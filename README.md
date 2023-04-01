@@ -2,7 +2,7 @@
 <p/>
 
 <p align = "center">
-<img src= "https://static.todamateria.com.br/upload/pi/ng/pinguimrei-cke.jpg" width="250" height="200"/>
+<img src= "https://user-images.githubusercontent.com/111469327/229311756-7adfe563-68ab-42d2-99c1-948d5f3b7f0e.jpg" width="650" height="300"/>
 
 <p align = "center">
    
