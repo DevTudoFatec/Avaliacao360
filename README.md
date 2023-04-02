@@ -74,7 +74,7 @@ Nosso objetivo é automatizar um produto de forma que cada passo seja validado p
      
 ## :date: Backlog do Produto
    
-![MVP](https://user-images.githubusercontent.com/111469327/229357776-c51b9bf2-3265-40d1-adff-2c80044cce80.png)
+![MVP](https://user-images.githubusercontent.com/111469327/229358855-c92a5b93-2133-473f-b937-2b185bf73f6c.png)
 
 
 ## :computer: Tecnologias ultilizadas
