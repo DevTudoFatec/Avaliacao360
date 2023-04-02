@@ -76,18 +76,11 @@ Nosso objetivo é automatizar um produto de forma que cada passo seja validado p
 ![Layout-ADM](https://user-images.githubusercontent.com/111469327/229330971-ef8ed62d-e2d8-405e-ac58-ebf64a38db4a.gif)
 
 
-   
-## Arquitetura do Projeto
-   
-
-
+     
 ## :date: Backlog do Produto
    
-> - [x] Sprint 01 - Entrega da documetação backlog e requisitos do projeto
-> - [x] Sprint 02 - Criação do sistema de avaliação 
-> - [x] Sprint 03 - Criação do sistema 
-> - [x] Sprint 04 - 
-> - [x] 13/06 a 14/06 - Feira de soluções
+![MVP (3)](https://user-images.githubusercontent.com/111469327/229331218-81ae4aa4-ed79-4d60-8568-27fc98e34688.png)
+
 
 ## :computer: Tecnologias ultilizadas
 
