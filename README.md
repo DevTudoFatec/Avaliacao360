@@ -69,11 +69,9 @@ Nosso objetivo é automatizar um produto de forma que cada passo seja validado p
 
 ## Preview da plataforma - Alunos
 ![Layout-Alunos](https://user-images.githubusercontent.com/111469327/229330212-c6c5a4ab-b85f-4e1d-8eca-140bf8ab657d.gif)
+## Preview da plataforma - Alunos
 
-
-
-+ #### (AGUARDANDO ANEXO VIDEO PROTOPIPO)
-
+   
    
 ## Arquitetura do Projeto
    
