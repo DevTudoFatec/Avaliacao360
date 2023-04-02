@@ -98,6 +98,8 @@ Nosso objetivo é automatizar um produto de forma que cada passo seja validado p
   <img align="center" alt="David-Wp" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-original.svg" />  
   <img align="center" alt="David-Wp" height="40" width="40" src="https://logodownload.org/wp-content/uploads/2017/11/discord-logo-1-1-2048x2048.png" />
   <img align="center" alt="David-Wp" height="30" width="40" src="https://logos-world.net/wp-content/uploads/2021/02/Trello-Emblem.png" />
-   
-   
- <div style="display: inline_block"><br>
+  <div style="display: inline_block"><br>
+     
+  + Disponivel pelo [Figma](https://www.figma.com/file/86VvL8DaM6IR9RH06jVobp/PBLTeX-Projeto?node-id=0%3A1&t=Av9utODXTrCT0tAK-1)
+  + Disponivel pelo [Trello](https://trello.com/b/CHEOxSyG/avalia%C3%A7%C3%A3o-360)
+
