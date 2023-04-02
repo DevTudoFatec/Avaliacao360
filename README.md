@@ -1,10 +1,7 @@
 # <p align = "center"> API - 1° Semestre - Banco de Dados 2023 
-<p/>
 
-![Avaliação 360° (1)](https://user-images.githubusercontent.com/111469327/229332136-093bbae5-89ba-4634-b95f-344e3cf6627e.png)
+![Avaliação 360° (3)](https://user-images.githubusercontent.com/111469327/229332571-b5c83526-7de5-4818-b9b6-a54e23a34cf4.png)
 
-<p align = "center">
-   
 ## 📍 Sumário
 
  * [Projeto API](#projeto_API)
