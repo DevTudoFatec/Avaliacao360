@@ -68,6 +68,8 @@ Nosso objetivo é automatizar um produto de forma que cada passo seja validado p
 # Produto DEVTUDO
 
 ## Preview da plataforma
+
+<img src= "https://drive.google.com/file/d/1HfC3acW8MUq8pG59xKOi4ibi4kRH90XQ/view?usp=share_link" width="650" height="300"/>
 + #### (AGUARDANDO ANEXO VIDEO PROTOPIPO)
 
    
@@ -77,11 +79,10 @@ Disponivel pelo [Figma](https://www.figma.com/file/86VvL8DaM6IR9RH06jVobp/PBLTeX
    
 ## :date: Backlog do Produto
    
-> - [x] Entrega da documetação do projeto e plataforma GITHUB
-> - [x] 13/03 a 02/04 - Sprint 01
-> - [x] 03/04 a 23/04 - Sprint 02
-> - [x] 24/04 a 14/05 - Sprint 03
-> - [x] 15/05 a 04/06 - Sprint 04
+> - [x] Sprint 01 - Entrega da documetação backlog e requisitos do projeto
+> - [x] Sprint 02 - Criação do sistema de avaliação 
+> - [x] Sprint 03 - Criação do sistema 
+> - [x] Sprint 04 - 
 > - [x] 13/06 a 14/06 - Feira de soluções
 
 ## :computer: Tecnologias ultilizadas
