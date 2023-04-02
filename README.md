@@ -95,5 +95,9 @@ Nosso objetivo é automatizar um produto de forma que cada passo seja validado p
   <img align="center" alt="David-Canvas" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg" />
   <img align="center" alt="David-Github" height="40" width="40" src="https://pngimg.com/uploads/github/github_PNG51.png" />
   <img align="center" alt="David-Vscode" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" />
-  <img align="center" alt="David-Wp" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-original.svg" />
+  <img align="center" alt="David-Wp" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-original.svg" />  
+  <img align="center" alt="David-Wp" height="40" width="40" src="https://logodownload.org/wp-content/uploads/2017/11/discord-logo-1-1-2048x2048.png" />
+  <img align="center" alt="David-Wp" height="30" width="40" src="https://logos-world.net/wp-content/uploads/2021/02/Trello-Emblem.png" />
+   
+   
  <div style="display: inline_block"><br>
