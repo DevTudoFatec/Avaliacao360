@@ -68,10 +68,14 @@ Nosso objetivo é automatizar um produto de forma que cada passo seja validado p
 # Produto DEVTUDO
 
 ## Preview da plataforma - Alunos
-![Layout-Alunos](https://user-images.githubusercontent.com/111469327/229330212-c6c5a4ab-b85f-4e1d-8eca-140bf8ab657d.gif)
-## Preview da plataforma - Alunos
 
-   
+![Layout-Alunos](https://user-images.githubusercontent.com/111469327/229330212-c6c5a4ab-b85f-4e1d-8eca-140bf8ab657d.gif)
+
+## Preview da plataforma - Administrador
+
+![Layout-ADM](https://user-images.githubusercontent.com/111469327/229330971-ef8ed62d-e2d8-405e-ac58-ebf64a38db4a.gif)
+
+
    
 ## Arquitetura do Projeto
    
