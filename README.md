@@ -1,8 +1,7 @@
 # <p align = "center"> API - 1° Semestre - Banco de Dados 2023 
 <p/>
 
-<p align = "center">
-<img src= "https://user-images.githubusercontent.com/111469327/229311756-7adfe563-68ab-42d2-99c1-948d5f3b7f0e.jpg" width="650" height="300"/>
+![Avaliação 360° (1)](https://user-images.githubusercontent.com/111469327/229332136-093bbae5-89ba-4634-b95f-344e3cf6627e.png)
 
 <p align = "center">
    
