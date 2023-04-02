@@ -67,16 +67,18 @@ Nosso objetivo é automatizar um produto de forma que cada passo seja validado p
 ##
 # Produto DEVTUDO
 
-## Preview da plataforma
+## Preview da plataforma - Alunos
+![Layout-Alunos](https://user-images.githubusercontent.com/111469327/229330212-c6c5a4ab-b85f-4e1d-8eca-140bf8ab657d.gif)
 
-<img src= "https://drive.google.com/file/d/1HfC3acW8MUq8pG59xKOi4ibi4kRH90XQ/view?usp=share_link" width="650" height="300"/>
+
+
 + #### (AGUARDANDO ANEXO VIDEO PROTOPIPO)
 
    
 ## Arquitetura do Projeto
-
-Disponivel pelo [Figma](https://www.figma.com/file/86VvL8DaM6IR9RH06jVobp/PBLTeX-Projeto?node-id=0%3A1&t=Av9utODXTrCT0tAK-1)
    
+
+
 ## :date: Backlog do Produto
    
 > - [x] Sprint 01 - Entrega da documetação backlog e requisitos do projeto
