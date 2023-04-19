@@ -1,0 +1,63 @@
+header{
+    display: flex;
+    align-items: center;
+    color: #89cfc9;
+    background-color: #011E36;
+    padding: 20px;
+    margin: 0;
+    justify-content: space-between;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: small;}
+
+body{
+    text-align: center;
+    color: #011E36;
+    background-color: #eeee;
+    margin: 0;
+    padding: 0;}
+    
+input{
+    border-radius: 20px;
+    width: 250px;
+    height: 30px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+    text-align: center;}
+    
+a{
+    text-decoration: none;
+    color: #fed196;}
+    
+.botao_azul_claro{
+    color: #214e65;
+    background-color: #89cfc9;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-color: #89cfc9;
+    border-radius: 20px;
+    height: 40px;
+    width: 250px;}
+
+.opções_menu{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 400px;
+    margin-right: 400px;}
+
+.botao_home{
+    background-color: #214e65;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    border-color: #214e65;
+    border-radius: 20px;
+    height: 40px;
+    width:40px;}
+
+.botao_cadastrar_voltar{    
+    color: #fed196;
+    background-color: #214e65;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-color: #214e65;
+    border-radius: 20px;
+    height: 35px;
+    width: 100px;}
+
+.roda_pé{
+    background-position: bottom;}
