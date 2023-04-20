@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UFT-8"/> <!--extensão para caracteres especiais-->
+        <title> Cadastro de Integrante - Avaliação 360º PBLTeX</title> 
+        <link rel="stylesheet" href="/App/Static/Css/Cadastro.css"/>
+    </head>
+    <body>
+        <header> 
+                <!-- Botão para abrir o menu lateral -->
+                <input type="checkbox" id="check" class="bt">
+                <label id="icone" for="check" class="bt"> ☰ </label>
+            
+            <div class="barra">
+                <nav class="menu_lateral">
+                    <a href="Menu_Admin.html"> <div class="link">MENU PRINCIPAL</div></a>
+                    <a href=""> <div class="link">CADASTRAR INTEGRANTE</div></a>
+                    <a href=""> <div class="link">CONTROLE GERAL TURMA/TIME/SPRINTS</div></a>
+                    <a href=""> <div class="link">CONTROLE DE PERFIL</div></a>
+                    <a href=""> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
+                    <a href=""> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
+                    <a href=""> <div class="link">DASHBOARDS GERENCIAIS</div></a>
+                    <a href=""> <div class="link">SAIR ➔ </div></a>
+                </nav>
+            </div>
+            <img id="logo_avaliação" src="/App/Static/Img/Logo API (3).png" alt="Logo da plataforma" width="300">
+            <p><b>Identificação do Usuário</b></p>
+        </header>
+
+        <img src="/App/Static/Img/Logo_API cadastro.png" width="400">
+        <form id="formulario">
+            <input type="text" placeholder="NOME COMPLETO" name="NOME" id="user">
+            <br><br>
+            <input type="text" value=""placeholder="E-MAIL" name="E-MAIL" id="email">
+            <br><br>
+            <input type="text" value=""placeholder="TURMA" name="TURMA" id="turma">
+            <br><br> 
+            <input type="text" value=""placeholder="SEMESTRE" name="SEMESTRE" id="semestre">
+            <br><br>
+            <input class="botao_cadastrar_voltar" type="submit" value="CADASTRAR">
+        </form>
+        <br>
+        <footer>
+            <img src="/App/Static/Img/Logo_API_PBLTeX.png" width="250">
+        </footer>
+        <p class="erro_validation template"></p>
+        <script src="/script.js"></script>
+    </body>
+</html>

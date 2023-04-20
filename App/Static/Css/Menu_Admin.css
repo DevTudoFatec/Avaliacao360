@@ -27,6 +27,16 @@ input{
 a{
     text-decoration: none;
     color: #fed196;}
+    
+.botao_azul_claro{
+    color: #214e65;
+    background-color: #89cfc9;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-color: #89cfc9;
+    border-radius: 20px;
+    height: 40px;
+    width: 250px;}
+
 
 .botao_home{
     background-color: #214e65;
