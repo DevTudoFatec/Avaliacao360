@@ -7,6 +7,11 @@ body {
 
 header {
     background-color:#082838;
+    top: auto;
+    margin: 0;
+    position: 0;
+
+
 }
 
 .titulos {
@@ -33,10 +38,12 @@ h4 {
 }   
 ol ,li .legenda {
     justify-content:flex-end;
+    align-items: center;
     text-align: center;
     color: #082838;
     border: solid 05px #89CFC9;
-    width: 80%;
+    display:center;
+    width: 90px;
     right: 50px;
      
 }
@@ -52,7 +59,14 @@ ol ,li .legenda {
      
 }
 
-.footer {
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+rodapé {
+        padding: 30px;
+        border-top: 0.2px solid #FFF2E7;
+    }
 
-}
+
+    .rodape-img {
+      height: 300px;
+      display: block;
+      margin: auto;
+    } 
