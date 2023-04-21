@@ -49,8 +49,8 @@ def senha_aleatoria(tamanho, caracteres):
 @app.route("/cadastro_submit", methods=["POST"])
 def cadastro_submit():
 
-  if not os.path.exists('./data/cadastro.json'):
-    with open('./data/cadastro.json', 'w') as f:
+  if not os.path.exists('data/cadastro.json'):
+    with open('data/cadastro.json', 'w') as f:
       f.write('[]')
 
   nome = request.form.get('nome')
@@ -59,7 +59,7 @@ def cadastro_submit():
   semestre = request.form.get('semestre')
   senha = senha_aleatoria(10, string.ascii_lowercase + string.ascii_uppercase + string.digits)
 
-  with open('./data/cadastro.json', 'r') as f:
+  with open('data/cadastro.json', 'r') as f:
     data = json.load(f)
   if any(user.get("email") == email for user in data):
     flash('Email já cadastrado!')
@@ -74,7 +74,7 @@ def cadastro_submit():
   }
 
   data.append(cadastro_dict)
-  with open('./data/cadastro.json', 'w') as f:
+  with open('data/cadastro.json', 'w') as f:
     json.dump(data, f)
 
   flash('Cadastrado com sucesso!')
@@ -85,20 +85,22 @@ def cadastro_submit():
 @app.route("/autoavaliacao_submit", methods=["POST"])
 def autoavaliacao_submit():
 
-  if not os.path.exists('./data/autoavaliacao.json'):
-    with open('./data/autoavaliacao.json', 'w') as f:
+  if not os.path.exists('data/autoavaliacao.json'):
+    with open('data/autoavaliacao.json', 'w') as f:
       f.write('[]')
 
+  sprint = request.form.get('sprint')
   comunicacao = request.form.get('comunicacao')
   engajamento = request.form.get('engajamento')
   conhecimento = request.form.get('conhecimento')
   entrega = request.form.get('entrega')
   autogestao = request.form.get('autogestao')
 
-  with open('./data/autoavaliacao.json', 'r') as f:
+  with open('data/autoavaliacao.json', 'r') as f:
     data = json.load(f)
 
   avaliacao_dict = {
+    "sprint": sprint,
     "comunicacao": comunicacao,
     "engajamento": engajamento,
     "conhecimento": conhecimento,
@@ -107,7 +109,7 @@ def autoavaliacao_submit():
   }
 
   data.append(avaliacao_dict)
-  with open('./data/autoavaliacao.json', 'w') as f:
+  with open('data/autoavaliacao.json', 'w') as f:
     json.dump(data, f)
 
   return redirect(url_for('home'))
@@ -115,8 +117,8 @@ def autoavaliacao_submit():
 @app.route("/avaliacao_submit", methods=["POST"])
 def avaliacao_submit():
 
-  if not os.path.exists('./data/avaliacao.json'):
-    with open('./data/avaliacao.json', 'w') as f:
+  if not os.path.exists('data/avaliacao.json'):
+    with open('data/avaliacao.json', 'w') as f:
       f.write('[]')
 
   sprint = request.form.get('sprint')
@@ -126,7 +128,7 @@ def avaliacao_submit():
   conhecimento = request.form.get('conhecimento')
   autogestao = request.form.get('autogestao')
 
-  with open('./data/avaliacao.json', 'r') as f:
+  with open('data/avaliacao.json', 'r') as f:
     data = json.load(f)
 
   avaliacao_dict = {
@@ -139,12 +141,12 @@ def avaliacao_submit():
   }
 
   data.append(avaliacao_dict)
-  with open('./data/avaliacao.json', 'w') as f:
+  with open('data/avaliacao.json', 'w') as f:
     json.dump(data, f)
 
   return redirect(url_for('home'))
 
-app.secret_key = 'xzy54%$t8f2Wm!+@'
+app.secret_key = 'wxyz@mtwjer123'
 
 if __name__ == "__main__":
   app.run(host='0.0.0.0', debug=True)

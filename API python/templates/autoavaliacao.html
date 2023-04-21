@@ -46,65 +46,65 @@
     <h1 class="bt_avaliacao_trc">AUTOAVALIAÇÃO</h1>  
     <ul>
     <div class="formulario_trc">
-      <form>
+      <form method="POST" action="{{ url_for('autoavaliacao_submit') }}">
         <label>
       <li><h1><em>Sprint</em></h1></li>
-      <input type="radio" name="comunicacao" value="1"> 1
-      <input type="radio" name="comunicacao" value="2"> 2
-      <input type="radio" name="comunicacao" value="3"> 3
-      <input type="radio" name="comunicacao" value="4"> 4
+      <input type="radio" name="sprint" value="1" required> 1
+      <input type="radio" name="sprint" value="2" required> 2
+      <input type="radio" name="sprint" value="3" required> 3
+      <input type="radio" name="sprint" value="4" required> 4
       <br>
       <br>
       <br>
         </label>
-      </form>
+      
     
-      <form>
+      
         <label>
       <li><h3><b>Comunicação e Trabalho em Equipe</b></h3></li>
-      <input type="radio" name="comunicacao" value="1"> 1
-      <input type="radio" name="comunicacao" value="2"> 2
-      <input type="radio" name="comunicacao" value="3"> 3
-      <input type="radio" name="comunicacao" value="4"> 4
-      <input type="radio" name="comunicacao" value="5"> 5
+      <input type="radio" name="comunicacao" value="1" required> 1
+      <input type="radio" name="comunicacao" value="2" required> 2
+      <input type="radio" name="comunicacao" value="3" required> 3
+      <input type="radio" name="comunicacao" value="4" required> 4
+      <input type="radio" name="comunicacao" value="5" required> 5
       <br>
       <br>
         </label>
-      </form>    
+        
       <li><h3><b>Engajamento e Pró-atividade</b></h3></li>
-      <input type="radio" name="engajamento" value="1"> 1
-      <input type="radio" name="engajamento" value="2"> 2
-      <input type="radio" name="engajamento" value="3"> 3
-      <input type="radio" name="engajamento" value="4"> 4
-      <input type="radio" name="engajamento" value="5"> 5
+      <input type="radio" name="engajamento" value="1" required> 1
+      <input type="radio" name="engajamento" value="2" required> 2
+      <input type="radio" name="engajamento" value="3" required> 3
+      <input type="radio" name="engajamento" value="4" required> 4
+      <input type="radio" name="engajamento" value="5" required> 5
       <br>
       <br>
       <br>
       <br>
   
     <li><h3><b>Conhecimento e Aplicabilidade Técnica</b></h3></li>
-      <input type="radio" name="conhecimento" value="1"> 1
-      <input type="radio" name="conhecimento" value="2"> 2
-      <input type="radio" name="conhecimento" value="3"> 3
-      <input type="radio" name="conhecimento" value="4"> 4
-      <input type="radio" name="conhecimento" value="5"> 5
+      <input type="radio" name="conhecimento" value="1" required> 1
+      <input type="radio" name="conhecimento" value="2" required> 2
+      <input type="radio" name="conhecimento" value="3" required> 3
+      <input type="radio" name="conhecimento" value="4" required> 4
+      <input type="radio" name="conhecimento" value="5" required> 5
     <br>
     <br>
     <li><h3><b>Entrega de Resultados com Valor Agregado</b></h3></li>
-      <input type="radio" name="entrega" value="1"> 1
-      <input type="radio" name="entrega" value="2"> 2
-      <input type="radio" name="entrega" value="3"> 3
-      <input type="radio" name="entrega" value="4"> 4
-      <input type="radio" name="entrega" value="5"> 5
+      <input type="radio" name="entrega" value="1" required> 1
+      <input type="radio" name="entrega" value="2" required> 2
+      <input type="radio" name="entrega" value="3" required> 3
+      <input type="radio" name="entrega" value="4" required> 4
+      <input type="radio" name="entrega" value="5" required> 5
     <br>
     <br>
   
     <li><h3><b>Auto-gestão das Atividades</b></h3></li>
-      <input type="radio" name="autogestao" value="1"> 1
-      <input type="radio" name="autogestao" value="2"> 2
-      <input type="radio" name="autogestao" value="3"> 3
-      <input type="radio" name="autogestao" value="4"> 4
-      <input type="radio" name="autogestao" value="5"> 5
+      <input type="radio" name="autogestao" value="1" required> 1
+      <input type="radio" name="autogestao" value="2" required> 2
+      <input type="radio" name="autogestao" value="3" required> 3
+      <input type="radio" name="autogestao" value="4" required> 4
+      <input type="radio" name="autogestao" value="5" required> 5
       <br>
       <br>
     
