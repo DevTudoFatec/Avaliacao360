@@ -3,23 +3,68 @@ body {
     background: #e7eaec;
     height: 500px;
     min-height: 400 px;
+    display: block;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 header {
-    background-color:#082838;
-    top: auto;
-    margin: 0;
-    position: 0;
-
-
+    background-color:#011E36;
+    display: flex;
+    align-items: center;
+    padding: 1%;
+    justify-content:space-around;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: small;
+    
 }
 
-.titulos {
-    display: flex;
-    padding: 20px;
+.formulario_mcs {
+    display: inline-block;
     justify-content: space-around;
 }
 
+.formulario_mcs2 {
+    text-align: center;
+    padding: auto;
+    justify-content: space-around;
+
+
+
+
+}
+
+
+.barra {
+    height: 100px;
+    width: 300 px;
+    position: absolute;
+    transition: all 0.2s;
+    left: -300px;
+    top:0;
+    background-color: #333;
+
+}
+.titulos {
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.img_inicial {
+    font-family: 'Times New Roman', Times, serif;
+    color: hsl(28, 21%, 84%);
+    font-weight: 20px;
+    font-size: 20px;
+    display: inline;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content:right;
+    width:45px;
+    min-height: 45px;
+    border-radius: 50px;
+    object-fit: cover;
+    padding: 30px, 30px, 60px, 30px;
+  }
 
 
 ul {
@@ -36,7 +81,7 @@ h4 {
     padding: 10px;
 
 }   
-ol ,li .legenda {
+.legenda {
     justify-content:flex-end;
     align-items: center;
     text-align: center;
@@ -45,7 +90,10 @@ ol ,li .legenda {
     display:center;
     width: 90px;
     right: 50px;
+    border-top: #89CFC9;
      
+
+    
 }
 
 .botão {
@@ -55,15 +103,7 @@ ol ,li .legenda {
     border-radius: 5px;
     padding: 10px 20px;
     color: white;
-
-     
 }
-
-rodapé {
-        padding: 30px;
-        border-top: 0.2px solid #FFF2E7;
-    }
-
 
     .rodape-img {
       height: 300px;

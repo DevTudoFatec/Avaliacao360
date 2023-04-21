@@ -4,14 +4,14 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> Documento</title>
-        <link rel="stylesheet" href="/App/Static/Css/Avaliacao.css">
+        <title> Avaliação de Integrantes</title>
+        <link rel="stylesheet" href="../Static/Css/Avaliacao.css">
     </head>
 
     <body>
 
         <header class="cabecalho">
-            <img class="cabecalho_img" src="/App/Static/Img/img_inicial.png" alt="Logo da avaliação 360º">
+            <img class="img_inicial" src="../Static/Img/img_inicial.png" alt="Logo da avaliação 360º" height="100" width="500">
             <h3 class="cabecalho_img">Usuário: </h3>
         </header>
         <!-- fim do conteúdo do cabeçalho -->
@@ -31,7 +31,6 @@
                 <a href=""> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
                 <a href=""> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
                 <a href=""> <div class="link">DASHBOARDS GERENCIAIS</div></a>
-                <br>
                 <a href=""> <div class="link">SAIR ➔ </div></a>
             </nav>
         </div>
@@ -50,6 +49,7 @@
                         <input type="radio" name="Comunicação e Trabalho em Equipe" valor="3">3
                         <input type="radio" name="Comunicação e Trabalho em Equipe" valor="4">4
                         <input type="radio" name="Comunicação e Trabalho em Equipe" valor="5">5
+
                         <span></span>
                         </label>
                     </form>
@@ -61,6 +61,7 @@
         </div>
        
       <ul>
+        <div class="formulário_mcs">
                 <form>
                     <label>
                         <li>Comunicação e Trabalho em Equipe</li>
@@ -69,12 +70,12 @@
                         <input type="radio" name="Comunicação e Trabalho em Equipe" valor="3">3
                         <input type="radio" name="Comunicação e Trabalho em Equipe" valor="4">4
                         <input type="radio" name="Comunicação e Trabalho em Equipe" valor="5">5
-                        <br>
-                        <br/>
                         <span></span>
                     </label>
                 </form>
-            
+
+        <br/>
+
             <form>
                 <label>
                     <li>Engajamento e Pró-atividade</li>
@@ -86,8 +87,10 @@
                     <span></span>
                 </label>
             </form>
+
+        </div>
             
-            
+        <div class="formulario_mcs2">
             <form>
                 <label>
                     <li>Entrega de Resultados com valor Agregado</li>
@@ -100,6 +103,8 @@
                 </label>
             </form>
             
+        <br/>
+
             <form>
                 <label>
                     <li>Conhecimento e Aplicabilidade Técnica</li>
@@ -108,10 +113,13 @@
                     <input type="radio" name="Conhecimento e Aplicabilidade Técnica" valor="3">3
                     <input type="radio" name="Conhecimento e Aplicabilidade Técnica" valor="4">4
                     <input type="radio" name="Conhecimento e Aplicabilidade Técnica" valor="5">5
+                    <br/>
                     <span></span>
                 </label>
             </form>
-            
+
+        </div>
+
             <form>
                 <label>
                     <li>Auto-gestão das Atividades</li>
@@ -125,9 +133,11 @@
             </form>
         </ul>
 
-        <br />
+    
 
             <h4 id="campo-feedback">Escreva aqui seu feedback para o integrante avaliado</h4>
+
+            
 
         <div class="Legenda">  
                 <ol>
@@ -139,13 +149,13 @@
                     <li>Muito bom</li>
                 </ol>
         </div>
-            <button>Voltar</button>
+
             <button>Confirmar</button>
 
         
         <rodapé>
             <img
-            src="/App/Static/Img/Logo_API_PBLTeX.png"
+            src="../Static/Img/Logo_API_PBLTeX.png"
             alt="logo PBLTEX"
          />
         
