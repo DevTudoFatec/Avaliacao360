@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Documento</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/avaliacao.css') }}">
+    </head>
+
+    <body>
+
+        <header class="cabecalho">
+            <img class="cabecalho_img" src="{{ url_for('static', filename='img/avaliacao/img_inicial.png') }}" alt="Logo da avaliação 360º">
+            <h3 class="cabecalho_img">Usuário: </h3>
+        </header>
+        <!-- fim do conteúdo do cabeçalho -->
+        
+        <!--- Início do botão de menu -->
+        <header>
+            <!-- Botão para abrir o menu lateral -->
+            <input type="checkbox" id="check" class="bt">
+            <label id="icone" for="check" class="bt"> ☰ </label>
+        
+        <div class="barra">
+            <nav>
+                <a href=""> <div class="link">MENU PRINCIPAL</div></a>
+                <a href=""> <div class="link">CADASTRAR INTEGRANTE</div></a>
+                <a href=""> <div class="link">CONTROLE GERAL TURMA/TIME/SPRINTS</div></a>
+                <a href=""> <div class="link">CONTROLE DE PERFIL</div></a>
+                <a href=""> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
+                <a href=""> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
+                <a href=""> <div class="link">DASHBOARDS GERENCIAIS</div></a>
+                <br>
+                <a href=""> <div class="link">SAIR ➔ </div></a>
+            </nav>
+        </div>
+        </header> 
+
+
+        <div class="titulos">
+            <h3>Avaliar Integrante</h3>
+          
+        <h3>Integrante avaliado:</h3>
+        </div>
+       
+
+        <form class="formulario_avaliacao" method="POST" action="{{ url_for('avaliacao_submit') }}">
+            <ul>   
+                <li>
+                    <label>
+                        <h3>Sprint</h3>    
+                        <input type="radio" name="sprint" value="1">1
+                        <input type="radio" name="sprint" value="2">2
+                        <input type="radio" name="sprint" value="3">3
+                        <input type="radio" name="sprint" value="4">4
+                        <span></span>
+                        </label>          
+                    </li>
+                </ul>
+                <ul>                
+                    <label>
+                        <li>Comunicação e Trabalho em Equipe</li>
+                        <input type="radio" name="comunicacao" value="1">1
+                        <input type="radio" name="comunicacao" value="2">2
+                        <input type="radio" name="comunicacao" value="3">3
+                        <input type="radio" name="comunicacao" value="4">4
+                        <input type="radio" name="comunicacao" value="5">5
+                        <br>
+                        <br/>
+                        <span></span>
+                    </label>
+            
+                    <label>
+                        <li>Engajamento e Pró-atividade</li>
+                        <input type="radio" name="engajamento" value="1">1
+                        <input type="radio" name="engajamento" value="2">2
+                        <input type="radio" name="engajamento" value="3">3
+                        <input type="radio" name="engajamento" value="4">4
+                        <input type="radio" name="engajamento" value="5">5
+                        <span></span>
+                    </label>
+                    
+    
+                    <label>
+                        <li>Entrega de Resultados com value Agregado</li>
+                        <input type="radio" name="entrega" value="1">1
+                        <input type="radio" name="entrega" value="2">2
+                        <input type="radio" name="entrega" value="3">3
+                        <input type="radio" name="entrega" value="4">4
+                        <input type="radio" name="entrega" value="5">5
+                        <span></span>
+                    </label>
+                    
+                    <label>
+                        <li>Conhecimento e Aplicabilidade Técnica</li>
+                        <input type="radio" name="conhecimento" value="1">1
+                        <input type="radio" name="conhecimento" value="2">2
+                        <input type="radio" name="conhecimento" value="3">3
+                        <input type="radio" name="conhecimento" value="4">4
+                        <input type="radio" name="conhecimento" value="5">5
+                        <span></span>
+                    </label>
+                    
+                    <label>
+                        <li>Auto-gestão das Atividades</li>
+                        <input type="radio" name="autogestao" value="1">1
+                        <input type="radio" name="autogestao" value="2">2
+                        <input type="radio" name="autogestao" value="3">3
+                        <input type="radio" name="autogestao" value="4">4
+                        <input type="radio" name="autogestao" value="5">5
+                        <span></span>
+                    </label>
+            </ul>
+            <button type="submit">CONFIRMAR</button>
+        </form>
+        <br/>
+
+            <h4 id="campo-feedback">Escreva aqui seu feedback para o integrante avaliado</h4>
+
+        <div class="Legenda">  
+                <ol>
+                    <h3>Legenda</h3>
+                    <li>Muito bom</li>
+                    <li>Ruim</li>
+                    <li>Médio</li>
+                    <li>Bom</li>
+                    <li>Muito bom</li>
+                </ol>
+        </div>
+            <button>Voltar</button>
+            <button>Confirmar</button>
+
+        
+        <rodapé>
+            <img src="{{ url_for('static', filename='img/avaliacao/logo.jpg') }}" alt="Logo da avaliação 360º">
+        
+        </rodapé>
+    </body>
+</html>

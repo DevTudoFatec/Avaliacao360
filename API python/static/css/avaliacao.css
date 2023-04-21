@@ -1,0 +1,72 @@
+body {
+    font-size: 100%;
+    background: #e7eaec;
+    height: 500px;
+    min-height: 400 px;
+}
+
+header {
+    background-color:#082838;
+    top: auto;
+    margin: 0;
+    position: 0;
+
+
+}
+
+.titulos {
+    display: flex;
+    padding: 20px;
+    justify-content: space-around;
+}
+
+
+
+ul {
+    display: flex;
+    justify-content: space-around;
+}
+
+
+h4 {
+    height: 200px;
+    width: 50%;
+    background-color: #89CFC9;
+    text-align:left;
+    padding: 10px;
+
+}   
+ol ,li .legenda {
+    justify-content:flex-end;
+    align-items: center;
+    text-align: center;
+    color: #082838;
+    border: solid 05px #89CFC9;
+    display:center;
+    width: 90px;
+    right: 50px;
+     
+}
+
+.botão {
+    display: flex;
+    justify-content:space-between;
+    background-color: #214E65;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: white;
+
+     
+}
+
+rodapé {
+        padding: 30px;
+        border-top: 0.2px solid #FFF2E7;
+    }
+
+
+    .rodape-img {
+      height: 300px;
+      display: block;
+      margin: auto;
+    } 
