@@ -1,74 +1,64 @@
 
-body{
-    margin-top: 180px;
+body{/*validado*/
+    margin-top: 5%;
     background-color: #011e36;
     color: white;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    text-align: right;
     padding: 3;
-    display:  block;
-    
+    text-align: center;
 }
-h3{
-    font-size: 35px;
-    margin-top: 150px;
-    margin-bottom: 1px;
-    max-width: 50%;
-    margin-left: 65%;
+
+  
+img {
+    width: 80%;
+    margin-top: 11%;
+       
+}
+
+.texto_instrucao{
+    font-size:40px;
+    text-align: center;
+    line-height: 0.9;
+}
+
+input{
+    width: 400px;
+    height: 55px;
+    margin-bottom: 2%;
+    text-align: center;
+    border-radius: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 50px;
+    background-color: #89cfc9;
+    color: #214e65;
+    border-color: #89cfc9;
+}
+
+::placeholder{
+    color: #214e65
+}
+
+.divisao_texto_tela{
     display: flex;
+    text-align: center;
+    justify-content: space-between;
+    margin-right: 15%;
+}
+
+.inputs{
+    margin-top: 7%;
+    padding:10px ;
 }
 
 button{
-    
-    background-color: #275368;
-    color: #fdd096;
-    font-size: 20px;
+    width: 150px;
     height: 40px;
-    width: 200px;
-    border-radius: 100px;
-    margin-top: 30px;
-    ;
-    
-    
+    border-radius: 30px;
+    background-color: #214e65;
+    border-color: #214e65 ;
+    color: #fed196;
+    font-size: 15px;
+    font-weight: bold;
     
 }
-.texto{
-    height: auto;
-    width: auto;
-    margin-right: 25%;
-}
-
-
-input{
-    margin-top: 40px;
-    background-color: #89cfc9;
-    color: #275368;
-    border-radius: 50px;
-    width: 300px;
-    height: 45px;
-    margin-bottom: 30px;
-    font-size: 20px;
-    text-align: center;
-    margin-bottom: 1px;
-    margin-right: 5%;
-
-
-}  
-  
-img {
-    width: 45%;
-    height: 45%;
-    float: left;
-    margin-left: 125px;
-    margin-top: %;
-    
-    
-  
-}
-div{
-    margin-right: 150px;
-}
-
-
-
-
