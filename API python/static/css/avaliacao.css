@@ -173,7 +173,7 @@ h4, campo-feedback {
 
 .button {
     right: 45%;
-    top: 63%;
+    top: 60%;
     display: flex;
     margin-left: 100px;
     text-align: center;
@@ -187,8 +187,9 @@ h4, campo-feedback {
     position: absolute;
 }
 
-    .rodape-img {
-      height: 300px;
-      display: block;
-      margin: auto;
-    } 
+.rodape-img {
+  height: 300px;
+  display: block;
+  margin: auto;
+} 
+
