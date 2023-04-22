@@ -4,18 +4,11 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> Documento</title>
+        <title> Avaliação de Integrantes</title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/avaliacao.css') }}">
     </head>
 
     <body>
-
-        <header class="cabecalho">
-            <img class="cabecalho_img" src="{{ url_for('static', filename='img/avaliacao/img_inicial.png') }}" alt="Logo da avaliação 360º">
-            <h3 class="cabecalho_img">Usuário: </h3>
-        </header>
-        <!-- fim do conteúdo do cabeçalho -->
-        
         <!--- Início do botão de menu -->
         <header>
             <!-- Botão para abrir o menu lateral -->
@@ -23,42 +16,51 @@
             <label id="icone" for="check" class="bt"> ☰ </label>
         
         <div class="barra">
-            <nav>
-                <a href=""> <div class="link">MENU PRINCIPAL</div></a>
+            <nav class="menu_lateral">
+                <a href="Menu_Admin.html"> <div class="link">MENU PRINCIPAL</div></a>
                 <a href=""> <div class="link">CADASTRAR INTEGRANTE</div></a>
                 <a href=""> <div class="link">CONTROLE GERAL TURMA/TIME/SPRINTS</div></a>
                 <a href=""> <div class="link">CONTROLE DE PERFIL</div></a>
                 <a href=""> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
                 <a href=""> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
                 <a href=""> <div class="link">DASHBOARDS GERENCIAIS</div></a>
-                <br>
                 <a href=""> <div class="link">SAIR ➔ </div></a>
             </nav>
         </div>
-        </header> 
+        <!--inicio do conteúdo do cabeçalho-->
 
+        <id class="cabecalho">
+            <img class="img_inicial" src="{{ url_for('static', filename='img/avaliacao/img_inicial.png') }}" alt="Logo da avaliação 360º" width="1000">
+            <p><b>Identificação de Usuário</b></p>
+        <!-- fim do conteúdo do cabeçalho -->
+        </id> </header>
+        <!--fim do botão de menu-->
 
+        <!--CONTEUDO CENTRAL DA PAGINA DE AVALIAÇÃO-->
+        
         <div class="titulos">
-            <h3>Avaliar Integrante</h3>
-          
-        <h3>Integrante avaliado:</h3>
-        </div>
-       
-
-        <form class="formulario_avaliacao" method="POST" action="{{ url_for('avaliacao_submit') }}">
+        <h3 id="bt_avaliar">Avaliar Integrante</h3>
             <ul>   
                 <li>
-                    <label>
-                        <h3>Sprint</h3>    
+                    <form class="formulario_avaliacao" method="POST" action="{{ url_for('avaliacao_submit') }}">
+                        <label>
+                        <h3>Sprint</h3>                            
+                        <span>
                         <input type="radio" name="sprint" value="1">1
                         <input type="radio" name="sprint" value="2">2
                         <input type="radio" name="sprint" value="3">3
                         <input type="radio" name="sprint" value="4">4
-                        <span></span>
-                        </label>          
-                    </li>
-                </ul>
-                <ul>                
+                            
+                        </span>
+                        </label>
+                </li>
+            </ul>
+            
+        <h3>Integrante avaliado:</h3>
+        </div>
+       
+      <ul>
+        <div class="formulário_mcs">
                     <label>
                         <li>Comunicação e Trabalho em Equipe</li>
                         <input type="radio" name="comunicacao" value="1">1
@@ -66,75 +68,79 @@
                         <input type="radio" name="comunicacao" value="3">3
                         <input type="radio" name="comunicacao" value="4">4
                         <input type="radio" name="comunicacao" value="5">5
-                        <br>
-                        <br/>
                         <span></span>
                     </label>
-            
-                    <label>
-                        <li>Engajamento e Pró-atividade</li>
-                        <input type="radio" name="engajamento" value="1">1
-                        <input type="radio" name="engajamento" value="2">2
-                        <input type="radio" name="engajamento" value="3">3
-                        <input type="radio" name="engajamento" value="4">4
-                        <input type="radio" name="engajamento" value="5">5
-                        <span></span>
-                    </label>
-                    
-    
-                    <label>
-                        <li>Entrega de Resultados com value Agregado</li>
-                        <input type="radio" name="entrega" value="1">1
-                        <input type="radio" name="entrega" value="2">2
-                        <input type="radio" name="entrega" value="3">3
-                        <input type="radio" name="entrega" value="4">4
-                        <input type="radio" name="entrega" value="5">5
-                        <span></span>
-                    </label>
-                    
-                    <label>
-                        <li>Conhecimento e Aplicabilidade Técnica</li>
-                        <input type="radio" name="conhecimento" value="1">1
-                        <input type="radio" name="conhecimento" value="2">2
-                        <input type="radio" name="conhecimento" value="3">3
-                        <input type="radio" name="conhecimento" value="4">4
-                        <input type="radio" name="conhecimento" value="5">5
-                        <span></span>
-                    </label>
-                    
-                    <label>
-                        <li>Auto-gestão das Atividades</li>
-                        <input type="radio" name="autogestao" value="1">1
-                        <input type="radio" name="autogestao" value="2">2
-                        <input type="radio" name="autogestao" value="3">3
-                        <input type="radio" name="autogestao" value="4">4
-                        <input type="radio" name="autogestao" value="5">5
-                        <span></span>
-                    </label>
-            </ul>
-            <button type="submit">CONFIRMAR</button>
-        </form>
+
         <br/>
 
-            <h4 id="campo-feedback">Escreva aqui seu feedback para o integrante avaliado</h4>
+                <label>
+                    <li>Engajamento e Pró-atividade</li>
+                    <input type="radio" name="engajamento" value="1">1
+                    <input type="radio" name="engajamento" value="2">2
+                    <input type="radio" name="engajamento" value="3">3
+                    <input type="radio" name="engajamento" value="4">4
+                    <input type="radio" name="engajamento" value="5">5
+                    <span></span>
+                </label>
 
-        <div class="Legenda">  
-                <ol>
-                    <h3>Legenda</h3>
-                    <li>Muito bom</li>
-                    <li>Ruim</li>
-                    <li>Médio</li>
-                    <li>Bom</li>
-                    <li>Muito bom</li>
-                </ol>
         </div>
-            <button>Voltar</button>
-            <button>Confirmar</button>
+            
+        <div class="formulario_mcs2">
+                <label>
+                    <li>Entrega de Resultados com valor Agregado</li>
+                    <input type="radio" name="entrega" value="1">1
+                    <input type="radio" name="entrega" value="2">2
+                    <input type="radio" name="entrega" value="3">3
+                    <input type="radio" name="entrega" value="4">4
+                    <input type="radio" name="entrega" value="5">5
+                    <span></span>
+                </label>
+            
+        <br/>
 
-        
-        <rodapé>
-            <img src="{{ url_for('static', filename='img/avaliacao/logo.jpg') }}" alt="Logo da avaliação 360º">
-        
-        </rodapé>
+                <label>
+                    <li>Conhecimento e Aplicabilidade Técnica</li>
+                    <input type="radio" name="conhecimento" value="1">1
+                    <input type="radio" name="conhecimento" value="2">2
+                    <input type="radio" name="conhecimento" value="3">3
+                    <input type="radio" name="conhecimento" value="4">4
+                    <input type="radio" name="conhecimento" value="5">5
+                    <br/>
+                    <br>
+                    <br>
+                    <br>
+                    <span></span>
+                </label>
+
+        </div>
+
+                <label>
+                    <li>Auto-gestão das Atividades</li>
+                    <input type="radio" name="autogestao" value="1">1
+                    <input type="radio" name="autogestao" value="2">2
+                    <input type="radio" name="autogestao" value="3">3
+                    <input type="radio" name="autogestao" value="4">4
+                    <input type="radio" name="autogestao" value="5">5
+                    <span></span>
+                </label>
+        </ul>
+        <button class="button" type="submit">CONFIRMAR</button>
+    </form>
+
+        <br/>
+    
+
+        <h4 id="campo-feedback">Escreva aqui seu feedback para o integrante avaliado</h4>
+
+        <br/>    
+
+        <img id="Legenda_mcs" src="{{ url_for('static', filename='img/avaliacao/Legenda.png') }}">  
+                
+        <!--final da pagina-->
+        <footer>
+            <center>
+            <img src="{{ url_for('static', filename='img/avaliacao/Logo.png') }}" alt="logo PBLTEX"/>
+        </center>
+        </footer>
     </body>
 </html>
