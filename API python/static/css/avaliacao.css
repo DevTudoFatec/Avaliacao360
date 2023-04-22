@@ -34,8 +34,9 @@ header {
   #icone {
     cursor: pointer;
     padding: 20px;
-    position: absolute;
+    position:absolute;
     z-index: 1;}
+    
   
   .barra{
     top: 0;
@@ -111,18 +112,23 @@ body {
 }
 
 .formulario_mcs {
-    display: flex;
-    flex-direction: column;
-    padding: 100px;
-    
+    text-align: center;
+    padding: auto;
+    justify-content: space-around;
+    padding: 50px 50px 50px;
 }
 
 .formulario_mcs2 {
     text-align: center;
-    padding: auto;
+    padding: 50px 50px 50px;
     justify-content: space-around;
 }
 
+.formulario_mcs3 {
+    text-align: center;
+    padding: 50px 50px 50px;
+    justify-content: space-around;
+}
 ul {
     display: flex;
     justify-content: space-evenly;
@@ -155,36 +161,30 @@ h4, campo-feedback {
 
 /*conteudo final da pagina*/
 
-.legenda {
-    justify-content:center;
-    margin-left: auto;
-    text-align: center;
-    border: solid 2px #89CFC9;
-    display:flex;
-    width: 90px;
-    right: 50px;
-    position: absolute;
-}
 
-#legenda_mcs {
-    width: 300px;
-    margin-right: auto;
+#Legenda_mcs {
+    display: flex;
+    padding: 0%;
+    margin: auto;
+    left: 35%;
+    position: relative;
+ 
 }
 
 .button {
-    right: 45%;
-    top: 63%;
-    display: flex;
-    margin-left: 100px;
+    bottom: 0;
+    left: 1800px;
+    right: 0;
+    position: relative;
     text-align: center;
     background-color: #214E65;
     border-radius: 15px;
     padding: 10px;
     color:#FED196;
-    margin: 20px;
+    margin:5px;
+    border-bottom: 2% solid #222;
     font-size: 15px;
     cursor: pointer;
-    position: absolute;
 }
 
     .rodape-img {
