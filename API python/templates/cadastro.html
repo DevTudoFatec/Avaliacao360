@@ -7,7 +7,6 @@
     </head>
     <body>
         <header> 
-                <!-- Botão para abrir o menu lateral -->
                 <input type="checkbox" id="check" class="bt">
                 <label id="icone" for="check" class="bt"> ☰ </label>
             
@@ -46,13 +45,11 @@
             <br><br> 
             <input id="semestre" type="text" placeholder="SEMESTRE" name="semestre" required>
             <br><br>
-            <button class="botao_cadastrar_voltar" type="submit">Cadastrar</button>
+            <button class="botao_cadastrar_voltar" type="submit">CADASTRAR</button>
         </form>
         <br>
         <footer>
             <img id="logo_api_pbletex" src="{{ url_for('static', filename='img/cadastro/Logo_API_PBLTeX.png') }}" width="250">
         </footer>
-        <p class="erro_validation template"></p>
-        <script src="/script.js"></script>
     </body>
 </html>

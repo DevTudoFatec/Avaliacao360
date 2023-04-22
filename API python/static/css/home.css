@@ -1,0 +1,22 @@
+header{
+    background-color: #011E36;
+    padding: 2%;}
+
+body{
+    text-align: center;
+    background-color: #eeee;
+    margin: 0;
+    padding: 0;}
+    
+#logo_avaliação{
+    text-align: center;}
+
+button{
+    margin-top: 10%;
+    color: #214e65;
+    background-color: #89cfc9;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-color: #89cfc9;
+    border-radius: 20px;
+    height: 40px;
+    width: 250px;}

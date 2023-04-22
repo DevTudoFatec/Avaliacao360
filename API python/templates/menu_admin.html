@@ -3,12 +3,11 @@
     <head>
         <meta charset="UFT-8"/>
         <title> Opções Admin - Avaliação 360º PBLTeX</title> 
-        <link rel="stylesheet" href="/App/Static/Css/Menu_Admin.css"/>
+        <link rel="stylesheet" href="/static/css/menu_admin.css"/>
     </head>
 
     <body>
         <header> 
-            <!-- Botão para abrir o menu lateral -->
             <input type="checkbox" id="check" class="bt">
             <label id="icone" for="check" class="bt"> ☰ </label>
         
@@ -24,12 +23,11 @@
                 <a href=""> <div class="link">SAIR ➔ </div></a>
             </nav>
         </div>
-        <img id="logo_avaliação" src="/App/Static/Img/Logo API (3).png" alt="Logo da plataforma" width="300">
         <img id="logo_avaliação" src="{{ url_for('static', filename='img/menu_admin/Logo API (3).png') }}" width="300">
         <p><b>Identificação do Usuário</b></p>
         </header>
 
-        <img src="{{ url_for('static', filename='img/menu_admin/Logo_API_Details Admin(1).png') }}" width="400">
+        <img id="details_adimn" src="{{ url_for('static', filename='img/menu_admin/Logo_API_Details Admin(1).png') }}" width="400">
 
         <nav class="opções_menu">
             <nav class="primeira_coluna">
@@ -71,7 +69,6 @@
                 </button>
             </nav>
         </nav>
-        <br><br><br><br><br><br>
         <footer>      
             <img id="logo_api_pbletex" src="{{ url_for('static', filename='img/menu_admin/Logo_API_PBLTeX.png') }}" width="250">
         </footer>
