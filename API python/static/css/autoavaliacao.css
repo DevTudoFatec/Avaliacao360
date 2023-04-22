@@ -4,11 +4,10 @@ header{
   align-items: center;
   color: #89cfc9;
   background-color: #011E36;
-  padding: 1%;
   justify-content: space-between;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size: small;
-}
+  font-size: small;}
+
 #logo_avaliação{
   margin-left: 37%;}
 /* FIM CABEÇALHO PADRONIZADO */
