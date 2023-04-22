@@ -75,7 +75,7 @@ Clique aqui para acessar o Backlog do produto: [Backlog do produto](https://user
     
   ## Acessar códigos
      
-   + Para acessar os códigos realizados na segunda Sprint, entre no link: [Códigos Sprint2](https://github.com/DevTudoFatec/Avaliacao360/tree/Sprint_2/App)
+   + Para acessar os códigos realizados na segunda Sprint, entre no link: [Códigos Sprint2](https://github.com/DevTudoFatec/Avaliacao360/tree/Sprint_2/API%20python)
     
   ## Acessar Sprint 1
   
