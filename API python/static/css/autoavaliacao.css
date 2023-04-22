@@ -9,7 +9,8 @@ header{
   font-size: small;}
 
 #logo_avaliação{
-  margin-left: 37%;}
+  margin-left: 45%;
+}
 /* FIM CABEÇALHO PADRONIZADO */
 
 /* Botão de menu */
@@ -96,33 +97,47 @@ nav a{
     height: 30px;
   }
   .bt_confirmar_trc{
+    position: absolute;
     color: azure;
     text-align: center;
     font-family: 'Times New Roman', Times, serif;
-    font-size: 100%;
-    padding: 2%;
-    margin: 5%;
-    border-radius: 30%;
-    background-color: #494949;
+    font-size: 150%;
+    padding: 1%;
+    border-radius: 20px;
+    background-color: #214E65;
     border-bottom: 2% solid #222;
     cursor: pointer;
+    left: 35%;
+    top: 130%;
   }
-  .formulario_trc{
-    display: inline-block;
-    justify-content: space-around;
-    text-align: center;
-  }
+
   .formulario_trc1{
+    position: absolute;
     display: inline-block;
-    justify-content: space-around;
-    columns: 4;  
-    text-align: center;
+    left: 18%;
+    top: 25%;
+    columns: 3;
   }
+
   .legenda_trc{
-    align-items: center;
     padding: 0%;
     margin:0;
-    height: 150%;
+    height: 100%;
+    top: 25%;
+    left: 62%;
   }
+
+  input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    font-size: 40px;
+  }
+
+  .rodape-img {
+    position: absolute;
+    left: 45%;
+    top: 90%;
+  }
+  
 
   /************** Fim do conteúdo central da página */
