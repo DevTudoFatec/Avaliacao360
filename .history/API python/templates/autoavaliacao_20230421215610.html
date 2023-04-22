@@ -36,28 +36,21 @@
 <!--- Fim do botão de menu -->
 
 <!-- Conteúdo central da página Autoavaliação-->
-    <h1 class="bt_avaliacao_trc">AUTOAVALIAÇÃO</h1> 
-    <ul> 
+    <h1 class="bt_avaliacao_trc">AUTOAVALIAÇÃO</h1>  
     <ul>
-      <center>
-      <div class="formulario_trc">
-        <form method="POST" action="{{ url_for('autoavaliacao_submit') }}">
-          <label>
-              <li><h1><em>Sprint</em></h1></li>
-        <input type="radio" name="sprint" value="1" required> 1
-        <input type="radio" name="sprint" value="2" required> 2
-        <input type="radio" name="sprint" value="3" required> 3
-        <input type="radio" name="sprint" value="4" required> 4
-        <br>
-        <br>
-          </label>
-        </form>
-      </div>
-      </ul>
-      <ul>
-        <center>
-        <div class="formulario_trc1">
+    <div class="formulario_trc">
       <form method="POST" action="{{ url_for('autoavaliacao_submit') }}">
+        <label>
+      <li><h1><em>Sprint</em></h1></li>
+      <input type="radio" name="sprint" value="1" required> 1
+      <input type="radio" name="sprint" value="2" required> 2
+      <input type="radio" name="sprint" value="3" required> 3
+      <input type="radio" name="sprint" value="4" required> 4
+      <br>
+      <br>
+      <br>
+    
+    </label>
         <label>
       <li><h3><b>Comunicação e Trabalho em Equipe</b></h3></li>
       <input type="radio" name="comunicacao" value="1" required> 1
@@ -78,21 +71,16 @@
       <br>
       <br>
       <br>
-
+      <br>
+  
       <li><h3><b>Conhecimento e Aplicabilidade Técnica</b></h3></li>
       <input type="radio" name="conhecimento" value="1" required> 1
       <input type="radio" name="conhecimento" value="2" required> 2
       <input type="radio" name="conhecimento" value="3" required> 3
       <input type="radio" name="conhecimento" value="4" required> 4
       <input type="radio" name="conhecimento" value="5" required> 5
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
+    <br>
+    <br>
       <li><h3><b>Entrega de Resultados com Valor Agregado</b></h3></li>
       <input type="radio" name="entrega" value="1" required> 1
       <input type="radio" name="entrega" value="2" required> 2
@@ -114,24 +102,13 @@
     <!-- Legenda da avaliação-->
     <img class="legenda_trc" src="{{ url_for('static', filename='img/autoavalicao/legenda.png') }}" alt="legenda">
 <!-- Fim do conteúdo central da página Autoavaliação-->
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+    <br>
+    <br>
     <input class="bt_confirmar_trc" type="submit" value="CONFIRMAR">
-  </div>
-</form>
-</label>
-</ul>
-</ul>
+    </div>
+    </form>
+  </label>
+  </ul>
 <!--- Início do rodapé da página-->
     <footer>
       <center>

@@ -21,18 +21,19 @@ header{
   color: #89cfc9;
   transition: 0.3s;
   z-index: 1;
+  left: 0;
   top: 0;
-  background-color: #111;}
-
+  background-color: #111;
+}
 #check{
-  display: none;}
-
+  display: none;
+}
 #icone{
   cursor: pointer;
   padding: 20px;
   position: absolute;
-  z-index: 1;}
-
+  z-index: 1;
+}
 .barra{
   top: 0;
   background-color: #333;
@@ -40,41 +41,31 @@ header{
   width: 300px;
   position: absolute;
   transition: all .2s linear;
-  left: -300px;}
-
+  left: -300px;
+}
 .menu_lateral{
   width: 100%;
   position: absolute;
   top: 60px;
-  color:#fed196;}
-
+}
 nav a{
   text-decoration: none;
-  color: #fed196;}
-
+}
 .link{
   background-color: #494949;
   padding: 20px;
   font-size: 12pt;
   transition: all .2s linear;
-  border-bottom: 2px solid #222;}
-
+  border-bottom: 2px solid #222;
+}
 #check:checked ~ .barra{
-  transform: translateX(300px);}
-
+  transform: translateX(300px);
+}
 #check:checked ~ .barra nav{
   margin-top: 0;
   opacity: 1;
-  transition-delay: .2s;}
-
-.flashes {
-  position: absolute;
-  color: black;
-  font-size: 20px;
-  font-weight: bold;
-  left: 44%;
-  margin-top: -35px;
-  text-align: center;}
+  transition-delay: .2s;
+}
 /************** fim do botão de menu */
     
 /************** Conteúdo central da página */
@@ -116,12 +107,13 @@ nav a{
   .formulario_trc1{
     display: inline-block;
     justify-content: space-around;
-    columns: 4;  
+    columns: 3;  
     text-align: center;
   }
+ 
   .legenda_trc{
     align-items: center;
-    padding: 0%;
+    padding: 10%;
     margin:0;
     height: 150%;
   }
