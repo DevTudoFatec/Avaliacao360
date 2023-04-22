@@ -25,7 +25,7 @@
 > - Acompanhamento diário do progresso da equipe, possibilitando a identificação de eventuais problemas e o planejamento de ações corretivas (Burndown);
 
 
-## :chart_with_downwards_trend Burndown
+## :chart_with_downwards_trend: Burndown
  
    <p align="center"><img src="https://user-images.githubusercontent.com/97489478/233753958-4a28c2e6-43b7-40f0-b67a-c758c3ebac86.png" alt="devtudo" style="width:700px;height:400px;"></p>
 
