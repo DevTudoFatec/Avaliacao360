@@ -27,7 +27,13 @@ def autoavaliacao():
 
 @app.route("/avaliacao")
 def avaliacao():
-  return render_template('avaliacao.html')
+  try:
+    with open("data/cadastro.json", "r") as f:
+      users = json.load(f)
+  except:
+    users=[]
+
+  return render_template('avaliacao.html', users=users)
 
 
 @app.route("/login")
@@ -121,6 +127,7 @@ def avaliacao_submit():
     with open('data/avaliacao.json', 'w') as f:
       f.write('[]')
 
+  integrante = request.form.get('integrante')
   sprint = request.form.get('sprint')
   comunicacao = request.form.get('comunicacao')
   engajamento = request.form.get('engajamento')
@@ -132,6 +139,7 @@ def avaliacao_submit():
     data = json.load(f)
 
   avaliacao_dict = {
+    "integrante": integrante,
     "sprint": sprint,
     "comunicacao": comunicacao,
     "engajamento": engajamento,
@@ -145,6 +153,8 @@ def avaliacao_submit():
     json.dump(data, f)
 
   return redirect(url_for('home'))
+
+
 
 app.secret_key = 'wxyz@mtwjer123'
 

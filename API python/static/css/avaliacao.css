@@ -187,8 +187,9 @@ h4, campo-feedback {
     cursor: pointer;
 }
 
-    .rodape-img {
-      height: 300px;
-      display: block;
-      margin: auto;
-    } 
+.rodape-img {
+  height: 300px;
+  display: block;
+  margin: auto;
+} 
+

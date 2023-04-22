@@ -56,18 +56,24 @@
                 </li>
             </ul>
             
-        <h3>Integrante avaliado:</h3>
+        <h3 class="integrante_avaliado">Integrante avaliado:</h3>
+        <select class="input_integrante" name="integrante" required style="position: absolute; width: 200px; height: 30px; left: 90%; top: 45%; border-radius: 20px;" >
+            <option  value="">Nome do Integrante</option>
+            {% for user in users %} 
+              <option value="{{ user['email'] }}">{{ user['nome'] }}</option>
+            {% endfor %}
+        </select>          
         </div>
        
       <ul>
         <div class="formulario_mcs">
                     <label>
                         <li>Comunicação e Trabalho em Equipe</li>
-                        <input type="radio" name="comunicacao" value="1">1
-                        <input type="radio" name="comunicacao" value="2">2
-                        <input type="radio" name="comunicacao" value="3">3
-                        <input type="radio" name="comunicacao" value="4">4
-                        <input type="radio" name="comunicacao" value="5">5
+                        <input type="radio" name="comunicacao" value="1" required>1
+                        <input type="radio" name="comunicacao" value="2" required>2
+                        <input type="radio" name="comunicacao" value="3" required>3
+                        <input type="radio" name="comunicacao" value="4" required>4
+                        <input type="radio" name="comunicacao" value="5" required>5
                         <span></span>
                     </label>
 
@@ -75,11 +81,11 @@
 
                 <label>
                     <li>Engajamento e Pró-atividade</li>
-                    <input type="radio" name="engajamento" value="1">1
-                    <input type="radio" name="engajamento" value="2">2
-                    <input type="radio" name="engajamento" value="3">3
-                    <input type="radio" name="engajamento" value="4">4
-                    <input type="radio" name="engajamento" value="5">5
+                    <input type="radio" name="engajamento" value="1" required>1
+                    <input type="radio" name="engajamento" value="2" required>2
+                    <input type="radio" name="engajamento" value="3" required>3
+                    <input type="radio" name="engajamento" value="4" required>4
+                    <input type="radio" name="engajamento" value="5" required>5
                     <span></span>
                 </label>
 
@@ -88,11 +94,11 @@
         <div class="formulario_mcs2">
                 <label>
                     <li>Entrega de Resultados com valor Agregado</li>
-                    <input type="radio" name="entrega" value="1">1
-                    <input type="radio" name="entrega" value="2">2
-                    <input type="radio" name="entrega" value="3">3
-                    <input type="radio" name="entrega" value="4">4
-                    <input type="radio" name="entrega" value="5">5
+                    <input type="radio" name="entrega" value="1" required>1
+                    <input type="radio" name="entrega" value="2" required>2
+                    <input type="radio" name="entrega" value="3" required>3
+                    <input type="radio" name="entrega" value="4" required>4
+                    <input type="radio" name="entrega" value="5" required>5
                     <span></span>
                 </label>
             
@@ -100,11 +106,11 @@
 
                 <label>
                     <li>Conhecimento e Aplicabilidade Técnica</li>
-                    <input type="radio" name="conhecimento" value="1">1
-                    <input type="radio" name="conhecimento" value="2">2
-                    <input type="radio" name="conhecimento" value="3">3
-                    <input type="radio" name="conhecimento" value="4">4
-                    <input type="radio" name="conhecimento" value="5">5
+                    <input type="radio" name="conhecimento" value="1" required>1
+                    <input type="radio" name="conhecimento" value="2" required>2
+                    <input type="radio" name="conhecimento" value="3" required>3
+                    <input type="radio" name="conhecimento" value="4" required>4
+                    <input type="radio" name="conhecimento" value="5" required>5
                 
                     <span></span>
                 </label>
@@ -113,17 +119,17 @@
         <div class="formulario_mcs3">
                 <label>
                     <li>Auto-gestão das Atividades</li>
-                    <input type="radio" name="autogestao" value="1">1
-                    <input type="radio" name="autogestao" value="2">2
-                    <input type="radio" name="autogestao" value="3">3
-                    <input type="radio" name="autogestao" value="4">4
-                    <input type="radio" name="autogestao" value="5">5
+                    <input type="radio" name="autogestao" value="1" required>1
+                    <input type="radio" name="autogestao" value="2" required>2
+                    <input type="radio" name="autogestao" value="3" required>3
+                    <input type="radio" name="autogestao" value="4" required>4
+                    <input type="radio" name="autogestao" value="5" required>5
                     <span></span>
                 </label>
         </ul>
 
         </form>
-        
+
     </div>
         
     
