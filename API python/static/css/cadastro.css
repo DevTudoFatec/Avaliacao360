@@ -31,7 +31,9 @@ input{
     border-radius: 20px;
     height: 35px;
     width: 8%;
-    color: #fed196;}
+    color: #fed196;
+    cursor: pointer;
+}
 
 ::placeholder{
     color: #214e65;

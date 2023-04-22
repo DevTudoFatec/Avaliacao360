@@ -85,7 +85,7 @@ def cadastro_submit():
 
   flash('Cadastrado com sucesso!')
 
-  return redirect(url_for('home'))
+  return redirect(url_for('cadastro'))
 
 
 @app.route("/autoavaliacao_submit", methods=["POST"])
@@ -118,7 +118,9 @@ def autoavaliacao_submit():
   with open('data/autoavaliacao.json', 'w') as f:
     json.dump(data, f)
 
-  return redirect(url_for('home'))
+  flash('Autoavaliação Registrada com Sucesso!')
+
+  return redirect(url_for('autoavaliacao'))
 
 @app.route("/avaliacao_submit", methods=["POST"])
 def avaliacao_submit():
@@ -134,6 +136,7 @@ def avaliacao_submit():
   entrega = request.form.get('entrega')
   conhecimento = request.form.get('conhecimento')
   autogestao = request.form.get('autogestao')
+  texto = request.form.get('texto')
 
   with open('data/avaliacao.json', 'r') as f:
     data = json.load(f)
@@ -145,14 +148,17 @@ def avaliacao_submit():
     "engajamento": engajamento,
     "entrega": entrega,
     "conhecimento": conhecimento,
-    "autogestao": autogestao
+    "autogestao": autogestao,
+    "texto": texto
   }
 
   data.append(avaliacao_dict)
   with open('data/avaliacao.json', 'w') as f:
     json.dump(data, f)
 
-  return redirect(url_for('home'))
+  flash('Avaliação Registrada com Sucesso!')
+
+  return redirect(url_for('avaliacao'))
 
 
 

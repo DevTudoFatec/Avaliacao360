@@ -1,153 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> Avaliação de Integrantes</title>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/avaliacao.css') }}">
-    </head>
+<html>
 
-    <body>
-        <!--- Início do botão de menu -->
-        <header>
-            <!-- Botão para abrir o menu lateral -->
-            <input type="checkbox" id="check" class="bt">
-            <label id="icone" for="check" class="bt"> ☰ </label>
+<head>
+  <meta charset="UFT-8"/> <!--extensão para caracteres especiais-->
+  <title> Avaliação </title> 
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/avaliacao.css') }}">
+</head>
+<!--- Início do botão de menu -->
+<header>
+    <!-- Botão para abrir o menu lateral -->
+    <input type="checkbox" id="check" class="bt">
+    <label id="icone" for="check" class="bt"> ☰ </label>
+
+<div class="barra">
+    <nav class="menu_lateral">
+        <a href="menu_admin.html"> <div class="link">MENU PRINCIPAL</div></a>
+        <a href="cadastro.html"> <div class="link">CADASTRAR INTEGRANTE</div></a>
+        <a href=""> <div class="link">CONTROLE GERAL TURMA/TIME/SPRINTS</div></a>
+        <a href=""> <div class="link">CONTROLE DE PERFIL</div></a>
+        <a href=""> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
+        <a href=""> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
+        <a href=""> <div class="link">DASHBOARDS GERENCIAIS</div></a>
+        <a href="login.html"> <div class="link">SAIR ➔ </div></a>
+    </nav>
+</div> 
+<!--- Fim do botão de menu -->
+
+<!-- Início do conteúdo do cabeçalho -->
+  <img id="logo_avaliação" src="{{ url_for('static', filename='img/avaliacao/Logo copy.png') }}" alt="Logo da plataforma" width="300">
+  <p><b>Identificação do Usuário</b></p>
+<!-- fim do conteúdo do cabeçalho -->
+</header>
+<!--- Fim do botão de menu -->
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <script>
+    alert('{{ messages[0] }}');
+    </script>
+{% endif %}
+{% endwith %}
+
+<!-- Conteúdo central da página Autoavaliação-->
+    <h1 class="bt_avaliacao_trc">AVALIAÇÃO</h1> 
+      <center>
+      <div class="formulario_trc1">
+        <form method="POST" action="{{ url_for('avaliacao_submit') }}">
+            <div class="input_integrante">
+                <h2>Integrante avaliado:</h2>
+                <select name="integrante" required style="width: 200px; height: 30px; border-radius: 20px;" >
+                    <option  value="">Nome do Integrante</option>
+                    {% for user in users %} 
+                    <option value="{{ user['email'] }}">{{ user['nome'] }}</option>
+                    {% endfor %}
+                </select>   
+            </div>  
+        <ul>
+        <div class="Sprint_select">
+          <li><h2><b>Sprint</b></h2></li>
+          <input type="radio" name="sprint" value="1" required> 1
+          <input type="radio" name="sprint" value="2" required> 2
+          <input type="radio" name="sprint" value="3" required> 3
+          <input type="radio" name="sprint" value="4" required> 4
+        </div>
         
-        <div class="barra">
-            <nav class="menu_lateral">
-                <a href="menu_Admin.html"> <div class="link">MENU PRINCIPAL</div></a>
-                <a href="cadastro.html"> <div class="link">CADASTRAR INTEGRANTE</div></a>
-                <a href=""> <div class="link">CONTROLE GERAL TURMA/TIME/SPRINTS</div></a>
-                <a href=""> <div class="link">CONTROLE DE PERFIL</div></a>
-                <a href=""> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
-                <a href=""> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
-                <a href=""> <div class="link">DASHBOARDS GERENCIAIS</div></a>
-                <a href="login.html"> <div class="link">SAIR ➔ </div></a>
-            </nav>
-        </div>
-        <!--inicio do conteúdo do cabeçalho-->
-
-        <id class="cabecalho">
-            <img class="img_inicial" src="{{ url_for('static', filename='img/avaliacao/img_inicial.png') }}" alt="Logo da avaliação 360º" width="300">
-            <p><b>Identificação de Usuário</b></p>
-        <!-- fim do conteúdo do cabeçalho -->
-        </id> </header>
-        <!--fim do botão de menu-->
-
-        <!--CONTEUDO CENTRAL DA PAGINA DE AVALIAÇÃO-->
-        
-        <div class="titulos">
-        <h3 id="bt_avaliar">Avaliar Integrante</h3>
-            <ul>   
-                <li>
-                    <form class="formulario_avaliacao" method="POST" action="{{ url_for('avaliacao_submit') }}">
-                        <label>
-                        <h3>Sprint</h3>                            
-                        <span>
-                        <input type="radio" name="sprint" value="1">1
-                        <input type="radio" name="sprint" value="2">2
-                        <input type="radio" name="sprint" value="3">3
-                        <input type="radio" name="sprint" value="4">4
-                        <input type="radio" name="sprint" value="5">5
-                        </span>
-                        </label>
-                </li>
-            </ul>
+          <li><h2><b>Comunicação e Trabalho em Equipe</b></h2></li>
+          <input type="radio" name="comunicacao" value="1" required> 1
+          <input type="radio" name="comunicacao" value="2" required> 2
+          <input type="radio" name="comunicacao" value="3" required> 3
+          <input type="radio" name="comunicacao" value="4" required> 4
+          <input type="radio" name="comunicacao" value="5" required> 5
             
-        <h3 class="integrante_avaliado">Integrante avaliado:</h3>
-        <select class="input_integrante" name="integrante" required style="position: absolute; width: 200px; height: 30px; left: 90%; top: 45%; border-radius: 20px;" >
-            <option  value="">Nome do Integrante</option>
-            {% for user in users %} 
-              <option value="{{ user['email'] }}">{{ user['nome'] }}</option>
-            {% endfor %}
-        </select>          
-        </div>
-       
-      <ul>
-        <div class="formulario_mcs">
-                    <label>
-                        <li>Comunicação e Trabalho em Equipe</li>
-                        <input type="radio" name="comunicacao" value="1" required>1
-                        <input type="radio" name="comunicacao" value="2" required>2
-                        <input type="radio" name="comunicacao" value="3" required>3
-                        <input type="radio" name="comunicacao" value="4" required>4
-                        <input type="radio" name="comunicacao" value="5" required>5
-                        <span></span>
-                    </label>
-
-        <br/>
-
-                <label>
-                    <li>Engajamento e Pró-atividade</li>
-                    <input type="radio" name="engajamento" value="1" required>1
-                    <input type="radio" name="engajamento" value="2" required>2
-                    <input type="radio" name="engajamento" value="3" required>3
-                    <input type="radio" name="engajamento" value="4" required>4
-                    <input type="radio" name="engajamento" value="5" required>5
-                    <span></span>
-                </label>
-
-        </div>
-            
-        <div class="formulario_mcs2">
-                <label>
-                    <li>Entrega de Resultados com valor Agregado</li>
-                    <input type="radio" name="entrega" value="1" required>1
-                    <input type="radio" name="entrega" value="2" required>2
-                    <input type="radio" name="entrega" value="3" required>3
-                    <input type="radio" name="entrega" value="4" required>4
-                    <input type="radio" name="entrega" value="5" required>5
-                    <span></span>
-                </label>
-            
-        <br/>
-
-                <label>
-                    <li>Conhecimento e Aplicabilidade Técnica</li>
-                    <input type="radio" name="conhecimento" value="1" required>1
-                    <input type="radio" name="conhecimento" value="2" required>2
-                    <input type="radio" name="conhecimento" value="3" required>3
-                    <input type="radio" name="conhecimento" value="4" required>4
-                    <input type="radio" name="conhecimento" value="5" required>5
-                
-                    <span></span>
-                </label>
-
-        </div>
-        <div class="formulario_mcs3">
-                <label>
-                    <li>Auto-gestão das Atividades</li>
-                    <input type="radio" name="autogestao" value="1" required>1
-                    <input type="radio" name="autogestao" value="2" required>2
-                    <input type="radio" name="autogestao" value="3" required>3
-                    <input type="radio" name="autogestao" value="4" required>4
-                    <input type="radio" name="autogestao" value="5" required>5
-                    <span></span>
-                </label>
+          <li><h2><b>Engajamento e Pró-atividade</b></h2></li>
+          <input type="radio" name="engajamento" value="1" required> 1
+          <input type="radio" name="engajamento" value="2" required> 2
+          <input type="radio" name="engajamento" value="3" required> 3
+          <input type="radio" name="engajamento" value="4" required> 4
+          <input type="radio" name="engajamento" value="5" required> 5
         </ul>
+        <ul>
+          <li><h2><b>Conhecimento e Aplicabilidade Técnica</b></h2></li>
+          <input type="radio" name="conhecimento" value="1" required> 1
+          <input type="radio" name="conhecimento" value="2" required> 2
+          <input type="radio" name="conhecimento" value="3" required> 3
+          <input type="radio" name="conhecimento" value="4" required> 4
+          <input type="radio" name="conhecimento" value="5" required> 5
 
+          <li><h2><b>Entrega de Resultados com Valor Agregado</b></h2></li>
+          <input type="radio" name="entrega" value="1" required> 1
+          <input type="radio" name="entrega" value="2" required> 2
+          <input type="radio" name="entrega" value="3" required> 3
+          <input type="radio" name="entrega" value="4" required> 4
+          <input type="radio" name="entrega" value="5" required> 5
+      
+          <li><h2><b>Auto-gestão das Atividades</b></h2></li>
+          <input type="radio" name="autogestao" value="1" required> 1
+          <input type="radio" name="autogestao" value="2" required> 2
+          <input type="radio" name="autogestao" value="3" required> 3
+          <input type="radio" name="autogestao" value="4" required> 4
+          <input type="radio" name="autogestao" value="5" required> 5  
+          <br>
+          <br>  
+        </ul>
+    <!-- Legenda da avaliação-->
+<!-- Fim do conteúdo central da página Autoavaliação-->
+          <button class="bt_confirmar_trc" type="submit">CONFIRMAR</button>
+          <textarea class="texto_avaliacao" type="text" name="texto" placeholder="Escreva aqui o seu feedback para o integrante." maxlength="50" required pattern="[A-Za-z ]+" title="São permitidas apenas letras!"></textarea>
         </form>
 
-    </div>
-        
-    
-        <h4 id="campo-feedback">Escreva aqui seu feedback para o integrante avaliado</h4>
+<img class="legenda_trc" src="{{ url_for('static', filename='img/avaliacao/legenda.png') }}" alt="legenda">
 
-        
-
-        <img id="Legenda_mcs" src="{{ url_for('static', filename='img/avaliacao/Legenda.png') }}">  
-                
-      
-
-        <button class="button" type="submit">CONFIRMAR</button>
-
-        <!--final da pagina-->
-        <footer>
-            <center>
-            <img src="{{ url_for('static', filename='img/avaliacao/Logo.png') }}" alt="logo PBLTEX"/>
-        </center>
-        </footer>
-    </body>
+</div>
+</label>
+<!--- Início do rodapé da página-->
+    <footer>
+    <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
+</footer>
+<!--- Fim do conteúdo do rodapé da página-->
+<script>
+    function updateValue(val) {
+      document.getElementById("rangeValue").textContent = val;
+    }
+  </script>
+</body>  
 </html>

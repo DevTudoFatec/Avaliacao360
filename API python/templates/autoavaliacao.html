@@ -32,27 +32,35 @@
 <!-- fim do conteúdo do cabeçalho -->
 </header>
 <!--- Fim do botão de menu -->
-
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <script>
+    alert('{{ messages[0] }}');
+    </script>
+{% endif %}
+{% endwith %}
 <!-- Conteúdo central da página Autoavaliação-->
     <h1 class="bt_avaliacao_trc">AUTOAVALIAÇÃO</h1> 
       <center>
       <div class="formulario_trc1">
-        <form method="POST" action="{{ url_for('autoavaliacao_submit') }}">
+        <form method="POST" action="{{ url_for('autoavaliacao_submit') }}"> 
         <ul>
-          <li><h1><b>Sprint</b></h1></li>
+        <div class="Sprint_select">
+          <li><h2><b>Sprint</b></h2></li>
           <input type="radio" name="sprint" value="1" required> 1
           <input type="radio" name="sprint" value="2" required> 2
           <input type="radio" name="sprint" value="3" required> 3
           <input type="radio" name="sprint" value="4" required> 4
-          
-          <li><h1><b>Comunicação e Trabalho em Equipe</b></h1></li>
+        </div>
+        
+          <li><h2><b>Comunicação e Trabalho em Equipe</b></h2></li>
           <input type="radio" name="comunicacao" value="1" required> 1
           <input type="radio" name="comunicacao" value="2" required> 2
           <input type="radio" name="comunicacao" value="3" required> 3
           <input type="radio" name="comunicacao" value="4" required> 4
           <input type="radio" name="comunicacao" value="5" required> 5
             
-          <li><h1><b>Engajamento e Pró-atividade</b></h1></li>
+          <li><h2><b>Engajamento e Pró-atividade</b></h2></li>
           <input type="radio" name="engajamento" value="1" required> 1
           <input type="radio" name="engajamento" value="2" required> 2
           <input type="radio" name="engajamento" value="3" required> 3
@@ -60,21 +68,21 @@
           <input type="radio" name="engajamento" value="5" required> 5
         </ul>
         <ul>
-          <li><h1><b>Conhecimento e Aplicabilidade Técnica</b></h1></li>
+          <li><h2><b>Conhecimento e Aplicabilidade Técnica</b></h2></li>
           <input type="radio" name="conhecimento" value="1" required> 1
           <input type="radio" name="conhecimento" value="2" required> 2
           <input type="radio" name="conhecimento" value="3" required> 3
           <input type="radio" name="conhecimento" value="4" required> 4
           <input type="radio" name="conhecimento" value="5" required> 5
 
-          <li><h1><b>Entrega de Resultados com Valor Agregado</b></h1></li>
+          <li><h2><b>Entrega de Resultados com Valor Agregado</b></h2></li>
           <input type="radio" name="entrega" value="1" required> 1
           <input type="radio" name="entrega" value="2" required> 2
           <input type="radio" name="entrega" value="3" required> 3
           <input type="radio" name="entrega" value="4" required> 4
           <input type="radio" name="entrega" value="5" required> 5
       
-          <li><h1><b>Auto-gestão das Atividades</b></h1></li>
+          <li><h2><b>Auto-gestão das Atividades</b></h2></li>
           <input type="radio" name="autogestao" value="1" required> 1
           <input type="radio" name="autogestao" value="2" required> 2
           <input type="radio" name="autogestao" value="3" required> 3
@@ -97,5 +105,10 @@
     <img class="rodape-img" src="{{ url_for('static', filename='img/autoavaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
 </footer>
 <!--- Fim do conteúdo do rodapé da página-->
+<script>
+    function updateValue(val) {
+      document.getElementById("rangeValue").textContent = val;
+    }
+  </script>
 </body>  
 </html>

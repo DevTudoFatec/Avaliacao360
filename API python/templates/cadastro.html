@@ -26,16 +26,16 @@
             <p><b>Identificação do Usuário</b></p>
         </header>
 
-        <img id="logo_api_cadastro" src="{{ url_for('static', filename='img/cadastro/Logo_API cadastro.png') }}" width="400">
         {% with messages = get_flashed_messages() %}
         {% if messages %}
-            <ul class="flashes">
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
+            <script>
+            alert('{{ messages[0] }}');
+            </script>
         {% endif %}
         {% endwith %}
+
+
+        <img id="logo_api_cadastro" src="{{ url_for('static', filename='img/cadastro/Logo_API cadastro.png') }}" width="400">
         <form id="formulario" method="POST" action="{{ url_for('cadastro_submit') }}">
             <input id="user" type="text" placeholder="NOME COMPLETO" name="nome" required pattern="[A-Za-z ]+" title="São permitidas apenas letras!">
             <br><br>
