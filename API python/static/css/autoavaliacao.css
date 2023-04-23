@@ -9,7 +9,7 @@ header{
   font-size: small;}
 
 #logo_avaliação{
-margin-left: 40%;
+margin-left: 38%;
 }
 /* FIM CABEÇALHO PADRONIZADO */
 
@@ -160,3 +160,66 @@ h2 {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
   /************** Fim do conteúdo central da página */
+
+
+/* Responsividade do site */
+
+
+@media screen and (max-width: 1393px) {
+ 
+  .bt_avaliacao_trc{
+    left: 40%;
+  } 
+
+  .Sprint_select {
+    left: 30%; 
+  }
+  
+}
+
+@media screen and (max-width: 1314px){
+
+  .legenda_trc{
+    height: 50%;
+  }
+  
+}
+
+@media screen and (max-width: 1253px){
+ 
+   .legenda_trc{
+    height: 40%;
+   }
+}
+
+ @media screen and (max-width: 1186px){
+ 
+   .legenda_trc{
+    height: 35%;
+    left:110%;
+  }
+
+  .bt_confirmar_trc{
+    width:20%;
+    left: 120%;
+    top: 65%;
+    font-size: 12px;
+  }
+  
+ }
+
+ @media screen and (max-width: 1120px){
+  
+ 
+  .legenda_trc{
+    
+    left: 80%;
+    top: 90%;
+    
+  }
+  .bt_confirmar_trc{
+
+    top: 105%;
+    left: 40%;
+  }
+ }

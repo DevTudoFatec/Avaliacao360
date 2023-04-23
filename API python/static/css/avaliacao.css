@@ -174,3 +174,102 @@ header{
     padding: 5px;
   }  
     /************** Fim do conteúdo central da página */
+
+
+
+    /*RESPONSIVIDADE */
+
+    
+    @media screen and (max-width: 1393px) {
+      .texto_avaliacao {
+        right: -80%;
+        top: -10%;
+        min-width: 60%;
+        min-height: 28%;
+        max-width: 60%;
+        max-height: 18%;
+        font-size: 20px;
+
+      }
+      .bt_avaliacao_trc{
+        /* width: 7%;
+        font-size: 15px; */
+        left:45%;
+      }
+    }
+
+    @media screen and (max-width: 1314px){
+
+      .texto_avaliacao{
+        
+        min-width: 50%;
+        min-height: 28%;
+        max-width: 50%;
+        max-height: 28%;
+        left: 120%;
+      }
+      .legenda_trc{
+        height: 50%;
+      }
+      
+    }
+
+    @media screen and (max-width: 1253px){
+      .texto_avaliacao{
+        
+        min-width: 40%;
+        min-height: 28%;
+        max-width: 50%;
+        max-height: 28%;
+        left: 110%;
+    }
+       .legenda_trc{
+        height: 40%;
+       }
+    }
+
+     @media screen and (max-width: 1186px){
+      .texto_avaliacao{
+        
+        min-width: 40%;
+        min-height: 18%;
+        max-width: 50%;
+        max-height: 18%;
+        left: 100%;
+    }
+       .legenda_trc{
+        height: 35%;
+        left:110%;
+      }
+
+      .bt_confirmar_trc{
+        width:20%;
+        left: 120%;
+        top: 65%;
+        font-size: 12px;
+      }
+      .bt_avaliacao_trc{
+        width: 7%;
+        font-size: 12px;
+      }
+     }
+
+     @media screen and (max-width: 1120px){
+      
+      .texto_avaliacao{
+        
+        top: 100%;
+        left: -30%;
+    }
+      .legenda_trc{
+        
+        left: 80%;
+        top: 90%;
+        
+      }
+      .bt_confirmar_trc{
+    
+        top: 105%;
+        left: 40%;
+      }
+     }
