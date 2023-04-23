@@ -32,17 +32,18 @@
 <!-- fim do conteúdo do cabeçalho -->
 </header>
 <!--- Fim do botão de menu -->
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-    <script>
-    alert('{{ messages[0] }}');
-    </script>
-{% endif %}
-{% endwith %}
-
 <!-- Conteúdo central da página Autoavaliação-->
     <h1 class="bt_avaliacao_trc">AVALIAÇÃO</h1> 
       <center>
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flash">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+      {% endwith %}
       <div class="formulario_trc1">
         <form method="POST" action="{{ url_for('avaliacao_submit') }}">
             <div class="input_integrante">
