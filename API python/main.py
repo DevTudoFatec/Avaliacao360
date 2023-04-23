@@ -56,8 +56,13 @@ def senha_aleatoria(tamanho, caracteres):
 def cadastro_submit():
 
   if not os.path.exists('data/cadastro.json'):
-    with open('data/cadastro.json', 'w') as f:
-      f.write('[]')
+    if not os.path.exists('data'):
+      os.makedirs('data')
+      with open('data/cadastro.json', 'w') as f:
+        f.write('[]')
+    else:
+      with open('data/cadastro.json', 'w') as f:
+        f.write('[]')
 
   nome = request.form.get('nome')
   email = request.form.get('email')
@@ -92,8 +97,13 @@ def cadastro_submit():
 def autoavaliacao_submit():
 
   if not os.path.exists('data/autoavaliacao.json'):
-    with open('data/autoavaliacao.json', 'w') as f:
-      f.write('[]')
+    if not os.path.exists('data'):
+      os.makedirs('data')
+      with open('data/autoavaliacao.json', 'w') as f:
+        f.write('[]')
+    else:
+      with open('data/autoavaliacao.json', 'w') as f:
+        f.write('[]')
 
   sprint = request.form.get('sprint')
   comunicacao = request.form.get('comunicacao')
@@ -126,8 +136,13 @@ def autoavaliacao_submit():
 def avaliacao_submit():
 
   if not os.path.exists('data/avaliacao.json'):
-    with open('data/avaliacao.json', 'w') as f:
-      f.write('[]')
+    if not os.path.exists('data'):
+      os.makedirs('data')
+      with open('data/avaliacao.json', 'w') as f:
+        f.write('[]')
+    else:
+      with open('data/avaliacao.json', 'w') as f:
+        f.write('[]')
 
   integrante = request.form.get('integrante')
   sprint = request.form.get('sprint')
@@ -162,7 +177,7 @@ def avaliacao_submit():
 
 
 
-app.secret_key = 'wxyz@mtwjer123'
+app.secret_key = 'wxyz@mtwjer123123%213'
 
 if __name__ == "__main__":
   app.run(host='0.0.0.0', debug=True)
