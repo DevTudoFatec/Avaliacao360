@@ -1,33 +1,21 @@
 
-# <p align = "center" > API - 1° Semestre - Banco de Dados 2023 </p>
-
-## :bookmark: Segunda Entrega - SPRINT 2 
+# <p align = "center" > API - 1° Semestre - Banco de Dados 2023 - SPRINT 2 </p>
   
  <p align="center"><img src="https://user-images.githubusercontent.com/97489478/233746669-41edb3cf-f9d8-4174-b0c8-351f0545eb13.png" alt="devtudo" style="width:800px;height:350px;"></p>
  
- 
- <p align="center">
-  <a href ="#dart-objetivo-sprint-2"> Objetivo </a>  •
-  <a href="#chart_with_downwards_trend-burndown">Burndown</a> •
-  <a href="#computer-aplicação">Aplicação</a> • 
-  <a href ="#backlog-do-produto"> Backlog </a>  •
-  <a href="#ferramentas-utilizadas">Ferramentas utilizadas</a> •
-  <a href="#tecnologias-utilizadas">Tecnologias utilizadas</a>
-  
+<p align="center">
+ <a href ="#dart-objetivo-sprint-2"> Objetivo </a>  •
+ <a href="#computer-aplicação">Aplicação</a> • 
+ <a href ="#backlog-do-produto"> Backlog </a>  •
+ <a href="#ferramentas-utilizadas">Ferramentas utilizadas</a> •
+ <a href="#tecnologias-utilizadas">Tecnologias utilizadas</a>
 </p>
   
-
-
 ## :dart: Objetivo Sprint 2
 
 > - Aplicação (no projeto) de conhecimentos adquiridos em linguagem de programação como HTML, CSS e Python;
 > - Desenvolvimento das atividades propostas no Backlog da segunda Sprint;
 > - Acompanhamento diário do progresso da equipe, possibilitando a identificação de eventuais problemas e o planejamento de ações corretivas (Burndown);
-
-
-## :chart_with_downwards_trend: Burndown
- 
-   <p align="center"><img src="https://user-images.githubusercontent.com/97489478/233753958-4a28c2e6-43b7-40f0-b67a-c758c3ebac86.png" alt="devtudo" style="width:700px;height:400px;"></p>
 
 ## :computer: Aplicação
 
@@ -45,7 +33,8 @@
  
  
 ## Backlog do produto
-Clique aqui para acessar o Backlog do produto: [Backlog do produto](https://user-images.githubusercontent.com/111469327/229358855-c92a5b93-2133-473f-b937-2b185bf73f6c.png)
+![image](https://user-images.githubusercontent.com/111203231/233815240-93709471-a9eb-4046-aa48-4923cebdae66.png)
+
 
 ## Tecnologias utilizadas
 
