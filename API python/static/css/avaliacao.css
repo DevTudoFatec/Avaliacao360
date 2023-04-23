@@ -6,7 +6,8 @@ header{
     background-color: #011E36;
     justify-content: space-between;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: small;}
+    font-size: small;
+    padding: 2%;}
   
   #logo_avaliação{
   margin-left: 40%;

@@ -16,7 +16,11 @@ button{
     color: #214e65;
     background-color: #89cfc9;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: large;
     border-color: #89cfc9;
     border-radius: 20px;
     height: 40px;
-    width: 250px;}
+    width: 20%;}
+
+footer{
+    margin: 5%}
