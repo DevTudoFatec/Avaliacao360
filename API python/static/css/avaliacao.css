@@ -166,7 +166,7 @@ header{
     position: absolute;
     left: 70%; 
     top: -25%;
-    width: 40%;
+    width: 43%;
   }
   
   h2 {
@@ -179,7 +179,7 @@ header{
     top: -10%;
     min-width: 60%;
     min-height: 28%;
-    max-width: 80%;
+    max-width: 60%;
     max-height: 28%;
     font-size: 12px;
     vertical-align: top;
@@ -194,20 +194,22 @@ header{
       font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
       color: rgb(247, 2, 2);
       font-weight: bolder;
-      font-size: 20px;
+      font-size: 17px;
       font-weight: bold;
-      left: 40%;
-      top: 14%;
+      left: 35%;
+      top: 100%;
       text-align: center;
       list-style-type: none;
-  }
+      width: 100%;
+    }
 
 /* RESPONSIVIDADE PARA TELAS MENORES QUE 1920X 1080 */
 /*xr*/
 
-@media screen and (min-width:1140) and (min-height: 1055) {
+  @media screen and (min-width:1200px) {
 
-  .content{
-    left: 40%;
+    .content{
+      left: 10%;
+      margin-top: 12%;
+    }
   }
-}

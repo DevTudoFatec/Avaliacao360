@@ -121,6 +121,11 @@ body {
     color: #fed196;
   }
   
+  .content {
+    position: relative; 
+    margin-top: 20%;
+  }
+
   .formulario_trc1{
     display: flex;
     position: absolute;
@@ -167,7 +172,7 @@ footer{
   position: absolute;
   left: 70%; 
   top: -25%;
-  width: 40%;
+  width: 43%;
 }
 
 h2 {
@@ -181,14 +186,38 @@ h2 {
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   color: rgb(247, 2, 2);
   font-weight: bolder;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: bold;
-  left: 40%;
-  top: 14%;
+  left: 35%;
+  top: 100%;
   text-align: center;
   list-style-type: none;
+  width: 100%;
 }
 
 
 /* RESPONSIVIDADE PARA TELAS MAIORES QUE 1920 X1080 */
 
+@media screen and (min-width:1100px) {
+
+  .content{
+    left: 3%;
+    margin-top: 19%;
+  }
+}
+
+@media screen and (min-width:1200px) {
+
+  .content{
+    left: 3%;
+    margin-top: 17%;
+  }
+}
+
+@media screen and (min-width:1300px) {
+
+  .content{
+    left: 3%;
+    margin-top: 17%;
+  }
+}
