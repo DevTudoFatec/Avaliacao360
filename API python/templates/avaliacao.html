@@ -33,18 +33,18 @@
 </header>
 <!--- Fim do botão de menu -->
 <!-- Conteúdo central da página Autoavaliação-->
-    <h1 class="bt_avaliacao_trc">AVALIAÇÃO</h1> 
-      <center>
-      {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul class="flash">
-        {% for message in messages %}
-            <li>{{ message }}</li>
-        {% endfor %}
-        </ul>
-      {% endif %}
-      {% endwith %}
+  <div class="content">
       <div class="formulario_trc1">
+        <h1 class="bt_avaliacao_trc">AVALIAÇÃO</h1> 
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="flash">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+          {% endwith %}        
         <form method="POST" action="{{ url_for('avaliacao_submit') }}">
             <div class="input_integrante">
                 <h2>Integrante avaliado:</h2>
@@ -110,17 +110,14 @@
 
 <img class="legenda_trc" src="{{ url_for('static', filename='img/avaliacao/legenda.png') }}" alt="legenda">
 
+
+<footer>
+  <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
+</footer>
+</div>
 </div>
 </label>
 <!--- Início do rodapé da página-->
-    <footer>
-    <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
-</footer>
 <!--- Fim do conteúdo do rodapé da página-->
-<script>
-    function updateValue(val) {
-      document.getElementById("rangeValue").textContent = val;
-    }
-  </script>
 </body>  
 </html>
