@@ -206,10 +206,26 @@ header{
 /* RESPONSIVIDADE PARA TELAS MENORES QUE 1920X 1080 */
 /*xr*/
 
-  @media screen and (min-width:1200px) {
+@media screen and (min-width:1100px) {
 
-    .content{
-      left: 10%;
-      margin-top: 12%;
-    }
+  .content{
+    left: 3%;
+    margin-top: 19%;
   }
+}
+
+@media screen and (min-width:1200px) {
+
+  .content{
+    left: 3%;
+    margin-top: 17%;
+  }
+}
+
+@media screen and (min-width:1300px) {
+
+  .content{
+    left: 3%;
+    margin-top: 17%;
+  }
+}
