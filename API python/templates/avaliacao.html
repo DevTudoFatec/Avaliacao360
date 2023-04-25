@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UFT-8"/> <!--extensão para caracteres especiais-->
+  <title> Avaliação </title> 
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/avaliacao.css') }}">
+</head>
+<!--- Início do botão de menu -->
+<header>
+    <!-- Botão para abrir o menu lateral -->
+    <input type="checkbox" id="check" class="bt">
+    <label id="icone" for="check" class="bt"> ☰ </label>
+
+<div class="barra">
+    <nav class="menu_lateral">
+        <a href="menu_admin.html"> <div class="link">MENU PRINCIPAL</div></a>
+        <a href="cadastro.html"> <div class="link">CADASTRAR INTEGRANTE</div></a>
+        <a href=""> <div class="link">CONTROLE GERAL TURMA/TIME/SPRINTS</div></a>
+        <a href=""> <div class="link">CONTROLE DE PERFIL</div></a>
+        <a href=""> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
+        <a href=""> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
+        <a href=""> <div class="link">DASHBOARDS GERENCIAIS</div></a>
+        <a href="login.html"> <div class="link">SAIR ➔ </div></a>
+    </nav>
+</div> 
+<!--- Fim do botão de menu -->
+
+<!-- Início do conteúdo do cabeçalho -->
+  <img id="logo_avaliação" src="{{ url_for('static', filename='img/avaliacao/Logo copy.png') }}" alt="Logo da plataforma" width="300">
+  <p><b>Identificação do Usuário</b></p>
+<!-- fim do conteúdo do cabeçalho -->
+</header>
+<!--- Fim do botão de menu -->
+<!-- Conteúdo central da página Autoavaliação-->
+  <div class="content">
+      <div class="formulario_trc1">
+        <h1 class="bt_avaliacao_trc">AVALIAÇÃO</h1> 
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="flash">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+          {% endwith %}        
+        <form method="POST" action="{{ url_for('avaliacao_submit') }}">
+            <div class="input_integrante">
+                <h2>Integrante avaliado:</h2>
+                <select name="integrante" required style="width: 200px; height: 30px; border-radius: 20px;" >
+                    <option  value="">Nome do Integrante</option>
+                    {% for user in users %} 
+                    <option value="{{ user['email'] }}">{{ user['nome'] }}</option>
+                    {% endfor %}
+                </select>   
+            </div>  
+        <ul>
+        <div class="Sprint_select">
+          <li><h2><b>Sprint</b></h2></li>
+          <input type="radio" name="sprint" value="1" required> 1
+          <input type="radio" name="sprint" value="2" required> 2
+          <input type="radio" name="sprint" value="3" required> 3
+          <input type="radio" name="sprint" value="4" required> 4
+        </div>
+        
+          <li><h2><b>Comunicação e Trabalho em Equipe</b></h2></li>
+          <input type="radio" name="comunicacao" value="1" required> 1
+          <input type="radio" name="comunicacao" value="2" required> 2
+          <input type="radio" name="comunicacao" value="3" required> 3
+          <input type="radio" name="comunicacao" value="4" required> 4
+          <input type="radio" name="comunicacao" value="5" required> 5
+            
+          <li><h2><b>Engajamento e Pró-atividade</b></h2></li>
+          <input type="radio" name="engajamento" value="1" required> 1
+          <input type="radio" name="engajamento" value="2" required> 2
+          <input type="radio" name="engajamento" value="3" required> 3
+          <input type="radio" name="engajamento" value="4" required> 4
+          <input type="radio" name="engajamento" value="5" required> 5
+        </ul>
+        <ul>
+          <li><h2><b>Conhecimento e Aplicabilidade Técnica</b></h2></li>
+          <input type="radio" name="conhecimento" value="1" required> 1
+          <input type="radio" name="conhecimento" value="2" required> 2
+          <input type="radio" name="conhecimento" value="3" required> 3
+          <input type="radio" name="conhecimento" value="4" required> 4
+          <input type="radio" name="conhecimento" value="5" required> 5
+
+          <li><h2><b>Entrega de Resultados com Valor Agregado</b></h2></li>
+          <input type="radio" name="entrega" value="1" required> 1
+          <input type="radio" name="entrega" value="2" required> 2
+          <input type="radio" name="entrega" value="3" required> 3
+          <input type="radio" name="entrega" value="4" required> 4
+          <input type="radio" name="entrega" value="5" required> 5
+      
+          <li><h2><b>Auto-gestão das Atividades</b></h2></li>
+          <input type="radio" name="autogestao" value="1" required> 1
+          <input type="radio" name="autogestao" value="2" required> 2
+          <input type="radio" name="autogestao" value="3" required> 3
+          <input type="radio" name="autogestao" value="4" required> 4
+          <input type="radio" name="autogestao" value="5" required> 5  
+          <br>
+          <br>  
+        </ul>
+    <!-- Legenda da avaliação-->
+<!-- Fim do conteúdo central da página Autoavaliação-->
+          <button class="bt_confirmar_trc" type="submit">CONFIRMAR</button>
+          <textarea class="texto_avaliacao" type="text" name="texto" placeholder="Escreva aqui o seu feedback para o integrante." maxlength="50" required pattern="[A-Za-z ]+" title="São permitidas apenas letras!"></textarea>
+        </form>
+
+<img class="legenda_trc" src="{{ url_for('static', filename='img/avaliacao/legenda.png') }}" alt="legenda">
+
+
+<footer>
+  <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
+</footer>
+</div>
+</div>
+</label>
+<!--- Início do rodapé da página-->
+<!--- Fim do conteúdo do rodapé da página-->
+</body>  
+</html>

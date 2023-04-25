@@ -1,0 +1,107 @@
+body{
+    text-align: center;
+    background-color: #eeee;
+    margin: 0;
+    padding: 0;}
+
+#details_adimn{
+    margin: 2%;}
+    
+.botao_azul_claro{
+    color: #214e65;
+    background-color: #89cfc9;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-color: #89cfc9;
+    border-radius: 25px;
+    height: 50px;
+    width: 350px;
+    font-size: medium;
+    text-align: center;}
+
+.opções_menu{
+    display: flex;
+    justify-content: space-around;
+    margin-left: 30%;
+    margin-right: 30%;}
+
+footer{
+    margin: 5%}
+
+/*header padrão: início*/
+
+header{
+    display: flex;
+    align-items: center;
+    color: #89cfc9;
+    background-color: #011E36;
+    padding: 2%;
+    justify-content: space-between;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: small;}
+
+#logo_avaliação{
+    margin-left: 40%;}
+
+.bt{
+    padding: 6px, 6px, 6px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #89cfc9;
+    transition: 0.3s;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;}
+
+#check{
+    display: none;}
+
+#icone{
+    cursor: pointer;
+    padding: 20px;
+    position: absolute;
+    z-index: 1;}
+
+.barra{
+    top: 0;
+    background-color: #333;
+    height: 100px;
+    width: 300px;
+    position: absolute;
+    transition: all .2s linear;
+    left: -300px;}
+
+.menu_lateral{
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    color:#fed196;}
+
+nav a{
+    text-decoration: none;
+    color: #fed196;}
+
+.link{
+    background-color: #494949;
+    padding: 20px;
+    font-size: 12pt;
+    transition: all .2s linear;
+    border-bottom: 2px solid #222;}
+
+#check:checked ~ .barra{
+    transform: translateX(300px);}
+
+#check:checked ~ .barra nav{
+    margin-top: 0;
+    opacity: 1;
+    transition-delay: .2s;}
+
+.flashes {
+    position: absolute;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    left: 44%;
+    margin-top: -35px;
+    text-align: center;}
+    /*header padrão: fim*/
