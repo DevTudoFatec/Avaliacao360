@@ -1,0 +1,223 @@
+/* CABEÇALHO PADRONIZADO */
+header{
+  display: flex;
+  align-items: center;
+  color: #89cfc9;
+  background-color: #011E36;
+  justify-content: space-between;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: small;
+  padding: 2%;}
+
+#logo_avaliação{
+margin-left: 38%;
+}
+/* FIM CABEÇALHO PADRONIZADO */
+
+@import url('https://fonts.googleapis.com/css2?family=Vina+Sans&display=swap');
+
+/* Botão de menu */
+.bt{
+padding: 6px, 6px, 6px;
+text-decoration: none;
+font-size: 15px;
+color: #89cfc9;
+transition: 0.3s;
+z-index: 1;
+top: 0;
+background-color: #111;}
+
+#check{
+display: none;}
+
+#icone{
+left: 0;
+cursor: pointer;
+padding: 20px;
+position: absolute;
+z-index: 1;}
+
+.barra{
+top: 0;
+background-color: #333;
+height: 100px;
+width: 300px;
+position: absolute;
+transition: all .2s linear;
+left: -300px;}
+
+.menu_lateral{
+width: 100%;
+position: absolute;
+top: 60px;
+color:#fed196;}
+
+
+nav a{
+text-decoration: none;
+color: #fed196;}
+
+.link{
+background-color: #494949;
+padding: 20px;
+font-size: 12pt;
+transition: all .2s linear;
+border-bottom: 2px solid #222;
+cursor: none;
+
+}
+
+#check:checked ~ .barra{
+transform: translateX(300px);
+}
+
+#check:checked ~ .barra nav{
+margin-top: 0;
+opacity: 1;
+transition-delay: .2s;
+}
+
+.flashes {
+position: absolute;
+color: black;
+font-size: 20px;
+font-weight: bold;
+left: 44%;
+margin-top: -35px;
+text-align: center;}
+/************** fim do botão de menu */
+  
+/************** Conteúdo central da página */
+
+body {
+  background-color: #eeee;
+  margin: 0;
+  padding: 0;
+  }
+  .bt_avaliacao_trc{
+    position: absolute;
+    background-color: #214E65;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 20px;
+    border-radius: 50px;
+    padding: 15px;
+    left: 0%;
+    top: -50%;
+    color: #fed196;
+  }
+  .bt_confirmar_trc{
+    position: absolute;
+    color: white;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 13px;
+    padding: 10px;
+    border-radius: 50px;
+    background-color: #214E65;
+    border-bottom: 2% solid #222;
+    cursor: pointer;
+    left: 135%;
+    top: 90%;
+    color: #fed196;
+  }
+  
+  .content {
+    position: relative; 
+    margin-top: 20%;
+  }
+
+  .formulario_trc1{
+    display: flex;
+    position: absolute;
+    left: 25%;
+    top: 70%;
+    columns: 2;
+    text-align: left;
+    font-size: 10px;
+  }
+  
+  .legenda_trc{
+    position: absolute;
+    margin:0;
+    height: 60%;
+    top: 24%;
+    left: 122%;
+  }
+
+input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  font-size: 40px;
+}
+
+footer{
+  position: absolute;
+  width: 50%;
+  bottom: -40%;
+  transform: translate(0%, 150%);
+  left: 35%;
+}
+.rodape-img {   
+  height: 100%;
+  width: auto;
+}
+
+.input_integrante {
+  left: 1%; 
+  top: -25%;
+  position: absolute;
+}
+
+.Sprint_select {
+  position: absolute;
+  left: 70%; 
+  top: -25%;
+  width: 43%;
+}
+
+h2 {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+  /************** Fim do conteúdo central da página */
+
+
+ .flash {
+  position: absolute;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: rgb(247, 2, 2);
+  font-weight: bolder;
+  font-size: 17px;
+  font-weight: bold;
+  left: 35%;
+  top: 100%;
+  text-align: center;
+  list-style-type: none;
+  width: 100%;
+}
+
+
+/* RESPONSIVIDADE PARA TELAS MAIORES QUE 1920 X1080 */
+
+@media screen and (min-width:1100px) {
+
+  .content{
+    left: 3%;
+    margin-top: 19%;
+  }
+}
+
+@media screen and (min-width:1200px) {
+
+  .content{
+    left: 3%;
+    margin-top: 17%;
+  }
+}
+
+@media screen and (min-width:1300px) {
+
+  .content{
+    left: 3%;
+    margin-top: 17%;
+  }
+}

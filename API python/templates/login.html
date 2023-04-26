@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Avaliação 360°</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/login.css') }}">
+</head>
+<!--CAMINHO PARA A IMAGEM "{{ url_for('static', filename='img/login/Layout API-2.png') }}"-->
+
+<body>
+
+	<nav class="divisao_texto_tela">
+		<nav class="img">
+			<img src="{{ url_for('static', filename='img/login/Layout API-2.png') }}"" alt="Imagem principal">
+		</nav>
+		
+		<nav class="inputs">
+			<h4 class="texto_instrucao">Faça seu login aqui!</h4>
+
+			<input type="text" name="nome" placeholder="DIGITE SEU E-MAIL">
+
+			<input type="password" name="password" placeholder="DIGITE SUA SENHA">			
+			<br>
+
+			<button class="botao_acessar" type="submit">ACESSAR</button>
+		</nav>
+	</nav>
+</body>

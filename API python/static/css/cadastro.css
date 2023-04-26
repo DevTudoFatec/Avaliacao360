@@ -1,0 +1,114 @@
+header{
+    display: flex;
+    align-items: center;
+    color: #89cfc9;
+    background-color: #011E36;
+    justify-content: space-between;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: small;
+    padding: 2%;}
+
+#logo_avaliação{
+    margin-left: 40%;}
+
+#logo_api_cadastro{
+    margin: 2%;}
+
+body{
+    text-align: center;
+    background-color: #eeee;
+    margin: 0;
+    padding: 0;}
+    
+input{
+    border-radius: 25px;
+    width: 25%;
+    height: 40px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+    text-align: center;
+    font-size:medium;}
+
+.botao_cadastrar_voltar{    
+    color: #fed196;
+    background-color: #214e65;
+    border-color: #214e65;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-radius: 25px;
+    height: 40px;
+    width: 10%;
+    color: #fed196;
+    cursor: pointer;
+    font-size: medium;
+    margin: 2%;
+    font-weight: bold;}
+
+::placeholder{
+    color: #214e65;
+    font-weight: bold;}
+
+/*thomas*/
+.bt{
+    padding: 6px, 6px, 6px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #89cfc9;
+    transition: 0.3s;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;}
+
+#check{
+    display: none;}
+
+#icone{
+    cursor: pointer;
+    padding: 20px;
+    position: absolute;
+    z-index: 1;}
+
+.barra{
+    top: 0;
+    background-color: #333;
+    height: 100px;
+    width: 300px;
+    position: absolute;
+    transition: all .2s linear;
+    left: -300px;}
+
+.menu_lateral{
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    color:#fed196;}
+
+nav a{
+    text-decoration: none;
+    color: #fed196;}
+
+.link{
+    background-color: #494949;
+    padding: 20px;
+    font-size: 12pt;
+    transition: all .2s linear;
+    border-bottom: 2px solid #222;}
+
+#check:checked ~ .barra{
+    transform: translateX(300px);}
+
+#check:checked ~ .barra nav{
+    margin-top: 0;
+    opacity: 1;
+    transition-delay: .2s;}
+
+.flash {
+    position: absolute;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+    font-size: 20px;
+    font-weight: bold;
+    left: 42%;
+    margin-top: -1.8%;
+    text-align: center;
+    list-style-type: none;
+}
