@@ -10,9 +10,17 @@ app = Flask(__name__)
 ##  DEFININDO ROTAS
 
 
-@app.route("/")
+@app.route("/home")
 def home():
   return render_template('home.html')
+
+@app.route("/menu_admin")
+def menu_admin():
+  return render_template('menu_admin.html')
+
+@app.route("/")
+def login():
+  return render_template('login.html')
 
 
 @app.route("/cadastro")
@@ -34,11 +42,6 @@ def avaliacao():
     users=[]
 
   return render_template('avaliacao.html', users=users)
-
-
-@app.route("/login")
-def login():
-  return render_template('login.html')
 
 
 @app.route("/menu_admin")
