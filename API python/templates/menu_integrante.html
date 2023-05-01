@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UFT-8"/>
+        <title>Opções Ususário - Avaliação 360º PBLTeX</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/menu_integrante.css') }}">
+    </head>
+
+    <body>
+        <header> 
+            <input type="checkbox" id="check" class="bt">
+            <label id="icone" for="check" class="bt"> ☰ </label>
+        
+        <div class="barra">
+            <nav class="menu_lateral">
+                <a href=""> <div class="link">MENU PRINCIPAL</div></a>
+                <a href=""> <div class="link">AUTO AVALIAÇÃO</div></a>
+                <a href=""> <div class="link">AVALIAÇÃO DE INTEGRANTES</div></a>
+                <a href=""> <div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
+                <a href=""> <div class="link">SAIR ➔ </div></a>
+            </nav>
+        </div>
+        <img id="logo_avaliação" src="{{ url_for('static', filename='img/menu_admin/Logo API (3).png') }}" width="300">
+        <p><b>Usuário {{}}</b></p>
+        </header>
+
+        <img id="details_integrante" src="{{ url_for('static', filename='img/menu_integrante/Logo_API_Menu_integrante.png') }}" width="300">
+
+        <nav class="opções_menu">
+            <button class="botao_azul_claro">
+                <a class="botao_azul_claro" href="">
+                <strong>AUTO AVALIAÇÃO</strong>
+                </a>
+            </button>
+            <br><br>
+            <button class="botao_azul_claro">
+                <a class="botao_azul_claro">
+                <strong>AVALIAÇÃO DE INTEGRANTES</strong>
+                </a>
+            </button>
+            <br><br>
+            <button class="botao_azul_claro">
+                <a class="botao_azul_claro">
+                <strong>DEVOLUTIVA DA AVALIAÇÃO</strong>
+                </a>
+            </button>
+        </nav>
+        <footer>      
+            <img id="logo_api_pbletex" src="{{ url_for('static', filename='img/menu_admin/Logo_API_PBLTeX.png') }}" width="250">
+        </footer>
+    </body>
+</html>    
+</html>
