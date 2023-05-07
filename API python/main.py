@@ -18,11 +18,6 @@ def home():
 def menu_admin():
   return render_template('menu_admin.html')
 
-@app.route("/")
-def login():
-  return render_template('login.html')
-
-
 @app.route("/cadastro")
 def cadastro():
   return render_template('cadastro.html')
@@ -47,6 +42,23 @@ def avaliacao():
 @app.route("/menu_admin")
 def menu():
   return render_template('menu_admin.html')
+
+## Validação login
+
+@app.route("/login", methods=['POST'])
+def login():
+  usuario = request.form.get('nome')
+  senha = request.form.get('password')
+  with open('data/cadastro.json') as cadastro:
+    lista = json.load(cadastro)
+    cont = 0
+    for c in lista:
+      cont=cont+1
+      if usuario == c['nome'] and senha == c['senha']:
+        return render_template("menu_admin.html", nomeUsuario=c['nome'])
+        if cont >= len(lista):
+          flash('Usuário Inválido')
+          return redirect('/')
 
 ## função para geração de senha aleatoria do usuario
 
