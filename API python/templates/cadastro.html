@@ -23,7 +23,7 @@
                 </nav>
             </div>
             <img id="logo_avaliação" src="{{ url_for('static', filename='img/cadastro/Logo.png') }}" alt="Logo da plataforma" width="300">
-            <p><b>Identificação do Usuário</b></p>
+            <p><b>Usuário: {{ nomeUsuario }}</b></p>
         </header>
         <img id="logo_api_cadastro" src="{{ url_for('static', filename='img/cadastro/Logo_API cadastro.png') }}" width="400">
         {% with messages = get_flashed_messages() %}
