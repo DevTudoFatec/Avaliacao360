@@ -1,6 +1,6 @@
 [
     {
         "nome": "Admin",
-        "senha": "api123"
+        "password": "api123"
     }
 ]

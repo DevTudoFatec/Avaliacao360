@@ -91,20 +91,19 @@ header{
     }
   .bt_avaliacao_trc{
     position: absolute;
-    background-color: #214E65;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #5e17eb;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 20px;
     border-radius: 50px;
     padding: 15px;
     left: 0%;
     top: -50%;
-    color: #fed196;
+    color: white;
   }
   .bt_confirmar_trc{
     position: absolute;
-    color: white;
     text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 13px;
     padding: 10px;
     border-radius: 50px;

@@ -48,16 +48,16 @@ def menu():
 def login():
   usuario = request.form.get('nome')
   senha = request.form.get('password')
-  with open('data/cadastro.json') as cadastro:
+  with open("data/cadastro.json") as cadastro:
     lista = json.load(cadastro)
     cont = 0
     for c in lista:
       cont=cont+1
-      if usuario == c['nome'] and senha == c['senha']:
+      if usuario == c['nome'] and senha == c['password']:
         return render_template("menu_admin.html", nomeUsuario=c['nome'])
-        if cont >= len(lista):
-          flash('Usuário Inválido')
-          return redirect('/')
+      if cont >= len(lista):
+        flash('Usuário Inválido')
+        return redirect('/')
 
 ## função para geração de senha aleatoria do usuario
 
