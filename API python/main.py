@@ -9,6 +9,7 @@ app = Flask(__name__)
 
 ##  DEFININDO ROTAS
 
+
 @app.route("/")
 def home():
   return render_template('login.html')
@@ -25,6 +26,14 @@ def cadastro():
 @app.route("/autoavaliacao")
 def autoavaliacao():
   return render_template('autoavaliacao.html')
+
+@app.route("/controle_perfil")
+def controle_perfil():
+  return render_template('controle_perfil.html')
+
+@app.route("/controle_geral")
+def controle_geral():
+  return render_template('controle_geral.html')
 
 
 @app.route("/avaliacao")

@@ -1,6 +1,1 @@
-[
-    {
-        "nome": "Admin",
-        "password": "api123"
-    }
-]
+[{"nome": "Admin", "password": "api123"}, {"nome": "Teste", "email": "teste@gmail.com", "turma": "bd", "semestre": "3", "senha": "axniPVriqb"}]

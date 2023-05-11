@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UFT-8"/>
+        <title>Controle Perfil</title> 
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/controle_perfil.css') }}">
+    </head>
+
+    <body>
+        <header> 
+            <input type="checkbox" id="check" class="bt">
+            <label id="icone" for="check" class="bt"> ☰ </label>
+        
+        <div class="barra">
+            <nav class="menu_lateral">
+                <a href=""> <div class="link">MENU PRINCIPAL</div></a>
+                <a href=""> <div class="link">CADASTRAR INTEGRANTE</div></a>
+                <a href=""> <div class="link">CONTROLE GERAL TURMA/TIME/SPRINTS</div></a>
+                <a href=""> <div class="link">CONTROLE DE PERFIL</div></a>
+                <a href=""> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
+                <a href=""> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
+                <a href=""> <div class="link">DASHBOARDS GERENCIAIS</div></a>
+                <a href=""> <div class="link">SAIR ➔ </div></a>
+            </nav>
+        </div>
+        <img id="logo_avaliação" src="{{ url_for('static', filename='img/menu_admin/Logo API (3).png') }}" width="300">
+        <p><b>Usuário: {{ nomeUsuario }}</b></p>
+        </header>
+        <div class="controle_container">          
+          <h1 class="bt_controle">CONTROLE DE PERFIL</h1>
+          <h1 class="bt_avaliacao_trc">NOME</h1>           
+          <h1 class="bt_avaliacao_trc">SEMESTRE</h1>     
+          <h1 class="bt_avaliacao_trc">TURMA</h1>          
+          <h1 class="bt_avaliacao_trc">TIME</h1>           
+          <h1 class="bt_avaliacao_trc">PERFIL</h1> 
+        </div>
+        <footer>      
+            <img id="logo_api_pbletex" src="{{ url_for('static', filename='img/menu_admin/Logo_API_PBLTeX.png') }}" width="250">
+        </footer>
+    </body>
+</html>    
