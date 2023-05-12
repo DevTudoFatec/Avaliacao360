@@ -109,7 +109,7 @@ def cadastro_submit():
 
   data.append(cadastro_dict)
   with open('data/cadastro.json', 'w') as f:
-    json.dump(data, f)
+    json.dump(data, f, indent=2)
 
   flash('Cadastrado com sucesso!')
 

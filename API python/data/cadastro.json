@@ -1,1 +1,27 @@
-[{"nome": "Admin", "password": "api123"}, {"nome": "Teste", "email": "teste@gmail.com", "turma": "bd", "semestre": "3", "senha": "axniPVriqb"}]
+[
+  {
+    "nome": "Admin",
+    "password": "api123"
+  },
+  {
+    "nome": "Teste",
+    "email": "teste@gmail.com",
+    "turma": "bd",
+    "semestre": "3",
+    "senha": "axniPVriqb"
+  },
+  {
+    "nome": "Testee",
+    "email": "teete",
+    "turma": "bd",
+    "semestre": "3",
+    "senha": "UrixLE9Ekd"
+  },
+  {
+    "nome": "Teste",
+    "email": "teteset",
+    "turma": "bd",
+    "semestre": "3",
+    "senha": "gLW5p1NaEO"
+  }
+]
