@@ -6,10 +6,9 @@ body{
 }
 
 footer{
-  position: fixed;
-  margin: 5%;
-  bottom: 0;
-  left: 35%;
+  position: relative;
+  margin-top: 10%;
+  left: 0%;
 }
 
 /*header padrão: início*/
@@ -127,5 +126,23 @@ nav a{
   width: 12%;
   color: black;
   background-color: white;
-  margin-right: 7%;
+  margin-right: 8%;
+}
+
+.usuarios_container {
+  position: absolute;
+}
+
+.user_infos {
+  table-layout: fixed;
+  width: 72%;
+  margin-left: 16.5%;
+}
+
+.user_info {
+  display: inline-block;
+  width: 20%;
+  text-align: left;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 22px;
 }

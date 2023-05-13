@@ -31,11 +31,23 @@ def autoavaliacao():
 
 @app.route("/controle_perfil")
 def controle_perfil():
-  return render_template('controle_perfil.html', nomeUsuario=session['nomeUsuario'])
+  try:
+    with open("data/cadastro.json", "r") as f:
+      users = json.load(f)
+  except:
+    users=[]
+
+  return render_template('controle_perfil.html', users=users, nomeUsuario=session['nomeUsuario'])
 
 @app.route("/controle_geral")
 def controle_geral():
-  return render_template('controle_geral.html', nomeUsuario=session['nomeUsuario'])
+  try:
+    with open("data/cadastro.json", "r") as f:
+      users = json.load(f)
+  except:
+    users=[]
+
+  return render_template('controle_geral.html', users=users, nomeUsuario=session['nomeUsuario'])
 
 @app.route("/devolutiva_avaliacao")
 def devolutiva_avaliacao():

@@ -34,8 +34,35 @@
           <h1 class="bt_avaliacao_trc">TIME</h1>           
           <h1 class="bt_avaliacao_trc">PERFIL</h1> 
         </div>
-        <footer>      
-            <img id="logo_api_pbletex" src="{{ url_for('static', filename='img/menu_admin/Logo_API_PBLTeX.png') }}" width="250">
-        </footer>
+        <div class="usuarios_container">    
+            {% for user in users %} 
+                {% if user['email'] != 'admin' %}
+                {% if user['email'] != emailUsuario %}
+                    <table class="user_infos">
+                        <tr>
+                            <td>
+                                <h1 class="user_info">{{ user['nome'] }}</h1>
+                            </td>
+                            <td>
+                                <h1 class="user_info">{{ user['semestre'] }}</h1>
+                            </td>
+                            <td>
+                                <h1 class="user_info">{{ user['turma'] }}</h1>
+                            </td>
+                            <td>
+                                <h1 class="user_info">{{ user['turma'] }}</h1>
+                            </td>
+                            <td>
+                                <h1 class="user_info">{{ user['turma'] }}</h1>
+                            </td>
+                        </tr>
+                    </table>
+                {% endif %}
+                {% endif %}
+            {% endfor %}
+            <footer>      
+                <img id="logo_api_pbletex" src="{{ url_for('static', filename='img/menu_admin/Logo_API_PBLTeX.png') }}" width="250">
+            </footer>
+        </div>
     </body>
 </html>    
