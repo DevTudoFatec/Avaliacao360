@@ -48,8 +48,10 @@
                 <select name="integrante" required style="width: 200px; height: 30px; border-radius: 20px;" >
                     <option  value="">Nome do Integrante</option>
                     {% for user in users %} 
-                      {% if user['email'] != 'Admin' %}
+                      {% if user['email'] != 'admin' %}
+                        {% if user['email'] != emailUsuario %}
                         <option value="{{ user['email'] }}">{{ user['nome'] }}</option>
+                        {% endif %}
                       {% endif %}
                     {% endfor %}
                 </select>   

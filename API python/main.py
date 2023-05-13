@@ -54,7 +54,7 @@ def avaliacao():
   except:
     users=[]
 
-  return render_template('avaliacao.html', users=users, nomeUsuario=session['nomeUsuario'])
+  return render_template('avaliacao.html', users=users, nomeUsuario=session['nomeUsuario'], emailUsuario=session['email'])
 
 
 ## Validação login
@@ -70,6 +70,7 @@ def login():
       if email == item['email'] and senha == item['senha']:
         check = True
         session['nomeUsuario'] = item['nome']
+        session['email'] = item['email']
         if item['nome'] == 'Admin':
           return redirect(url_for('menu_admin'))
         else:
@@ -139,6 +140,7 @@ def autoavaliacao_submit():
       with open('data/autoavaliacao.json', 'w') as f:
         f.write('[]')
 
+  email = session['email']
   sprint = request.form.get('sprint')
   comunicacao = request.form.get('comunicacao')
   engajamento = request.form.get('engajamento')
@@ -148,8 +150,12 @@ def autoavaliacao_submit():
 
   with open('data/autoavaliacao.json', 'r') as f:
     data = json.load(f)
-
+  if any(user.get("email") == email and user.get("sprint") == sprint for user in data):
+    flash(f'Auto Avaliação da S print {sprint} já foi realizada!')
+    return redirect(url_for('autoavaliacao'))
+  
   avaliacao_dict = {
+    "email": email,
     "sprint": sprint,
     "comunicacao": comunicacao,
     "engajamento": engajamento,
@@ -160,7 +166,7 @@ def autoavaliacao_submit():
 
   data.append(avaliacao_dict)
   with open('data/autoavaliacao.json', 'w') as f:
-    json.dump(data, f)
+    json.dump(data, f, indent=2)
 
   flash('Autoavaliação Registrada com Sucesso!')
 
@@ -177,7 +183,8 @@ def avaliacao_submit():
     else:
       with open('data/avaliacao.json', 'w') as f:
         f.write('[]')
-
+  
+  avaliador = session['email']
   integrante = request.form.get('integrante')
   sprint = request.form.get('sprint')
   comunicacao = request.form.get('comunicacao')
@@ -189,8 +196,12 @@ def avaliacao_submit():
 
   with open('data/avaliacao.json', 'r') as f:
     data = json.load(f)
+  if any(user.get("avaliador") == avaliador and user.get("integrante") == integrante and user.get("sprint") == sprint for user in data):
+    flash(f'Avaliação do integrante selecionado na Sprint {sprint} já foi realizada!')
+    return redirect(url_for('avaliacao'))
 
   avaliacao_dict = {
+    "avaliador": avaliador,
     "integrante": integrante,
     "sprint": sprint,
     "comunicacao": comunicacao,
@@ -203,7 +214,7 @@ def avaliacao_submit():
 
   data.append(avaliacao_dict)
   with open('data/avaliacao.json', 'w') as f:
-    json.dump(data, f)
+    json.dump(data, f, indent=2)
 
   flash('Avaliação Registrada com Sucesso!')
 
