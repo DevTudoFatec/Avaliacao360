@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> Devolutiva de Avaliação</title>
-        <link rel="stylesheet" type="text/css" href="devolutiva_avaliacao.css">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/devolutiva_avaliacao.css') }}">
     </head>
 
     <body>
@@ -32,7 +32,7 @@
 
         <id class="cabecalho">
             <img class="img_inicial" src="{{ url_for('static', filename='img/avaliacao/img_inicial.png') }}" alt="Logo da avaliação 360º" width="1000">
-            <p><b>Identificação de Usuário</b></p>
+            <p><b>Usuário: {{ nomeUsuario }}</b></p>
         <!-- fim do conteúdo do cabeçalho -->
         </id> </header>
         <!--fim do botão de menu-->

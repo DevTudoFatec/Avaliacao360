@@ -27,23 +27,23 @@
         <img id="details_integrante" src="{{ url_for('static', filename='img/menu_integrante/Logo_API_Menu_integrante.png') }}" width="300">
 
         <nav class="opções_menu">
-            <button class="botao_azul_claro">
-                <a class="botao_azul_claro" href="">
-                <strong>AUTO AVALIAÇÃO</strong>
-                </a>
-            </button>
+            <a href="/autoavaliacao">
+                <button class="botao_azul_claro">
+                    <strong> AUTO AVALIAÇÃO  </strong>
+                </button>
+            </a>
             <br><br>
-            <button class="botao_azul_claro">
-                <a class="botao_azul_claro">
-                <strong>AVALIAÇÃO DE INTEGRANTES</strong>
-                </a>
-            </button>
+            <a href="/avaliacao">
+                <button class="botao_azul_claro">
+                    <strong> AVALIAÇÃO DE INTEGRANTES </strong>
+                </button>
+            </a>
             <br><br>
-            <button class="botao_azul_claro">
-                <a class="botao_azul_claro">
-                <strong>DEVOLUTIVA DA AVALIAÇÃO</strong>
-                </a>
-            </button>
+            <a href="/devolutiva_avaliacao">
+                <button class="botao_azul_claro">
+                    <strong> DEVOLUTIVA DA AVALIAÇÃO </strong>
+                </button>
+            </a>
         </nav>
         <footer>      
             <img id="logo_api_pbletex" src="{{ url_for('static', filename='img/menu_admin/Logo_API_PBLTeX.png') }}" width="250">

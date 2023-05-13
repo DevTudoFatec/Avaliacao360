@@ -16,7 +16,9 @@ body{
     height: 50px;
     width: 350px;
     font-size: medium;
-    text-align: center;}
+    text-align: center;
+    cursor: pointer;
+}
 
 .opções_menu{
     justify-content: space-around;

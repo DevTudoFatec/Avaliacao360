@@ -64,3 +64,9 @@ button{
     font-weight: bold;
     
 }
+
+.flash {
+    position: absolute;
+    left: 67%;
+    top: 43%;
+}
