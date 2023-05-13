@@ -54,7 +54,7 @@ def menu():
 ## Validação login
 
 @app.route("/login", methods=['POST'])
-def login():
+def login(): 
   usuario = request.form.get('nome')
   senha = request.form.get('password')
   with open("data/cadastro.json") as cadastro:
@@ -62,8 +62,10 @@ def login():
     cont = 0
     for c in lista:
       cont=cont+1
-      if usuario == c['nome'] and senha == c['password']:
+      if usuario == c['chave'] and senha == c['senha']:
         return render_template("menu_admin.html", nomeUsuario=c['nome'])
+      elif usuario == c['email'] and senha == c['senha']:
+        return render_template("menu_integrante.html", nomeUsuario=c['nome'])
       if cont >= len(lista):
         flash('Usuário Inválido')
         return redirect('/')

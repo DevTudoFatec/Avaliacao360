@@ -1,7 +1,8 @@
 [
   {
     "nome": "Admin",
-    "password": "api123"
+    "senha": "api123",
+    "chave": "admin@"
   },
   {
     "nome": "Teste",
