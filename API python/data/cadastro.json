@@ -8,16 +8,9 @@
   },
   {
     "nome": "Joao",
-    "email": "joao@gmail.com",
+    "email": "joao",
     "turma": "bd",
-    "semestre": "1",
+    "semestre": "3",
     "senha": "joao"
-  },
-  {
-    "nome": "Teste",
-    "email": "teste@gmail.com",
-    "turma": "bd",
-    "semestre": "1",
-    "senha": "K5y1ntsxyj"
   }
 ]
