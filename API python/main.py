@@ -41,6 +41,18 @@ def controle_geral():
 def devolutiva_avaliacao():
   return render_template('devolutiva_avaliacao.html', nomeUsuario=session['nomeUsuario'])
 
+@app.route("/devolutiva_admin")
+def devolutiva_admin():
+  return render_template('devolutiva_admin.html', nomeUsuario=session['nomeUsuario'])
+
+@app.route("/dashboards_gerenciais")
+def dashboards_gerenciais():
+  return render_template('dashboards_gerenciais.html', nomeUsuario=session['nomeUsuario'])
+
+@app.route("/dashboards_operacionais")
+def dashboards_operacionais():
+  return render_template('dashboards_operacionais.html', nomeUsuario=session['nomeUsuario'])
+
 @app.route("/avaliacao")
 def avaliacao():
   try:
