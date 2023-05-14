@@ -96,14 +96,12 @@
       
         <h2>Feedbacks Recebidos:</h2>
         <div class="container">
-            <!-- existing content -->
-            <h4 id="campo-feedback"></h4>
             <table class="textos">
                 <tr>
                     <td>
                         {% for avaliacao in avaliacoes %} 
                             {% if avaliacao['sprint'] == sprint and avaliacao['integrante'] == email%}
-                                • {{ avaliacao['texto'] }}                            
+                                • {{ avaliacao['texto'] }}<br>                            
                             {% endif %}
                         {% endfor %}
                     </td>
