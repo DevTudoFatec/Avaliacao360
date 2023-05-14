@@ -82,7 +82,7 @@ def pre_devolutiva_submit():
     entrega = entrega/rows
     autogestao = autogestao/rows
 
-    avgs = [comunicacao, engajamento, conhecimento, entrega, autogestao] 
+    avgs = [int(comunicacao), int(engajamento), int(conhecimento), int(entrega), int(autogestao)] 
   except:
     avgs = []
 
