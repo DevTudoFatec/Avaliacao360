@@ -1,11 +1,11 @@
 [
   {
     "email": "joao",
-    "sprint": "2",
-    "comunicacao": "5",
-    "engajamento": "5",
-    "conhecimento": "3",
-    "entrega": "3",
-    "autogestao": "5"
+    "sprint": "1",
+    "comunicacao": 1,
+    "engajamento": 2,
+    "conhecimento": 2,
+    "entrega": 2,
+    "autogestao": 2
   }
 ]

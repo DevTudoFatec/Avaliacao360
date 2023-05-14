@@ -80,6 +80,7 @@ font-weight: bold;
 left: 44%;
 margin-top: -35px;
 text-align: center;}
+ 
 /*fim do botão menu*/
 
 /*conteudo central da pagina*/
@@ -109,6 +110,7 @@ body {
     border-radius: 50px;
     width: 250px;
     height: 25px;
+    margin-right: 4%;
 }
 
 
@@ -121,15 +123,13 @@ ul {
 }
 
 h4, campo-feedback {
-    display: flex;
-    flex-direction: column;
     height: 200px;
     width: 40%;
     background-color: #89CFC9;
     text-align:center;
     margin-left: 02%;
     border-radius: 0%;
-}
+} 
 
 h2 {
     margin: 30px;
@@ -156,11 +156,9 @@ h2 {
 
 
 
-.legenda {
-  position: absolute;
-  width: 15%;
-  left: 70%;
-  top: 65%;
+#legenda_mcs {
+    width: 300px;
+    margin-right: auto;
 }
 
 .button {
@@ -178,38 +176,44 @@ h2 {
     cursor: pointer; 
 }
 
-.rodape-img {
-  height: 300px;
-  display: block;
-  margin: auto;
-} 
+.rodape-img {   
+  height: 100%;
+  width: auto;
+}
 
 .questao {
   margin-top: 15%;
   margin-bottom: 10%;
+
  }
 
-.all_data {
-  table-layout: fixed;
-  width: 70%;
-  margin-left: 20%;
+ footer{
+  position: absolute;
+  width: 50%;
+  top: 300%;
+  right: 90%;
 }
 
-.sprint {
-  position: relative;
-  margin-left: -20%;
+.formulario_avaliacao {
+  position: absolute;
+  top: 38%;
+  left: 44%;
 }
 
-.textos {
-  display: inline-block;
-  width: 30%;
-  text-align: left;
+.bt_confirmar_trc{
+  position: absolute;
+  text-align: center;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size: 22px;
-  margin-left: 3%;
-  background-color: #89CFC9;
+  font-size: 13px;
+  padding: 10px;
+  border-radius: 50px;
+  background-color: #214E65;
+  border-bottom: 2% solid #222;
+  cursor: pointer;
+  left: 14%;
+  top: 120%;
+  color: #fed196;
 }
-
 /*responsividade para telas menores que 1920X 1080*/
 /*xr*/
 

@@ -94,9 +94,73 @@ def pre_devolutiva_submit():
 
   return render_template('devolutiva_avaliacao.html', nomeUsuario=session['nomeUsuario'], sprint=sprint, avgs=avgs, avaliacoes=avaliacoes, autoavaliacoes=autoavaliacoes, email=session['email'])
 
+
+@app.route("/pre_devolutiva_submit_admin", methods=["POST"])
+def pre_devolutiva_submit_admin():
+  sprint = request.form.get('sprint')
+  integrante = request.form.get('integrante')
+
+  try:
+    with open("data/avaliacao.json", "r") as f:
+      avaliacoes = json.load(f)
+  except:
+    avaliacoes=[]
+
+  int_infos=''
+
+  try:
+    with open("data/cadastro.json", "r") as f:
+      users = json.load(f)
+      for user in users:
+        if user['email'] == integrante:
+          int_infos = user['semestre'] + 'º Semestre   -   ' + user['turma'] + '   -    ' + user['nome']                   
+  except:
+    users=[]
+
+  try:      
+    rows=0
+    comunicacao = engajamento = conhecimento = entrega = autogestao = 0
+
+    for avaliacao in avaliacoes:
+      if avaliacao['integrante'] == integrante and avaliacao['sprint'] == sprint:
+        rows+=1
+        comunicacao += avaliacao['comunicacao']
+        engajamento += avaliacao['engajamento']
+        conhecimento += avaliacao['conhecimento']
+        entrega += avaliacao['entrega']
+        autogestao += avaliacao['autogestao']
+
+    comunicacao = comunicacao/rows
+    engajamento = engajamento/rows
+    conhecimento = conhecimento/rows
+    entrega = entrega/rows
+    autogestao = autogestao/rows
+
+    avgs = [int(comunicacao), int(engajamento), int(conhecimento), int(entrega), int(autogestao)] 
+  except:
+    avgs = []
+
+  try:
+    with open("data/autoavaliacao.json", "r") as g:
+      autoavaliacoes = json.load(g)
+  except:
+    autoavaliacoes=[]
+
+  return render_template('devolutiva_admin.html', nomeUsuario=session['nomeUsuario'], sprint=sprint, int_infos = int_infos, integrante=integrante, avgs=avgs, avaliacoes=avaliacoes, autoavaliacoes=autoavaliacoes, email=session['email'])
+
 @app.route("/devolutiva_admin")
 def devolutiva_admin():
   return render_template('devolutiva_admin.html', nomeUsuario=session['nomeUsuario'])
+
+@app.route("/pre_devolutiva_admin")
+def pre_devolutiva_admin():
+  try:
+    with open("data/cadastro.json", "r") as f:
+      users = json.load(f)
+  except:
+    users=[]
+
+  return render_template('pre_devolutiva_admin.html', users=users, nomeUsuario=session['nomeUsuario'])
 
 @app.route("/dashboards_gerenciais")
 def dashboards_gerenciais():
