@@ -8,23 +8,30 @@
   },
   {
     "nome": "Joao",
-    "email": "joao@gmail.com",
+    "email": "joao",
     "turma": "bd",
     "semestre": "1",
-    "senha": "nHnYeiuP72"
+    "senha": "joao"
   },
   {
     "nome": "Teste",
-    "email": "teste@gmail.com",
+    "email": "teste",
     "turma": "bd",
     "semestre": "1",
-    "senha": "oo8C67NrAI"
+    "senha": "teste"
   },
   {
     "nome": "Teste",
-    "email": "testes",
+    "email": "teste1",
     "turma": "testes",
     "semestre": "testes",
-    "senha": "Vn4JbjTafu"
+    "senha": "teste1"
+  },
+  {
+    "nome": "Teste",
+    "email": "teste2",
+    "turma": "bd",
+    "semestre": "3",
+    "senha": "teste2"
   }
 ]

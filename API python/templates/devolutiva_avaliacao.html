@@ -7,101 +7,114 @@
         <title> Devolutiva de Avaliação</title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/devolutiva_avaliacao.css') }}">
     </head>
-
-    <body>
         <!--- Início do botão de menu -->
         <header>
             <!-- Botão para abrir o menu lateral -->
             <input type="checkbox" id="check" class="bt">
             <label id="icone" for="check" class="bt"> ☰ </label>
         
-          <div class="barra">
+        <div class="barra">
             <nav class="menu_lateral">
-                <a href="Menu_Admin.html"> <div class="link">MENU PRINCIPAL</div></a>
-                <a href=""> <div class="link">CADASTRAR INTEGRANTE</div></a>
-                <a href=""> <div class="link">CONTROLE GERAL TURMA/TIME/SPRINTS</div></a>
-                <a href=""> <div class="link">CONTROLE DE PERFIL</div></a>
-                <a href=""> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
-                <a href=""> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
-                <a href=""> <div class="link">DASHBOARDS GERENCIAIS</div></a>
-                <a href=""> <div class="link">SAIR ➔ </div></a>
+              <a href=""> <div class="link">MENU PRINCIPAL</div></a>
+              <a href=""> <div class="link">AUTO AVALIAÇÃO</div></a>
+              <a href=""> <div class="link">AVALIAÇÃO DE INTEGRANTES</div></a>
+              <a href=""> <div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
+              <a href=""> <div class="link">SAIR ➔ </div></a>
             </nav>
-        </div>
+        </div> 
+        <!--- Fim do botão de menu -->
         
-        <!--inicio do conteúdo do cabeçalho-->
-
-        <id class="cabecalho">
-            <img class="img_inicial" src="{{ url_for('static', filename='img/avaliacao/img_inicial.png') }}" alt="Logo da avaliação 360º" width="1000">
-            <p><b>Usuário: {{ nomeUsuario }}</b></p>
+        <!-- Início do conteúdo do cabeçalho -->
+          <img id="logo_avaliação" src="{{ url_for('static', filename='img/avaliacao/Logo copy.png') }}" alt="Logo da plataforma" width="300">
+          <p><b>Usuário: {{ nomeUsuario }}</b></p>
         <!-- fim do conteúdo do cabeçalho -->
-        </id> </header>
+        </header>
         <!--fim do botão de menu-->
 
         <!--CONTEUDO CENTRAL DA PAGINA DE AVALIAÇÃO-->
         
         <div class="titulos">
         <h3 id="bt_avaliar">Devolutiva de Avaliação</h3>
-            <ul>   
-                <li>
-                    <form class="formulario_avaliacao" method="POST" action="{{ url_for('avaliacao_submit') }}">
-                        <label>
-                        <h3>Sprint</h3>                            
-                        <span>
-                        <input type="radio" name="sprint" value="1">1
-                        <input type="radio" name="sprint" value="2">2
-                        <input type="radio" name="sprint" value="3">3
-                        <input type="radio" name="sprint" value="4">4
-                        </span>
-                        </label>
-                </li>
-            </ul>
-            
+        <h2 class="sprint">Sprint: {{ sprint }}</h2>     
         </div>
-       
-      <ul>
-        <div>
-                <label>
-                    <li class="questao">Comunicação e Trabalho em Equipe</li>
-                        
-                    <p>Autoavaliação:<input type="escrita"><br/></p>
-                    <p>Avaliadores:<input type="escrita"><br/></p>
-        <br/>
-                <label>
-                    <li class="questao">Engajamento e Pró-atividade</li>
-
-                    <p>Autoavaliação:<input type="escrita"><br/></p>
-                    <p>Avaliadores:<input type="escrita"><br/></p>
-        </div>
-            
-        <div>
-                <label>
-                    <li class="questao">Entrega de Resultados com valor Agregado</li>
-                    <p>Autoavaliação:<input type="escrita"><br/></p>
-                    <p>Avaliadores:<input type="escrita"><br/></p>
-            
-        <br/>
-                    <li class="questao">Conhecimento e Aplicabilidade Técnica</li>
-                    <p>Autoavaliação:<input type="escrita"><br/></p>
-                    <p>Avaliadores:<input type="escrita"><br/></p>
-
-        </div>
-                <label>
-                    <li class="questao">Auto-gestão das Atividades</li>
-                    <p>Autoavaliação:<input type="escrita"><br/></p>
-                    <p>Avaliadores:<input type="escrita"><br/></p>
-                </label>
-        </ul>
+            <table class="all_data">
+                <tr>
+                    <td>
+                        <h3>Comunicação e Trabalho em Equipe:</h3>
+                        <p>Autoavaliação:
+                            {% for autoavaliacao in autoavaliacoes %} 
+                                {% if autoavaliacao['sprint'] == sprint and autoavaliacao['email'] == email%}
+                                    {{ autoavaliacao['comunicacao'] }}</p>                             
+                                {% endif %}
+                            {% endfor %}
+                        <p>Avaliadores: {{ avgs[0] }}</p>
+                    </td>
+                    <td>
+                        <h3>Engajamento e Pró-atividade:</h3>
+                        <p>Autoavaliação:
+                        {% for autoavaliacao in autoavaliacoes %} 
+                            {% if autoavaliacao['sprint'] == sprint and autoavaliacao['email'] == email%}
+                                {{ autoavaliacao['engajamento'] }}</p>                              
+                            {% endif %}
+                        {% endfor %}
+                        <p>Avaliadores: {{ avgs[1] }}</p>
+                    </td>
+                    <td>
+                        <h3>Entrega de Resultados com valor Agregado:</h3>
+                        <p>Autoavaliação:
+                        {% for autoavaliacao in autoavaliacoes %} 
+                            {% if autoavaliacao['sprint'] == sprint and autoavaliacao['email'] == email%}
+                                {{ autoavaliacao['entrega'] }} </p>                              
+                            {% endif %}
+                        {% endfor %}
+                        <p>Avaliadores: {{ avgs[3] }}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3>Conhecimento e Aplicabilidade Técnica:</h3>
+                        <p>Autoavaliação:
+                        {% for autoavaliacao in autoavaliacoes %} 
+                            {% if autoavaliacao['sprint'] == sprint and autoavaliacao['email'] == email%}
+                                {{ autoavaliacao['conhecimento'] }}</p>                              
+                            {% endif %}
+                        {% endfor %}
+                        <p>Avaliadores: {{ avgs[2] }}</p>
+                    </td>
+                    <td>
+                        <h3>Auto-gestão das Atividades:</h3>
+                        <p>Autoavaliação:
+                        {% for autoavaliacao in autoavaliacoes %} 
+                            {% if autoavaliacao['sprint'] == sprint and autoavaliacao['email'] == email%}
+                                {{ autoavaliacao['autogestao'] }}</p>                            
+                            {% endif %}
+                        {% endfor %}
+                        <p>Avaliadores: {{ avgs[4] }}</p>
+                    </td>
+                </tr>
+            </table>                      
       
         <h2>Feedbacks Recebidos:</h2>
-        <h4 id="campo-feedback">Escreva aqui seu feedback para o integrante avaliado</h4>
+        <div class="container">
+            <!-- existing content -->
+            <h4 id="campo-feedback"></h4>
+            <table class="textos">
+                <tr>
+                    <td>
+                        {% for avaliacao in avaliacoes %} 
+                            {% if avaliacao['sprint'] == sprint and avaliacao['integrante'] == email%}
+                                • {{ avaliacao['texto'] }}                            
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+            </table>
+        </div>
 <br/>
         <br/>
 
-        <img id="Legenda_mcs" src="{{ url_for('static', filename='img/avaliacao/Legenda.png') }}">  
+        <img class="legenda" src="{{ url_for('static', filename='img/avaliacao/Legenda.png') }}">  
                 
-        <!--final da pagina-->
-
-        <button class="button" type="submit">CONFIRMAR</button>
-     
+        <!--final da pagina-->     
     </body>
 </html>

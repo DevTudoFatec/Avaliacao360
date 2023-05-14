@@ -49,9 +49,50 @@ def controle_geral():
 
   return render_template('controle_geral.html', users=users, nomeUsuario=session['nomeUsuario'])
 
-@app.route("/devolutiva_avaliacao")
-def devolutiva_avaliacao():
-  return render_template('devolutiva_avaliacao.html', nomeUsuario=session['nomeUsuario'])
+@app.route("/pre_devolutiva")
+def pre_devolutiva():
+  return render_template('pre_devolutiva_avaliacao.html', nomeUsuario=session['nomeUsuario'])
+
+@app.route("/pre_devolutiva_submit", methods=["POST"])
+def pre_devolutiva_submit():
+  sprint = request.form.get('sprint')
+
+  try:
+    with open("data/avaliacao.json", "r") as f:
+      avaliacoes = json.load(f)
+  except:
+    avaliacoes=[]
+
+  try:      
+    rows=0
+    comunicacao = engajamento = conhecimento = entrega = autogestao = 0
+
+    for avaliacao in avaliacoes:
+      if avaliacao['integrante'] == session['email'] and avaliacao['sprint'] == sprint:
+        rows+=1
+        comunicacao += avaliacao['comunicacao']
+        engajamento += avaliacao['engajamento']
+        conhecimento += avaliacao['conhecimento']
+        entrega += avaliacao['entrega']
+        autogestao += avaliacao['autogestao']
+
+    comunicacao = comunicacao/rows
+    engajamento = engajamento/rows
+    conhecimento = conhecimento/rows
+    entrega = entrega/rows
+    autogestao = autogestao/rows
+
+    avgs = [comunicacao, engajamento, conhecimento, entrega, autogestao] 
+  except:
+    avgs = []
+
+  try:
+    with open("data/autoavaliacao.json", "r") as g:
+      autoavaliacoes = json.load(g)
+  except:
+    autoavaliacoes=[]
+
+  return render_template('devolutiva_avaliacao.html', nomeUsuario=session['nomeUsuario'], sprint=sprint, avgs=avgs, avaliacoes=avaliacoes, autoavaliacoes=autoavaliacoes, email=session['email'])
 
 @app.route("/devolutiva_admin")
 def devolutiva_admin():
@@ -176,11 +217,11 @@ def autoavaliacao_submit():
   avaliacao_dict = {
     "email": email,
     "sprint": sprint,
-    "comunicacao": comunicacao,
-    "engajamento": engajamento,
-    "conhecimento": conhecimento,
-    "entrega": entrega,
-    "autogestao": autogestao
+    "comunicacao": int(comunicacao),
+    "engajamento": int(engajamento),
+    "conhecimento": int(conhecimento),
+    "entrega": int(entrega),
+    "autogestao": int(autogestao)
   }
 
   data.append(avaliacao_dict)
@@ -223,11 +264,11 @@ def avaliacao_submit():
     "avaliador": avaliador,
     "integrante": integrante,
     "sprint": sprint,
-    "comunicacao": comunicacao,
-    "engajamento": engajamento,
-    "entrega": entrega,
-    "conhecimento": conhecimento,
-    "autogestao": autogestao,
+    "comunicacao": int(comunicacao),
+    "engajamento": int(engajamento),
+    "conhecimento": int(conhecimento),
+    "entrega": int(entrega),
+    "autogestao": int(autogestao),
     "texto": texto
   }
 
