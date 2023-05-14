@@ -211,7 +211,7 @@ def autoavaliacao_submit():
   with open('data/autoavaliacao.json', 'r') as f:
     data = json.load(f)
   if any(user.get("email") == email and user.get("sprint") == sprint for user in data):
-    flash(f'Auto Avaliação da S print {sprint} já foi realizada!')
+    flash(f'Auto Avaliação da Sprint {sprint} já foi realizada!')
     return redirect(url_for('autoavaliacao'))
   
   avaliacao_dict = {

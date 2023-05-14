@@ -8,24 +8,24 @@
 </head>
 <!--- Início do botão de menu -->
 <header>
-    <!-- Botão para abrir o menu lateral -->
-    <input type="checkbox" id="check" class="bt">
-    <label id="icone" for="check" class="bt"> ☰ </label>
+  <!-- Botão para abrir o menu lateral -->
+  <input type="checkbox" id="check" class="bt">
+  <label id="icone" for="check" class="bt"> ☰ </label>
 
 <div class="barra">
-    <nav class="menu_lateral">
-      <a href=""> <div class="link">MENU PRINCIPAL</div></a>
-      <a href=""> <div class="link">AUTO AVALIAÇÃO</div></a>
-      <a href=""> <div class="link">AVALIAÇÃO DE INTEGRANTES</div></a>
-      <a href=""> <div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
-      <a href=""> <div class="link">SAIR ➔ </div></a>
-    </nav>
+  <nav class="menu_lateral">
+    <a href="/menu_integrante"> <div class="link">MENU PRINCIPAL</div></a>
+    <a href="/autoavaliacao"> <div class="link">AUTO AVALIAÇÃO</div></a>
+    <a href="/avaliacao"> <div class="link">AVALIAÇÃO DE INTEGRANTES</div></a>
+    <a href="/pre_devolutiva_avaliacao"> <div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
+    <a href="/"> <div class="link">SAIR ➔ </div></a>
+  </nav>
 </div> 
 <!--- Fim do botão de menu -->
 
 <!-- Início do conteúdo do cabeçalho -->
-  <img id="logo_avaliação" src="{{ url_for('static', filename='img/autoavaliacao/Logo.png') }}" alt="Logo da plataforma" width="300">
-  <p><b>Usuário: {{ nomeUsuario }}</b></p>
+<img id="logo_avaliação" src="{{ url_for('static', filename='img/avaliacao/Logo copy.png') }}" alt="Logo da plataforma" width="300">
+<p><b>Usuário: {{ nomeUsuario }}</b></p>
 <!-- fim do conteúdo do cabeçalho -->
 </header>
 <!--- Fim do botão de menu -->

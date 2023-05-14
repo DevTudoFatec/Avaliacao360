@@ -1,4 +1,4 @@
-/*inicio do cabeçalho padronizado*/
+/* CABEÇALHO PADRONIZADO */
 header{
   display: flex;
   align-items: center;
@@ -7,11 +7,10 @@ header{
   justify-content: space-between;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: small;
-  padding: 2%;
-}
+  padding: 2%;}
 
 #logo_avaliação{
-margin-left: 38%;
+margin-left: 40%;
 }
 /* FIM CABEÇALHO PADRONIZADO */
 
@@ -45,14 +44,14 @@ height: 100px;
 width: 300px;
 position: absolute;
 transition: all .2s linear;
-left: -300px;}
+left: -300px;
+}
 
 .menu_lateral{
 width: 100%;
 position: absolute;
 top: 60px;
 color:#fed196;}
-
 
 nav a{
 text-decoration: none;
@@ -63,20 +62,15 @@ background-color: #494949;
 padding: 20px;
 font-size: 12pt;
 transition: all .2s linear;
-border-bottom: 2px solid #222;
-cursor: none;
-
-}
+border-bottom: 2px solid #222;}
 
 #check:checked ~ .barra{
-transform: translateX(300px);
-}
+transform: translateX(300px);}
 
 #check:checked ~ .barra nav{
 margin-top: 0;
 opacity: 1;
-transition-delay: .2s;
-}
+transition-delay: .2s;}
 
 .flashes {
 position: absolute;

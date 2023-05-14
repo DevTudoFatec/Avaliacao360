@@ -195,8 +195,8 @@ header{
       font-weight: bolder;
       font-size: 17px;
       font-weight: bold;
-      left: 35%;
-      top: 100%;
+      left: 45%;
+      top: -48%;
       text-align: center;
       list-style-type: none;
       width: 100%;
@@ -208,7 +208,6 @@ header{
 @media screen and (min-width:1100px) {
 
   .content{
-    left: 3%;
     margin-top: 19%;
   }
 }
@@ -216,7 +215,6 @@ header{
 @media screen and (min-width:1200px) {
 
   .content{
-    left: 3%;
     margin-top: 17%;
   }
 }
@@ -224,7 +222,6 @@ header{
 @media screen and (min-width:1300px) {
 
   .content{
-    left: 3%;
     margin-top: 17%;
   }
 }

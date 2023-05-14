@@ -31,5 +31,16 @@
     "entrega": 1,
     "autogestao": 1,
     "texto": "testee"
+  },
+  {
+    "avaliador": "joao",
+    "integrante": "teste",
+    "sprint": "2",
+    "comunicacao": 5,
+    "engajamento": 5,
+    "conhecimento": 5,
+    "entrega": 5,
+    "autogestao": 5,
+    "texto": "xd"
   }
 ]
