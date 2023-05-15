@@ -5,6 +5,7 @@
  
 <p align="center">
  <a href ="#dart-objetivo-sprint-3">Objetivo</a>  •
+ <a href ="#burndown"> Burndown </a>  •
  <a href ="#backlog-do-produto"> Backlog </a>  •
  <a href="#ferramentas-utilizadas">Ferramentas utilizadas</a> •
  <a href="#tecnologias-utilizadas">Tecnologias utilizadas</a>
@@ -13,12 +14,14 @@
 ## :dart: Objetivo Sprint 3
 > - Desenvolvimento das Devolutivas de Avaliações através dos dados JSON armazenados;
 > - Desenvolvimento da Gestão de Usuarios para melhor controle dos integrantes.
+
+## Burndown
+<img src="https://github.com/DevTudoFatec/Avaliacao360/assets/111203231/e0a1ea70-dcbc-412b-a8ce-63395c4eab5e" alt="Burndown" style="width:600px;height:350px;"></p>
  
 ## Backlog do produto
 ![image](https://github.com/DevTudoFatec/Avaliacao360/assets/111203231/5d3d813d-0b2c-4cab-903a-459780e34839)
 
 ## Tecnologias utilizadas
-
 <div style="display: inline_block"><br>
   <img align="center" alt="HTML" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg">
   <img align="center" alt="CSS" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg">
