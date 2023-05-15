@@ -16,7 +16,7 @@
 > - Desenvolvimento da Gestão de Usuarios para melhor controle dos integrantes.
 
 ## Burndown
-<img src="https://github.com/DevTudoFatec/Avaliacao360/assets/111203231/e0a1ea70-dcbc-412b-a8ce-63395c4eab5e" alt="Burndown" style="width:600px;height:350px;"></p>
+<img src="https://github.com/DevTudoFatec/Avaliacao360/assets/111203231/1d3c653e-4461-4e07-97fd-acb038960975" alt="Burndown" style="width:600px;height:350px;"></p>
  
 ## Backlog do produto
 ![image](https://github.com/DevTudoFatec/Avaliacao360/assets/111203231/5d3d813d-0b2c-4cab-903a-459780e34839)
