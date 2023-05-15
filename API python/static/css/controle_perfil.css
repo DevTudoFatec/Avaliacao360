@@ -8,7 +8,6 @@ body{
 footer{
   position: relative;
   margin-top: 10%;
-  left: 0%;
 }
 
 /*header padrão: início*/
@@ -145,4 +144,28 @@ nav a{
   text-align: left;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 22px;
+}
+
+.save_icon {
+  width: 25px;
+}
+
+.edit_icon {
+  width: 25px;
+}
+
+.save_button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.edit_button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.user_info_input {
+  width: 10%;
 }

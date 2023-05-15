@@ -35,34 +35,50 @@
           <h1 class="bt_avaliacao_trc">PERFIL</h1> 
         </div>
         <div class="usuarios_container">    
-            {% for user in users %} 
-                {% if user['email'] != 'admin' %}
-                {% if user['email'] != emailUsuario %}
-                    <table class="user_infos">
-                        <tr>
-                            <td>
-                                <h1 class="user_info">{{ user['nome'] }}</h1>
-                            </td>
-                            <td>
-                                <h1 class="user_info">{{ user['semestre'] }}</h1>
-                            </td>
-                            <td>
-                                <h1 class="user_info">{{ user['turma'] }}</h1>
-                            </td>
-                            <td>
-                                <h1 class="user_info">{{ user['turma'] }}</h1>
-                            </td>
-                            <td>
-                                <h1 class="user_info">{{ user['turma'] }}</h1>
-                            </td>
-                        </tr>
-                    </table>
-                {% endif %}
-                {% endif %}
+            {% for user in users %}
+                <table class="user_infos">
+                    <tr>
+                        <td>
+                            <h1 class="user_info">{{ user['nome'] }}</h1>
+                        </td>
+                        <td>
+                            <h1 class="user_info">{{ user['semestre'] }}</h1>
+                        </td>
+                        <td>
+                            <h1 class="user_info">{{ user['turma'] }}</h1>
+                        </td>
+                        <td>
+                            <h1 class="user_info">{{ user['turma'] }}</h1>
+                        </td>
+                        <td>
+                            <form class="edit_form" method="POST" action="{{ url_for('update_perfil') }}">
+                                {% if editing %}
+                                    {% if index == user['index']  %}
+                                        <input type="hidden" name="index" value="{{ user['index'] }}">
+                                        <input type="text" class="user_info_input" name="edited_perfil" value="{{ user['perfil'] }}" style="border-radius: 3px; font-size: 20px;">
+                                        <button type="submit" class="save_button" name="save">
+                                            <img src="https://cdn-icons-png.flaticon.com/512/5291/5291043.png" class="save_icon" alt="save_icon">
+                                        </button>                                          
+                                    {% else %}
+                                        <h1 class="user_info">{{ user['perfil'] }}</h1>
+                                    {% endif %}                             
+                                {% else %}
+                                    <h1 class="user_info">{{ user['perfil'] }}</h1>
+                                    <input type="hidden" name="index" value="{{ user['index'] }}">
+                                    <button type="submit" class="edit_button" name="edit">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/45/45706.png" class="edit_icon" alt="edit_icon">
+                                    </button>
+                                {% endif %}
+                            </form>
+                        </td>
+                    </tr>
+                </table>
             {% endfor %}
             <footer>      
                 <img id="logo_api_pbletex" src="{{ url_for('static', filename='img/menu_admin/Logo_API_PBLTeX.png') }}" width="250">
             </footer>
         </div>
-    </body>
+
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    </body>    
 </html>    

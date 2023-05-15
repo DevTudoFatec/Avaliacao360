@@ -1,37 +1,29 @@
 [
   {
+    "index": 0,
     "nome": "Admin",
     "email": "admin",
     "turma": "bd",
     "semestre": "3",
-    "senha": "admin"
+    "senha": "admin",
+    "perfil": 2
   },
   {
+    "index": 1,
     "nome": "Joao",
-    "email": "joao",
+    "email": "joao@gmail.com",
     "turma": "bd",
     "semestre": "1",
-    "senha": "joao"
+    "senha": "yBZzmO6Y0X",
+    "perfil": 2
   },
   {
+    "index": 2,
     "nome": "Teste",
-    "email": "teste",
+    "email": "teste@teste.com",
     "turma": "bd",
     "semestre": "1",
-    "senha": "teste"
-  },
-  {
-    "nome": "Teste",
-    "email": "teste1",
-    "turma": "testes",
-    "semestre": "testes",
-    "senha": "teste1"
-  },
-  {
-    "nome": "Teste",
-    "email": "teste2",
-    "turma": "bd",
-    "semestre": "3",
-    "senha": "teste2"
+    "senha": "ySpl0UrqTC",
+    "perfil": 1
   }
 ]

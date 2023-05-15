@@ -38,11 +38,11 @@
         <form id="formulario" method="POST" action="{{ url_for('cadastro_submit') }}">
             <input id="user" type="text" placeholder="NOME COMPLETO" name="nome" required pattern="[A-Za-z ]+" title="São permitidas apenas letras!">
             <br><br>
-            <input id="email" type="text" placeholder="E-MAIL" name="email" required>
+            <input id="email" type="text" placeholder="E-MAIL" name="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2})?" >
             <br><br>
             <input id="turma" type="text" placeholder="TURMA" name="turma" required>
             <br><br> 
-            <input id="semestre" type="text" placeholder="SEMESTRE" name="semestre" required>
+            <input id="semestre" type="text" placeholder="SEMESTRE" name="semestre" required pattern="[1-10]" title="Apenas números entre 1 e 10">
             <br><br>
             <button class="botao_cadastrar_voltar" type="submit">CADASTRAR</button>
         </form>

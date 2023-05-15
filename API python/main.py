@@ -39,6 +39,37 @@ def controle_perfil():
 
   return render_template('controle_perfil.html', users=users, nomeUsuario=session['nomeUsuario'])
 
+import json
+from flask import request, render_template
+
+@app.route("/update_perfil", methods=["POST"])
+def update_perfil():
+    try:
+        with open("data/cadastro.json", "r") as f:
+            users = json.load(f)
+    except:
+        users = []
+    
+    editing=False
+    index=int(request.form.get("index"))
+
+    if "edit" in request.form:
+        editing=True
+
+    elif "save" in request.form:
+        editing=False
+
+        edited_perfil = request.form.get("edited_perfil")
+
+        for user in users:
+          if user['index'] == index:
+            user['perfil'] = int(edited_perfil)
+
+        with open("data/cadastro.json", "w") as file:
+            json.dump(users, file, indent=2)
+
+    return render_template('controle_perfil.html', users=users, editing=editing, index=index)
+
 @app.route("/controle_geral")
 def controle_geral():
   try:
@@ -195,7 +226,7 @@ def login():
         check = True
         session['nomeUsuario'] = item['nome']
         session['email'] = item['email']
-        if item['nome'] == 'Admin':
+        if item['perfil'] == 2:
           return redirect(url_for('menu_admin'))
         else:
           return redirect(url_for('menu_integrante'))
@@ -236,11 +267,13 @@ def cadastro_submit():
     return redirect(url_for('cadastro'))
 
   cadastro_dict = {
+    "index": len(data),
     "nome": nome.title(),
     "email": email.lower(),
     "turma": turma,
     "semestre": semestre,
-    "senha": senha
+    "senha": senha,
+    "perfil": 1
   }
 
   data.append(cadastro_dict)
