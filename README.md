@@ -47,7 +47,8 @@ Nosso objetivo é automatizar um produto de forma que cada passo seja validado p
 > - [x] 13/06 a 14/06 - Feira de soluções
 
 ## Backlog do Produto
-![image](https://github.com/DevTudoFatec/Avaliacao360/assets/111203231/b28caeb7-ae65-438f-aaa1-d67ca453abf9)
+![image](https://github.com/DevTudoFatec/Avaliacao360/assets/111203231/280d1ace-815d-4bfc-9891-4b067c183989)
+
 
 ## Tecnologias utilizadas
 <div style="display: inline_block"><br>
