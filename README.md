@@ -1,23 +1,21 @@
 
 # <p align = "center" > API - 1° Semestre - Banco de Dados 2023 - SPRINT 3 </p>
   
- <p align="center"><img src="https://github.com/DevTudoFatec/Avaliacao360/assets/127264350/48d74601-4381-407e-a055-d43629c4b450" alt="Sprint_3" style="width:600px;height:500px;"></p>
+ <p align="center"><img src="https://github.com/DevTudoFatec/Avaliacao360/assets/111203231/b7fadfa2-a89a-427a-a92f-a93fd979149a" alt="Sprint_3" style="width:600px;height:350px;"></p>
  
 <p align="center">
- <a href ="#dart-objetivo-sprint-2">Objetivo</a>  •
+ <a href ="#dart-objetivo-sprint-3">Objetivo</a>  •
  <a href ="#backlog-do-produto"> Backlog </a>  •
  <a href="#ferramentas-utilizadas">Ferramentas utilizadas</a> •
  <a href="#tecnologias-utilizadas">Tecnologias utilizadas</a>
 </p>
   
 ## :dart: Objetivo Sprint 3
-
-> - Aplicação (no projeto) de conhecimentos adquiridos em linguagem de programação como HTML, CSS e Python;
-> - Desenvolvimento das atividades propostas no Backlog da terceira Sprint;
-> - Acompanhamento diário do progresso da equipe, possibilitando a identificação de eventuais problemas e o planejamento de ações corretivas (Burndown);
+> - Desenvolvimento das Devolutivas de Avaliações através dos dados JSON armazenados;
+> - Desenvolvimento da Gestão de Usuarios para melhor controle dos integrantes.
  
 ## Backlog do produto
-![image](https://user-images.githubusercontent.com/111203231/233815240-93709471-a9eb-4046-aa48-4923cebdae66.png)
+![image](https://github.com/DevTudoFatec/Avaliacao360/assets/111203231/5d3d813d-0b2c-4cab-903a-459780e34839)
 
 ## Tecnologias utilizadas
 
