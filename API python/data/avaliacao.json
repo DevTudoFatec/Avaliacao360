@@ -1,0 +1,24 @@
+[
+  {
+    "avaliador": "teste",
+    "integrante": "joao",
+    "sprint": "1",
+    "comunicacao": 5,
+    "engajamento": 5,
+    "conhecimento": 5,
+    "entrega": 5,
+    "autogestao": 5,
+    "texto": "xd"
+  },
+  {
+    "avaliador": "teste",
+    "integrante": "joao@gmail.com",
+    "sprint": "1",
+    "comunicacao": 5,
+    "engajamento": 5,
+    "conhecimento": 5,
+    "entrega": 5,
+    "autogestao": 5,
+    "texto": "teste"
+  }
+]
