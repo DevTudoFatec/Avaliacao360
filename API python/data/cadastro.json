@@ -13,17 +13,19 @@
     "nome": "Joao",
     "email": "joao@gmail.com",
     "turma": "bd",
-    "semestre": "1",
-    "senha": "yBZzmO6Y0X",
-    "perfil": 2
+    "semestre": 1,
+    "time": "",
+    "senha": "GyForFzvkE",
+    "perfil": 1
   },
   {
     "index": 2,
     "nome": "Teste",
-    "email": "teste@teste.com",
+    "email": "teste@gmail.com",
     "turma": "bd",
-    "semestre": "1",
-    "senha": "ySpl0UrqTC",
+    "semestre": "2",
+    "time": "",
+    "senha": "qlwSkygMnA",
     "perfil": 1
   }
 ]

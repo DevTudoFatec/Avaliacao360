@@ -70,6 +70,48 @@ def update_perfil():
 
     return render_template('controle_perfil.html', users=users, editing=editing, index=index)
 
+@app.route("/update_geral", methods=["POST"])
+def update_geral():
+    try:
+        with open("data/cadastro.json", "r") as f:
+            users = json.load(f)
+    except:
+        users = []
+    
+    editing=False
+    index=int(request.form.get("index"))
+
+    if "edit" in request.form:
+        editing=True
+
+    elif "save" in request.form:
+        editing=False
+
+        edited_semestre = request.form.get("edited_semestre")
+        edited_turma = request.form.get("edited_turma")
+        edited_time = request.form.get("edited_time")
+
+        for user in users:
+          if user['index'] == index:
+            user['semestre'] = int(edited_semestre)
+            user['turma'] = edited_turma
+            user['time'] = edited_time
+
+        with open("data/cadastro.json", "w") as file:
+            json.dump(users, file, indent=2)
+    
+    elif "delete" in request.form:
+        editing=False
+
+        for user in users:
+          if user['index'] == index:
+            users.remove(user)  
+
+        with open("data/cadastro.json", "w") as file:
+            json.dump(users, file, indent=2)
+
+    return render_template('controle_geral.html', users=users, editing=editing, index=index)
+
 @app.route("/controle_geral")
 def controle_geral():
   try:
@@ -272,6 +314,7 @@ def cadastro_submit():
     "email": email.lower(),
     "turma": turma,
     "semestre": semestre,
+    "time": '',
     "senha": senha,
     "perfil": 1
   }

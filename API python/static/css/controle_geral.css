@@ -6,10 +6,8 @@ body{
 }
 
 footer{
-  position: fixed;
-  margin: 5%;
-  bottom: 0;
-  left: 35%;
+  position: relative;
+  margin-top: 10%;
 }
 
 /*header padrão: início*/
@@ -127,7 +125,7 @@ nav a{
   width: 12%;
   color: black;
   background-color: white;
-  margin-right: 7%;
+  margin-right: 8%;
 }
 
 .usuarios_container {
@@ -146,4 +144,35 @@ nav a{
   text-align: left;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 22px;
+}
+
+.save_icon {
+  width: 25px;
+}
+
+.edit_icon {
+  width: 25px;
+}
+
+.save_button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.edit_button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.user_info_input {
+  width: 10%;
+}
+
+
+.delete_button {
+  border: none;
+  outline: none;
+  cursor: pointer;
 }

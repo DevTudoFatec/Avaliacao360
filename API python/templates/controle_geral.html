@@ -3,7 +3,7 @@
     <head>
         <meta charset="UFT-8"/>
         <title>Controle Geral</title> 
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/controle_perfil.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/controle_geral.css') }}">
     </head>
 
     <body>
@@ -44,16 +44,49 @@
                                 <h1 class="user_info">{{ user['nome'] }}</h1>
                             </td>
                             <td>
-                                <h1 class="user_info">{{ user['semestre'] }}</h1>
+                                <form class="edit_form" method="POST" action="{{ url_for('update_geral') }}">
+                                {% if editing and index == user['index'] %}
+                                    <input type="text" class="user_info_input" name="edited_semestre" value="{{ user['semestre'] }}" style="border-radius: 3px; font-size: 20px;">
+                                {% else %}
+                                    <h1 class="user_info">{{ user['semestre'] }}</h1>
+                                {% endif %}
                             </td>
                             <td>
-                                <h1 class="user_info">{{ user['turma'] }}</h1>
+                                {% if editing and index == user['index'] %}
+                                    <input type="text" class="user_info_input" name="edited_turma" value="{{ user['turma'] }}" style="border-radius: 3px; font-size: 20px;">
+                                {% else %}
+                                    <h1 class="user_info">{{ user['turma'] }}</h1>
+                                {% endif %}
                             </td>
                             <td>
-                                <h1 class="user_info">{{ user['turma'] }}</h1>
+                                {% if editing and index == user['index'] %}
+                                    <input type="text" class="user_info_input" name="edited_time" value="{{ user['time'] }}" style="border-radius: 3px; font-size: 20px;">
+                                {% else %}
+                                    <h1 class="user_info">{{ user['time'] }}</h1>
+                                {% endif %}
                             </td>
                             <td>
-                                <h1 class="user_info">{{ user['turma'] }}</h1>
+                                {% if editing %}
+                                    {% if index == user['index']  %}
+                                        <h1 class="user_info">{{ user['turma'] }}</h1>
+                                        <input type="hidden" name="index" value="{{ user['index'] }}">
+                                        <button type="submit" class="save_button" name="save">
+                                            <img src="https://cdn-icons-png.flaticon.com/512/5291/5291043.png" class="save_icon" alt="save_icon">
+                                        </button>
+                                        <button type="submit" class="delete_button" name="delete">
+                                            <img src="https://cdn-icons-png.flaticon.com/512/458/458594.png" class="save_icon" alt="save_icon">
+                                        </button>
+                                    {% else %}     
+                                        <h1 class="user_info">{{ user['turma'] }}</h1>
+                                    {% endif %}                                                                        
+                                {% else %}
+                                    <h1 class="user_info">{{ user['turma'] }}</h1>
+                                    <input type="hidden" name="index" value="{{ user['index'] }}">
+                                    <button type="submit" class="edit_button" name="edit">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/45/45706.png" class="edit_icon" alt="edit_icon">
+                                    </button>
+                                {% endif %}
+                                </form>
                             </td>
                         </tr>
                     </table>
