@@ -21,7 +21,6 @@ body{
 }
 
 .opções_menu{
-    display: flex;
     justify-content: space-around;
     margin-left: 30%;
     margin-right: 30%;}
@@ -107,3 +106,4 @@ nav a{
     margin-top: -35px;
     text-align: center;}
     /*header padrão: fim*/
+

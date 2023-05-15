@@ -1,0 +1,31 @@
+[
+  {
+    "index": 0,
+    "nome": "Admin",
+    "email": "admin",
+    "turma": "bd",
+    "semestre": "3",
+    "senha": "admin",
+    "perfil": 2
+  },
+  {
+    "index": 1,
+    "nome": "Joao",
+    "email": "joao@gmail.com",
+    "turma": "bd",
+    "semestre": 1,
+    "time": "",
+    "senha": "GyForFzvkE",
+    "perfil": 1
+  },
+  {
+    "index": 2,
+    "nome": "Teste",
+    "email": "teste@gmail.com",
+    "turma": "bd",
+    "semestre": "2",
+    "time": "",
+    "senha": "qlwSkygMnA",
+    "perfil": 1
+  }
+]

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Avaliação 360°</title>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/login.css') }}">
+  <link rel="stylesheet" type="text/css" href="/static/css/login.css">
 </head>
 <!--CAMINHO PARA A IMAGEM "{{ url_for('static', filename='img/login/Layout API-2.png') }}"-->
 
@@ -11,18 +11,28 @@
 
 	<nav class="divisao_texto_tela">
 		<nav class="img">
-			<img src="{{ url_for('static', filename='img/login/Layout API-2.png') }}"" alt="Imagem principal">
+			<img src="/static/img/login/Layout API-2.png" alt="Imagem principal">
 		</nav>
-		
+
 		<nav class="inputs">
-			<h4 class="texto_instrucao">Faça seu login aqui!</h4>
+		<h4 class="texto_instrucao">Faça seu login aqui!</h4>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+			</div>
+        {% endif %}
+        {% endwith %}
+		<form action="{{ url_for('login') }}" method="post">	
+			<input type="text" name="email" placeholder="DIGITE SEU E-MAIL" required>
 
-			<input type="text" name="nome" placeholder="DIGITE SEU E-MAIL">
-
-			<input type="password" name="password" placeholder="DIGITE SUA SENHA">			
+			<input type="password" name="senha" placeholder="DIGITE SUA SENHA" required>			
 			<br>
 
-			<button class="botao_acessar" type="submit">ACESSAR</button>
+			<button class="botao_acessar" type="submit" value="acessar">ACESSAR</button>
+		</form>
 		</nav>
 	</nav>
 </body>
