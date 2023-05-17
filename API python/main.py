@@ -220,7 +220,21 @@ def controle_geral():
   except:
     users=[]
 
-  return render_template('controle_geral.html', users=users, nomeUsuario=session['nomeUsuario'])
+  try:
+        with open("data/times.json", "r") as f:
+            times = json.load(f)
+  except:
+      times = []
+  
+  try:
+      with open("data/turmas.json", "r") as f:
+          turmas = json.load(f)
+  except:
+      turmas = []
+
+    
+
+  return render_template('controle_geral.html', times=times, turmas=turmas, users=users, nomeUsuario=session['nomeUsuario'])
 
 @app.route("/pre_devolutiva")
 def pre_devolutiva():
