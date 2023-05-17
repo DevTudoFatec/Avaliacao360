@@ -1,11 +1,12 @@
 [
   {
     "index": 0,
-    "nome": "Admin",
-    "email": "admin",
-    "turma": "bd01",
+    "nome": "Joao",
+    "email": "joao@email.com",
+    "turma": "ads01",
     "time": 1,
-    "senha": "$2b$12$CodOfTnlEPYD3fROsDJ4LuhLGGROYJVP9MNO6KFClev0zWzFQSiay",
-    "perfil": 2
+    "senha": "$2b$12$MK9upzxgX5UARANufsurU.JRHfhuF5EdFP5AxIqTPcT5db9ZpAHAa",
+    "perfil": 2,
+    "acessos": 2
   }
 ]

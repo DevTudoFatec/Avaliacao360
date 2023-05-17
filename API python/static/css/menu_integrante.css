@@ -107,3 +107,14 @@ nav a{
     text-align: center;}
     /*header padrão: fim*/
 
+.button_first_access {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13px;
+    padding: 10px;
+    border-radius: 50px;
+    background-color: #214E65;
+    border-bottom: 2% solid #222;
+    cursor: pointer;
+    color: #fed196;
+    margin-top: 5%;
+}

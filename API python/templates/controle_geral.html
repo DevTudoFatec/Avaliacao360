@@ -52,10 +52,14 @@
                         <td>
                             <form class="edit_form" method="POST" action="{{ url_for('update_geral') }}">
                             {% if editing and index == user['index'] %}
-                                <select class="user_info_input" name="edited_turma" style="border-radius: 3px; font-size: 20px;">                                    
-                                    <option  value="{{ user['turma'] }}">{{ user['turma'] }}</option>
+                                <select class="user_info_input" name="edited_turma" style="border-radius: 3px; font-size: 20px;">
                                     {% for turma in turmas %} 
-                                        {% if user['turma'] != turma['codigo'] %}
+                                        {% if user['turma'] == turma['codigo'] %}                                        
+                                            <option  value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% for turma in turmas %} 
+                                        {% if turma['codigo'] != user['turma'] %}
                                             <option value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
                                         {% endif %}
                                     {% endfor %}
@@ -70,10 +74,16 @@
                         </td>
                         <td>
                             {% if editing and index == user['index'] %}
-                                <select class="user_info_input" name="edited_time" style="border-radius: 3px; font-size: 20px;">                                    
-                                    <option  value="{{ user['time'] }}">{{ user['time'] }}</option>
+                                <select class="user_info_input" name="edited_time" style="border-radius: 3px; font-size: 20px;">   
+                                    {% for time in times %} 
+                                        {% if user['time'] == time['codigo'] %}
+                                            <option  value="{{ time['codigo'] }}">{{ time['nome'] }}</option>
+                                        {% endif %}
+                                    {% endfor %}                                 
                                     {% for time in times %}
-                                        <option value="{{ time['codigo'] }}">{{ time['nome'] }}</option>
+                                        {% if time['codigo'] != user['time'] %} 
+                                            <option value="{{ time['codigo'] }}">{{ time['nome'] }}</option>
+                                        {% endif %}
                                     {% endfor %}
                                 </select>
                             {% else %}

@@ -132,7 +132,11 @@
                             <h1 class="time_info">{{ time['nome'] }}</h1>
                         </td>
                         <td>
-                            <h1 class="time_info">{{ time['integrantes'] }}</h1>
+                            {% for user in users %}
+                                {% if user['time'] == time['codigo'] %}
+                                    <h1 class="time_info">• {{ user['nome'] }}</h1>
+                                {% endif %}
+                            {% endfor %}
                         </td>
                         <td>
                             <h1 class="time_info">{{ time['codigo'] }}</h1>

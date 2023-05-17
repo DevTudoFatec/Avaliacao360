@@ -25,7 +25,21 @@
         </header>
 
         <img id="details_integrante" src="{{ url_for('static', filename='img/menu_integrante/Logo_API_Menu_integrante.png') }}" width="300">
-
+        {% if primeiro_acesso %}
+            <nav class="opções_menu">
+                <h1>Selecione o seu time:</h1>
+                <form method="POST" action="{{ url_for('menu_integrante') }}">
+                    <select class="user_info_input" name="user_time" style="border-radius: 3px; font-size: 20px;">                    
+                        <option  value="">Nome do time</option>
+                        {% for time in times %}
+                            <option value="{{ time['codigo'] }}">{{ time['nome'] }}</option>
+                        {% endfor %}
+                    </select>
+                    <br>
+                    <button class="button_first_access" type="submit" name="confirm">CONFIRMAR</button>
+                </form>
+            </nav>
+        {% else %}
         <nav class="opções_menu">
             <a href="/autoavaliacao">
                 <button class="botao_azul_claro">
@@ -45,6 +59,7 @@
                 </button>
             </a>
         </nav>
+        {% endif %}
         <footer>      
             <img id="logo_api_pbletex" src="{{ url_for('static', filename='img/menu_admin/Logo_API_PBLTeX.png') }}" width="250">
         </footer>
