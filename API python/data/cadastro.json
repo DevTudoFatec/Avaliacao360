@@ -3,39 +3,9 @@
     "index": 0,
     "nome": "Admin",
     "email": "admin",
-    "turma": "bd",
-    "semestre": "3",
-    "senha": "admin",
+    "turma": "bd01",
+    "time": 1,
+    "senha": "$2b$12$CodOfTnlEPYD3fROsDJ4LuhLGGROYJVP9MNO6KFClev0zWzFQSiay",
     "perfil": 2
-  },
-  {
-    "index": 1,
-    "nome": "Teste",
-    "email": "teste",
-    "turma": "bd",
-    "semestre": 1,
-    "time": "",
-    "senha": "teste",
-    "perfil": 1
-  },
-  {
-    "index": 2,
-    "nome": "Teste",
-    "email": "teste1@gmail.com",
-    "turma": "bf",
-    "semestre": "1",
-    "time": "",
-    "senha": "ZOjxpn9W9M",
-    "perfil": 1
-  },
-  {
-    "index": 3,
-    "nome": "Joao",
-    "email": "joao@gmail.com",
-    "turma": "bd",
-    "semestre": "1",
-    "time": "",
-    "senha": "iXOVIsTrzo",
-    "perfil": 1
   }
 ]

@@ -6,24 +6,11 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/cadastro.css') }}">
     </head>
     <body>
-        <header> 
-                <input type="checkbox" id="check" class="bt">
-                <label id="icone" for="check" class="bt"> ☰ </label>
+        <header>
             
             <div class="barra">
-                <nav class="menu_lateral">
-                    <a href="/menu_admin"> <div class="link">MENU PRINCIPAL</div></a>
-                    <a href="/cadastro"> <div class="link">CADASTRAR INTEGRANTE</div></a>
-                    <a href="/controle_geral"> <div class="link">CONTROLE GERAL TURMA/TIME/SPRINTS</div></a>
-                    <a href="/controle_perfil"> <div class="link">CONTROLE DE PERFIL</div></a>
-                    <a href="/pre_devolutiva_admin"> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
-                    <a href="/dashboards_operacionais"> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
-                    <a href="/dashboards_gerenciais"> <div class="link">DASHBOARDS GERENCIAIS</div></a>
-                    <a href="/"> <div class="link">SAIR ➔ </div></a>
-                </nav>
             </div>
             <img id="logo_avaliação" src="{{ url_for('static', filename='img/cadastro/Logo.png') }}" alt="Logo da plataforma" width="300">
-            <p><b>Usuário: {{ nomeUsuario }}</b></p>
         </header>
         <img id="logo_api_cadastro" src="{{ url_for('static', filename='img/cadastro/Logo_API cadastro.png') }}" width="400">
         {% with messages = get_flashed_messages() %}
@@ -40,12 +27,14 @@
             <br><br>
             <input id="email" type="text" placeholder="E-MAIL" name="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2})?" >
             <br><br>
-            <input id="turma" type="text" placeholder="TURMA" name="turma" required>
+            <input id="turma" type="text" placeholder="CHAVE DA TURMA" name="turma" required>
             <br><br> 
-            <input id="semestre" type="text" placeholder="SEMESTRE" name="semestre" required title="Apenas números entre 1 e 10">
+            <input id="senha" type="password" placeholder="SENHA" name="senha" required>
             <br><br>
             <button class="botao_cadastrar_voltar" type="submit">CADASTRAR</button>
         </form>
+        <a href="/"><button class="botao__voltar">VOLTAR</button></a>
+        <br>
         <br>
         <footer>
             <img id="logo_api_pbletex" src="{{ url_for('static', filename='img/cadastro/Logo_API_PBLTeX.png') }}" width="250">

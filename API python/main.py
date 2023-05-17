@@ -4,6 +4,7 @@ import os
 import time
 import string
 import random
+import bcrypt
 
 app = Flask(__name__)
 
@@ -23,11 +24,98 @@ def menu_integrante():
 
 @app.route("/cadastro")
 def cadastro():
-  return render_template('cadastro.html', nomeUsuario=session['nomeUsuario'])
+  return render_template('cadastro.html')
 
 @app.route("/autoavaliacao")
 def autoavaliacao():
   return render_template('autoavaliacao.html', nomeUsuario=session['nomeUsuario'])
+
+@app.route("/controle_turmas", methods=["GET", "POST"])
+def controle_turmas():
+  try:
+    with open("data/turmas.json", "r") as f:
+      turmas = json.load(f)
+  except:
+    turmas=[]
+
+  try:
+    with open("data/times.json", "r") as f:
+      times = json.load(f)
+  except:
+    times=[]
+
+  page=''
+
+  if "turmas" in request.form:
+    page='turmas'
+  elif "times" in request.form:
+    page='times'
+
+  return render_template('controle_turmas.html', turmas=turmas, times=times, page=page, nomeUsuario=session['nomeUsuario'])
+
+@app.route("/criar_turma", methods=["POST"])
+def criar_turma():
+  if not os.path.exists('data/turmas.json'):
+    if not os.path.exists('data'):
+      os.makedirs('data')
+      with open('data/turmas.json', 'w') as f:
+        f.write('[]')
+    else:
+      with open('data/turmas.json', 'w') as f:
+        f.write('[]')
+
+  nome_turma = request.form.get("nome_turma")
+  codigo_turma = request.form.get("codigo_turma")
+
+  with open('data/turmas.json', 'r') as f:
+    data = json.load(f)
+  if any(turma.get("codigo_turma") == codigo_turma for turma in data):
+    flash('Turma já cadastrada')
+    return redirect(url_for('controle_turmas'))
+
+  turma_dict = {
+    "index": len(data),
+    "nome": nome_turma.title(),
+    "codigo": codigo_turma
+  }
+
+  data.append(turma_dict)
+  with open('data/turmas.json', 'w') as f:
+    json.dump(data, f, indent=2)
+
+  return redirect(url_for('controle_turmas'))
+
+
+@app.route("/criar_time", methods=["POST"])
+def criar_time():
+  if not os.path.exists('data/times.json'):
+    if not os.path.exists('data'):
+      os.makedirs('data')
+      with open('data/times.json', 'w') as f:
+        f.write('[]')
+    else:
+      with open('data/times.json', 'w') as f:
+        f.write('[]')
+
+  nome_time = request.form.get("nome_time")
+  codigo_time_turma = request.form.get("codigo_time_turma")
+
+  with open('data/times.json', 'r') as f:
+    data = json.load(f)
+
+  time_dict = {
+    "index": len(data),
+    "nome": nome_time.title(),
+    "codigo_turma": codigo_time_turma,
+    "codigo": len(data)+1
+  }
+
+  data.append(time_dict)
+  with open('data/times.json', 'w') as f:
+    json.dump(data, f, indent=2)
+
+  return redirect(url_for('controle_turmas'))
+
 
 @app.route("/controle_perfil")
 def controle_perfil():
@@ -77,6 +165,18 @@ def update_geral():
             users = json.load(f)
     except:
         users = []
+
+    try:
+        with open("data/times.json", "r") as f:
+            times = json.load(f)
+    except:
+        times = []
+    
+    try:
+        with open("data/turmas.json", "r") as f:
+            turmas = json.load(f)
+    except:
+        turmas = []
     
     editing=False
     index=int(request.form.get("index"))
@@ -87,15 +187,15 @@ def update_geral():
     elif "save" in request.form:
         editing=False
 
-        edited_semestre = request.form.get("edited_semestre")
         edited_turma = request.form.get("edited_turma")
-        edited_time = request.form.get("edited_time")
+        edited_time = request.form.get("edited_time")        
+        edited_perfil = request.form.get("edited_perfil")
 
         for user in users:
           if user['index'] == index:
-            user['semestre'] = int(edited_semestre)
             user['turma'] = edited_turma
-            user['time'] = edited_time
+            user['time'] = int(edited_time)
+            user['perfil'] = int(edited_perfil)
 
         with open("data/cadastro.json", "w") as file:
             json.dump(users, file, indent=2)
@@ -110,7 +210,7 @@ def update_geral():
         with open("data/cadastro.json", "w") as file:
             json.dump(users, file, indent=2)
 
-    return render_template('controle_geral.html', users=users, editing=editing, index=index)
+    return render_template('controle_geral.html', users=users, turmas=turmas, times=times, editing=editing, index=index)
 
 @app.route("/controle_geral")
 def controle_geral():
@@ -186,7 +286,7 @@ def pre_devolutiva_submit_admin():
       users = json.load(f)
       for user in users:
         if user['email'] == integrante:
-          int_infos = user['semestre'] + 'º Semestre   -   ' + user['turma'] + '   -    ' + user['nome']                   
+          int_infos = user['turma'] + '   -    ' + user['time'] + '   -    ' + user['nome']                   
   except:
     users=[]
 
@@ -264,7 +364,7 @@ def login():
   with open('data/cadastro.json', 'r') as f:
     data = json.load(f)
     for item in data:
-      if email == item['email'] and senha == item['senha']:
+      if email == item['email'] and bcrypt.checkpw(senha.encode('utf-8'), item['senha'].encode('utf-8')):
         check = True
         session['nomeUsuario'] = item['nome']
         session['email'] = item['email']
@@ -298,9 +398,10 @@ def cadastro_submit():
 
   nome = request.form.get('nome')
   email = request.form.get('email')
-  turma = request.form.get('turma')
-  semestre = request.form.get('semestre')
-  senha = senha_aleatoria(10, string.ascii_lowercase + string.ascii_uppercase + string.digits)
+  codigo_turma = request.form.get('turma')
+  senha = request.form.get('senha')
+
+  hashed_password = bcrypt.hashpw(senha.encode('utf-8'), bcrypt.gensalt())
 
   with open('data/cadastro.json', 'r') as f:
     data = json.load(f)
@@ -312,10 +413,9 @@ def cadastro_submit():
     "index": len(data),
     "nome": nome.title(),
     "email": email.lower(),
-    "turma": turma,
-    "semestre": semestre,
-    "time": '',
-    "senha": senha,
+    "turma": codigo_turma,
+    "time": 0,
+    "senha": hashed_password.decode('utf-8'),
     "perfil": 1
   }
 
@@ -325,7 +425,7 @@ def cadastro_submit():
 
   flash('Cadastrado com sucesso!')
 
-  return redirect(url_for('cadastro'))
+  return redirect(url_for('home'))
 
 
 @app.route("/autoavaliacao_submit", methods=["POST"])

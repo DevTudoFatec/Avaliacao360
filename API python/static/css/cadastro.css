@@ -40,7 +40,23 @@ input{
     cursor: pointer;
     font-size: medium;
     margin: 2%;
-    font-weight: bold;}
+    font-weight: bold;
+}
+
+.botao__voltar{    
+    color: #fed196;
+    background-color: #214e65;
+    border-color: #214e65;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-radius: 25px;
+    height: 40px;
+    width: 10%;
+    color: #fed196;
+    cursor: pointer;
+    font-size: medium;
+    font-weight: bold;
+    margin-top: -2%;    
+}
 
 ::placeholder{
     color: #214e65;

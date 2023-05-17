@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UFT-8"/>
+        <title>Controle Geral</title> 
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/controle_turmas.css') }}">
+    </head>
+
+    <body>
+        <header> 
+            <input type="checkbox" id="check" class="bt">
+            <label id="icone" for="check" class="bt"> ☰ </label>
+        
+        <div class="barra">
+            <nav class="menu_lateral">
+                <a href="/menu_admin"> <div class="link">MENU PRINCIPAL</div></a>
+                <a href="/controle_turmas"> <div class="link">CONTROLE DE TURMAS/TIMES</div></a>
+                <a href="/controle_geral"> <div class="link">CONTROLE INTEGRANTES</div></a>
+                <a href="/pre_devolutiva_admin"> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
+                <a href="/dashboards_operacionais"> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
+                <a href="/dashboards_gerenciais"> <div class="link">DASHBOARDS GERENCIAIS</div></a>
+                <a href="/"> <div class="link">SAIR ➔ </div></a>
+            </nav>
+        </div>
+        <img id="logo_avaliação" src="{{ url_for('static', filename='img/menu_admin/Logo API (3).png') }}" width="300">
+        <p><b>Usuário: {{ nomeUsuario }}</b></p>
+        </header>
+        <div class="controle_container">
+            <form class="new_turma" method="POST" action="{{ url_for('controle_turmas') }}">
+                <button class="bt_turmas" type="submit" name="turmas">CONTROLE DE TURMAS</button>
+                <button class="bt_times" type="submit" name="times">CONTROLE DE TIMES</button>
+            </form>
+        </div>
+        {% if page == 'turmas' %}
+        <div class="turmas_container">  
+            <table class="turmas_infos">
+                    <tr>
+                        <td>
+                            <h1 class="turma_info_default">TURMA</h1>
+                        </td>
+                        <td>
+                            <h1 class="turma_info_default">TIMES</h1>
+                        </td>
+                        <td>          
+                            <h1 class="turma_info_default">CODIGO TURMA</h1>
+                        </td>
+                        <td>          
+                            <h1 class="turma_info_default">EDITAR</h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <form class="new_turma" method="POST" action="{{ url_for('criar_turma') }}">
+                        <td>
+                            <input type="text" class="turma_info_input" name="nome_turma" placeholder="Nome da Turma" required style="border-radius: 3px; font-size: 20px;">
+                        </td>
+                        <td></td>
+                        <td>
+                            <input type="text" class="turma_info_input" name="codigo_turma" placeholder="Codigo da Turma" required style="border-radius: 3px; font-size: 20px;"> 
+                        </td>
+                        <td>
+                            <button class="submit_turma" type="submit" >ADICIONAR TURMA</button>
+                        </td>
+                        </form>
+                    </tr>
+                {% for turma in turmas %}
+                    <tr>
+                        <td>
+                            <h1 class="turma_info">{{ turma['nome'] }}</h1>
+                        </td>
+                        <td>
+                            {% for time in times %}
+                                {% if turma['codigo'] == time['codigo_turma'] %}
+                                    <h1 class="turma_info">• {{ time['nome'] }}</h1>
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <h1 class="turma_info">{{ turma['codigo'] }}</h1>
+                        </td>
+                        <td></td>
+                    </tr>
+                {% endfor %}            
+            </table>
+            <footer>
+                <img id="logo_api_pbletex" src="{{ url_for('static', filename='img/menu_admin/Logo_API_PBLTeX.png') }}" width="250">
+            </footer>
+        </div>
+        {% elif page == 'times' %}
+        <div class="times_container">  
+            <table class="times_infos">
+                    <tr>
+                        <td>
+                            <h1 class="time_info_default">TIME</h1>
+                        </td>
+                        <td>
+                            <h1 class="time_info_default">INTEGRANTES</h1>
+                        </td>
+                        <td>          
+                            <h1 class="time_info_default">CODIGO TIME</h1>
+                        </td>
+                        <td>          
+                            <h1 class="time_info_default">TURMA</h1>
+                        </td>
+                        <td>          
+                            <h1 class="turma_info_default">EDITAR</h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <form class="new_time" method="POST" action="{{ url_for('criar_time') }}">
+                        <td>
+                            <input type="text" class="time_info_input" name="nome_time" placeholder="Nome do Time" required style="border-radius: 3px; font-size: 20px;">
+                        </td>
+                        <td></td>
+                        <td>
+                        </td>
+                        <td>
+                            <select class="user_info_input" name="codigo_time_turma" required style="border-radius: 3px; font-size: 20px;">                                    
+                                <option  value="">Nome da Turma</option>
+                                {% for turma in turmas %}
+                                        <option value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>
+                            <button class="submit_time" type="submit" >ADICIONAR TIME</button>
+                        </td>
+                        </form>
+                    </tr>
+                {% for time in times %}
+                    <tr>
+                        <td>
+                            <h1 class="time_info">{{ time['nome'] }}</h1>
+                        </td>
+                        <td>
+                            <h1 class="time_info">{{ time['integrantes'] }}</h1>
+                        </td>
+                        <td>
+                            <h1 class="time_info">{{ time['codigo'] }}</h1>
+                        </td>
+                        <td>
+                            {% for turma in turmas %}
+                                {% if turma['codigo'] == time['codigo_turma'] %}
+                                    <h1 class="time_info">{{ turma['nome'] }}</h1>
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td></td>
+                    </tr>
+                {% endfor %}            
+            </table>
+            <footer>
+                <img id="logo_api_pbletex" src="{{ url_for('static', filename='img/menu_admin/Logo_API_PBLTeX.png') }}" width="250">
+            </footer>
+        </div>
+        {% endif %}
+    </body>
+</html>    

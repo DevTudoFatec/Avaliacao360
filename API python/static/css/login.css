@@ -68,5 +68,9 @@ button{
 .flash {
     position: absolute;
     left: 67%;
-    top: 43%;
+    top: 41%;
+}
+
+.botao_cadastro {
+    margin-top: 1%;
 }
