@@ -169,6 +169,34 @@ nav a{
   font-weight: bold;
 }
 
+.turma_info_default_controle {
+  display: inline-block;
+  width: 60%; 
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 22px;
+  color: #fed196;
+  background-color: #214e65;
+  border-color: #214e65;
+  border-radius: 50px;
+  padding: 15px;
+  font-weight: bold;
+}
+
+.time_info_default_controle {
+  display: inline-block;
+  width: 60%; 
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 22px;
+  color: #fed196;
+  background-color: #214e65;
+  border-color: #214e65;
+  border-radius: 50px;
+  padding: 15px;
+  font-weight: bold;
+}
+
 
 .turma_info {
   display: inline-block;

@@ -3,8 +3,8 @@
     "index": 0,
     "nome": "Admin",
     "email": "admin",
-    "turma": "",
-    "time": 0,
+    "turma": "bd01",
+    "time": 1,
     "senha": "$2b$12$MK9upzxgX5UARANufsurU.JRHfhuF5EdFP5AxIqTPcT5db9ZpAHAa",
     "perfil": 2,
     "acessos": 7
@@ -13,10 +13,10 @@
     "index": 1,
     "nome": "Joao",
     "email": "joao@email.com",
-    "turma": "db01",
+    "turma": "bd01",
     "time": 1,
     "senha": "$2b$12$0x8X6qel1en83sQw8UDHV.1GLn8rfccpH4.7BeJf3a8.Tfnk0xPtu",
-    "perfil": 2,
+    "perfil": 1,
     "acessos": 1
   }
 ]

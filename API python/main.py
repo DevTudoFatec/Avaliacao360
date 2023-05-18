@@ -260,6 +260,64 @@ def update_turmas():
 
     return render_template('controle_turmas.html', page=page, users=users, turmas=turmas, times=times, editing=editing, index=index)
 
+@app.route("/update_times", methods=["POST"])
+@login_required
+@admin_required
+def update_times():
+    page='times'
+
+    try:
+        with open("data/cadastro.json", "r") as f:
+            users = json.load(f)
+    except:
+        users = []
+
+    try:
+        with open("data/times.json", "r") as f:
+            times = json.load(f)
+    except:
+        times = []
+    
+    try:
+        with open("data/turmas.json", "r") as f:
+            turmas = json.load(f)
+    except:
+        turmas = []
+    
+    editing=False
+
+    index = int(request.form.get("index"))
+
+    if "edit" in request.form:
+        editing=True
+
+    elif "save" in request.form:
+        edited_nome = request.form.get("edited_nome")
+        edited_turma = request.form.get("edited_turma")
+
+        for time in times:
+           if time['index'] == index:
+            time['nome'] = edited_nome
+            time['turma'] = edited_turma
+
+        with open("data/cadastro.json", "w") as file:
+            json.dump(users, file, indent=2)
+
+        with open("data/times.json", "w") as file:
+            json.dump(times, file, indent=2)
+    
+    elif "delete" in request.form:
+        editing=False
+
+        for turma in turmas:
+          if turma['index'] == index:
+            turmas.remove(turma)  
+
+        with open("data/turmas.json", "w") as file:
+            json.dump(turmas, file, indent=2)
+
+    return render_template('controle_turmas.html', page=page, users=users, turmas=turmas, times=times, editing=editing, index=index)
+
 
 @app.route("/update_geral", methods=["POST"])
 @login_required

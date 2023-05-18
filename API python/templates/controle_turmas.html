@@ -45,7 +45,7 @@
                             <h1 class="turma_info_default">CODIGO TURMA</h1>
                         </td>
                         <td>          
-                            <h1 class="turma_info_default">EDITAR</h1>
+                            <h1 class="turma_info_default_controle">CONTROLE</h1>
                         </td>
                     </tr>
                     {% if not editing %}
@@ -69,7 +69,7 @@
                         <td>
                             <form class="edit_turma" method="POST" action="{{ url_for('update_turmas') }}">
                                 {% if editing and turma['index'] == index %}
-                                    <input type="text" name="new_nome" class="turma_info_input" placeholder="{{ turma['nome'] }}" style="border-radius: 3px; font-size: 20px;">
+                                    <input type="text" name="new_nome" class="turma_info_input" placeholder="{{ turma['nome'] }}" required style="border-radius: 3px; font-size: 20px;">
                                 {% else %}
                                     <h1 class="turma_info">{{ turma['nome'] }}</h1>
                                 {% endif %}
@@ -83,7 +83,7 @@
                         </td>
                         <td>
                                 {% if editing and turma['index'] == index %}
-                                    <input type="text" name="new_codigo" class="turma_info_input" placeholder="{{ turma['codigo'] }}" style="border-radius: 3px; font-size: 20px;">
+                                    <input type="text" name="new_codigo" class="turma_info_input" placeholder="{{ turma['codigo'] }}" required style="border-radius: 3px; font-size: 20px;">
                                 {% else %}
                                     <h1 class="turma_info">{{ turma['codigo'] }}</h1>
                                 {% endif %}                            
@@ -130,9 +130,10 @@
                             <h1 class="time_info_default">TURMA</h1>
                         </td>
                         <td>          
-                            <h1 class="turma_info_default">EDITAR</h1>
+                            <h1 class="turma_info_default_controle">CONTROLE</h1>
                         </td>
                     </tr>
+                    {% if not editing %}
                     <tr>
                         <form class="new_time" method="POST" action="{{ url_for('criar_time') }}">
                         <td>
@@ -154,10 +155,16 @@
                         </td>
                         </form>
                     </tr>
+                    {% endif %}
                 {% for time in times %}
                     <tr>
                         <td>
-                            <h1 class="time_info">{{ time['nome'] }}</h1>
+                            <form class="edit_turma" method="POST" action="{{ url_for('update_times') }}">
+                            {% if editing and time['index'] == index %}
+                                <input type="text" name="edited_nome" class="time_info_input" placeholder="{{ time['nome'] }}" required style="border-radius: 3px; font-size: 20px;">
+                            {% else %}
+                                <h1 class="time_info">{{ time['nome'] }}</h1>
+                            {% endif %}
                         </td>
                         <td>
                             {% for user in users %}
@@ -170,13 +177,45 @@
                             <h1 class="time_info">{{ time['codigo'] }}</h1>
                         </td>
                         <td>
-                            {% for turma in turmas %}
-                                {% if turma['codigo'] == time['turma'] %}
-                                    <h1 class="time_info">{{ turma['nome'] }}</h1>
-                                {% endif %}
-                            {% endfor %}
+                            {% if editing and time['index'] == index %}
+                                <select class="user_info_input" name="edited_turma" required style="border-radius: 3px; font-size: 20px;">                                    
+                                    {% for turma in turmas %}
+                                    {% if turma['codigo'] == time['turma'] %}
+                                        <option value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
+                                    {% endif %}
+                                    {% endfor %}                         
+                                    {% for turma in turmas %}
+                                        {% if turma['codigo'] != time['turma'] %}
+                                            <option value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
+                                        {% endif %}
+                                    {% endfor %}  
+                                    </select>
+                            {% else %}
+                                {% for turma in turmas %}
+                                    {% if turma['codigo'] == time['turma'] %}
+                                        <h1 class="time_info">{{ turma['nome'] }}</h1>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
                         </td>
-                        <td></td>
+                        <td>
+                            {% if editing and time['index'] == index %}
+                                <input type="hidden" name="index" value="{{ time['index'] }}"> 
+                                <input type="hidden" name="old_codigo" value="{{ time['codigo'] }}"> 
+                                <button type="submit" class="save_button" name="save">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/5291/5291043.png" class="save_icon" alt="save_icon">
+                                </button>
+                            {% else %} 
+                                    <input type="hidden" name="index" value="{{ time['index'] }}">
+                                    <button type="submit" class="edit_button" name="edit">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/45/45706.png" class="edit_icon" alt="edit_icon">
+                                    </button>
+                                    <button type="submit" class="delete_button" name="delete">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/2891/2891491.png" class="save_icon" alt="save_icon">
+                                    </button>
+                                </form>      
+                            {% endif %}
+                        </td>
                     </tr>
                 {% endfor %}            
             </table>
