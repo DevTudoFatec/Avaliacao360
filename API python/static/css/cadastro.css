@@ -118,13 +118,10 @@ nav a{
     transition-delay: .2s;}
 
 .flash {
-    position: absolute;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bolder;
     font-size: 20px;
     font-weight: bold;
-    left: 42%;
-    margin-top: -1.8%;
+    margin-top: -2%;
     text-align: center;
-    list-style-type: none;
 }

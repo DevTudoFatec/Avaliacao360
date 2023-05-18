@@ -2,13 +2,7 @@
   {
     "index": 0,
     "nome": "Devtudo",
-    "codigo_turma": "bd01",
+    "turma": "db01",
     "codigo": 1
-  },
-  {
-    "index": 1,
-    "nome": "Nada Dev",
-    "codigo_turma": "ads01",
-    "codigo": 2
   }
 ]

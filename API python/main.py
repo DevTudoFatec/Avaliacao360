@@ -61,7 +61,7 @@ def menu_integrante():
   
   for user in users:
     if user['email'] == session['email']:
-      if user['acessos'] == 1:
+      if user['acessos'] == 0:
         primeiro_acesso = True
       else:
         primeiro_acesso = False 
@@ -73,7 +73,7 @@ def menu_integrante():
       
       times_turma = []
       for time in times:
-        if time['codigo_turma'] == session['turma']:
+        if time['turma'] == session['turma']:
           times_turma.append(time)
     except:
       times_turma = []     
@@ -179,7 +179,7 @@ def criar_time():
   time_dict = {
     "index": len(data),
     "nome": nome_time.title(),
-    "codigo_turma": codigo_time_turma,
+    "turma": codigo_time_turma,
     "codigo": len(data)+1
   }
 
@@ -190,50 +190,76 @@ def criar_time():
   return redirect(url_for('controle_turmas'))
 
 
-@app.route("/controle_perfil")
+@app.route("/update_turmas", methods=["POST"])
 @login_required
 @admin_required
-def controle_perfil():
-  try:
-    with open("data/cadastro.json", "r") as f:
-      users = json.load(f)
-  except:
-    users=[]
+def update_turmas():
+    page='turmas'
 
-  return render_template('controle_perfil.html', users=users, nomeUsuario=session['nomeUsuario'])
-
-import json
-from flask import request, render_template
-
-@app.route("/update_perfil", methods=["POST"])
-@login_required
-@admin_required
-def update_perfil():
     try:
         with open("data/cadastro.json", "r") as f:
             users = json.load(f)
     except:
         users = []
+
+    try:
+        with open("data/times.json", "r") as f:
+            times = json.load(f)
+    except:
+        times = []
+    
+    try:
+        with open("data/turmas.json", "r") as f:
+            turmas = json.load(f)
+    except:
+        turmas = []
     
     editing=False
-    index=int(request.form.get("index"))
+
+    index = int(request.form.get("index"))
 
     if "edit" in request.form:
         editing=True
 
     elif "save" in request.form:
-        editing=False
+        old_codigo = request.form.get("old_codigo")
+        new_nome = request.form.get("new_nome")
+        new_codigo = request.form.get("new_codigo")
 
-        edited_perfil = request.form.get("edited_perfil")
+        for turma in turmas:
+          if turma['index'] == index:
+            turma['nome'] = new_nome
+            turma['codigo'] = new_codigo
 
         for user in users:
-          if user['index'] == index:
-            user['perfil'] = int(edited_perfil)
+          if user['turma'] == old_codigo:
+            user['turma'] = new_codigo
+
+        for time in times:
+           if time['turma'] == old_codigo:
+            time['turma'] = new_codigo
+
+        with open("data/turmas.json", "w") as file:
+            json.dump(turmas, file, indent=2)
 
         with open("data/cadastro.json", "w") as file:
             json.dump(users, file, indent=2)
 
-    return render_template('controle_perfil.html', users=users, editing=editing, index=index)
+        with open("data/times.json", "w") as file:
+            json.dump(times, file, indent=2)
+    
+    elif "delete" in request.form:
+        editing=False
+
+        for turma in turmas:
+          if turma['index'] == index:
+            turmas.remove(turma)  
+
+        with open("data/turmas.json", "w") as file:
+            json.dump(turmas, file, indent=2)
+
+    return render_template('controle_turmas.html', page=page, users=users, turmas=turmas, times=times, editing=editing, index=index)
+
 
 @app.route("/update_geral", methods=["POST"])
 @login_required
@@ -258,22 +284,44 @@ def update_geral():
         turmas = []
     
     editing=False
-    index=int(request.form.get("index"))
+    editing_time=False
+    editing_perfil=False
+
+    index = int(request.form.get("index"))
 
     if "edit" in request.form:
         editing=True
 
-    elif "save" in request.form:
-        editing=False
+    elif "save_turma" in request.form:
+        editing_time=True
 
         edited_turma = request.form.get("edited_turma")
-        edited_time = request.form.get("edited_time")        
-        edited_perfil = request.form.get("edited_perfil")
 
         for user in users:
           if user['index'] == index:
             user['turma'] = edited_turma
+
+        with open("data/cadastro.json", "w") as file:
+            json.dump(users, file, indent=2)
+            
+
+    elif "save_time" in request.form:
+        editing_perfil=True
+
+        edited_time = request.form.get("edited_time")
+
+        for user in users:
+          if user['index'] == index:
             user['time'] = int(edited_time)
+
+        with open("data/cadastro.json", "w") as file:
+            json.dump(users, file, indent=2)
+
+    elif "save_perfil" in request.form:        
+        edited_perfil = request.form.get("edited_perfil")
+
+        for user in users:
+          if user['index'] == index:
             user['perfil'] = int(edited_perfil)
 
         with open("data/cadastro.json", "w") as file:
@@ -289,7 +337,8 @@ def update_geral():
         with open("data/cadastro.json", "w") as file:
             json.dump(users, file, indent=2)
 
-    return render_template('controle_geral.html', users=users, turmas=turmas, times=times, editing=editing, index=index)
+    return render_template('controle_geral.html', users=users, turmas=turmas, times=times, editing=editing, editing_time=editing_time, editing_perfil=editing_perfil, index=index)
+
 
 @app.route("/controle_geral")
 @login_required
@@ -478,9 +527,6 @@ def login():
         session['email'] = item['email']
         session['perfil'] = item['perfil']
         session['turma'] = item['turma']
-        item['acessos'] += 1
-        with open("data/cadastro.json", "w") as file:
-            json.dump(data, file, indent=2)
         if item['perfil'] == 2:
           return redirect(url_for('menu_admin'))
         else:

@@ -48,6 +48,7 @@
                             <h1 class="turma_info_default">EDITAR</h1>
                         </td>
                     </tr>
+                    {% if not editing %}
                     <tr>
                         <form class="new_turma" method="POST" action="{{ url_for('criar_turma') }}">
                         <td>
@@ -62,22 +63,49 @@
                         </td>
                         </form>
                     </tr>
+                    {% endif %}
                 {% for turma in turmas %}
                     <tr>
                         <td>
-                            <h1 class="turma_info">{{ turma['nome'] }}</h1>
+                            <form class="edit_turma" method="POST" action="{{ url_for('update_turmas') }}">
+                                {% if editing and turma['index'] == index %}
+                                    <input type="text" name="new_nome" class="turma_info_input" placeholder="{{ turma['nome'] }}" style="border-radius: 3px; font-size: 20px;">
+                                {% else %}
+                                    <h1 class="turma_info">{{ turma['nome'] }}</h1>
+                                {% endif %}
                         </td>
                         <td>
                             {% for time in times %}
-                                {% if turma['codigo'] == time['codigo_turma'] %}
+                                {% if turma['codigo'] == time['turma'] %}
                                     <h1 class="turma_info">• {{ time['nome'] }}</h1>
                                 {% endif %}
                             {% endfor %}
                         </td>
                         <td>
-                            <h1 class="turma_info">{{ turma['codigo'] }}</h1>
+                                {% if editing and turma['index'] == index %}
+                                    <input type="text" name="new_codigo" class="turma_info_input" placeholder="{{ turma['codigo'] }}" style="border-radius: 3px; font-size: 20px;">
+                                {% else %}
+                                    <h1 class="turma_info">{{ turma['codigo'] }}</h1>
+                                {% endif %}                            
                         </td>
-                        <td></td>
+                        <td>
+                            {% if editing and turma['index'] == index %}
+                                <input type="hidden" name="index" value="{{ turma['index'] }}"> 
+                                <input type="hidden" name="old_codigo" value="{{ turma['codigo'] }}"> 
+                                <button type="submit" class="save_button" name="save">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/5291/5291043.png" class="save_icon" alt="save_icon">
+                                </button>
+                            {% else %} 
+                                    <input type="hidden" name="index" value="{{ turma['index'] }}">
+                                    <button type="submit" class="edit_button" name="edit">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/45/45706.png" class="edit_icon" alt="edit_icon">
+                                    </button>
+                                    <button type="submit" class="delete_button" name="delete">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/2891/2891491.png" class="save_icon" alt="save_icon">
+                                    </button>
+                                </form>      
+                            {% endif %}
+                        </td>
                     </tr>
                 {% endfor %}            
             </table>
@@ -143,7 +171,7 @@
                         </td>
                         <td>
                             {% for turma in turmas %}
-                                {% if turma['codigo'] == time['codigo_turma'] %}
+                                {% if turma['codigo'] == time['turma'] %}
                                     <h1 class="time_info">{{ turma['nome'] }}</h1>
                                 {% endif %}
                             {% endfor %}

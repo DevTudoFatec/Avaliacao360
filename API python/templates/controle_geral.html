@@ -50,20 +50,25 @@
                             <h1 class="user_info">{{ user['nome'] }}</h1>
                         </td>
                         <td>
-                            <form class="edit_form" method="POST" action="{{ url_for('update_geral') }}">
                             {% if editing and index == user['index'] %}
+                            <form class="edit_form" method="POST" action="{{ url_for('update_geral') }}">                                    
+                                <input type="hidden" name="index" value="{{ user['index'] }}">
                                 <select class="user_info_input" name="edited_turma" style="border-radius: 3px; font-size: 20px;">
                                     {% for turma in turmas %} 
-                                        {% if user['turma'] == turma['codigo'] %}                                        
+                                        {% if turma['codigo'] == user['turma'] %}
+                                            <option value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
+                                        {% endif %}
+                                    {% endfor %}                                       
+                                    {% for turma in turmas %} 
+                                        {% if turma['codigo'] != user['turma'] %}
                                             <option  value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
                                         {% endif %}
                                     {% endfor %}
-                                    {% for turma in turmas %} 
-                                        {% if turma['codigo'] != user['turma'] %}
-                                            <option value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
-                                        {% endif %}
-                                    {% endfor %}
                                 </select>
+                                <button type="submit" class="save_button" name="save_turma">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/5291/5291043.png" class="save_icon" alt="save_icon">
+                                </button>
+                            </form>
                             {% else %}
                                 {% for turma in turmas %} 
                                     {% if user['turma'] == turma['codigo'] %}                                        
@@ -73,72 +78,70 @@
                             {% endif %}
                         </td>
                         <td>
-                            {% if editing and index == user['index'] %}
+                            {% if editing_time and index == user['index'] %}            
+                            <form class="edit_form" method="POST" action="{{ url_for('update_geral') }}">                 
+                                <input type="hidden" name="index" value="{{ user['index'] }}">
                                 <select class="user_info_input" name="edited_time" style="border-radius: 3px; font-size: 20px;">   
                                     {% for time in times %} 
-                                        {% if user['time'] == time['codigo'] %}
+                                        {% if  time['codigo'] == user['time'] and time['turma'] == user['turma'] %}
                                             <option  value="{{ time['codigo'] }}">{{ time['nome'] }}</option>
                                         {% endif %}
                                     {% endfor %}                                 
                                     {% for time in times %}
-                                        {% if time['codigo'] != user['time'] %} 
+                                        {% if time['codigo'] != user['time'] and time['turma'] == user['turma'] %} 
                                             <option value="{{ time['codigo'] }}">{{ time['nome'] }}</option>
                                         {% endif %}
                                     {% endfor %}
                                 </select>
+                                <button type="submit" class="save_button" name="save_time">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/5291/5291043.png" class="save_icon" alt="save_icon">
+                                </button>
+                            </form>
                             {% else %}
-                                {% for time in times %} 
-                                    {% if user['time'] == time['codigo'] %}                                        
+                                {% for time in times %}
+                                    {% if time['codigo'] == user['time'] %}
                                         <h1 class="user_info">{{ time['nome'] }}</h1>
                                     {% endif %}
-                                {% endfor %}
+                                {% endfor %}                                 
                             {% endif %}
                         </td>
                         <td>
-                            {% if editing %}
-                                {% if index == user['index']  %}
+                            {% if editing_perfil and index == user['index']%}
+                                <form class="edit_form" method="POST" action="{{ url_for('update_geral') }}">   
                                     <input type="hidden" name="index" value="{{ user['index'] }}">
                                     <select class="user_info_input" name="edited_perfil" style="border-radius: 3px; font-size: 20px;">
-                                        {% if user['perfil']  == 1  %}   
-                                            <option value="1">Usuário</option>   
-                                            <option value="2">Administrador</option>                                   
-                                        {% else %}
-                                            <option value="2">Administrador</option>     
-                                            <option value="1">Usuário</option>   
-                                        {% endif %}
-                                    </select>
-                                {% else %}
-                                    {% if user['perfil'] == 1  %}     
-                                        <h1 class="user_info">Usuário</h1>                                        
+                                    {% if user['perfil']  == 1  %}   
+                                        <option value="1">Usuário</option>   
+                                        <option value="2">Administrador</option>                                   
                                     {% else %}
-                                        <h1 class="user_info">Administrador</h1>
-                                    {% endif %}           
-                                {% endif %}                                                                        
+                                        <option value="2">Administrador</option>     
+                                        <option value="1">Usuário</option>   
+                                    {% endif %}
+                                    </select>
+                                    <button type="submit" class="save_button" name="save_perfil">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/5291/5291043.png" class="save_icon" alt="save_icon">
+                                    </button>
+                                </form>                                                                       
                             {% else %}
                                 {% if user['perfil']  == 1  %}     
                                     <h1 class="user_info">Usuário</h1>                                        
                                 {% else %}
                                     <h1 class="user_info">Administrador</h1>
-                                {% endif %}  
-                                <input type="hidden" name="index" value="{{ user['index'] }}">
+                                {% endif %}
                             {% endif %}
                         </td>
                         <td>
-                            {% if editing %}
-                                {% if index == user['index']  %}
-                                    <button type="submit" class="save_button" name="save">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/5291/5291043.png" class="save_icon" alt="save_icon">
-                                    </button>
-                                    <button type="submit" class="delete_button" name="delete">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/2891/2891491.png" class="save_icon" alt="save_icon">
-                                    </button>
-                                {% endif %}                         
-                            {% else %}
+                            {% if not editing and not editing_perfil and not editing_time %}
+                            <form class="edit_form" method="POST" action="{{ url_for('update_geral') }}">   
+                                <input type="hidden" name="index" value="{{ user['index'] }}">  
                                 <button type="submit" class="edit_button" name="edit">
                                     <img src="https://cdn-icons-png.flaticon.com/512/45/45706.png" class="edit_icon" alt="edit_icon">
                                 </button>
+                                <button type="submit" class="delete_button" name="delete">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/2891/2891491.png" class="save_icon" alt="save_icon">
+                                </button>
+                            </form>      
                             {% endif %}
-                        </form>
                         </td>
                     </tr>
                 {% endfor %}            

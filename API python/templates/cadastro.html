@@ -13,16 +13,15 @@
             <img id="logo_avaliação" src="{{ url_for('static', filename='img/cadastro/Logo.png') }}" alt="Logo da plataforma" width="300">
         </header>
         <img id="logo_api_cadastro" src="{{ url_for('static', filename='img/cadastro/Logo_API cadastro.png') }}" width="400">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul class="flash">
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-        {% endwith %}
+        
         <form id="formulario" method="POST" action="{{ url_for('cadastro_submit') }}">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <li class="flash">{{ message }}</li>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
             <input id="user" type="text" placeholder="NOME COMPLETO" name="nome" required pattern="[A-Za-z ]+" title="São permitidas apenas letras!">
             <br><br>
             <input id="email" type="text" placeholder="E-MAIL" name="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2})?" >
