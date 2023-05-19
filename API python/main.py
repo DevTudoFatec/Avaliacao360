@@ -1,9 +1,7 @@
 from flask import Flask, render_template, request, jsonify, flash, redirect, url_for, session
 import json
 import os
-import time
-import string
-import random
+from datetime import datetime, timedelta
 import bcrypt
 from functools import wraps
 
@@ -90,6 +88,77 @@ def cadastro():
 @login_required
 def autoavaliacao():
   return render_template('autoavaliacao.html', nomeUsuario=session['nomeUsuario'])
+
+@app.route("/controle_sprints")
+def controle_sprints():
+  try:
+      with open("data/cadastro.json", "r") as f:
+        users = json.load(f)
+  except:
+    users=[]
+
+  try:
+    with open("data/turmas.json", "r") as f:
+      turmas = json.load(f)
+  except:
+    turmas=[]
+
+  try:
+    with open("data/times.json", "r") as f:
+      times = json.load(f)
+  except:
+    times=[]
+
+  try:
+    with open("data/projetos.json", "r") as f:
+      projetos = json.load(f)
+  except:
+    projetos=[]
+
+  return render_template('controle_sprints.html', users=users, turmas=turmas, times=times, projetos=projetos, nomeUsuario=session['nomeUsuario'])
+
+@app.route("/criar_projeto", methods=["POST"])
+@login_required
+@admin_required
+def criar_projeto():
+  if not os.path.exists('data/projetos.json'):
+    if not os.path.exists('data'):
+      os.makedirs('data')
+      with open('data/projetos.json', 'w') as f:
+        f.write('[]')
+    else:
+      with open('data/projetos.json', 'w') as f:
+        f.write('[]')
+
+  new_projeto_turma = request.form.get("new_projeto_turma")
+  new_projeto_nome = request.form.get("new_projeto_nome")
+  new_projeto_sprints = int(request.form.get("new_projeto_sprints"))
+  new_projeto_duracao_sprint = int(request.form.get("new_projeto_duracao_sprint"))
+  new_projeto_inicio = datetime.strptime(request.form.get("new_projeto_inicio"), '%Y-%m-%d').date()
+
+  dias = (new_projeto_sprints*new_projeto_duracao_sprint)-1
+
+  new_projeto_fim = new_projeto_inicio + timedelta(days=dias)
+
+
+  with open('data/projetos.json', 'r') as f:
+    data = json.load(f)
+
+  projeto_dict = {
+    "index": len(data),
+    "turma": new_projeto_turma,
+    "nome": new_projeto_nome,
+    "sprints": new_projeto_sprints,
+    "duracao": new_projeto_duracao_sprint,
+    "inicio": str(new_projeto_inicio),
+    "fim": str(new_projeto_fim)
+  }
+
+  data.append(projeto_dict)
+  with open('data/projetos.json', 'w') as f:
+    json.dump(data, f, indent=2)
+
+  return redirect(url_for('controle_sprints'))
 
 @app.route("/controle_turmas", methods=["GET", "POST"])
 @login_required

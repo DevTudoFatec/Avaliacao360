@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UFT-8"/>
+        <title>Controle Geral</title> 
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/controle_sprints.css') }}">
+    </head>
+
+    <body>
+        <header> 
+            <input type="checkbox" id="check" class="bt">
+            <label id="icone" for="check" class="bt"> ☰ </label>
+        
+        <div class="barra">
+            <nav class="menu_lateral">
+                <a href="/menu_admin"> <div class="link">MENU PRINCIPAL</div></a>
+                <a href="/controle_turmas"> <div class="link">CONTROLE DE TURMAS/TIMES</div></a>
+                <a href="/controle_geral"> <div class="link">CONTROLE DE INTEGRANTES</div></a>
+                <a href="/controle_sprints"> <div class="link">CONTROLE DE SPRINTS</div></a>
+                <a href="/pre_devolutiva_admin"> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
+                <a href="/dashboards_operacionais"> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
+                <a href="/dashboards_gerenciais"> <div class="link">DASHBOARDS GERENCIAIS</div></a>
+                <a href="/"> <div class="link">SAIR ➔ </div></a>
+            </nav>
+        </div>
+        <img id="logo_avaliação" src="{{ url_for('static', filename='img/menu_admin/Logo API (3).png') }}" width="300">
+        <p><b>Usuário: {{ nomeUsuario }}</b></p>
+        </header>
+        <div class="controle_container">
+            <h1 class="bt_sprints">CONTROLE DE SPRINTS</h1>
+        </div>
+        <div class="projetos_container">  
+            <table class="projetos_infos">
+                    <tr>
+                        <td>
+                            <h1 class="info_default">TURMA</h1>
+                        </td>
+                        <td>
+                            <h1 class="info_default">NOME DO PROJETO</h1>
+                        </td>
+                        <td>
+                            <h1 class="info_default">SPRINTS</h1>
+                        </td>
+                        <td>          
+                            <h1 class="info_default">DURAÇÃO SPRINT</h1>
+                        </td>
+                        <td>          
+                            <h1 class="info_default">INICIO DO PROJETO</h1>
+                        </td>
+                        <td>          
+                            <h1 class="info_default">FIM DO PROJETO</h1>
+                        </td>
+                        <td>          
+                            <h1 class="default_controle">CONTROLE</h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <form class="new_projeto" method="POST" action="{{ url_for('criar_projeto') }}">
+                            <td>
+                                <select class="projeto_info_input" name="new_projeto_turma" required style="border-radius: 3px; font-size: 20px;">                                    
+                                    <option  value="" disabled selected>Nome da Turma</option>
+                                    {% for turma in turmas %}
+                                            <option value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td>
+                                <input class="projeto_info_input" type="text" name="new_projeto_nome" required>
+                            </td>
+                            <td>
+                                <input type="number" class="projeto_info_input" name="new_projeto_sprints" placeholder="Qtd. de Sprints" min="1" required style="border-radius: 3px; font-size: 20px;"> 
+                            </td>
+                            <td>
+                                <select class="projeto_info_input" name="new_projeto_duracao_sprint" required style="border-radius: 3px; font-size: 20px;">                                    
+                                    <option value="" disabled selected>Dias</option>
+                                    <option value="7">7 Dias</option>
+                                    <option value="15">15 Dias</option>
+                                    <option value="21">21 Dias</option>
+                                    <option value="30">30 Dias</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="date" name="new_projeto_inicio" required>
+                            </td>
+                            <td>
+    
+                            </td>
+                            <td>
+                                <button class="new_projeto_submit" type="submit" >REGISTRAR PROJETO</button>
+                            </td>
+                        </form>
+                    </tr>
+                    {% for projeto in projetos %}
+                    <tr>
+                        <td>
+                            {% for turma in turmas %}
+                                {% if turma['codigo'] == projeto['turma'] %}
+                                    <h3>{{ turma['nome']}}</h3>
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <h3>{{ projeto['nome']}}</h3>
+                        </td>
+                        <td>
+                            <h3>{{ projeto['sprints']}}</h3>
+                        </td>
+                        <td>
+                            <h3>{{ projeto['duracao']}} dias</h3>
+                        </td>
+                        <td>
+                            <h3>{{ projeto['inicio']}}</h3>
+                        </td>
+                        <td>
+                            <h3>{{ projeto['fim']}}</h3>
+                        </td>
+                    </tr>
+                    {% endfor %}
+            </table>
+            <footer>
+                <img id="logo_api_pbletex" src="{{ url_for('static', filename='img/menu_admin/Logo_API_PBLTeX.png') }}" width="250">
+            </footer>
+        </div>
+    </body>
+</html>  
