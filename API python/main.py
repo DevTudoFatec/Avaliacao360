@@ -25,10 +25,20 @@ def admin_required(route_function):
         return route_function(*args, **kwargs)
     return decorated_function
 
+def team_required(route_function):
+    @wraps(route_function)
+    def decorated_function(*args, **kwargs):
+        if session['time'] == 0:
+            return redirect(url_for('menu_integrante'))
+        return route_function(*args, **kwargs)
+    return decorated_function
+
+
 @app.route("/")
 def home():
   try:  
-    del session['email']
+    for key in list(session.keys()):
+      del session[key]
   except:
     pass
 
@@ -52,6 +62,7 @@ def menu_integrante():
     for user in users:
       if user['email'] == session['email']:
         user['time'] = int(user_time)
+        session['time'] = user['time']
         user['acessos'] += 1
 
     with open("data/cadastro.json", "w") as file:
@@ -59,24 +70,10 @@ def menu_integrante():
   
   for user in users:
     if user['email'] == session['email']:
-      if user['acessos'] == 0:
+      if user['acessos'] == 0 or session['time'] == 0:
         primeiro_acesso = True
       else:
         primeiro_acesso = False
-
-      avaliacoes = user['avaliacoes']
-      
-      avaliacao_check = False
-      sprint_index = 'none'
-      
-      current_date = datetime.now().date()        
-      for avaliacao in avaliacoes:
-        inicio = datetime.strptime(avaliacao[1], '%Y-%m-%d').date()
-        fim = datetime.strptime(avaliacao[2], '%Y-%m-%d').date()
-
-        if inicio <= current_date <= fim:
-          avaliacao_check = True
-          sprint_index = avaliacao[0]
 
   if primeiro_acesso:
     try:
@@ -100,6 +97,7 @@ def cadastro():
 
 @app.route("/autoavaliacao")
 @login_required
+@team_required
 def autoavaliacao():
   return render_template('autoavaliacao.html', nomeUsuario=session['nomeUsuario'])
 
@@ -205,6 +203,111 @@ def criar_projeto():
 
   return redirect(url_for('controle_sprints'))
 
+
+@app.route("/update_projetos", methods=["POST"])
+@login_required
+@admin_required
+def update_projetos():
+
+    try:
+        with open("data/cadastro.json", "r") as f:
+            users = json.load(f)
+    except:
+        users = []
+
+    try:
+        with open("data/turmas.json", "r") as f:
+            turmas = json.load(f)
+    except:
+        turmas = []
+
+    try:
+        with open("data/projetos.json", "r") as f:
+            projetos = json.load(f)
+    except:
+        projetos = []
+    
+    editing=False
+
+    index = int(request.form.get("index"))
+
+    if "edit" in request.form:
+        editing=True
+
+    elif "save" in request.form:
+        edit_projeto_turma = request.form.get("edit_projeto_turma")
+        edit_projeto_nome = request.form.get("edit_projeto_nome")
+        edit_projeto_sprints = int(request.form.get("edit_projeto_sprints"))
+        edit_projeto_duracao_sprint = int(request.form.get("edit_projeto_duracao_sprint"))
+        edit_projeto_inicio = datetime.strptime(request.form.get("edit_projeto_inicio"), '%Y-%m-%d').date()
+
+        dias = (edit_projeto_sprints*edit_projeto_duracao_sprint)-1
+
+        edit_projeto_fim = edit_projeto_inicio + timedelta(days=dias)
+
+        for projeto in projetos:
+          if projeto['index'] == index:
+            projeto['nome'] = edit_projeto_nome
+            projeto['sprints'] = edit_projeto_sprints
+            projeto['duracao'] = edit_projeto_duracao_sprint
+            projeto['inicio'] = str(edit_projeto_inicio)
+            projeto['fim'] = str(edit_projeto_fim)
+
+        with open("data/projetos.json", "w") as file:
+            json.dump(projetos, file, indent=2)
+
+
+        edit_periodos_avaliacao = []
+        i=0
+        delta = edit_projeto_inicio
+        
+        while i<edit_projeto_sprints:
+          sprint = i+1
+          inicio =  delta + timedelta(days=edit_projeto_duracao_sprint)
+          fim =  inicio + timedelta(days=2)
+
+          edit_periodos_avaliacao.append([sprint,str(inicio),str(fim)])
+
+          delta += timedelta(days=edit_projeto_duracao_sprint)
+
+          i+=1
+
+        try:
+            with open("data/cadastro.json", "r") as f:
+              users = json.load(f)
+        except:
+          users=[]
+
+        for user in users:
+          if user['turma'] == edit_projeto_turma:
+              user['avaliacoes'] = edit_periodos_avaliacao
+
+        with open('data/cadastro.json', 'w') as u:
+          json.dump(users, u, indent=2)
+
+        return redirect(url_for('controle_sprints'))
+    
+    elif "delete" in request.form:
+        editing=False
+
+        for projeto in projetos:
+          if projeto['index'] == index:
+            for user in users:
+               if user['turma'] == projeto['turma']:
+                  del user['avaliacoes']
+            projetos.remove(projeto)
+
+        with open("data/projetos.json", "w") as file:
+            json.dump(projetos, file, indent=2)
+        
+        with open("data/cadastro.json", "w") as file:
+            json.dump(users, file, indent=2)
+
+        return redirect(url_for('controle_sprints'))
+
+    return render_template('controle_sprints.html', index=index, editing=editing, users=users, turmas=turmas, projetos=projetos, nomeUsuario=session['nomeUsuario'])
+
+
 @app.route("/controle_turmas", methods=["GET", "POST"])
 @login_required
 @admin_required
@@ -227,14 +330,31 @@ def controle_turmas():
   except:
     times=[]
 
-  page=''
+  return render_template('controle_turmas.html', users=users, turmas=turmas, times=times, nomeUsuario=session['nomeUsuario'])
 
-  if "turmas" in request.form:
-    page='turmas'
-  elif "times" in request.form:
-    page='times'
+@app.route("/controle_times", methods=["GET", "POST"])
+@login_required
+@admin_required
+def controle_times():
+  try:
+      with open("data/cadastro.json", "r") as f:
+        users = json.load(f)
+  except:
+    users=[]
 
-  return render_template('controle_turmas.html', users=users, turmas=turmas, times=times, page=page, nomeUsuario=session['nomeUsuario'])
+  try:
+    with open("data/turmas.json", "r") as f:
+      turmas = json.load(f)
+  except:
+    turmas=[]
+
+  try:
+    with open("data/times.json", "r") as f:
+      times = json.load(f)
+  except:
+    times=[]
+
+  return render_template('controle_times.html', users=users, turmas=turmas, times=times, nomeUsuario=session['nomeUsuario'])
 
 @app.route("/criar_turma", methods=["POST"])
 @login_required
@@ -270,7 +390,6 @@ def criar_turma():
 
   return redirect(url_for('controle_turmas'))
 
-
 @app.route("/criar_time", methods=["POST"])
 @login_required
 @admin_required
@@ -301,7 +420,7 @@ def criar_time():
   with open('data/times.json', 'w') as f:
     json.dump(data, f, indent=2)
 
-  return redirect(url_for('controle_turmas'))
+  return redirect(url_for('controle_times'))
 
 
 @app.route("/update_turmas", methods=["POST"])
@@ -361,6 +480,8 @@ def update_turmas():
 
         with open("data/times.json", "w") as file:
             json.dump(times, file, indent=2)
+
+        return redirect(url_for('controle_turmas'))
     
     elif "delete" in request.form:
         editing=False
@@ -371,6 +492,8 @@ def update_turmas():
 
         with open("data/turmas.json", "w") as file:
             json.dump(turmas, file, indent=2)
+          
+        return redirect(url_for('controle_turmas'))
 
     return render_template('controle_turmas.html', page=page, users=users, turmas=turmas, times=times, editing=editing, index=index)
 
@@ -419,18 +542,28 @@ def update_times():
 
         with open("data/times.json", "w") as file:
             json.dump(times, file, indent=2)
+
+        return redirect(url_for('controle_times'))
     
     elif "delete" in request.form:
         editing=False
 
-        for turma in turmas:
-          if turma['index'] == index:
-            turmas.remove(turma)  
+        for time in times:
+          if time['index'] == index:
+            for user in users:
+              if user['time'] == time['codigo']:
+                 user['time'] = 0
+            times.remove(time)
 
-        with open("data/turmas.json", "w") as file:
-            json.dump(turmas, file, indent=2)
+        with open("data/times.json", "w") as file:
+            json.dump(times, file, indent=2)
+        
+        with open("data/cadastro.json", "w") as file:
+            json.dump(users, file, indent=2)
+          
+        return redirect(url_for('controle_times'))
 
-    return render_template('controle_turmas.html', page=page, users=users, turmas=turmas, times=times, editing=editing, index=index)
+    return render_template('controle_times.html', page=page, users=users, turmas=turmas, times=times, editing=editing, index=index)
 
 
 @app.route("/update_geral", methods=["POST"])
@@ -467,37 +600,26 @@ def update_geral():
     elif "save_turma" in request.form:
         editing_time=True
 
-        edited_turma = request.form.get("edited_turma")
-
-        for user in users:
-          if user['index'] == index:
-            user['turma'] = edited_turma
-
-        with open("data/cadastro.json", "w") as file:
-            json.dump(users, file, indent=2)
-            
+        session['edited_turma'] = request.form.get("edited_turma")            
 
     elif "save_time" in request.form:
         editing_perfil=True
 
-        edited_time = request.form.get("edited_time")
-
-        for user in users:
-          if user['index'] == index:
-            user['time'] = int(edited_time)
-
-        with open("data/cadastro.json", "w") as file:
-            json.dump(users, file, indent=2)
+        session['edited_time'] = request.form.get("edited_time")
 
     elif "save_perfil" in request.form:        
         edited_perfil = request.form.get("edited_perfil")
 
         for user in users:
           if user['index'] == index:
+            user['turma'] = session['edited_turma']
+            user['time'] = int(session['edited_time'])
             user['perfil'] = int(edited_perfil)
 
         with open("data/cadastro.json", "w") as file:
             json.dump(users, file, indent=2)
+
+        return redirect(url_for('controle_geral'))        
     
     elif "delete" in request.form:
         editing=False
@@ -508,6 +630,8 @@ def update_geral():
 
         with open("data/cadastro.json", "w") as file:
             json.dump(users, file, indent=2)
+
+        return redirect(url_for('controle_geral'))        
 
     return render_template('controle_geral.html', users=users, turmas=turmas, times=times, editing=editing, editing_time=editing_time, editing_perfil=editing_perfil, index=index)
 
@@ -673,6 +797,7 @@ def dashboards_operacionais():
 
 @app.route("/avaliacao")
 @login_required
+@team_required
 def avaliacao():
   try:
     with open("data/cadastro.json", "r") as f:
@@ -699,21 +824,25 @@ def login():
         session['email'] = item['email']
         session['perfil'] = item['perfil']
         session['turma'] = item['turma']
+        session['time'] = item['time']
 
-        avaliacoes = item['avaliacoes']
-        
         session['avaliacao'] = False
-        session['sprint'] = 'none'
-        
-        current_date = datetime.now().date()        
-        for avaliacao in avaliacoes:
-          inicio = datetime.strptime(avaliacao[1], '%Y-%m-%d').date()
-          fim = datetime.strptime(avaliacao[2], '%Y-%m-%d').date()
+        session['sprint'] = 'None'
 
-          if inicio <= current_date <= fim:
-            session['avaliacao'] = True
-            session['sprint'] = avaliacao[0]
+        try:
+          avaliacoes = item['avaliacoes']
+          
+          current_date = datetime.now().date()        
+          for avaliacao in avaliacoes:
+            inicio = datetime.strptime(avaliacao[1], '%Y-%m-%d').date()
+            fim = datetime.strptime(avaliacao[2], '%Y-%m-%d').date()
 
+            if inicio <= current_date <= fim:
+              session['avaliacao'] = True
+              session['sprint'] = avaliacao[0]
+        except:
+           pass
+           
         if item['perfil'] == 2:
           return redirect(url_for('menu_admin'))
         else:
@@ -784,6 +913,7 @@ def cadastro_submit():
 
 @app.route("/autoavaliacao_submit", methods=["POST"])
 @login_required
+@team_required
 def autoavaliacao_submit():
 
   if not os.path.exists('data/autoavaliacao.json'):
@@ -829,6 +959,7 @@ def autoavaliacao_submit():
 
 @app.route("/avaliacao_submit", methods=["POST"])
 @login_required
+@team_required
 def avaliacao_submit():
 
   if not os.path.exists('data/avaliacao.json'):

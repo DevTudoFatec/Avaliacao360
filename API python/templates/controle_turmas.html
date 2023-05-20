@@ -27,12 +27,9 @@
         <p><b>Usuário: {{ nomeUsuario }}</b></p>
         </header>
         <div class="controle_container">
-            <form class="new_turma" method="POST" action="{{ url_for('controle_turmas') }}">
-                <button class="bt_turmas" type="submit" name="turmas">CONTROLE DE TURMAS</button>
-                <button class="bt_times" type="submit" name="times">CONTROLE DE TIMES</button>
-            </form>
+            <a href="/controle_turmas"><button class="bt_turmas" type="button" name="turmas">CONTROLE DE TURMAS</button></a>
+            <a href="/controle_times"><button class="bt_times" type="button" name="times">CONTROLE DE TIMES</button></a>
         </div>
-        {% if page == 'turmas' %}
         <div class="turmas_container">  
             <table class="turmas_infos">
                     <tr>
@@ -92,9 +89,14 @@
                         <td>
                             {% if editing and turma['index'] == index %}
                                 <input type="hidden" name="index" value="{{ turma['index'] }}"> 
-                                <input type="hidden" name="old_codigo" value="{{ turma['codigo'] }}"> 
+                                <input type="hidden" name="old_codigo" value="{{ turma['codigo'] }}">
+                                <a href="/controle_turmas">
+                                    <button type="button" class="save_button" name="cancel">
+                                        <img src="https://cdn2.iconfinder.com/data/icons/interface-solid-7/30/interface-solid-edit-pencil-remove-512.png" class="save_icon" alt="cancel_icon">
+                                    </button>
+                                </a>    
                                 <button type="submit" class="save_button" name="save">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/5291/5291043.png" class="save_icon" alt="save_icon">
+                                    <img src="https://i.ibb.co/ySv77Qj/verify.png" class="save_icon" alt="save_icon">
                                 </button>
                             {% else %} 
                                     <input type="hidden" name="index" value="{{ turma['index'] }}">
@@ -114,116 +116,5 @@
                 <img id="logo_api_pbletex" src="{{ url_for('static', filename='img/menu_admin/Logo_API_PBLTeX.png') }}" width="250">
             </footer>
         </div>
-        {% elif page == 'times' %}
-        <div class="times_container">  
-            <table class="times_infos">
-                    <tr>
-                        <td>
-                            <h1 class="time_info_default">TIME</h1>
-                        </td>
-                        <td>
-                            <h1 class="time_info_default">INTEGRANTES</h1>
-                        </td>
-                        <td>          
-                            <h1 class="time_info_default">CODIGO TIME</h1>
-                        </td>
-                        <td>          
-                            <h1 class="time_info_default">TURMA</h1>
-                        </td>
-                        <td>          
-                            <h1 class="turma_info_default_controle">CONTROLE</h1>
-                        </td>
-                    </tr>
-                    {% if not editing %}
-                    <tr>
-                        <form class="new_time" method="POST" action="{{ url_for('criar_time') }}">
-                        <td>
-                            <input type="text" class="time_info_input" name="nome_time" placeholder="Nome do Time" required style="border-radius: 3px; font-size: 20px;">
-                        </td>
-                        <td></td>
-                        <td>
-                        </td>
-                        <td>
-                            <select class="user_info_input" name="codigo_time_turma" required style="border-radius: 3px; font-size: 20px;">                                    
-                                <option  value="" disabled selected>Nome da Turma</option>
-                                {% for turma in turmas %}
-                                        <option value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
-                                {% endfor %}
-                            </select>
-                        </td>
-                        <td>
-                            <button class="submit_time" type="submit" >ADICIONAR TIME</button>
-                        </td>
-                        </form>
-                    </tr>
-                    {% endif %}
-                {% for time in times %}
-                    <tr>
-                        <td>
-                            <form class="edit_turma" method="POST" action="{{ url_for('update_times') }}">
-                            {% if editing and time['index'] == index %}
-                                <input type="text" name="edited_nome" class="time_info_input" placeholder="{{ time['nome'] }}" required style="border-radius: 3px; font-size: 20px;">
-                            {% else %}
-                                <h1 class="time_info">{{ time['nome'] }}</h1>
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% for user in users %}
-                                {% if user['time'] == time['codigo'] %}
-                                    <h1 class="time_info">• {{ user['nome'] }}</h1>
-                                {% endif %}
-                            {% endfor %}
-                        </td>
-                        <td>
-                            <h1 class="time_info">{{ time['codigo'] }}</h1>
-                        </td>
-                        <td>
-                            {% if editing and time['index'] == index %}
-                                <select class="user_info_input" name="edited_turma" required style="border-radius: 3px; font-size: 20px;">                                    
-                                    {% for turma in turmas %}
-                                    {% if turma['codigo'] == time['turma'] %}
-                                        <option value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
-                                    {% endif %}
-                                    {% endfor %}                         
-                                    {% for turma in turmas %}
-                                        {% if turma['codigo'] != time['turma'] %}
-                                            <option value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
-                                        {% endif %}
-                                    {% endfor %}  
-                                    </select>
-                            {% else %}
-                                {% for turma in turmas %}
-                                    {% if turma['codigo'] == time['turma'] %}
-                                        <h1 class="time_info">{{ turma['nome'] }}</h1>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if editing and time['index'] == index %}
-                                <input type="hidden" name="index" value="{{ time['index'] }}"> 
-                                <input type="hidden" name="old_codigo" value="{{ time['codigo'] }}"> 
-                                <button type="submit" class="save_button" name="save">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/5291/5291043.png" class="save_icon" alt="save_icon">
-                                </button>
-                            {% else %} 
-                                    <input type="hidden" name="index" value="{{ time['index'] }}">
-                                    <button type="submit" class="edit_button" name="edit">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/45/45706.png" class="edit_icon" alt="edit_icon">
-                                    </button>
-                                    <button type="submit" class="delete_button" name="delete">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/2891/2891491.png" class="save_icon" alt="save_icon">
-                                    </button>
-                                </form>      
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% endfor %}            
-            </table>
-            <footer>
-                <img id="logo_api_pbletex" src="{{ url_for('static', filename='img/menu_admin/Logo_API_PBLTeX.png') }}" width="250">
-            </footer>
-        </div>
-        {% endif %}
     </body>
 </html>    

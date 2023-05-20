@@ -8,6 +8,7 @@
 
     <body>
         <header> 
+        {% if not primeiro_acesso %}
             <input type="checkbox" id="check" class="bt">
             <label id="icone" for="check" class="bt"> ☰ </label>
         
@@ -20,8 +21,9 @@
                 <a href="/"> <div class="link">SAIR ➔ </div></a>
             </nav>
         </div>
+        {% endif %}
         <img id="logo_avaliação" src="{{ url_for('static', filename='img/menu_admin/Logo API (3).png') }}" width="300">
-        <p><b>Usuário: {{ sprint_index }}</b></p>
+        <p><b>Usuário: {{ nomeUsuario }}</b></p>
         </header>
 
         <img id="details_integrante" src="{{ url_for('static', filename='img/menu_integrante/Logo_API_Menu_integrante.png') }}" width="300">
@@ -41,6 +43,9 @@
             </nav>
         {% else %}
         <nav class="opções_menu">
+            {% if sprint_index != 'None' %}
+                <h2 style="color: gray">Sprint: {{ sprint_index }}</h2>
+            {% endif %}    
             <a href="/autoavaliacao">
                 <button class="botao_azul_claro">
                     <strong> AUTO AVALIAÇÃO  </strong>

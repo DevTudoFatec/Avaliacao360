@@ -27,7 +27,7 @@
         <p><b>Usuário: {{ nomeUsuario }}</b></p>
         </header>
         <div class="controle_container">
-            <h1 class="bt_controle">CONTROLE GERAL</h1>
+            <h1 class="bt_controle">CONTROLE DE INTEGRANTES</h1>
         </div>
         <div class="usuarios_container">  
             <table class="user_infos">
@@ -43,6 +43,9 @@
                         </td>
                         <td>         
                             <h1 class="user_info_default">PERFIL</h1>
+                        </td>
+                        <td>          
+                            <h1 class="default_controle">CONTROLE</h1>
                         </td>
                     </tr>
                 {% for user in users %} 
@@ -67,7 +70,7 @@
                                     {% endfor %}
                                 </select>
                                 <button type="submit" class="save_button" name="save_turma">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/5291/5291043.png" class="save_icon" alt="save_icon">
+                                    <img src="https://static-00.iconduck.com/assets.00/arrow-right-circle-icon-512x512-2p1e2aaw.png" class="save_icon" alt="save_icon">
                                 </button>
                             </form>
                             {% else %}
@@ -95,7 +98,7 @@
                                     {% endfor %}
                                 </select>
                                 <button type="submit" class="save_button" name="save_time">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/5291/5291043.png" class="save_icon" alt="save_icon">
+                                    <img src="https://static-00.iconduck.com/assets.00/arrow-right-circle-icon-512x512-2p1e2aaw.png" class="save_icon" alt="save_icon">
                                 </button>
                             </form>
                             {% else %}
@@ -118,11 +121,19 @@
                                         <option value="2">Administrador</option>     
                                         <option value="1">Usuário</option>   
                                     {% endif %}
+                                </td>
+                                <td>
                                     </select>
+                                    <a href="/controle_geral">
+                                        <button type="button" class="save_button" name="cancel">
+                                            <img src="https://cdn2.iconfinder.com/data/icons/interface-solid-7/30/interface-solid-edit-pencil-remove-512.png" class="save_icon" alt="cancel_icon">
+                                        </button>
+                                    </a>    
                                     <button type="submit" class="save_button" name="save_perfil">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/5291/5291043.png" class="save_icon" alt="save_icon">
+                                        <img src="https://i.ibb.co/ySv77Qj/verify.png" class="save_icon" alt="save_icon">
                                     </button>
-                                </form>                                                                       
+                                </form> 
+                                </td>                                                                      
                             {% else %}
                                 {% if user['perfil']  == 1  %}     
                                     <h1 class="user_info">Usuário</h1>                                        
@@ -131,8 +142,8 @@
                                 {% endif %}
                             {% endif %}
                         </td>
-                        <td>
                             {% if not editing and not editing_perfil and not editing_time %}
+                            <td>
                             <form class="edit_form" method="POST" action="{{ url_for('update_geral') }}">   
                                 <input type="hidden" name="index" value="{{ user['index'] }}">  
                                 <button type="submit" class="edit_button" name="edit">
@@ -141,9 +152,11 @@
                                 <button type="submit" class="delete_button" name="delete">
                                     <img src="https://cdn-icons-png.flaticon.com/512/2891/2891491.png" class="save_icon" alt="save_icon">
                                 </button>
-                            </form>      
+                            </form>  
+                            </td>
+                            {% elif not editing_perfil%}
+                            <td></td>
                             {% endif %}
-                        </td>
                     </tr>
                 {% endfor %}            
             </table>

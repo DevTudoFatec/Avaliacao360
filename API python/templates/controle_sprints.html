@@ -93,6 +93,7 @@
                     {% for projeto in projetos %}
                     <tr>
                         <td>
+                            <form class="edit_projeto" method="POST" action="{{ url_for('update_projetos') }}">
                             {% for turma in turmas %}
                                 {% if turma['codigo'] == projeto['turma'] %}
                                     <h3>{{ turma['nome']}}</h3>
@@ -100,19 +101,66 @@
                             {% endfor %}
                         </td>
                         <td>
-                            <h3>{{ projeto['nome']}}</h3>
+                            {% if editing and projeto['index'] == index %}	
+                                <input class="projeto_info_input" type="text" name="edit_projeto_nome" placeholder="{{ projeto ['nome'] }}" required>
+                            {% else %} 
+                                <h3>{{ projeto['nome']}}</h3>
+                            {% endif %} 
                         </td>
                         <td>
-                            <h3>{{ projeto['sprints']}}</h3>
+                            {% if editing and projeto['index'] == index %}
+                                <input type="number" class="projeto_info_input" name="edit_projeto_sprints" placeholder="{{ projeto ['sprints'] }}" min="1" required style="border-radius: 3px; font-size: 20px;"> 
+                            {% else %} 
+                                <h3>{{ projeto['sprints']}}</h3>
+                            {% endif %} 
                         </td>
                         <td>
-                            <h3>{{ projeto['duracao']}} dias</h3>
+                            {% if editing and projeto['index'] == index %}
+                                <select class="projeto_info_input" name="edit_projeto_duracao_sprint" required style="border-radius: 3px; font-size: 20px;">                                    
+                                    <option value="" disabled selected>{{ projeto['duracao'] }} dias</option>
+                                    <option value="7">7 Dias</option>
+                                    <option value="15">15 Dias</option>
+                                    <option value="21">21 Dias</option>
+                                    <option value="30">30 Dias</option>
+                                </select>	
+                            {% else %} 
+                                <h3>{{ projeto['duracao']}} dias</h3>
+                            {% endif %} 
                         </td>
                         <td>
-                            <h3>{{ projeto['inicio']}}</h3>
+                            {% if editing and projeto['index'] == index %}	
+                                <input type="date" name="edit_projeto_inicio" placeholder="{{ projeto['inicio'] }}"required>
+                            {% else %} 
+                                <h3>{{ projeto['inicio']}}</h3>
+                            {% endif %} 
                         </td>
                         <td>
-                            <h3>{{ projeto['fim']}}</h3>
+                            {% if not editing and projeto['index'] != index %}
+                                <h3>{{ projeto['fim']}}</h3>
+                            {% endif %}	
+                        </td>
+                        <td>
+                            {% if editing and projeto['index'] == index %}
+                                <input type="hidden" name="edit_projeto_turma" value="{{ projeto['turma'] }}">
+                                <input type="hidden" name="index" value="{{ projeto['index'] }}">
+                                <a href="/controle_sprints">
+                                    <button type="button" class="save_button" name="cancel">
+                                        <img src="https://cdn2.iconfinder.com/data/icons/interface-solid-7/30/interface-solid-edit-pencil-remove-512.png" class="save_icon" alt="cancel_icon">
+                                    </button>
+                                </a>    
+                                <button type="submit" class="save_button" name="save">
+                                    <img src="https://i.ibb.co/ySv77Qj/verify.png" class="save_icon" alt="save_icon">
+                                </button>
+                            {% else %} 
+                                    <input type="hidden" name="index" value="{{ projeto['index'] }}">
+                                    <button type="submit" class="edit_button" name="edit">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/45/45706.png" class="edit_icon" alt="edit_icon">
+                                    </button>
+                                    <button type="submit" class="delete_button" name="delete">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/2891/2891491.png" class="save_icon" alt="save_icon">
+                                    </button>  
+                            {% endif %}
+                            </form>
                         </td>
                     </tr>
                     {% endfor %}
