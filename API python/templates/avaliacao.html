@@ -13,14 +13,17 @@
     <label id="icone" for="check" class="bt"> ☰ </label>
 
 <div class="barra">
-    <nav class="menu_lateral">
+  <nav class="menu_lateral">
       <a href="/menu_integrante"> <div class="link">MENU PRINCIPAL</div></a>
-      <a href="/autoavaliacao"> <div class="link">AUTO AVALIAÇÃO</div></a>
-      <a href="/avaliacao"> <div class="link">AVALIAÇÃO DE INTEGRANTES</div></a>
+      {% if avaliacao_check %}
+          <a href="/avaliacao"><div class="link">AVALIAÇÃO DE INTEGRANTES</div></a>
+      {% else %}
+          <div class="link_disable">AVALIAÇÃO DE INTEGRANTES</div>
+      {% endif %}
       <a href="/pre_devolutiva"> <div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
       <a href="/"> <div class="link">SAIR ➔ </div></a>
-    </nav>
-</div> 
+  </nav>
+</div>
 <!--- Fim do botão de menu -->
 
 <!-- Início do conteúdo do cabeçalho -->
@@ -42,72 +45,59 @@
             </ul>
           {% endif %}
           {% endwith %}        
-        <form method="POST" action="{{ url_for('avaliacao_submit') }}">
-            <div class="input_integrante">
-                <h2>Integrante avaliado:</h2>
-                <select name="integrante" required style="width: 200px; height: 30px; border-radius: 20px;" >
-                    <option  value="">Nome do Integrante</option>
-                    {% for user in users %} 
-                      {% if user['email'] != 'admin' %}
-                        {% if user['email'] != emailUsuario %}
-                        <option value="{{ user['email'] }}">{{ user['nome'] }}</option>
-                        {% endif %}
-                      {% endif %}
-                    {% endfor %}
-                </select>   
-            </div>  
-        <ul>
-        <div class="Sprint_select">
-          <li><h2><b>Sprint</b></h2></li>
-          <input type="radio" name="sprint" value="1" required> 1
-          <input type="radio" name="sprint" value="2" required> 2
-          <input type="radio" name="sprint" value="3" required> 3
-          <input type="radio" name="sprint" value="4" required> 4
-        </div>
-        
-          <li><h2><b>Comunicação e Trabalho em Equipe</b></h2></li>
-          <input type="radio" name="comunicacao" value="1" required> 1
-          <input type="radio" name="comunicacao" value="2" required> 2
-          <input type="radio" name="comunicacao" value="3" required> 3
-          <input type="radio" name="comunicacao" value="4" required> 4
-          <input type="radio" name="comunicacao" value="5" required> 5
-            
-          <li><h2><b>Engajamento e Pró-atividade</b></h2></li>
-          <input type="radio" name="engajamento" value="1" required> 1
-          <input type="radio" name="engajamento" value="2" required> 2
-          <input type="radio" name="engajamento" value="3" required> 3
-          <input type="radio" name="engajamento" value="4" required> 4
-          <input type="radio" name="engajamento" value="5" required> 5
-        </ul>
-        <ul>
-          <li><h2><b>Conhecimento e Aplicabilidade Técnica</b></h2></li>
-          <input type="radio" name="conhecimento" value="1" required> 1
-          <input type="radio" name="conhecimento" value="2" required> 2
-          <input type="radio" name="conhecimento" value="3" required> 3
-          <input type="radio" name="conhecimento" value="4" required> 4
-          <input type="radio" name="conhecimento" value="5" required> 5
-
-          <li><h2><b>Entrega de Resultados com Valor Agregado</b></h2></li>
-          <input type="radio" name="entrega" value="1" required> 1
-          <input type="radio" name="entrega" value="2" required> 2
-          <input type="radio" name="entrega" value="3" required> 3
-          <input type="radio" name="entrega" value="4" required> 4
-          <input type="radio" name="entrega" value="5" required> 5
-      
-          <li><h2><b>Auto-gestão das Atividades</b></h2></li>
-          <input type="radio" name="autogestao" value="1" required> 1
-          <input type="radio" name="autogestao" value="2" required> 2
-          <input type="radio" name="autogestao" value="3" required> 3
-          <input type="radio" name="autogestao" value="4" required> 4
-          <input type="radio" name="autogestao" value="5" required> 5  
+        <form class="formulario" method="POST" action="{{ url_for('avaliacao_submit') }}">        
+          <h2>• Comunicação e Trabalho em Equipe</h2>
+          <input class="input_radio" type="radio" name="comunicacao" value="1" required><a class="number"> 1</a>
+          <input class="input_radio" type="radio" name="comunicacao" value="2" required><a class="number"> 2</a>
+          <input class="input_radio" type="radio" name="comunicacao" value="3" required><a class="number"> 3</a>
+          <input class="input_radio" type="radio" name="comunicacao" value="4" required><a class="number"> 4</a>
+          <input class="input_radio" type="radio" name="comunicacao" value="5" required><a class="number"> 5</a>
           <br>
-          <br>  
-        </ul>
-    <!-- Legenda da avaliação-->
-<!-- Fim do conteúdo central da página Autoavaliação-->
+          <br>
+          <textarea class="texto_avaliacao" type="text" name="texto_comunicacao" placeholder="Escreva aqui o seu feedback para o integrante." maxlength="100" pattern="[A-Za-z ]+" title="São permitidas apenas letras!"></textarea>
+            
+          <h2>• Engajamento e Pró-atividade</h2>
+          <input class="input_radio" type="radio" name="engajamento" value="1" required><a class="number"> 1</a>
+          <input class="input_radio" type="radio" name="engajamento" value="2" required><a class="number"> 2</a>
+          <input class="input_radio" type="radio" name="engajamento" value="3" required><a class="number"> 3</a>
+          <input class="input_radio" type="radio" name="engajamento" value="4" required><a class="number"> 4</a>
+          <input class="input_radio" type="radio" name="engajamento" value="5" required><a class="number"> 5</a>
+          <br>
+          <br>
+          <textarea class="texto_avaliacao" type="text" name="texto_engajamento" placeholder="Escreva aqui o seu feedback para o integrante." maxlength="100" pattern="[A-Za-z ]+" title="São permitidas apenas letras!"></textarea>
+
+          <h2>• Conhecimento e Aplicabilidade Técnica</h2>
+          <input class="input_radio" type="radio" name="conhecimento" value="1" required><a class="number"> 1</a>
+          <input class="input_radio" type="radio" name="conhecimento" value="2" required><a class="number"> 2</a>
+          <input class="input_radio" type="radio" name="conhecimento" value="3" required><a class="number"> 3</a>
+          <input class="input_radio" type="radio" name="conhecimento" value="4" required><a class="number"> 4</a>
+          <input class="input_radio" type="radio" name="conhecimento" value="5" required><a class="number"> 5</a>
+          <br>
+          <br>
+          <textarea class="texto_avaliacao" type="text" name="texto_conhecimento" placeholder="Escreva aqui o seu feedback para o integrante." maxlength="100" pattern="[A-Za-z ]+" title="São permitidas apenas letras!"></textarea>
+
+          <h2>• Entrega de Resultados com Valor Agregado</h2>
+          <input class="input_radio" type="radio" name="entrega" value="1" required><a class="number"> 1</a>
+          <input class="input_radio" type="radio" name="entrega" value="2" required><a class="number"> 2</a>
+          <input class="input_radio" type="radio" name="entrega" value="3" required><a class="number"> 3</a>
+          <input class="input_radio" type="radio" name="entrega" value="4" required><a class="number"> 4</a>
+          <input class="input_radio" type="radio" name="entrega" value="5" required><a class="number"> 5</a>
+          <br>
+          <br>
+          <textarea class="texto_avaliacao" type="text" name="texto_entrega" placeholder="Escreva aqui o seu feedback para o integrante." maxlength="100" pattern="[A-Za-z ]+" title="São permitidas apenas letras!"></textarea>
+      
+          <h2>• Auto-gestão das Atividades</h2>
+          <input class="input_radio" type="radio" name="autogestao" value="1" required><a class="number"> 1</a>
+          <input class="input_radio" type="radio" name="autogestao" value="2" required><a class="number"> 2</a>
+          <input class="input_radio" type="radio" name="autogestao" value="3" required><a class="number"> 3</a>
+          <input class="input_radio" type="radio" name="autogestao" value="4" required><a class="number"> 4</a>
+          <input class="input_radio" type="radio" name="autogestao" value="5" required><a class="number"> 5</a>
+          <br>
+          <br>
+          <textarea class="texto_avaliacao" type="text" name="texto_autogestao" placeholder="Escreva aqui o seu feedback para o integrante." maxlength="100" pattern="[A-Za-z ]+" title="São permitidas apenas letras!"></textarea>
+
           <button class="bt_confirmar_trc" type="submit">CONFIRMAR</button>
-          <textarea class="texto_avaliacao" type="text" name="texto" placeholder="Escreva aqui o seu feedback para o integrante." maxlength="50" required pattern="[A-Za-z ]+" title="São permitidas apenas letras!"></textarea>
-        </form>
+          </form>
 
 <img class="legenda_trc" src="{{ url_for('static', filename='img/avaliacao/legenda.png') }}" alt="legenda">
 

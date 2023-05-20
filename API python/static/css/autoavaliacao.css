@@ -64,6 +64,14 @@ font-size: 12pt;
 transition: all .2s linear;
 border-bottom: 2px solid #222;}
 
+.link_disable{
+  background-color: #bbbbbb;
+  padding: 20px;
+  font-size: 12pt;
+  transition: all .2s linear;
+  border-bottom: 2px solid #222;
+}
+
 #check:checked ~ .barra{
 transform: translateX(300px);}
 
@@ -89,62 +97,75 @@ body {
   margin: 0;
   padding: 0;
   }
-  .bt_avaliacao_trc{
-    position: absolute;
-    background-color: #5e17eb;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 20px;
-    border-radius: 50px;
-    padding: 15px;
-    left: 0%;
-    top: -50%;
-    color: white;
-  }
-  .bt_confirmar_trc{
-    position: absolute;
-    text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 13px;
-    padding: 10px;
-    border-radius: 50px;
-    background-color: #214E65;
-    border-bottom: 2% solid #222;
-    cursor: pointer;
-    left: 135%;
-    top: 90%;
-    color: #fed196;
-  }
-  
-  .content {
-    position: relative; 
-    margin-top: 20%;
-    margin-left: 10%;
-  }
 
-  .formulario_trc1{
-    display: flex;
-    position: absolute;
-    left: 25%;
-    top: 70%;
-    columns: 2;
-    text-align: left;
-    font-size: 10px;
-  }
-  
-  .legenda_trc{
-    position: absolute;
-    margin:0;
-    height: 60%;
-    top: 24%;
-    left: 122%;
-  }
+.bt_avaliacao_trc{
+  position: absolute;
+  background-color: #5e17eb;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 20px;
+  border-radius: 50px;
+  padding: 15px;
+  left: 80%;
+  margin-top: -50%;
+  color: white;
+}
+.bt_confirmar_trc{
+  position: absolute;
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 220%;
+  padding: 10px;
+  border-radius: 50px;
+  background-color: #214E65;
+  border-bottom: 2% solid #222;
+  cursor: pointer;
+  left: 145%;
+  top: 70%;
+  color: #fed196;
+}
+
+.formulario {
+  margin-top: -30%;
+}
+
+.input_radio{
+  margin-left: 5%;
+}
+
+.number {
+  font-size: 150%;
+}
+
+.content {
+  position: relative; 
+  margin-top: 20%;
+  margin-left: 10%;
+}
+
+.formulario_trc1{
+  display: flex;
+  position: absolute;
+  left: 25%;
+  top: 70%;
+  columns: 2;
+  text-align: left;
+  font-size: 10px;
+}
+
+.legenda_trc{
+  position: absolute;
+  margin:0;
+  width: 80%;
+  height: 100%;
+  margin-top: -30%;
+  left: 127%;
+}
 
 input[type="radio"] {
   width: 20px;
   height: 20px;
   font-size: 40px;
 }
-
 footer{
   position: absolute;
   width: 50%;
@@ -173,43 +194,58 @@ footer{
 h2 {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
+.texto_avaliacao {
+  resize: none;
+  width: 90%;
+  height: 5%;
+  font-size: 120%;
+  text-align: left;
+}  
   /************** Fim do conteúdo central da página */
 
 
- .flash {
-  position: absolute;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  color: rgb(247, 2, 2);
-  font-weight: bolder;
-  font-size: 17px;
-  font-weight: bold;
-  left: 45%;
-  top: -48%;
-  text-align: center;
-  list-style-type: none;
-  width: 100%;
-}
+  .flash {
+    position: absolute;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: rgb(247, 2, 2);
+    font-weight: bolder;
+    font-size: 17px;
+    font-weight: bold;
+    left: 45%;
+    top: -48%;
+    text-align: center;
+    list-style-type: none;
+    width: 100%;
+  }
 
-
-/* RESPONSIVIDADE PARA TELAS MAIORES QUE 1920 X1080 */
+/* RESPONSIVIDADE PARA TELAS MENORES QUE 1920X 1080 */
+/*xr*/
 
 @media screen and (min-width:1100px) {
 
-  .content{
-    margin-top: 19%;
-  }
+.content{
+  margin-top: 23%;
+}
 }
 
 @media screen and (min-width:1200px) {
 
-  .content{
-    margin-top: 17%;
-  }
+.content{
+  margin-top: 17%;
+}
 }
 
 @media screen and (min-width:1300px) {
 
-  .content{
-    margin-top: 17%;
-  }
+.content{
+  margin-top: 15%;
+}
+}
+
+@media screen and (min-width:1700px) {
+
+.content{
+  margin-top: 12%;
+}
 }

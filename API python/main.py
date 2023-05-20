@@ -665,7 +665,7 @@ def controle_geral():
 @app.route("/pre_devolutiva")
 @login_required
 def pre_devolutiva():
-  return render_template('pre_devolutiva_avaliacao.html', nomeUsuario=session['nomeUsuario'])
+  return render_template('pre_devolutiva_avaliacao.html', avaliacao_check=session['avaliacao'], nomeUsuario=session['nomeUsuario'])
 
 @app.route("/pre_devolutiva_submit", methods=["POST"])
 @login_required
@@ -707,7 +707,7 @@ def pre_devolutiva_submit():
   except:
     autoavaliacoes=[]
 
-  return render_template('devolutiva_avaliacao.html', nomeUsuario=session['nomeUsuario'], sprint=sprint, avgs=avgs, avaliacoes=avaliacoes, autoavaliacoes=autoavaliacoes, email=session['email'])
+  return render_template('devolutiva_avaliacao.html', avaliacao_check=session['avaliacao'], nomeUsuario=session['nomeUsuario'], sprint=sprint, avgs=avgs, avaliacoes=avaliacoes, autoavaliacoes=autoavaliacoes, email=session['email'])
 
 
 @app.route("/pre_devolutiva_submit_admin", methods=["POST"])
@@ -975,11 +975,15 @@ def avaliacao_submit():
   integrante = request.form.get('integrante')
   sprint = request.form.get('sprint')
   comunicacao = request.form.get('comunicacao')
+  texto_comunicacao = request.form.get('texto_comunicacao')
   engajamento = request.form.get('engajamento')
+  texto_engajamento = request.form.get('texto_engajamento')
   entrega = request.form.get('entrega')
+  texto_entrega = request.form.get('texto_entrega')
   conhecimento = request.form.get('conhecimento')
+  texto_conhecimento = request.form.get('texto_conhecimento')
   autogestao = request.form.get('autogestao')
-  texto = request.form.get('texto')
+  texto_autogestao = request.form.get('texto_autogestao')
 
   with open('data/avaliacao.json', 'r') as f:
     data = json.load(f)
@@ -992,11 +996,15 @@ def avaliacao_submit():
     "integrante": integrante,
     "sprint": sprint,
     "comunicacao": int(comunicacao),
+    "texto_comunicacao": texto_comunicacao,
     "engajamento": int(engajamento),
+    "texto_engajamento": texto_engajamento,
     "conhecimento": int(conhecimento),
+    "texto_conhecimento": texto_conhecimento,
     "entrega": int(entrega),
+    "texto_entrega": texto_entrega,
     "autogestao": int(autogestao),
-    "texto": texto
+    "texto_autogestao": texto_autogestao
   }
 
   data.append(avaliacao_dict)

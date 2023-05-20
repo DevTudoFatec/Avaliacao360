@@ -15,13 +15,16 @@
     
     <div class="barra">
         <nav class="menu_lateral">
-          <a href="/menu_integrante"> <div class="link">MENU PRINCIPAL</div></a>
-          <a href="/autoavaliacao"> <div class="link">AUTO AVALIAÇÃO</div></a>
-          <a href="/avaliacao"> <div class="link">AVALIAÇÃO DE INTEGRANTES</div></a>
-          <a href="/pre_devolutiva"> <div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
-          <a href="/"> <div class="link">SAIR ➔ </div></a>
+            <a href="/menu_integrante"> <div class="link">MENU PRINCIPAL</div></a>
+            {% if avaliacao_check %}
+                <a href="/avaliacao"><div class="link">AVALIAÇÃO DE INTEGRANTES</div></a>
+            {% else %}
+                <div class="link_disable">AVALIAÇÃO DE INTEGRANTES</div>
+            {% endif %}
+            <a href="/pre_devolutiva"> <div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
+            <a href="/"> <div class="link">SAIR ➔ </div></a>
         </nav>
-    </div> 
+    </div>
     <!--- Fim do botão de menu -->
     
     <!-- Início do conteúdo do cabeçalho -->
