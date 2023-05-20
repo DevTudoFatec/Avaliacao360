@@ -1,0 +1,247 @@
+/* CABEÇALHO PADRONIZADO */
+header{
+  display: flex;
+  align-items: center;
+  color: #89cfc9;
+  background-color: #011E36;
+  justify-content: space-between;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: small;
+  padding: 2%;}
+
+#logo_avaliação{
+margin-left: 40%;
+}
+/* FIM CABEÇALHO PADRONIZADO */
+
+@import url('https://fonts.googleapis.com/css2?family=Vina+Sans&display=swap');
+
+/* Botão de menu */
+.bt{
+padding: 6px, 6px, 6px;
+text-decoration: none;
+font-size: 15px;
+color: #89cfc9;
+transition: 0.3s;
+z-index: 1;
+top: 0;
+background-color: #111;}
+
+#check{
+display: none;}
+
+#icone{
+left: 0;
+cursor: pointer;
+padding: 20px;
+position: absolute;
+z-index: 1;}
+
+.barra{
+top: 0;
+background-color: #333;
+height: 100px;
+width: 300px;
+position: absolute;
+transition: all .2s linear;
+left: -300px;
+}
+
+.menu_lateral{
+width: 100%;
+position: absolute;
+top: 60px;
+color:#fed196;}
+
+nav a{
+text-decoration: none;
+color: #fed196;}
+
+.link{
+background-color: #494949;
+padding: 20px;
+font-size: 12pt;
+transition: all .2s linear;
+border-bottom: 2px solid #222;
+text-align: center;
+}
+
+#check:checked ~ .barra{
+transform: translateX(300px);}
+
+#check:checked ~ .barra nav{
+margin-top: 0;
+opacity: 1;
+transition-delay: .2s;}
+
+.flashes {
+position: absolute;
+color: black;
+font-size: 20px;
+font-weight: bold;
+left: 44%;
+margin-top: -35px;
+text-align: center;}
+ 
+/*fim do botão menu*/
+
+/*conteudo central da pagina*/
+
+body {
+    background-color: #eeee;
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.titulos {
+    display: flex;
+    padding: 20px;
+    justify-content:space-evenly;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#bt_avaliar {
+    background-color: #5e17eb;
+    color: azure;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 50px;
+    width: 250px;
+    height: 25px;
+    margin-right: 4%;
+}
+
+
+
+ul {
+    display: flex;
+    justify-content: space-around;
+    text-align:center;
+
+}
+
+h4, campo-feedback {
+    height: 200px;
+    width: 40%;
+    background-color: #89CFC9;
+    text-align:center;
+    margin-left: 02%;
+    border-radius: 0%;
+} 
+
+h2 {
+    margin: 30px;
+}
+
+
+.img_inicial {
+    font-family: 'Times New Roman', Times, serif;
+    color: hsl(28, 21%, 84%);
+    font-weight: 20px;
+    font-size: 20px;
+    display: inline;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content:right;
+    width:300px;
+    min-height: 45px;
+    border-radius: 50px;
+    object-fit: cover;
+    padding: 30px, 30px, 60px, 30px;
+  }
+
+/*conteudo final da pagina*/
+
+
+
+#legenda_mcs {
+    width: 300px;
+    margin-right: auto;
+}
+
+.button {
+    right: 45%;
+    top: 63%;
+    display: flex;
+    margin-left: 100px;
+    text-align:center;
+    background-color: #214E65;
+    border-radius: 15px;
+    padding: 10px;
+    color:#FED196;
+    margin: 10px 1250px;
+    font-size: 15px;
+    cursor: pointer; 
+}
+
+.rodape-img {   
+  height: 100%;
+  width: auto;
+}
+
+.questao {
+  margin-top: 15%;
+  margin-bottom: 10%;
+
+ }
+
+ footer{
+  position: absolute;
+  width: 50%;
+  top: 300%;
+  right: 90%;
+}
+
+.formulario_avaliacao {
+  position: absolute;
+  top: 38%;
+  left: 44%;
+}
+
+.bt_confirmar_trc{
+  position: absolute;
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 13px;
+  padding: 10px;
+  border-radius: 50px;
+  background-color: #214E65;
+  border-bottom: 2% solid #222;
+  cursor: pointer;
+  left: 14%;
+  top: 120%;
+  color: #fed196;
+}
+/*responsividade para telas menores que 1920X 1080*/
+/*xr*/
+
+@media screen and (min-width:1100px) {
+  .content {
+    left: 3%;
+    margin-top:19%;
+  }
+}
+
+@media screen and (min-width:1200px){
+  
+  .content {
+    left: 3%;
+    margin-top:17%;
+  }
+  
+}
+
+@media screen and (min-width:1300px) {
+  
+  .content {
+    left:3%;
+    margin-top:17%;
+  }
+}
+  
+    
+ 

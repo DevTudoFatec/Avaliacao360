@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Devolutiva de Avaliação</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/devolutiva_admin.css') }}">
+    </head>
+        <!--- Início do botão de menu -->
+        <header>
+            <!-- Botão para abrir o menu lateral -->
+            <input type="checkbox" id="check" class="bt">
+            <label id="icone" for="check" class="bt"> ☰ </label>
+        
+        <div class="barra">
+            <nav class="menu_lateral">
+                <a href="/menu_admin"> <div class="link">MENU PRINCIPAL</div></a>
+                <a href="/controle_turmas"> <div class="link">CONTROLE DE TURMAS/TIMES</div></a>
+                <a href="/controle_geral"> <div class="link">CONTROLE DE INTEGRANTES</div></a>
+                <a href="/controle_sprints"> <div class="link">CONTROLE DE SPRINTS</div></a>
+                <a href="/pre_devolutiva_admin"> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
+                <a href="/dashboards_operacionais"> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
+                <a href="/dashboards_gerenciais"> <div class="link">DASHBOARDS GERENCIAIS</div></a>
+                <a href="/"> <div class="link">SAIR ➔ </div></a>
+            </nav>
+        </div>
+        <!--- Fim do botão de menu -->
+        
+        <!-- Início do conteúdo do cabeçalho -->
+          <img id="logo_avaliação" src="{{ url_for('static', filename='img/avaliacao/Logo copy.png') }}" alt="Logo da plataforma" width="300">
+          <p><b>Usuário: {{ nomeUsuario }}</b></p>
+        <!-- fim do conteúdo do cabeçalho -->
+        </header>
+        <!--fim do botão de menu-->
+
+        <!--CONTEUDO CENTRAL DA PAGINA DE AVALIAÇÃO-->
+        
+        <div class="titulos">
+        <h3 id="bt_avaliar">Devolutiva de Avaliação</h3>
+        <h2 class="sprint">Sprint: {{ sprint }}</h2>     
+        <h2 class="sprint">Integrante: {{ int_infos }}</h2>  
+        </div>
+            <table class="all_data">
+                <tr>
+                    <td>
+                        <h3>Comunicação e Trabalho em Equipe:</h3>
+                        <p>Autoavaliação:
+                            {% for autoavaliacao in autoavaliacoes %} 
+                                {% if autoavaliacao['sprint'] == sprint and autoavaliacao['email'] == integrante%}
+                                    {{ autoavaliacao['comunicacao'] }}</p>                             
+                                {% endif %}
+                            {% endfor %}
+                        <p>Avaliadores: {{ avgs[0] }}</p>
+                    </td>
+                    <td>
+                        <h3>Engajamento e Pró-atividade:</h3>
+                        <p>Autoavaliação:
+                        {% for autoavaliacao in autoavaliacoes %} 
+                            {% if autoavaliacao['sprint'] == sprint and autoavaliacao['email'] == integrante%}
+                                {{ autoavaliacao['engajamento'] }}</p>                              
+                            {% endif %}
+                        {% endfor %}
+                        <p>Avaliadores: {{ avgs[1] }}</p>
+                    </td>
+                    <td>
+                        <h3>Entrega de Resultados com valor Agregado:</h3>
+                        <p>Autoavaliação:
+                        {% for autoavaliacao in autoavaliacoes %} 
+                            {% if autoavaliacao['sprint'] == sprint and autoavaliacao['email'] == integrante%}
+                                {{ autoavaliacao['entrega'] }} </p>                              
+                            {% endif %}
+                        {% endfor %}
+                        <p>Avaliadores: {{ avgs[3] }}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3>Conhecimento e Aplicabilidade Técnica:</h3>
+                        <p>Autoavaliação:
+                        {% for autoavaliacao in autoavaliacoes %} 
+                            {% if autoavaliacao['sprint'] == sprint and autoavaliacao['email'] == integrante%}
+                                {{ autoavaliacao['conhecimento'] }}</p>                              
+                            {% endif %}
+                        {% endfor %}
+                        <p>Avaliadores: {{ avgs[2] }}</p>
+                    </td>
+                    <td>
+                        <h3>Auto-gestão das Atividades:</h3>
+                        <p>Autoavaliação:
+                        {% for autoavaliacao in autoavaliacoes %} 
+                            {% if autoavaliacao['sprint'] == sprint and autoavaliacao['email'] == integrante%}
+                                {{ autoavaliacao['autogestao'] }}</p>                            
+                            {% endif %}
+                        {% endfor %}
+                        <p>Avaliadores: {{ avgs[4] }}</p>
+                    </td>
+                </tr>
+            </table>                      
+      
+        <h2>Feedbacks Recebidos:</h2>
+        <div class="container">
+            <table class="textos">
+                <tr>
+                    <td>
+                        {% for avaliacao in avaliacoes %} 
+                            {% if avaliacao['sprint'] == sprint and avaliacao['integrante'] == email%}
+                                • {{ avaliacao['texto'] }}<br>                            
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+<br/>
+        <br/>
+
+        <img class="legenda" src="{{ url_for('static', filename='img/avaliacao/Legenda.png') }}">  
+                
+        <!--final da pagina-->     
+    </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Devolutiva de Avaliação</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_devolutiva_avaliacao.css') }}">
+    </head>
+
+    <header>
+        <!-- Botão para abrir o menu lateral -->
+        <input type="checkbox" id="check" class="bt">
+        <label id="icone" for="check" class="bt"> ☰ </label>
+    
+    <div class="barra">
+        <nav class="menu_lateral">
+          <a href="/menu_integrante"> <div class="link">MENU PRINCIPAL</div></a>
+          <a href="/autoavaliacao"> <div class="link">AUTO AVALIAÇÃO</div></a>
+          <a href="/avaliacao"> <div class="link">AVALIAÇÃO DE INTEGRANTES</div></a>
+          <a href="/pre_devolutiva"> <div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
+          <a href="/"> <div class="link">SAIR ➔ </div></a>
+        </nav>
+    </div> 
+    <!--- Fim do botão de menu -->
+    
+    <!-- Início do conteúdo do cabeçalho -->
+      <img id="logo_avaliação" src="{{ url_for('static', filename='img/avaliacao/Logo copy.png') }}" alt="Logo da plataforma" width="300">
+      <p><b>Usuário: {{ nomeUsuario }}</b></p>
+    <!-- fim do conteúdo do cabeçalho -->
+    </header>
+        <!--fim do botão de menu-->
+
+        <!--CONTEUDO CENTRAL DA PAGINA DE AVALIAÇÃO-->
+    <body>
+        <div class="titulos">
+        <h3 id="bt_avaliar">Devolutiva de Avaliação</h3>
+            <form class="formulario_avaliacao" method="POST" action="{{ url_for('pre_devolutiva_submit') }}">
+                <h3>Selecione a Sprint:</h3>      
+                <input type="radio" name="sprint" value="1" required>1
+                <input type="radio" name="sprint" value="2" required>2
+                <input type="radio" name="sprint" value="3" required>3
+                <input type="radio" name="sprint" value="4" required>4
+                <br>
+                <br>        
+                <button class="bt_confirmar_trc" type="submit">CONFIRMAR</button>
+            <form>          
+    </body>
+
+    <footer>
+        <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
+    </footer>
+</html>

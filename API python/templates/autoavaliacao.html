@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UFT-8"/> <!--extensão para caracteres especiais-->
+  <title> Autoavaliação </title> 
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/autoavaliacao.css') }}">
+</head>
+<!--- Início do botão de menu -->
+<header>
+  <!-- Botão para abrir o menu lateral -->
+  <input type="checkbox" id="check" class="bt">
+  <label id="icone" for="check" class="bt"> ☰ </label>
+
+<div class="barra">
+  <nav class="menu_lateral">
+    <a href="/menu_integrante"> <div class="link">MENU PRINCIPAL</div></a>
+    <a href="/autoavaliacao"> <div class="link">AUTO AVALIAÇÃO</div></a>
+    <a href="/avaliacao"> <div class="link">AVALIAÇÃO DE INTEGRANTES</div></a>
+    <a href="/pre_devolutiva"> <div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
+    <a href="/"> <div class="link">SAIR ➔ </div></a>
+  </nav>
+</div> 
+<!--- Fim do botão de menu -->
+
+<!-- Início do conteúdo do cabeçalho -->
+<img id="logo_avaliação" src="{{ url_for('static', filename='img/avaliacao/Logo copy.png') }}" alt="Logo da plataforma" width="300">
+<p><b>Usuário: {{ nomeUsuario }}</b></p>
+<!-- fim do conteúdo do cabeçalho -->
+</header>
+<!--- Fim do botão de menu -->
+<!-- Conteúdo central da página Autoavaliação-->
+  <div class="content">
+      <div class="formulario_trc1">
+        <h1 class="bt_avaliacao_trc">AUTOAVALIAÇÃO</h1>
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+              <ul class="flash">
+              {% for message in messages %}
+                  <li>{{ message }}</li>
+              {% endfor %}
+              </ul>
+          {% endif %}
+          {% endwith %}
+        <form method="POST" action="{{ url_for('autoavaliacao_submit') }}"> 
+        <ul>
+        <div class="Sprint_select">
+          <li><h2><b>Sprint</b></h2></li>
+          <input type="radio" name="sprint" value="1" required> 1
+          <input type="radio" name="sprint" value="2" required> 2
+          <input type="radio" name="sprint" value="3" required> 3
+          <input type="radio" name="sprint" value="4" required> 4
+        </div>
+        
+          <li><h2><b>Comunicação e Trabalho em Equipe</b></h2></li>
+          <input type="radio" name="comunicacao" value="1" required> 1
+          <input type="radio" name="comunicacao" value="2" required> 2
+          <input type="radio" name="comunicacao" value="3" required> 3
+          <input type="radio" name="comunicacao" value="4" required> 4
+          <input type="radio" name="comunicacao" value="5" required> 5
+            
+          <li><h2><b>Engajamento e Pró-atividade</b></h2></li>
+          <input type="radio" name="engajamento" value="1" required> 1
+          <input type="radio" name="engajamento" value="2" required> 2
+          <input type="radio" name="engajamento" value="3" required> 3
+          <input type="radio" name="engajamento" value="4" required> 4
+          <input type="radio" name="engajamento" value="5" required> 5
+        </ul>
+        <ul>
+          <li><h2><b>Conhecimento e Aplicabilidade Técnica</b></h2></li>
+          <input type="radio" name="conhecimento" value="1" required> 1
+          <input type="radio" name="conhecimento" value="2" required> 2
+          <input type="radio" name="conhecimento" value="3" required> 3
+          <input type="radio" name="conhecimento" value="4" required> 4
+          <input type="radio" name="conhecimento" value="5" required> 5
+
+          <li><h2><b>Entrega de Resultados com Valor Agregado</b></h2></li>
+          <input type="radio" name="entrega" value="1" required> 1
+          <input type="radio" name="entrega" value="2" required> 2
+          <input type="radio" name="entrega" value="3" required> 3
+          <input type="radio" name="entrega" value="4" required> 4
+          <input type="radio" name="entrega" value="5" required> 5
+      
+          <li><h2><b>Auto-gestão das Atividades</b></h2></li>
+          <input type="radio" name="autogestao" value="1" required> 1
+          <input type="radio" name="autogestao" value="2" required> 2
+          <input type="radio" name="autogestao" value="3" required> 3
+          <input type="radio" name="autogestao" value="4" required> 4
+          <input type="radio" name="autogestao" value="5" required> 5  
+          <br>
+          <br>  
+        </ul>
+    <!-- Legenda da avaliação-->
+<!-- Fim do conteúdo central da página Autoavaliação-->
+          <button class="bt_confirmar_trc" type="submit">CONFIRMAR</button>        
+        </form>
+
+<img class="legenda_trc" src="{{ url_for('static', filename='img/autoavaliacao/legenda.png') }}" alt="legenda">
+
+<footer>
+  <img class="rodape-img" src="{{ url_for('static', filename='img/autoavaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
+</footer>
+
+</div>
+</div>
+</label>
+<!--- Início do rodapé da página-->
+<!--- Fim do conteúdo do rodapé da página-->
+</body>  
+</html>

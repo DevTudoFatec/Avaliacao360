@@ -1,0 +1,66 @@
+[
+  {
+    "index": 0,
+    "nome": "Admin",
+    "email": "admin",
+    "turma": "bd01",
+    "time": 0,
+    "senha": "$2b$12$KWEV7w/I/XRW66GtGe5Dl.us2TKUr8z2WjJ2ts6FNQNHwyknfTAP6",
+    "perfil": 2,
+    "acessos": 0,
+    "avaliacoes": [
+      [
+        1,
+        "2023-02-08",
+        "2023-02-10"
+      ],
+      [
+        2,
+        "2023-02-15",
+        "2023-02-17"
+      ],
+      [
+        3,
+        "2023-02-22",
+        "2023-02-24"
+      ],
+      [
+        4,
+        "2023-03-01",
+        "2023-03-03"
+      ]
+    ]
+  },
+  {
+    "index": 1,
+    "nome": "Joao",
+    "email": "joao",
+    "turma": "bd01",
+    "time": 1,
+    "senha": "$2b$12$kaIgvUpN5obDHjO7evxiz.4l6hIssyB8CyMeQIA6IBTgiLyE4xhzu",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "2023-02-08",
+        "2023-02-10"
+      ],
+      [
+        2,
+        "2023-02-15",
+        "2023-02-17"
+      ],
+      [
+        3,
+        "2023-02-22",
+        "2023-02-24"
+      ],
+      [
+        4,
+        "2023-03-01",
+        "2023-03-03"
+      ]
+    ]
+  }
+]

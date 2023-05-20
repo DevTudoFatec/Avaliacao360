@@ -1,0 +1,11 @@
+[
+  {
+    "index": 0,
+    "turma": "bd01",
+    "nome": "API",
+    "sprints": 4,
+    "duracao": 7,
+    "inicio": "2023-02-01",
+    "fim": "2023-02-28"
+  }
+]
