@@ -4,6 +4,13 @@
         <meta charset="UFT-8"/>
         <title>Controle Sprints</title> 
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/controle_sprints.css') }}">
+        {% if darkmode%}
+            <style>
+            h3 {
+                color: white;
+            }
+            </style>
+        {% endif %}
     </head>
 
     <body {% if darkmode%} style="background-color: #494949;" {% endif %}>

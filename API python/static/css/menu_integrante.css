@@ -139,3 +139,10 @@ nav a{
     color: #fed196;
     margin-top: 5%;
 }
+
+
+.darkmode_switch {
+    position: absolute;
+    right: 5%;
+    top: 30%;
+}

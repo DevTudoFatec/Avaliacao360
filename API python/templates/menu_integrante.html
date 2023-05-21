@@ -20,11 +20,6 @@
                     <div class="link_disable">AVALIAÇÃO DE INTEGRANTES</div>
                 {% endif %}
                 <a href="/pre_devolutiva"><div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
-                {% if darkmode %}
-                    <a href="/darkmode_off"><div class="link">DARKMODE OFF</div></a>     
-                {% else %}           
-                    <a href="/darkmode_on"><div class="link">DARKMODE ON</div></a>
-                {% endif %}
                 <a href="/"> <div class="link">SAIR ➔ </div></a>
             </nav>
         </div>
@@ -34,6 +29,14 @@
         </header>
 
         <img id="details_integrante" src="{{ url_for('static', filename='img/menu_integrante/Logo_API_Menu_integrante.png') }}" width="300">
+
+
+        {% if darkmode %}
+            <a href="/darkmode_off"><img class="darkmode_switch" src="{{ url_for('static', filename='img/icones/darkmode.png') }}" width="100"></a>
+        {% else %}           
+            <a href="/darkmode_on"><img class="darkmode_switch" src="{{ url_for('static', filename='img/icones/lightmode.png') }}" width="100"></a>
+        {% endif %}
+
         {% if primeiro_acesso %}
             <nav class="opções_menu">
                 <h1>Selecione o seu time:</h1>

@@ -152,6 +152,7 @@ header{
   }
   
   .legenda_trc{
+    background-color: #EFEFEF;
     position: absolute;
     margin:0;
     height: 60%;
@@ -162,8 +163,8 @@ header{
   input[type="radio"] {
     width: 20px;
     height: 20px;
-    font-size: 40px;
   }
+  
   footer{
     position: absolute;
     width: 50%;

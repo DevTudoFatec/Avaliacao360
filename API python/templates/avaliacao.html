@@ -5,6 +5,21 @@
   <meta charset="UFT-8"/> <!--extensão para caracteres especiais-->
   <title> Avaliação </title> 
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/avaliacao.css') }}">
+  {% if darkmode%}
+  <style>
+    h2 {
+      color: white;
+    }
+
+    .number {
+      color: white;
+    }
+    .texto_avaliacao {
+      background-color: rgb(202, 202, 202);
+    }
+    
+  </style>
+  {% endif %}
 </head>
 <!--- Início do botão de menu -->
 <body {% if darkmode%} style="background-color: #494949;" {% endif %}>

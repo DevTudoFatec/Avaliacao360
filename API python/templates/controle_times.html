@@ -4,6 +4,13 @@
         <meta charset="UFT-8"/>
         <title>Controle Geral</title> 
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/controle_turmas.css') }}">
+        {% if darkmode%}
+            <style>
+            .time_info {
+                color: white;
+            }
+            </style>
+        {% endif %}
     </head>
 
     <body {% if darkmode%} style="background-color: #494949;" {% endif %}>

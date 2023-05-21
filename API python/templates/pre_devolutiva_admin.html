@@ -6,6 +6,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> Devolutiva de Avaliação</title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_devolutiva_admin.css') }}">
+        {% if darkmode%}
+            <style>
+            h3 {
+                color: white;
+            }
+
+            .number {
+                color: white;
+            }
+            </style>
+        {% endif %}
     </head>
     <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
     
@@ -41,10 +52,10 @@
         <h3 id="bt_avaliar">Devolutiva de Avaliação</h3>
             <form class="formulario_avaliacao" method="POST" action="{{ url_for('pre_devolutiva_submit_admin') }}">
                 <h3>Selecione a Sprint:</h3>      
-                <input type="radio" class="sprint" name="sprint" value="1" required>1
-                <input type="radio" class="sprint" name="sprint" value="2" required>2
-                <input type="radio" class="sprint" name="sprint" value="3" required>3
-                <input type="radio" class="sprint" name="sprint" value="4" required>4
+                <input type="radio" class="sprint" name="sprint" value="1" required><a class="number"> 1</a>
+                <input type="radio" class="sprint" name="sprint" value="2" required><a class="number"> 2</a>
+                <input type="radio" class="sprint" name="sprint" value="3" required><a class="number"> 3</a>
+                <input type="radio" class="sprint" name="sprint" value="4" required><a class="number"> 4</a>
                 <br>
                 <br>        
                 <button class="bt_confirmar_trc" type="submit">CONFIRMAR</button>
