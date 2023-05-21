@@ -28,7 +28,7 @@ def admin_required(route_function):
 def team_required(route_function):
     @wraps(route_function)
     def decorated_function(*args, **kwargs):
-        if session['time'] == 0:
+        if session['time'] == 0 or session['acessos'] == 0:
             return redirect(url_for('menu_integrante'))
         return route_function(*args, **kwargs)
     return decorated_function
