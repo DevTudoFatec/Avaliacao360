@@ -33,6 +33,25 @@ def team_required(route_function):
         return route_function(*args, **kwargs)
     return decorated_function
 
+@app.route("/darkmode_on")
+def darkmode_on():
+
+  session['darkmode'] = True
+
+  if session['perfil'] == 1:
+    return redirect(url_for('menu_integrante'))
+  else:
+    return redirect(url_for('menu_admin'))
+
+@app.route("/darkmode_off")
+def darkmode_off():
+
+  session['darkmode'] = False
+
+  if session['perfil'] == 1:
+    return redirect(url_for('menu_integrante'))
+  else:
+    return redirect(url_for('menu_admin'))
 
 @app.route("/")
 def home():
@@ -48,7 +67,7 @@ def home():
 @login_required
 @admin_required
 def menu_admin():
-  return render_template('menu_admin.html', nomeUsuario=session['nomeUsuario'])
+  return render_template('menu_admin.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 @app.route("/menu_integrante", methods=["GET", "POST"])
 @login_required
@@ -86,10 +105,10 @@ def menu_integrante():
           times_turma.append(time)
     except:
       times_turma = []     
-    return render_template('menu_integrante.html', primeiro_acesso=primeiro_acesso, times=times_turma, nomeUsuario=session['nomeUsuario'])
+    return render_template('menu_integrante.html', primeiro_acesso=primeiro_acesso, times=times_turma, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
       
   else:
-    return render_template('menu_integrante.html', nomeUsuario=session['nomeUsuario'], sprint_index=session['sprint'], avaliacao_check=session['avaliacao'])
+    return render_template('menu_integrante.html', nomeUsuario=session['nomeUsuario'], sprint_index=session['sprint'], avaliacao_check=session['avaliacao'], darkmode=session['darkmode'])
 
 @app.route("/cadastro")
 def cadastro():
@@ -99,7 +118,7 @@ def cadastro():
 @login_required
 @team_required
 def autoavaliacao():
-  return render_template('autoavaliacao.html', nomeUsuario=session['nomeUsuario'])
+  return render_template('autoavaliacao.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 @app.route("/controle_sprints")
 def controle_sprints():
@@ -130,7 +149,7 @@ def controle_sprints():
   turmas_with_projeto = [projeto["turma"] for projeto in projetos]
   turmas_select = [turma for turma in turmas if turma["codigo"] not in turmas_with_projeto]
 
-  return render_template('controle_sprints.html', turmas_select=turmas_select, users=users, turmas=turmas, times=times, projetos=projetos, nomeUsuario=session['nomeUsuario'])
+  return render_template('controle_sprints.html', turmas_select=turmas_select, users=users, turmas=turmas, times=times, projetos=projetos, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 @app.route("/criar_projeto", methods=["POST"])
 @login_required
@@ -305,7 +324,7 @@ def update_projetos():
 
         return redirect(url_for('controle_sprints'))
 
-    return render_template('controle_sprints.html', index=index, editing=editing, users=users, turmas=turmas, projetos=projetos, nomeUsuario=session['nomeUsuario'])
+    return render_template('controle_sprints.html', index=index, editing=editing, users=users, turmas=turmas, projetos=projetos, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 
 @app.route("/controle_turmas", methods=["GET", "POST"])
@@ -330,7 +349,7 @@ def controle_turmas():
   except:
     times=[]
 
-  return render_template('controle_turmas.html', users=users, turmas=turmas, times=times, nomeUsuario=session['nomeUsuario'])
+  return render_template('controle_turmas.html', users=users, turmas=turmas, times=times, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 @app.route("/controle_times", methods=["GET", "POST"])
 @login_required
@@ -354,7 +373,7 @@ def controle_times():
   except:
     times=[]
 
-  return render_template('controle_times.html', users=users, turmas=turmas, times=times, nomeUsuario=session['nomeUsuario'])
+  return render_template('controle_times.html', users=users, turmas=turmas, times=times, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 @app.route("/criar_turma", methods=["POST"])
 @login_required
@@ -495,7 +514,7 @@ def update_turmas():
           
         return redirect(url_for('controle_turmas'))
 
-    return render_template('controle_turmas.html', page=page, users=users, turmas=turmas, times=times, editing=editing, index=index)
+    return render_template('controle_turmas.html', page=page, users=users, turmas=turmas, times=times, editing=editing, index=index, darkmode=session['darkmode'])
 
 @app.route("/update_times", methods=["POST"])
 @login_required
@@ -563,7 +582,7 @@ def update_times():
           
         return redirect(url_for('controle_times'))
 
-    return render_template('controle_times.html', page=page, users=users, turmas=turmas, times=times, editing=editing, index=index)
+    return render_template('controle_times.html', page=page, users=users, turmas=turmas, times=times, editing=editing, index=index, darkmode=session['darkmode'])
 
 
 @app.route("/update_geral", methods=["POST"])
@@ -633,7 +652,7 @@ def update_geral():
 
         return redirect(url_for('controle_geral'))        
 
-    return render_template('controle_geral.html', users=users, turmas=turmas, times=times, editing=editing, editing_time=editing_time, editing_perfil=editing_perfil, index=index)
+    return render_template('controle_geral.html', users=users, turmas=turmas, times=times, editing=editing, editing_time=editing_time, editing_perfil=editing_perfil, index=index, darkmode=session['darkmode'])
 
 
 @app.route("/controle_geral")
@@ -660,12 +679,12 @@ def controle_geral():
 
     
 
-  return render_template('controle_geral.html', times=times, turmas=turmas, users=users, nomeUsuario=session['nomeUsuario'])
+  return render_template('controle_geral.html', times=times, turmas=turmas, users=users, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 @app.route("/pre_devolutiva")
 @login_required
 def pre_devolutiva():
-  return render_template('pre_devolutiva_avaliacao.html', avaliacao_check=session['avaliacao'], nomeUsuario=session['nomeUsuario'])
+  return render_template('pre_devolutiva_avaliacao.html', avaliacao_check=session['avaliacao'], nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 @app.route("/pre_devolutiva_submit", methods=["POST"])
 @login_required
@@ -707,7 +726,7 @@ def pre_devolutiva_submit():
   except:
     autoavaliacoes=[]
 
-  return render_template('devolutiva_avaliacao.html', avaliacao_check=session['avaliacao'], nomeUsuario=session['nomeUsuario'], sprint=sprint, avgs=avgs, avaliacoes=avaliacoes, autoavaliacoes=autoavaliacoes, email=session['email'])
+  return render_template('devolutiva_avaliacao.html', avaliacao_check=session['avaliacao'], nomeUsuario=session['nomeUsuario'], sprint=sprint, avgs=avgs, avaliacoes=avaliacoes, autoavaliacoes=autoavaliacoes, email=session['email'], darkmode=session['darkmode'])
 
 
 @app.route("/pre_devolutiva_submit_admin", methods=["POST"])
@@ -763,13 +782,13 @@ def pre_devolutiva_submit_admin():
   except:
     autoavaliacoes=[]
 
-  return render_template('devolutiva_admin.html', nomeUsuario=session['nomeUsuario'], sprint=sprint, int_infos = int_infos, integrante=integrante, avgs=avgs, avaliacoes=avaliacoes, autoavaliacoes=autoavaliacoes, email=session['email'])
+  return render_template('devolutiva_admin.html', nomeUsuario=session['nomeUsuario'], sprint=sprint, int_infos = int_infos, integrante=integrante, avgs=avgs, avaliacoes=avaliacoes, autoavaliacoes=autoavaliacoes, email=session['email'], darkmode=session['darkmode'])
 
 @app.route("/devolutiva_admin")
 @login_required
 @admin_required
 def devolutiva_admin():
-  return render_template('devolutiva_admin.html', nomeUsuario=session['nomeUsuario'])
+  return render_template('devolutiva_admin.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 @app.route("/pre_devolutiva_admin")
 @login_required
@@ -781,19 +800,19 @@ def pre_devolutiva_admin():
   except:
     users=[]
 
-  return render_template('pre_devolutiva_admin.html', users=users, nomeUsuario=session['nomeUsuario'])
+  return render_template('pre_devolutiva_admin.html', users=users, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 @app.route("/dashboards_gerenciais")
 @login_required
 @admin_required
 def dashboards_gerenciais():
-  return render_template('dashboards_gerenciais.html', nomeUsuario=session['nomeUsuario'])
+  return render_template('dashboards_gerenciais.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 @app.route("/dashboards_operacionais")
 @login_required
 @admin_required
 def dashboards_operacionais():
-  return render_template('dashboards_operacionais.html', nomeUsuario=session['nomeUsuario'])
+  return render_template('dashboards_operacionais.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 @app.route("/avaliacao")
 @login_required
@@ -805,7 +824,7 @@ def avaliacao():
   except:
     users=[]
 
-  return render_template('avaliacao.html', users=users, nomeUsuario=session['nomeUsuario'], emailUsuario=session['email'])
+  return render_template('avaliacao.html', users=users, nomeUsuario=session['nomeUsuario'], emailUsuario=session['email'], darkmode=session['darkmode'])
 
 
 ## Validação login
@@ -828,6 +847,8 @@ def login():
 
         session['avaliacao'] = False
         session['sprint'] = 'None'
+
+        session['darkmode'] = False
 
         try:
           avaliacoes = item['avaliacoes']

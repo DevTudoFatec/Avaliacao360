@@ -2,11 +2,11 @@
 <html>
     <head>
         <meta charset="UFT-8"/>
-        <title>Opções Ususário - Avaliação 360º PBLTeX</title>
+        <title>Opções Usuário - Avaliação 360º PBLTeX</title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/menu_integrante.css') }}">
     </head>
 
-    <body>
+    <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
         <header> 
         {% if not primeiro_acesso %}
             <input type="checkbox" id="check" class="bt">
@@ -19,7 +19,12 @@
                 {% else %}
                     <div class="link_disable">AVALIAÇÃO DE INTEGRANTES</div>
                 {% endif %}
-                <a href="/pre_devolutiva"> <div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
+                <a href="/pre_devolutiva"><div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
+                {% if darkmode %}
+                    <a href="/darkmode_off"><div class="link">DARKMODE OFF</div></a>     
+                {% else %}           
+                    <a href="/darkmode_on"><div class="link">DARKMODE ON</div></a>
+                {% endif %}
                 <a href="/"> <div class="link">SAIR ➔ </div></a>
             </nav>
         </div>

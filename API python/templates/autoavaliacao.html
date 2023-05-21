@@ -7,93 +7,92 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/autoavaliacao.css') }}">
 </head>
 <!--- Início do botão de menu -->
-<header>
-    <!-- Botão para abrir o menu lateral -->
-    <input type="checkbox" id="check" class="bt">
-    <label id="icone" for="check" class="bt"> ☰ </label>
+<body {% if darkmode%} style="background-color: #494949;" {% endif %}>
+  <header>
+      <!-- Botão para abrir o menu lateral -->
+      <input type="checkbox" id="check" class="bt">
+      <label id="icone" for="check" class="bt"> ☰ </label>
 
-<div class="barra">
-  <nav class="menu_lateral">
-      <a href="/menu_integrante"> <div class="link">MENU PRINCIPAL</div></a>
-      {% if avaliacao_check %}
-          <a href="/avaliacao"><div class="link">AVALIAÇÃO DE INTEGRANTES</div></a>
-      {% else %}
-          <div class="link_disable">AVALIAÇÃO DE INTEGRANTES</div>
-      {% endif %}
-      <a href="/pre_devolutiva"> <div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
-      <a href="/"> <div class="link">SAIR ➔ </div></a>
-  </nav>
-</div>
-<!--- Fim do botão de menu -->
+  <div class="barra">
+    <nav class="menu_lateral">
+        <a href="/menu_integrante"> <div class="link">MENU PRINCIPAL</div></a>
+        {% if avaliacao_check %}
+            <a href="/avaliacao"><div class="link">AVALIAÇÃO DE INTEGRANTES</div></a>
+        {% else %}
+            <div class="link_disable">AVALIAÇÃO DE INTEGRANTES</div>
+        {% endif %}
+        <a href="/pre_devolutiva"> <div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
+        <a href="/"> <div class="link">SAIR ➔ </div></a>
+    </nav>
+  </div>
+  <!--- Fim do botão de menu -->
 
-<!-- Início do conteúdo do cabeçalho -->
-  <img id="logo_avaliação" src="{{ url_for('static', filename='img/avaliacao/Logo copy.png') }}" alt="Logo da plataforma" width="300">
-  <p><b>Usuário: {{ nomeUsuario }}</b></p>
-<!-- fim do conteúdo do cabeçalho -->
-</header>
-<!--- Fim do botão de menu -->
-<!-- Conteúdo central da página Autoavaliação-->
-  <div class="content">
-      <div class="formulario_trc1">
-        <h1 class="bt_avaliacao_trc">AUTOAVALIAÇÃO</h1> 
-          {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <ul class="flash">
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-          {% endif %}
-          {% endwith %}        
-        <form class="formulario" method="POST" action="{{ url_for('autoavaliacao_submit') }}">        
-          <h2>• Comunicação e Trabalho em Equipe</h2>
-          <input class="input_radio" type="radio" name="comunicacao" value="1" required><a class="number"> 1</a>
-          <input class="input_radio" type="radio" name="comunicacao" value="2" required><a class="number"> 2</a>
-          <input class="input_radio" type="radio" name="comunicacao" value="3" required><a class="number"> 3</a>
-          <input class="input_radio" type="radio" name="comunicacao" value="4" required><a class="number"> 4</a>
-          <input class="input_radio" type="radio" name="comunicacao" value="5" required><a class="number"> 5</a>
+  <!-- Início do conteúdo do cabeçalho -->
+    <img id="logo_avaliação" src="{{ url_for('static', filename='img/avaliacao/Logo copy.png') }}" alt="Logo da plataforma" width="300">
+    <p><b>Usuário: {{ nomeUsuario }}</b></p>
+  <!-- fim do conteúdo do cabeçalho -->
+  </header>
+  <!--- Fim do botão de menu -->
+  <!-- Conteúdo central da página Autoavaliação-->
+    <div class="content">
+        <div class="formulario_trc1">
+          <h1 class="bt_avaliacao_trc">AUTOAVALIAÇÃO</h1> 
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <ul class="flash">
+              {% for message in messages %}
+                  <li>{{ message }}</li>
+              {% endfor %}
+              </ul>
+            {% endif %}
+            {% endwith %}        
+          <form class="formulario" method="POST" action="{{ url_for('autoavaliacao_submit') }}">        
+            <h2>• Comunicação e Trabalho em Equipe</h2>
+            <input class="input_radio" type="radio" name="comunicacao" value="1" required><a class="number"> 1</a>
+            <input class="input_radio" type="radio" name="comunicacao" value="2" required><a class="number"> 2</a>
+            <input class="input_radio" type="radio" name="comunicacao" value="3" required><a class="number"> 3</a>
+            <input class="input_radio" type="radio" name="comunicacao" value="4" required><a class="number"> 4</a>
+            <input class="input_radio" type="radio" name="comunicacao" value="5" required><a class="number"> 5</a>
 
-          <h2>• Engajamento e Pró-atividade</h2>
-          <input class="input_radio" type="radio" name="engajamento" value="1" required><a class="number"> 1</a>
-          <input class="input_radio" type="radio" name="engajamento" value="2" required><a class="number"> 2</a>
-          <input class="input_radio" type="radio" name="engajamento" value="3" required><a class="number"> 3</a>
-          <input class="input_radio" type="radio" name="engajamento" value="4" required><a class="number"> 4</a>
-          <input class="input_radio" type="radio" name="engajamento" value="5" required><a class="number"> 5</a>
+            <h2>• Engajamento e Pró-atividade</h2>
+            <input class="input_radio" type="radio" name="engajamento" value="1" required><a class="number"> 1</a>
+            <input class="input_radio" type="radio" name="engajamento" value="2" required><a class="number"> 2</a>
+            <input class="input_radio" type="radio" name="engajamento" value="3" required><a class="number"> 3</a>
+            <input class="input_radio" type="radio" name="engajamento" value="4" required><a class="number"> 4</a>
+            <input class="input_radio" type="radio" name="engajamento" value="5" required><a class="number"> 5</a>
 
-          <h2>• Conhecimento e Aplicabilidade Técnica</h2>
-          <input class="input_radio" type="radio" name="conhecimento" value="1" required><a class="number"> 1</a>
-          <input class="input_radio" type="radio" name="conhecimento" value="2" required><a class="number"> 2</a>
-          <input class="input_radio" type="radio" name="conhecimento" value="3" required><a class="number"> 3</a>
-          <input class="input_radio" type="radio" name="conhecimento" value="4" required><a class="number"> 4</a>
-          <input class="input_radio" type="radio" name="conhecimento" value="5" required><a class="number"> 5</a>
+            <h2>• Conhecimento e Aplicabilidade Técnica</h2>
+            <input class="input_radio" type="radio" name="conhecimento" value="1" required><a class="number"> 1</a>
+            <input class="input_radio" type="radio" name="conhecimento" value="2" required><a class="number"> 2</a>
+            <input class="input_radio" type="radio" name="conhecimento" value="3" required><a class="number"> 3</a>
+            <input class="input_radio" type="radio" name="conhecimento" value="4" required><a class="number"> 4</a>
+            <input class="input_radio" type="radio" name="conhecimento" value="5" required><a class="number"> 5</a>
 
-          <h2>• Entrega de Resultados com Valor Agregado</h2>
-          <input class="input_radio" type="radio" name="entrega" value="1" required><a class="number"> 1</a>
-          <input class="input_radio" type="radio" name="entrega" value="2" required><a class="number"> 2</a>
-          <input class="input_radio" type="radio" name="entrega" value="3" required><a class="number"> 3</a>
-          <input class="input_radio" type="radio" name="entrega" value="4" required><a class="number"> 4</a>
-          <input class="input_radio" type="radio" name="entrega" value="5" required><a class="number"> 5</a>
+            <h2>• Entrega de Resultados com Valor Agregado</h2>
+            <input class="input_radio" type="radio" name="entrega" value="1" required><a class="number"> 1</a>
+            <input class="input_radio" type="radio" name="entrega" value="2" required><a class="number"> 2</a>
+            <input class="input_radio" type="radio" name="entrega" value="3" required><a class="number"> 3</a>
+            <input class="input_radio" type="radio" name="entrega" value="4" required><a class="number"> 4</a>
+            <input class="input_radio" type="radio" name="entrega" value="5" required><a class="number"> 5</a>
 
-          <h2>• Auto-gestão das Atividades</h2>
-          <input class="input_radio" type="radio" name="autogestao" value="1" required><a class="number"> 1</a>
-          <input class="input_radio" type="radio" name="autogestao" value="2" required><a class="number"> 2</a>
-          <input class="input_radio" type="radio" name="autogestao" value="3" required><a class="number"> 3</a>
-          <input class="input_radio" type="radio" name="autogestao" value="4" required><a class="number"> 4</a>
-          <input class="input_radio" type="radio" name="autogestao" value="5" required><a class="number"> 5</a>
+            <h2>• Auto-gestão das Atividades</h2>
+            <input class="input_radio" type="radio" name="autogestao" value="1" required><a class="number"> 1</a>
+            <input class="input_radio" type="radio" name="autogestao" value="2" required><a class="number"> 2</a>
+            <input class="input_radio" type="radio" name="autogestao" value="3" required><a class="number"> 3</a>
+            <input class="input_radio" type="radio" name="autogestao" value="4" required><a class="number"> 4</a>
+            <input class="input_radio" type="radio" name="autogestao" value="5" required><a class="number"> 5</a>
 
-          <button class="bt_confirmar_trc" type="submit">CONFIRMAR</button>
-          </form>
+            <button class="bt_confirmar_trc" type="submit">CONFIRMAR</button>
+            </form>
 
-<img class="legenda_trc" src="{{ url_for('static', filename='img/avaliacao/legenda.png') }}" alt="legenda">
+  <img class="legenda_trc" src="{{ url_for('static', filename='img/avaliacao/legenda.png') }}" alt="legenda">
 
 
-<footer>
-  <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
-</footer>
-</div>
-</div>
-</label>
-<!--- Início do rodapé da página-->
-<!--- Fim do conteúdo do rodapé da página-->
+  <footer>
+    <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
+  </footer>
+  </div>
+  </div>
+  </label>
 </body>  
 </html>

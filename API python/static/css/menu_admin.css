@@ -107,3 +107,9 @@ nav a{
     margin-top: -35px;
     text-align: center;}
     /*header padrão: fim*/
+
+.darkmode_switch {
+    position: absolute;
+    right: 5%;
+    top: 30%;
+}

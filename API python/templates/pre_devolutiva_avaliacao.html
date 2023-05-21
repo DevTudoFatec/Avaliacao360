@@ -7,7 +7,7 @@
         <title> Devolutiva de Avaliação</title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_devolutiva_avaliacao.css') }}">
     </head>
-
+    <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
     <header>
         <!-- Botão para abrir o menu lateral -->
         <input type="checkbox" id="check" class="bt">
@@ -35,7 +35,7 @@
         <!--fim do botão de menu-->
 
         <!--CONTEUDO CENTRAL DA PAGINA DE AVALIAÇÃO-->
-    <body>
+    <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
         <div class="titulos">
         <h3 id="bt_avaliar">Devolutiva de Avaliação</h3>
             <form class="formulario_avaliacao" method="POST" action="{{ url_for('pre_devolutiva_submit') }}">
@@ -47,10 +47,10 @@
                 <br>
                 <br>        
                 <button class="bt_confirmar_trc" type="submit">CONFIRMAR</button>
-            <form>          
+            <form> 
+        <footer>
+            <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
+        </footer>
     </body>
 
-    <footer>
-        <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
-    </footer>
 </html>

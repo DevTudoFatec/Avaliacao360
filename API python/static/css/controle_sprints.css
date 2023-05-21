@@ -210,18 +210,29 @@ body{
   
   .edit_icon {
     width: 25px;
+    background: transparent;
   }
   
   .save_button {
     border: none;
     outline: none;
     cursor: pointer;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: none;
   }
   
   .edit_button {
     border: none;
     outline: none;
     cursor: pointer;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: none;
   }
   
   .projeto_info_input {
@@ -234,6 +245,11 @@ body{
     border: none;
     outline: none;
     cursor: pointer;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: none;
   }
   
   .new_projeto_submit {

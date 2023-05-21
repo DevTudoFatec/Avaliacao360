@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="/static/css/menu_admin.css"/>
     </head>
 
-    <body>
+    <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
         <header> 
             <input type="checkbox" id="check" class="bt">
             <label id="icone" for="check" class="bt"> ☰ </label>
@@ -29,18 +29,24 @@
 
         <img id="details_adimn" src="{{ url_for('static', filename='img/menu_admin/Logo_API_Details Admin(1).png') }}" width="400">
 
+        {% if darkmode %}
+            <a href="/darkmode_off"><img class="darkmode_switch" src="{{ url_for('static', filename='img/icones/darkmode.png') }}" width="100"></a>
+        {% else %}           
+            <a href="/darkmode_on"><img class="darkmode_switch" src="{{ url_for('static', filename='img/icones/lightmode.png') }}" width="100"></a>
+        {% endif %}
+
         <nav class="opções_menu">
             <nav class="primeira_coluna">
-                <a href="/controle_turmas">
-                <button class="botao_azul_claro">
-                    <strong> CONTROLE DE TURMAS/TIMES  </strong>
-                </button>
-                </a>
-                <br><br>
                 <a href="/controle_geral">
                     <button class="botao_azul_claro">
                         <strong> CONTROLE DE INTEGRANTES  </strong>
                     </button>
+                </a>
+                <br><br>
+                <a href="/controle_turmas">
+                <button class="botao_azul_claro">
+                    <strong> CONTROLE DE TURMAS/TIMES  </strong>
+                </button>
                 </a>
                 <br><br>
                 <a href="/controle_sprints">

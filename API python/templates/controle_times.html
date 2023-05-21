@@ -6,7 +6,7 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/controle_turmas.css') }}">
     </head>
 
-    <body>
+    <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
         <header> 
             <input type="checkbox" id="check" class="bt">
             <label id="icone" for="check" class="bt"> ☰ </label>
@@ -113,19 +113,35 @@
                                 <input type="hidden" name="old_codigo" value="{{ time['codigo'] }}">
                                 <a href="/controle_times">
                                     <button type="button" class="save_button" name="cancel">
-                                        <img src="https://cdn2.iconfinder.com/data/icons/interface-solid-7/30/interface-solid-edit-pencil-remove-512.png" class="save_icon" alt="cancel_icon">
+                                        {% if darkmode %}
+                                        <img src="{{ url_for('static', filename='img/icones/cancela_edicao_branco.png') }}" class="save_icon" alt="cancel_icon">
+                                        {% else %}
+                                            <img src="{{ url_for('static', filename='img/icones/cancela_edicao.png') }}" class="save_icon" alt="cancel_icon">
+                                        {% endif %}
                                     </button>
                                 </a>
                                 <button type="submit" class="save_button" name="save">
-                                    <img src="https://i.ibb.co/ySv77Qj/verify.png" class="save_icon" alt="save_icon">
+                                    {% if darkmode %}
+                                        <img src="{{ url_for('static', filename='img/icones/confirmar_edicao_branco.png') }}" class="save_icon" alt="save_icon">
+                                    {% else %}
+                                        <img src="{{ url_for('static', filename='img/icones/confirmar_edicao.png') }}" class="save_icon" alt="save_icon">
+                                    {% endif %}
                                 </button>
                             {% else %} 
                                     <input type="hidden" name="index" value="{{ time['index'] }}">
                                     <button type="submit" class="edit_button" name="edit">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/45/45706.png" class="edit_icon" alt="edit_icon">
+                                        {% if darkmode %}
+                                            <img src="{{ url_for('static', filename='img/icones/editar_branco.png') }}" class="edit_icon" alt="edit_icon">
+                                        {% else %}
+                                            <img src="{{ url_for('static', filename='img/icones/editar.png') }}" class="edit_icon" alt="edit_icon">
+                                        {% endif %}
                                     </button>
                                     <button type="submit" class="delete_button" name="delete">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/2891/2891491.png" class="save_icon" alt="delete_icon">
+                                        {% if darkmode %}
+                                            <img src="{{ url_for('static', filename='img/icones/excluir_branco.png') }}" class="save_icon" alt="save_icon">
+                                        {% else %}
+                                            <img src="{{ url_for('static', filename='img/icones/excluir.png') }}" class="save_icon" alt="save_icon">
+                                        {% endif %}
                                     </button>
                                 </form>      
                             {% endif %}

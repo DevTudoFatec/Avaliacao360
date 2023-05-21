@@ -7,7 +7,8 @@
         <title> Devolutiva de Avaliação</title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_devolutiva_admin.css') }}">
     </head>
-
+    <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
+    
     <header>
         <!-- Botão para abrir o menu lateral -->
         <input type="checkbox" id="check" class="bt">
@@ -57,10 +58,9 @@
                       {% endif %}
                     {% endfor %}
                 </select>
-            <form>          
+            <form>  
+        <footer>
+            <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
+        </footer>    
     </body>
-
-    <footer>
-        <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
-    </footer>
 </html>

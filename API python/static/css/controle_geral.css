@@ -175,12 +175,22 @@ nav a{
   border: none;
   outline: none;
   cursor: pointer;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: none;
 }
 
 .edit_button {
   border: none;
   outline: none;
   cursor: pointer;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: none;
 }
 
 .user_info_input {
@@ -193,6 +203,11 @@ nav a{
   border: none;
   outline: none;
   cursor: pointer;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: none;
 }
 
 th, td {

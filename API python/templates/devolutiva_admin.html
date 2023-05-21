@@ -8,6 +8,8 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/devolutiva_admin.css') }}">
     </head>
         <!--- Início do botão de menu -->
+    <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
+            
         <header>
             <!-- Botão para abrir o menu lateral -->
             <input type="checkbox" id="check" class="bt">
