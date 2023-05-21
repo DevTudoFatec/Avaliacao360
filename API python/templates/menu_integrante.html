@@ -4,26 +4,31 @@
         <meta charset="UFT-8"/>
         <title>Opções Usuário - Avaliação 360º PBLTeX</title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/menu_integrante.css') }}">
+        {% if darkmode %}
+            <style>
+            h2 {
+                color: white;
+            }
+            </style>
+        {% endif %}
     </head>
 
     <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
         <header> 
-        {% if not primeiro_acesso %}
             <input type="checkbox" id="check" class="bt">
             <label id="icone" for="check" class="bt"> ☰ </label>
         <div class="barra">
             <nav class="menu_lateral">
                 <a href="/menu_integrante"> <div class="link">MENU PRINCIPAL</div></a>
-                {% if avaliacao_check %}
-                    <a href="/avaliacao"><div class="link">AVALIAÇÃO DE INTEGRANTES</div></a>
+                {% if avaliacao_check and sprint_index > count %}
+                    <a href="{{ url_for('avaliacao', index=0) }}"><div class="link">REALIZAR AVALIAÇÃO </div></a>
                 {% else %}
-                    <div class="link_disable">AVALIAÇÃO DE INTEGRANTES</div>
+                    <div class="link_disable">REALIZAR AVALIAÇÃO </div>
                 {% endif %}
                 <a href="/pre_devolutiva"><div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
                 <a href="/"> <div class="link">SAIR ➔ </div></a>
             </nav>
         </div>
-        {% endif %}
         <img id="logo_avaliação" src="{{ url_for('static', filename='img/menu_admin/Logo API (3).png') }}" width="300">
         <p><b>Usuário: {{ nomeUsuario }}</b></p>
         </header>
@@ -42,7 +47,7 @@
                 <h1>Selecione o seu time:</h1>
                 <form method="POST" action="{{ url_for('menu_integrante') }}">
                     <select class="user_info_input" name="user_time" style="border-radius: 3px; font-size: 20px;">                    
-                        <option  value="">Nome do time</option>
+                        <option  value="" disabled selected>Nome do time</option>
                         {% for time in times %}
                             <option value="{{ time['codigo'] }}">{{ time['nome'] }}</option>
                         {% endfor %}
@@ -54,17 +59,17 @@
         {% else %}
         <nav class="opções_menu">
             {% if sprint_index != 'None' %}
-                <h2 style="color: gray">Sprint: {{ sprint_index }}</h2>
+                <h2>Sprint: {{ sprint_index }}</h2>
             {% endif %}
-            {% if avaliacao_check %}
-            <a href="/avaliacao">
+            {% if avaliacao_check and sprint_index > count %}
+            <a href="{{ url_for('avaliacao', index=0) }}">
                 <button class="botao_azul_claro">
-                    <strong> AVALIAÇÃO DE INTEGRANTES </strong>
+                    <strong> REALIZAR AVALIAÇÃO </strong>
                 </button>
             </a>
             {% else %}
                 <button disabled class="botao_cinza">
-                    <strong> AVALIAÇÃO DE INTEGRANTES </strong>
+                    <strong> REALIZAR AVALIAÇÃO </strong>
                 </button>
             {% endif %}
             <br><br>

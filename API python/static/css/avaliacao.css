@@ -108,6 +108,16 @@ header{
     top: -40%;
     color: white;
   }
+
+  
+  .integrante{
+    position: absolute;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    left: 10%;
+    top: -37%;
+  }
+
   .bt_confirmar_trc{
     position: absolute;
     text-align: center;

@@ -32,9 +32,9 @@
     <nav class="menu_lateral">
         <a href="/menu_integrante"> <div class="link">MENU PRINCIPAL</div></a>
         {% if avaliacao_check %}
-            <a href="/avaliacao"><div class="link">AVALIAÇÃO DE INTEGRANTES</div></a>
+          <a href="{{ url_for('avaliacao', index=0) }}"><div class="link">REALIZAR AVALIAÇÃO </div></a>
         {% else %}
-            <div class="link_disable">AVALIAÇÃO DE INTEGRANTES</div>
+            <div class="link_disable">REALIZAR AVALIAÇÃO </div>
         {% endif %}
         <a href="/pre_devolutiva"> <div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
         <a href="/"> <div class="link">SAIR ➔ </div></a>
@@ -51,17 +51,10 @@
   <!-- Conteúdo central da página Autoavaliação-->
     <div class="content">
         <div class="formulario_trc1">
-          <h1 class="bt_avaliacao_trc">AVALIAÇÃO</h1> 
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-              <ul class="flash">
-              {% for message in messages %}
-                  <li>{{ message }}</li>
-              {% endfor %}
-              </ul>
-            {% endif %}
-            {% endwith %}        
-          <form class="formulario" method="POST" action="{{ url_for('avaliacao_submit') }}">        
+          <h1 class="bt_avaliacao_trc">AVALIAÇÃO</h1>
+          <h1 class="integrante">Integrante: {{ user['nome'] }}</h1>
+          <h2 style="color: gray">Sprint: {{ sprint_index }}</h2>   
+          <form class="formulario" method="POST" action="{{ url_for('avaliacao', index=next_index) }}">        
             <h2>• Comunicação e Trabalho em Equipe</h2>
             <input class="input_radio" type="radio" name="comunicacao" value="1" required><a class="number"> 1</a>
             <input class="input_radio" type="radio" name="comunicacao" value="2" required><a class="number"> 2</a>

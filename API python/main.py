@@ -28,7 +28,15 @@ def admin_required(route_function):
 def team_required(route_function):
     @wraps(route_function)
     def decorated_function(*args, **kwargs):
-        if session['time'] == 0 or session['acessos'] == 0:
+        if session['time'] == 0:
+            return redirect(url_for('menu_integrante'))
+        return route_function(*args, **kwargs)
+    return decorated_function
+
+def sprint_required(route_function):
+    @wraps(route_function)
+    def decorated_function(*args, **kwargs):
+        if session['sprint'] == session['count_avaliacao']:
             return redirect(url_for('menu_integrante'))
         return route_function(*args, **kwargs)
     return decorated_function
@@ -106,9 +114,9 @@ def menu_integrante():
     except:
       times_turma = []     
     return render_template('menu_integrante.html', primeiro_acesso=primeiro_acesso, times=times_turma, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
-      
+  
   else:
-    return render_template('menu_integrante.html', nomeUsuario=session['nomeUsuario'], sprint_index=session['sprint'], avaliacao_check=session['avaliacao'], darkmode=session['darkmode'])
+    return render_template('menu_integrante.html', nomeUsuario=session['nomeUsuario'], sprint_index=session['sprint'], count=session['count_avaliacao'], avaliacao_check=session['avaliacao'], darkmode=session['darkmode'])
 
 @app.route("/cadastro")
 def cadastro():
@@ -117,6 +125,7 @@ def cadastro():
 @app.route("/autoavaliacao")
 @login_required
 @team_required
+@sprint_required
 def autoavaliacao():
   return render_template('autoavaliacao.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
@@ -149,7 +158,7 @@ def controle_sprints():
   turmas_with_projeto = [projeto["turma"] for projeto in projetos]
   turmas_select = [turma for turma in turmas if turma["codigo"] not in turmas_with_projeto]
 
-  return render_template('controle_sprints.html', turmas_select=turmas_select, users=users, turmas=turmas, times=times, projetos=projetos, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+  return render_template('controle_sprints.html', turmas_select=turmas_select, users=users, turmas=turmas, times=times, projetos=projetos, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'], sprint_index=session['sprint'])
 
 @app.route("/criar_projeto", methods=["POST"])
 @login_required
@@ -174,24 +183,6 @@ def criar_projeto():
 
   new_projeto_fim = new_projeto_inicio + timedelta(days=dias)
 
-
-  with open('data/projetos.json', 'r') as f:
-    data = json.load(f)
-
-  projeto_dict = {
-    "index": len(data),
-    "turma": new_projeto_turma,
-    "nome": new_projeto_nome,
-    "sprints": new_projeto_sprints,
-    "duracao": new_projeto_duracao_sprint,
-    "inicio": str(new_projeto_inicio),
-    "fim": str(new_projeto_fim)
-  }
-
-  data.append(projeto_dict)
-  with open('data/projetos.json', 'w') as f:
-    json.dump(data, f, indent=2)
-
   periodos_avaliacao = []
   i=0
   delta = new_projeto_inicio
@@ -207,6 +198,25 @@ def criar_projeto():
 
     i+=1
 
+
+  with open('data/projetos.json', 'r') as f:
+    data = json.load(f)
+
+  projeto_dict = {
+    "index": len(data),
+    "turma": new_projeto_turma,
+    "nome": new_projeto_nome,
+    "sprints": new_projeto_sprints,
+    "duracao": new_projeto_duracao_sprint,
+    "inicio": str(new_projeto_inicio),
+    "fim": str(new_projeto_fim),
+    "avaliacoes": periodos_avaliacao
+  }
+
+  data.append(projeto_dict)
+  with open('data/projetos.json', 'w') as f:
+    json.dump(data, f, indent=2)
+
   try:
       with open("data/cadastro.json", "r") as f:
         users = json.load(f)
@@ -216,6 +226,7 @@ def criar_projeto():
   for user in users:
      if user['turma'] == new_projeto_turma:
         user['avaliacoes'] = periodos_avaliacao
+        user['count_avaliacao'] = 0
 
   with open('data/cadastro.json', 'w') as u:
     json.dump(users, u, indent=2)
@@ -683,11 +694,28 @@ def controle_geral():
 
 @app.route("/pre_devolutiva")
 @login_required
+@team_required
 def pre_devolutiva():
-  return render_template('pre_devolutiva_avaliacao.html', avaliacao_check=session['avaliacao'], nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+  try:
+    with open("data/cadastro.json", "r") as f:
+      users = json.load(f)
+  except:
+    users=[]
+
+  team_sprints=0
+
+  try:
+    for user in users:
+      if user['email'] == session['email']:
+          team_sprints=len(user['avaliacoes'])
+  except:
+     pass
+
+  return render_template('pre_devolutiva_avaliacao.html', team_sprints=team_sprints, avaliacao_check=session['avaliacao'], nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 @app.route("/pre_devolutiva_submit", methods=["POST"])
 @login_required
+@team_required
 def pre_devolutiva_submit():
   sprint = request.form.get('sprint')
 
@@ -814,18 +842,78 @@ def dashboards_gerenciais():
 def dashboards_operacionais():
   return render_template('dashboards_operacionais.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
-@app.route("/avaliacao")
+@app.route("/avaliacao/<int:index>", methods=['GET', 'POST'])
 @login_required
 @team_required
-def avaliacao():
-  try:
-    with open("data/cadastro.json", "r") as f:
-      users = json.load(f)
-  except:
-    users=[]
+@sprint_required
+def avaliacao(index=0):
+    try:
+        with open("data/cadastro.json", "r") as f:
+            users = json.load(f)
+    except:
+        users = []
 
-  return render_template('avaliacao.html', users=users, nomeUsuario=session['nomeUsuario'], emailUsuario=session['email'], darkmode=session['darkmode'])
+    user_time = next((user['time'] for user in users if user['email'] == session['email']), None)
 
+    filtered_users = []
+    for user in users:
+        if user['time'] == user_time and user['email'] != session['email']:
+            filtered_users.append(user)
+
+    if request.method == 'POST':
+        
+        avaliador = session['email']
+        integrante = session['avaliacao_email']
+        sprint = session['sprint']
+        comunicacao = request.form.get('comunicacao')
+        texto_comunicacao = request.form.get('texto_comunicacao')
+        engajamento = request.form.get('engajamento')
+        texto_engajamento = request.form.get('texto_engajamento')
+        entrega = request.form.get('entrega')
+        texto_entrega = request.form.get('texto_entrega')
+        conhecimento = request.form.get('conhecimento')
+        texto_conhecimento = request.form.get('texto_conhecimento')
+        autogestao = request.form.get('autogestao')
+        texto_autogestao = request.form.get('texto_autogestao')
+
+        avaliacao_dict = {
+          "avaliador": avaliador,
+          "integrante": integrante,
+          "sprint": sprint,
+          "comunicacao": int(comunicacao),
+          "texto_comunicacao": texto_comunicacao,
+          "engajamento": int(engajamento),
+          "texto_engajamento": texto_engajamento,
+          "conhecimento": int(conhecimento),
+          "texto_conhecimento": texto_conhecimento,
+          "entrega": int(entrega),
+          "texto_entrega": texto_entrega,
+          "autogestao": int(autogestao),
+          "texto_autogestao": texto_autogestao
+        }
+
+        if 'temp_avaliacao' not in session:
+          session.setdefault('temp_avaliacao', [])
+
+        session['temp_avaliacao'].append(avaliacao_dict)
+
+        next_index = index + 1
+
+        if next_index < len(filtered_users):
+            return redirect(url_for('avaliacao', index=next_index))
+        else:
+            return redirect(url_for('autoavaliacao'))
+
+    if index < len(filtered_users):
+        current_user = filtered_users[index]
+        session['avaliacao_email'] = current_user['email']
+    else:
+        return redirect(url_for('autoavaliacao'))
+
+    return render_template('avaliacao.html', avaliacao_check=session['avaliacao'],
+                           user=current_user, nomeUsuario=session['nomeUsuario'],
+                           emailUsuario=session['email'], darkmode=session['darkmode'],
+                           next_index=index, sprint_index=session['sprint'])
 
 ## Validação login
 
@@ -844,6 +932,7 @@ def login():
         session['perfil'] = item['perfil']
         session['turma'] = item['turma']
         session['time'] = item['time']
+        session['count_avaliacao'] = item['count_avaliacao']
 
         session['avaliacao'] = False
         session['sprint'] = 'None'
@@ -911,6 +1000,21 @@ def cadastro_submit():
   if not check_turma:
     flash('Codigo de turma não existente!')
     return redirect(url_for('cadastro'))
+  
+  try:
+    with open("data/projetos.json", "r") as f:
+      projetos = json.load(f)
+  except:
+    projetos=[]
+
+  avaliacoes=[]
+
+  try:
+    for projeto in projetos:
+      if projeto['turma'] == codigo_turma:
+          avaliacoes=projeto['avaliacoes']
+  except:
+    pass
 
   cadastro_dict = {
     "index": len(data),
@@ -920,7 +1024,9 @@ def cadastro_submit():
     "time": 0,
     "senha": hashed_password.decode('utf-8'),
     "perfil": 1,
-    "acessos": 0
+    "acessos": 0,
+    "avaliacoes": avaliacoes,
+    "count_avaliacao": 0
   }
 
   data.append(cadastro_dict)
@@ -935,7 +1041,25 @@ def cadastro_submit():
 @app.route("/autoavaliacao_submit", methods=["POST"])
 @login_required
 @team_required
+@sprint_required
 def autoavaliacao_submit():
+          
+  if not os.path.exists('data/avaliacao.json'):
+    if not os.path.exists('data'):
+      os.makedirs('data')
+      with open('data/avaliacao.json', 'w') as f:
+        f.write('[]')
+    else:
+      with open('data/avaliacao.json', 'w') as f:
+        f.write('[]')
+
+  with open('data/avaliacao.json', 'r') as f:
+    avaliacoes = json.load(f)
+
+  for avaliacao in session['temp_avaliacao']: 
+    avaliacoes.append(avaliacao)
+  with open('data/avaliacao.json', 'w') as f:
+    json.dump(avaliacoes, f, indent=2)
 
   if not os.path.exists('data/autoavaliacao.json'):
     if not os.path.exists('data'):
@@ -947,7 +1071,7 @@ def autoavaliacao_submit():
         f.write('[]')
 
   email = session['email']
-  sprint = request.form.get('sprint')
+  sprint = session['sprint']
   comunicacao = request.form.get('comunicacao')
   engajamento = request.form.get('engajamento')
   conhecimento = request.form.get('conhecimento')
@@ -974,69 +1098,19 @@ def autoavaliacao_submit():
   with open('data/autoavaliacao.json', 'w') as f:
     json.dump(data, f, indent=2)
 
-  flash('Autoavaliação Registrada com Sucesso!')
+  session['count_avaliacao'] += 1
 
-  return redirect(url_for('autoavaliacao'))
+  with open("data/cadastro.json", "r") as f:
+    users = json.load(f)
 
-@app.route("/avaliacao_submit", methods=["POST"])
-@login_required
-@team_required
-def avaliacao_submit():
+  for user in users:
+     if user['email'] == session['email']:
+        user['count_avaliacao'] += 1
 
-  if not os.path.exists('data/avaliacao.json'):
-    if not os.path.exists('data'):
-      os.makedirs('data')
-      with open('data/avaliacao.json', 'w') as f:
-        f.write('[]')
-    else:
-      with open('data/avaliacao.json', 'w') as f:
-        f.write('[]')
-  
-  avaliador = session['email']
-  integrante = request.form.get('integrante')
-  sprint = request.form.get('sprint')
-  comunicacao = request.form.get('comunicacao')
-  texto_comunicacao = request.form.get('texto_comunicacao')
-  engajamento = request.form.get('engajamento')
-  texto_engajamento = request.form.get('texto_engajamento')
-  entrega = request.form.get('entrega')
-  texto_entrega = request.form.get('texto_entrega')
-  conhecimento = request.form.get('conhecimento')
-  texto_conhecimento = request.form.get('texto_conhecimento')
-  autogestao = request.form.get('autogestao')
-  texto_autogestao = request.form.get('texto_autogestao')
-
-  with open('data/avaliacao.json', 'r') as f:
-    data = json.load(f)
-  if any(user.get("avaliador") == avaliador and user.get("integrante") == integrante and user.get("sprint") == sprint for user in data):
-    flash(f'Avaliação do integrante selecionado na Sprint {sprint} já foi realizada!')
-    return redirect(url_for('avaliacao'))
-
-  avaliacao_dict = {
-    "avaliador": avaliador,
-    "integrante": integrante,
-    "sprint": sprint,
-    "comunicacao": int(comunicacao),
-    "texto_comunicacao": texto_comunicacao,
-    "engajamento": int(engajamento),
-    "texto_engajamento": texto_engajamento,
-    "conhecimento": int(conhecimento),
-    "texto_conhecimento": texto_conhecimento,
-    "entrega": int(entrega),
-    "texto_entrega": texto_entrega,
-    "autogestao": int(autogestao),
-    "texto_autogestao": texto_autogestao
-  }
-
-  data.append(avaliacao_dict)
-  with open('data/avaliacao.json', 'w') as f:
-    json.dump(data, f, indent=2)
-
-  flash('Avaliação Registrada com Sucesso!')
-
-  return redirect(url_for('avaliacao'))
-
-
+  with open('data/cadastro.json', 'w') as u:
+    json.dump(users, u, indent=2)
+ 
+  return redirect(url_for('menu_integrante'))
 
 app.secret_key = 'wxyz@mtwjer123123%213'
 

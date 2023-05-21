@@ -6,6 +6,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> Devolutiva de Avaliação</title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_devolutiva_avaliacao.css') }}">
+        {% if darkmode%}
+            <style>
+            h3 {
+                color: white;
+            }
+
+            .number {
+                color: white;
+            }
+            </style>
+        {% endif %}
     </head>
     <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
     <header>
@@ -17,9 +28,9 @@
         <nav class="menu_lateral">
             <a href="/menu_integrante"> <div class="link">MENU PRINCIPAL</div></a>
             {% if avaliacao_check %}
-                <a href="/avaliacao"><div class="link">AVALIAÇÃO DE INTEGRANTES</div></a>
+                <a href="{{ url_for('avaliacao', index=0) }}"><div class="link">REALIZAR AVALIAÇÃO </div></a>
             {% else %}
-                <div class="link_disable">AVALIAÇÃO DE INTEGRANTES</div>
+                <div class="link_disable">REALIZAR AVALIAÇÃO</div>
             {% endif %}
             <a href="/pre_devolutiva"> <div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
             <a href="/"> <div class="link">SAIR ➔ </div></a>
@@ -40,10 +51,9 @@
         <h3 id="bt_avaliar">Devolutiva de Avaliação</h3>
             <form class="formulario_avaliacao" method="POST" action="{{ url_for('pre_devolutiva_submit') }}">
                 <h3>Selecione a Sprint:</h3>      
-                <input type="radio" name="sprint" value="1" required>1
-                <input type="radio" name="sprint" value="2" required>2
-                <input type="radio" name="sprint" value="3" required>3
-                <input type="radio" name="sprint" value="4" required>4
+                {% for i in range(1,team_sprints+1) %}
+                    <input type="radio" name="sprint" value="{{ i }}" required><a class="number"> {{ i }}</a>
+                {% endfor %}
                 <br>
                 <br>        
                 <button class="bt_confirmar_trc" type="submit">CONFIRMAR</button>

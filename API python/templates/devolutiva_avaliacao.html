@@ -6,6 +6,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> Devolutiva de Avaliação</title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/devolutiva_avaliacao.css') }}">
+        {% if darkmode%}
+            <style>
+            h3 {
+                color: white;
+            }
+
+            h2 {
+                color: rgb(221, 205, 205);
+            }
+
+            p {
+                color: rgb(201, 201, 201)
+            }
+            </style>
+        {% endif %}
     </head>
         <!--- Início do botão de menu -->
     <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
@@ -18,9 +33,9 @@
                 <nav class="menu_lateral">
                     <a href="/menu_integrante"> <div class="link">MENU PRINCIPAL</div></a>
                     {% if avaliacao_check %}
-                        <a href="/avaliacao"><div class="link">AVALIAÇÃO DE INTEGRANTES</div></a>
+                        <a href="{{ url_for('avaliacao', index=0) }}"><div class="link">REALIZAR AVALIAÇÃO </div></a>
                     {% else %}
-                        <div class="link_disable">AVALIAÇÃO DE INTEGRANTES</div>
+                        <div class="link_disable">REALIZAR AVALIAÇÃO</div>
                     {% endif %}
                     <a href="/pre_devolutiva"> <div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
                     <a href="/"> <div class="link">SAIR ➔ </div></a>
@@ -38,83 +53,131 @@
         <!--CONTEUDO CENTRAL DA PAGINA DE AVALIAÇÃO-->
         
         <div class="titulos">
-        <h3 id="bt_avaliar">Devolutiva de Avaliação</h3>
-        <h2 class="sprint">Sprint: {{ sprint }}</h2>     
+            <h3 id="bt_avaliar">Devolutiva de Avaliação</h3>
+            <h2 class="sprint">Sprint: {{ sprint }}</h2>     
         </div>
-            <table class="all_data">
-                <tr>
-                    <td>
-                        <h3>Comunicação e Trabalho em Equipe:</h3>
-                        <p>Autoavaliação:
-                            {% for autoavaliacao in autoavaliacoes %} 
-                                {% if autoavaliacao['sprint'] == sprint and autoavaliacao['email'] == email%}
-                                    {{ autoavaliacao['comunicacao'] }}</p>                             
-                                {% endif %}
-                            {% endfor %}
-                        <p>Avaliadores: {{ avgs[0] }}</p>
-                    </td>
-                    <td>
-                        <h3>Engajamento e Pró-atividade:</h3>
-                        <p>Autoavaliação:
-                        {% for autoavaliacao in autoavaliacoes %} 
-                            {% if autoavaliacao['sprint'] == sprint and autoavaliacao['email'] == email%}
-                                {{ autoavaliacao['engajamento'] }}</p>                              
-                            {% endif %}
-                        {% endfor %}
-                        <p>Avaliadores: {{ avgs[1] }}</p>
-                    </td>
-                    <td>
-                        <h3>Entrega de Resultados com valor Agregado:</h3>
-                        <p>Autoavaliação:
-                        {% for autoavaliacao in autoavaliacoes %} 
-                            {% if autoavaliacao['sprint'] == sprint and autoavaliacao['email'] == email%}
-                                {{ autoavaliacao['entrega'] }} </p>                              
-                            {% endif %}
-                        {% endfor %}
-                        <p>Avaliadores: {{ avgs[3] }}</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <h3>Conhecimento e Aplicabilidade Técnica:</h3>
-                        <p>Autoavaliação:
-                        {% for autoavaliacao in autoavaliacoes %} 
-                            {% if autoavaliacao['sprint'] == sprint and autoavaliacao['email'] == email%}
-                                {{ autoavaliacao['conhecimento'] }}</p>                              
-                            {% endif %}
-                        {% endfor %}
-                        <p>Avaliadores: {{ avgs[2] }}</p>
-                    </td>
-                    <td>
-                        <h3>Auto-gestão das Atividades:</h3>
-                        <p>Autoavaliação:
-                        {% for autoavaliacao in autoavaliacoes %} 
-                            {% if autoavaliacao['sprint'] == sprint and autoavaliacao['email'] == email%}
-                                {{ autoavaliacao['autogestao'] }}</p>                            
-                            {% endif %}
-                        {% endfor %}
-                        <p>Avaliadores: {{ avgs[4] }}</p>
-                    </td>
-                </tr>
-            </table>                      
-      
-        <h2>Feedbacks Recebidos:</h2>
-        <div class="container">
-            <table class="textos">
-                <tr>
-                    <td>
-                        {% for avaliacao in avaliacoes %} 
-                            {% if avaliacao['sprint'] == sprint and avaliacao['integrante'] == email%}
-                                • {{ avaliacao['texto'] }}<br>                            
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                </tr>
-            </table>
-        </div>
-<br/>
-        <br/>
 
+        <table class="all_data">
+            <tr>
+                <td>
+                    <h3>Comunicação e Trabalho em Equipe:</h3>
+                    <p>Autoavaliação:
+                        {% for autoavaliacao in autoavaliacoes %} 
+                            {% if autoavaliacao['sprint'] == sprint and autoavaliacao['email'] == email%}
+                                {{ autoavaliacao['comunicacao'] }}</p>                             
+                            {% endif %}
+                        {% endfor %}
+                    <p>Avaliadores: {{ avgs[0] }}</p>
+                    <div class="container">
+                        <table class="textos">
+                            <tr>
+                                <td>
+                                    {% for avaliacao in avaliacoes %} 
+                                        {% if avaliacao['sprint'] == sprint and avaliacao['integrante'] == email%}
+                                            • {{ avaliacao['texto_comunicacao'] }}<br>                            
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+                <td>
+                    <h3>Engajamento e Pró-atividade:</h3>
+                    <p>Autoavaliação:
+                    {% for autoavaliacao in autoavaliacoes %} 
+                        {% if autoavaliacao['sprint'] == sprint and autoavaliacao['email'] == email%}
+                            {{ autoavaliacao['engajamento'] }}</p>                              
+                        {% endif %}
+                    {% endfor %}
+                    <p>Avaliadores: {{ avgs[1] }}</p>
+                    <div class="container">
+                        <table class="textos">
+                            <tr>
+                                <td>
+                                    {% for avaliacao in avaliacoes %} 
+                                        {% if avaliacao['sprint'] == sprint and avaliacao['integrante'] == email%}
+                                            • {{ avaliacao['texto_engajamento'] }}<br>                            
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+                <td>
+                    <h3>Entrega de Resultados com valor Agregado:</h3>
+                    <p>Autoavaliação:
+                    {% for autoavaliacao in autoavaliacoes %} 
+                        {% if autoavaliacao['sprint'] == sprint and autoavaliacao['email'] == email%}
+                            {{ autoavaliacao['entrega'] }} </p>                              
+                        {% endif %}
+                    {% endfor %}
+                    <p>Avaliadores: {{ avgs[3] }}</p>
+                    <div class="container">
+                        <table class="textos">
+                            <tr>
+                                <td>
+                                    {% for avaliacao in avaliacoes %} 
+                                        {% if avaliacao['sprint'] == sprint and avaliacao['integrante'] == email%}
+                                            • {{ avaliacao['texto_entrega'] }}<br>                            
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3>Conhecimento e Aplicabilidade Técnica:</h3>
+                    <p>Autoavaliação:
+                    {% for autoavaliacao in autoavaliacoes %} 
+                        {% if autoavaliacao['sprint'] == sprint and autoavaliacao['email'] == email%}
+                            {{ autoavaliacao['conhecimento'] }}</p>                              
+                        {% endif %}
+                    {% endfor %}
+                    <p>Avaliadores: {{ avgs[2] }}</p>
+                    <div class="container">
+                        <table class="textos">
+                            <tr>
+                                <td>
+                                    {% for avaliacao in avaliacoes %} 
+                                        {% if avaliacao['sprint'] == sprint and avaliacao['integrante'] == email%}
+                                            • {{ avaliacao['texto_conhecimento'] }}<br>                            
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+                <td>
+                    <h3>Auto-gestão das Atividades:</h3>
+                    <p>Autoavaliação:
+                    {% for autoavaliacao in autoavaliacoes %} 
+                        {% if autoavaliacao['sprint'] == sprint and autoavaliacao['email'] == email%}
+                            {{ autoavaliacao['autogestao'] }}</p>                            
+                        {% endif %}
+                    {% endfor %}
+                    <p>Avaliadores: {{ avgs[4] }}</p>
+                    <div class="container">
+                        <table class="textos">
+                            <tr>
+                                <td>
+                                    {% for avaliacao in avaliacoes %} 
+                                        {% if avaliacao['sprint'] == sprint and avaliacao['integrante'] == email%}
+                                            • {{ avaliacao['texto_autogestao'] }}<br>                            
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
         <img class="legenda" src="{{ url_for('static', filename='img/avaliacao/Legenda.png') }}"> 
     </body>
 </html>
