@@ -1,19 +1,32 @@
 [
-  [
-    {
-      "autogestao": 5,
-      "avaliador": "joao@email.com",
-      "comunicacao": 5,
-      "conhecimento": 5,
-      "engajamento": 5,
-      "entrega": 5,
-      "integrante": "fulano@email.com",
-      "sprint": 1,
-      "texto_autogestao": "",
-      "texto_comunicacao": "",
-      "texto_conhecimento": "",
-      "texto_engajamento": "",
-      "texto_entrega": ""
-    }
-  ]
+  {
+    "avaliador": "joao@email.com",
+    "integrante": "fulano@email.com",
+    "sprint": 1,
+    "comunicacao": 5,
+    "texto_comunicacao": "",
+    "engajamento": 5,
+    "texto_engajamento": "",
+    "conhecimento": 5,
+    "texto_conhecimento": "",
+    "entrega": 5,
+    "texto_entrega": "",
+    "autogestao": 5,
+    "texto_autogestao": ""
+  },
+  {
+    "avaliador": "joao@email.com",
+    "integrante": "teste@email.com",
+    "sprint": 1,
+    "comunicacao": 5,
+    "texto_comunicacao": "",
+    "engajamento": 5,
+    "texto_engajamento": "",
+    "conhecimento": 5,
+    "texto_conhecimento": "",
+    "entrega": 5,
+    "texto_entrega": "",
+    "autogestao": 5,
+    "texto_autogestao": ""
+  }
 ]

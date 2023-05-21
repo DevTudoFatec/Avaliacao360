@@ -711,7 +711,7 @@ def pre_devolutiva():
   except:
      pass
 
-  return render_template('pre_devolutiva_avaliacao.html', team_sprints=team_sprints, avaliacao_check=session['avaliacao'], nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+  return render_template('pre_devolutiva_avaliacao.html', count=session['count_avaliacao'], sprint_index=session['sprint'], team_sprints=team_sprints, avaliacao_check=session['avaliacao'], nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 @app.route("/pre_devolutiva_submit", methods=["POST"])
 @login_required
@@ -754,7 +754,7 @@ def pre_devolutiva_submit():
   except:
     autoavaliacoes=[]
 
-  return render_template('devolutiva_avaliacao.html', avaliacao_check=session['avaliacao'], nomeUsuario=session['nomeUsuario'], sprint=sprint, avgs=avgs, avaliacoes=avaliacoes, autoavaliacoes=autoavaliacoes, email=session['email'], darkmode=session['darkmode'])
+  return render_template('devolutiva_avaliacao.html', count=session['count_avaliacao'], sprint_index=session['sprint'], avaliacao_check=session['avaliacao'], nomeUsuario=session['nomeUsuario'], sprint=sprint, avgs=avgs, avaliacoes=avaliacoes, autoavaliacoes=autoavaliacoes, email=session['email'], darkmode=session['darkmode'])
 
 
 @app.route("/pre_devolutiva_submit_admin", methods=["POST"])
@@ -892,10 +892,21 @@ def avaliacao(index=0):
           "texto_autogestao": texto_autogestao
         }
 
-        if 'temp_avaliacao' not in session:
-          session.setdefault('temp_avaliacao', [])
+        if not os.path.exists('data/avaliacao.json'):
+          if not os.path.exists('data'):
+            os.makedirs('data')
+            with open('data/avaliacao.json', 'w') as f:
+              f.write('[]')
+          else:
+            with open('data/avaliacao.json', 'w') as f:
+              f.write('[]')
 
-        session['temp_avaliacao'].append(avaliacao_dict)
+        with open('data/avaliacao.json', 'r') as f:
+          avaliacoes = json.load(f)
+
+        avaliacoes.append(avaliacao_dict)
+        with open('data/avaliacao.json', 'w') as f:
+          json.dump(avaliacoes, f, indent=2)
 
         next_index = index + 1
 
@@ -932,7 +943,10 @@ def login():
         session['perfil'] = item['perfil']
         session['turma'] = item['turma']
         session['time'] = item['time']
-        session['count_avaliacao'] = item['count_avaliacao']
+        try:
+          session['count_avaliacao'] = item['count_avaliacao']
+        except:
+           pass
 
         session['avaliacao'] = False
         session['sprint'] = 'None'
@@ -1044,22 +1058,22 @@ def cadastro_submit():
 @sprint_required
 def autoavaliacao_submit():
           
-  if not os.path.exists('data/avaliacao.json'):
-    if not os.path.exists('data'):
-      os.makedirs('data')
-      with open('data/avaliacao.json', 'w') as f:
-        f.write('[]')
-    else:
-      with open('data/avaliacao.json', 'w') as f:
-        f.write('[]')
+  # if not os.path.exists('data/avaliacao.json'):
+  #   if not os.path.exists('data'):
+  #     os.makedirs('data')
+  #     with open('data/avaliacao.json', 'w') as f:
+  #       f.write('[]')
+  #   else:
+  #     with open('data/avaliacao.json', 'w') as f:
+  #       f.write('[]')
 
-  with open('data/avaliacao.json', 'r') as f:
-    avaliacoes = json.load(f)
+  # with open('data/avaliacao.json', 'r') as f:
+  #   avaliacoes = json.load(f)
 
-  for avaliacao in session['temp_avaliacao']: 
-    avaliacoes.append(avaliacao)
-  with open('data/avaliacao.json', 'w') as f:
-    json.dump(avaliacoes, f, indent=2)
+  # for avaliacao in session['temp_avaliacao']: 
+  #   avaliacoes.append(avaliacao)
+  # with open('data/avaliacao.json', 'w') as f:
+  #   json.dump(avaliacoes, f, indent=2)
 
   if not os.path.exists('data/autoavaliacao.json'):
     if not os.path.exists('data'):
