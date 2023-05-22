@@ -81,6 +81,11 @@ def menu_admin():
 @login_required
 def menu_integrante():
 
+  temp_path = f"data/temp_avaliacao_{session['email']}.json"
+
+  if os.path.exists(temp_path):
+    os.remove(temp_path)
+
   with open("data/cadastro.json", "r") as f:
     users = json.load(f)
 
@@ -121,13 +126,6 @@ def menu_integrante():
 @app.route("/cadastro")
 def cadastro():
   return render_template('cadastro.html')
-
-@app.route("/autoavaliacao")
-@login_required
-@team_required
-@sprint_required
-def autoavaliacao():
-  return render_template('autoavaliacao.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 @app.route("/controle_sprints")
 def controle_sprints():
@@ -696,6 +694,12 @@ def controle_geral():
 @login_required
 @team_required
 def pre_devolutiva():
+  
+  temp_path = f"data/temp_avaliacao_{session['email']}.json"
+
+  if os.path.exists(temp_path):
+    os.remove(temp_path)
+
   try:
     with open("data/cadastro.json", "r") as f:
       users = json.load(f)
@@ -842,39 +846,88 @@ def dashboards_gerenciais():
 def dashboards_operacionais():
   return render_template('dashboards_operacionais.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
-@app.route("/avaliacao/<int:index>", methods=['GET', 'POST'])
+@app.route("/avaliacao", methods=['GET', 'POST'])
 @login_required
 @team_required
 @sprint_required
-def avaliacao(index=0):
+def avaliacao():
+    try:
+      with open("data/times.json", "r") as f:
+        times = json.load(f)
+        for time in times:
+          if time['codigo'] == session['time']:
+            user_time = time['nome']
+    except:
+      user_time = ''
+
     try:
         with open("data/cadastro.json", "r") as f:
             users = json.load(f)
     except:
         users = []
 
-    user_time = next((user['time'] for user in users if user['email'] == session['email']), None)
-
     filtered_users = []
     for user in users:
-        if user['time'] == user_time and user['email'] != session['email']:
+        if user['time'] == session['time'] and user['email'] != session['email']:
             filtered_users.append(user)
 
-    if request.method == 'POST':
+
+    if request.method == 'GET':
+
+      return render_template('avaliacao.html', time=user_time, users=filtered_users, avaliacao_check=session['avaliacao'],nomeUsuario=session['nomeUsuario'],emailUsuario=session['email'], darkmode=session['darkmode'],sprint_index=session['sprint'])
+
+    elif request.method == 'POST':
+
+      email = session['email']
+      sprint = session['sprint']
+      comunicacao = request.form.get('auto_comunicacao')
+      engajamento = request.form.get('auto_engajamento')
+      conhecimento = request.form.get('auto_conhecimento')
+      entrega = request.form.get('auto_entrega')
+      autogestao = request.form.get('auto_autogestao')
+      
+      autovaliacao_dict = {
+        "email": email,
+        "sprint": sprint,
+        "comunicacao": int(comunicacao),
+        "engajamento": int(engajamento),
+        "conhecimento": int(conhecimento),
+        "entrega": int(entrega),
+        "autogestao": int(autogestao)
+      }
+
+      try:
+        with open('data/autoavaliacao.json', 'r') as f:
+          data = json.load(f)
+
+          data.append(autovaliacao_dict)
+          
+          with open('data/autoavaliacao.json', 'w') as f:
+            json.dump(data, f, indent=2)   
+      except:
+          autovaliacoes=[]
+
+          autovaliacoes.append(autovaliacao_dict)
+
+          with open('data/autoavaliacao.json', 'w') as f:
+            json.dump(autovaliacoes, f, indent=2)
+
         
+
+      for user in filtered_users:  
         avaliador = session['email']
-        integrante = session['avaliacao_email']
+        integrante = request.form.get(f"user_email_{user['email']}")
         sprint = session['sprint']
-        comunicacao = request.form.get('comunicacao')
-        texto_comunicacao = request.form.get('texto_comunicacao')
-        engajamento = request.form.get('engajamento')
-        texto_engajamento = request.form.get('texto_engajamento')
-        entrega = request.form.get('entrega')
-        texto_entrega = request.form.get('texto_entrega')
-        conhecimento = request.form.get('conhecimento')
-        texto_conhecimento = request.form.get('texto_conhecimento')
-        autogestao = request.form.get('autogestao')
-        texto_autogestao = request.form.get('texto_autogestao')
+        comunicacao = request.form.get(f"comunicacao_{user['email']}")
+        texto_comunicacao = request.form.get(f"texto_comunicacao_{user['email']}")
+        engajamento = request.form.get(f"engajamento_{user['email']}")
+        texto_engajamento = request.form.get(f"texto_engajamento_{user['email']}")
+        entrega = request.form.get(f"entrega_{user['email']}")
+        texto_entrega = request.form.get(f"texto_entrega_{user['email']}")
+        conhecimento = request.form.get(f"conhecimento_{user['email']}")
+        texto_conhecimento = request.form.get(f"texto_conhecimento_{user['email']}")
+        autogestao = request.form.get(f"autogestao_{user['email']}")
+        texto_autogestao = request.form.get(f"texto_autogestao_{user['email']}")
 
         avaliacao_dict = {
           "avaliador": avaliador,
@@ -892,40 +945,37 @@ def avaliacao(index=0):
           "texto_autogestao": texto_autogestao
         }
 
-        if not os.path.exists('data/avaliacao.json'):
-          if not os.path.exists('data'):
-            os.makedirs('data')
+        try:
+          with open('data/avaliacao.json', 'r') as f:
+            avaliacoes = json.load(f)
+          
+            avaliacoes.append(avaliacao_dict)
+          
             with open('data/avaliacao.json', 'w') as f:
-              f.write('[]')
-          else:
-            with open('data/avaliacao.json', 'w') as f:
-              f.write('[]')
+              json.dump(avaliacoes, f, indent=2)
+        except:
+           avaliacoes=[]
 
-        with open('data/avaliacao.json', 'r') as f:
-          avaliacoes = json.load(f)
+           avaliacoes.append(avaliacao_dict)
 
-        avaliacoes.append(avaliacao_dict)
-        with open('data/avaliacao.json', 'w') as f:
-          json.dump(avaliacoes, f, indent=2)
+           with open('data/avaliacao.json', 'w') as f:
+              json.dump(avaliacoes, f, indent=2)
 
-        next_index = index + 1
+      session['count_avaliacao'] += 1
 
-        if next_index < len(filtered_users):
-            return redirect(url_for('avaliacao', index=next_index))
-        else:
-            return redirect(url_for('autoavaliacao'))
+      with open("data/cadastro.json", "r") as f:
+        users = json.load(f)
 
-    if index < len(filtered_users):
-        current_user = filtered_users[index]
-        session['avaliacao_email'] = current_user['email']
-    else:
-        return redirect(url_for('autoavaliacao'))
+      for user in users:
+        if user['email'] == session['email']:
+            user['count_avaliacao'] += 1
 
-    return render_template('avaliacao.html', avaliacao_check=session['avaliacao'],
-                           user=current_user, nomeUsuario=session['nomeUsuario'],
-                           emailUsuario=session['email'], darkmode=session['darkmode'],
-                           next_index=index, sprint_index=session['sprint'])
+      with open('data/cadastro.json', 'w') as u:
+        json.dump(users, u, indent=2)
 
+      return redirect(url_for('menu_integrante'))
+
+    
 ## Validação login
 
 @app.route("/login", methods=['POST'])
@@ -1050,81 +1100,6 @@ def cadastro_submit():
   flash('Cadastrado com sucesso!')
 
   return redirect(url_for('home'))
-
-
-@app.route("/autoavaliacao_submit", methods=["POST"])
-@login_required
-@team_required
-@sprint_required
-def autoavaliacao_submit():
-          
-  # if not os.path.exists('data/avaliacao.json'):
-  #   if not os.path.exists('data'):
-  #     os.makedirs('data')
-  #     with open('data/avaliacao.json', 'w') as f:
-  #       f.write('[]')
-  #   else:
-  #     with open('data/avaliacao.json', 'w') as f:
-  #       f.write('[]')
-
-  # with open('data/avaliacao.json', 'r') as f:
-  #   avaliacoes = json.load(f)
-
-  # for avaliacao in session['temp_avaliacao']: 
-  #   avaliacoes.append(avaliacao)
-  # with open('data/avaliacao.json', 'w') as f:
-  #   json.dump(avaliacoes, f, indent=2)
-
-  if not os.path.exists('data/autoavaliacao.json'):
-    if not os.path.exists('data'):
-      os.makedirs('data')
-      with open('data/autoavaliacao.json', 'w') as f:
-        f.write('[]')
-    else:
-      with open('data/autoavaliacao.json', 'w') as f:
-        f.write('[]')
-
-  email = session['email']
-  sprint = session['sprint']
-  comunicacao = request.form.get('comunicacao')
-  engajamento = request.form.get('engajamento')
-  conhecimento = request.form.get('conhecimento')
-  entrega = request.form.get('entrega')
-  autogestao = request.form.get('autogestao')
-
-  with open('data/autoavaliacao.json', 'r') as f:
-    data = json.load(f)
-  if any(user.get("email") == email and user.get("sprint") == sprint for user in data):
-    flash(f'Auto Avaliação da Sprint {sprint} já foi realizada!')
-    return redirect(url_for('autoavaliacao'))
-  
-  avaliacao_dict = {
-    "email": email,
-    "sprint": sprint,
-    "comunicacao": int(comunicacao),
-    "engajamento": int(engajamento),
-    "conhecimento": int(conhecimento),
-    "entrega": int(entrega),
-    "autogestao": int(autogestao)
-  }
-
-  data.append(avaliacao_dict)
-  with open('data/autoavaliacao.json', 'w') as f:
-    json.dump(data, f, indent=2)
-
-  session['count_avaliacao'] += 1
-
-  with open("data/cadastro.json", "r") as f:
-    users = json.load(f)
-
-  for user in users:
-     if user['email'] == session['email']:
-        user['count_avaliacao'] += 1
-
-  with open('data/cadastro.json', 'w') as u:
-    json.dump(users, u, indent=2)
- 
-  return redirect(url_for('menu_integrante'))
 
 app.secret_key = 'wxyz@mtwjer123123%213'
 

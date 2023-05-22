@@ -28,7 +28,7 @@
         <nav class="menu_lateral">
             <a href="/menu_integrante"> <div class="link">MENU PRINCIPAL</div></a>
             {% if avaliacao_check and sprint_index > count %}
-                <a href="{{ url_for('avaliacao', index=0) }}"><div class="link">REALIZAR AVALIAÇÃO </div></a>
+                <a href="/avaliacao"><div class="link">REALIZAR AVALIAÇÃO </div></a>
             {% else %}
                 <div class="link_disable">REALIZAR AVALIAÇÃO</div>
             {% endif %}

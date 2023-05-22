@@ -11,6 +11,10 @@
       color: white;
     }
 
+    .sprint_sign {
+      color: white;
+    }
+
     .number {
       color: white;
     }
@@ -32,7 +36,7 @@
     <nav class="menu_lateral">
         <a href="/menu_integrante"> <div class="link">MENU PRINCIPAL</div></a>
         {% if avaliacao_check %}
-          <a href="{{ url_for('avaliacao', index=0) }}"><div class="link">REALIZAR AVALIAÇÃO </div></a>
+          <a href="/avaliacao"><div class="link">REALIZAR AVALIAÇÃO </div></a>
         {% else %}
             <div class="link_disable">REALIZAR AVALIAÇÃO </div>
         {% endif %}
@@ -49,73 +53,130 @@
   </header>
   <!--- Fim do botão de menu -->
   <!-- Conteúdo central da página Autoavaliação-->
+
     <div class="content">
-        <div class="formulario_trc1">
-          <h1 class="bt_avaliacao_trc">AVALIAÇÃO</h1>
-          <h1 class="integrante">Integrante: {{ user['nome'] }}</h1>
-          <h2 style="color: gray">Sprint: {{ sprint_index }}</h2>   
-          <form class="formulario" method="POST" action="{{ url_for('avaliacao', index=next_index) }}">        
-            <h2>• Comunicação e Trabalho em Equipe</h2>
-            <input class="input_radio" type="radio" name="comunicacao" value="1" required><a class="number"> 1</a>
-            <input class="input_radio" type="radio" name="comunicacao" value="2" required><a class="number"> 2</a>
-            <input class="input_radio" type="radio" name="comunicacao" value="3" required><a class="number"> 3</a>
-            <input class="input_radio" type="radio" name="comunicacao" value="4" required><a class="number"> 4</a>
-            <input class="input_radio" type="radio" name="comunicacao" value="5" required><a class="number"> 5</a>
-            <br>
-            <br>
-            <textarea class="texto_avaliacao" type="text" name="texto_comunicacao" placeholder="Escreva aqui o seu feedback para o integrante." maxlength="100" pattern="[A-Za-z ]+" title="São permitidas apenas letras!"></textarea>
-              
-            <h2>• Engajamento e Pró-atividade</h2>
-            <input class="input_radio" type="radio" name="engajamento" value="1" required><a class="number"> 1</a>
-            <input class="input_radio" type="radio" name="engajamento" value="2" required><a class="number"> 2</a>
-            <input class="input_radio" type="radio" name="engajamento" value="3" required><a class="number"> 3</a>
-            <input class="input_radio" type="radio" name="engajamento" value="4" required><a class="number"> 4</a>
-            <input class="input_radio" type="radio" name="engajamento" value="5" required><a class="number"> 5</a>
-            <br>
-            <br>
-            <textarea class="texto_avaliacao" type="text" name="texto_engajamento" placeholder="Escreva aqui o seu feedback para o integrante." maxlength="100" pattern="[A-Za-z ]+" title="São permitidas apenas letras!"></textarea>
+      <div class="header_infos">
+        <h1 class="bt_avaliacao_trc">AVALIAÇÃO</h1>
+        <h3 class="sprint_sign">Sprint: {{ sprint_index }}</h3>
+        <h3 class="sprint_sign">{{ time }}</h3>
+        <img class="legenda_trc" src="{{ url_for('static', filename='img/avaliacao/legenda.png') }}" alt="legenda">
+      </div>
+        <table class="table_formularios">
+            <tr>
+              <td>
+                <h2>INTEGRANTE</h2>
+              </td>
+              <td>
+                <h2>COMUNICAÇÃO E TRABALHO<br>EM EQUIPE</h2>
+              </td>
+              <td>
+                <h2>ENGAJAMENTO E PRÓ-ATIVIDADE</h2>
+              </td>
+              <td>
+                <h2>CONHECIMENTO E <br>APLICABILIDADE TÉCNICA</h2>
+              </td>
+              <td>
+                <h2>ENTREGA DE RESULTADOS COM <br>VALOR AGREGADO</h2>
+              </td>
+              <td>
+                <h2>AUTO-GESTÃO DAS ATIVIDADES</h2>
+              </td>
+            </tr>
+            <form class="formulario" method="POST" action="{{ url_for('avaliacao') }}">
+            {% for user in users %}
+            <tr>       
+                <td>
+                  <h2 class="user_nomes">{{ user['nome'] }}</h2>
+                </td>
+                <td>
+                  <input type="range" name="comunicacao_{{user['email']}}" min="1", max="5", step="1" required>
+                  <div class="input_values">
+                    <a class="number">1</a><a class="number">2</a><a class="number">3</a><a class="number">4</a><a class="number">5</a>
+                  </div>
 
-            <h2>• Conhecimento e Aplicabilidade Técnica</h2>
-            <input class="input_radio" type="radio" name="conhecimento" value="1" required><a class="number"> 1</a>
-            <input class="input_radio" type="radio" name="conhecimento" value="2" required><a class="number"> 2</a>
-            <input class="input_radio" type="radio" name="conhecimento" value="3" required><a class="number"> 3</a>
-            <input class="input_radio" type="radio" name="conhecimento" value="4" required><a class="number"> 4</a>
-            <input class="input_radio" type="radio" name="conhecimento" value="5" required><a class="number"> 5</a>
-            <br>
-            <br>
-            <textarea class="texto_avaliacao" type="text" name="texto_conhecimento" placeholder="Escreva aqui o seu feedback para o integrante." maxlength="100" pattern="[A-Za-z ]+" title="São permitidas apenas letras!"></textarea>
+                  <textarea class="texto_avaliacao" type="text" name="texto_comunicacao_{{user['email']}}" placeholder="Escreva aqui o seu feedback para o integrante." maxlength="100" pattern="[A-Za-z ]+" title="São permitidas apenas letras!"></textarea>
+                </td>       
+                <td>
+                  <input type="range" name="engajamento_{{user['email']}}" min="1", max="5", step="1" required>
+                  <div class="input_values">
+                    <a class="number">1</a><a class="number">2</a><a class="number">3</a><a class="number">4</a><a class="number">5</a>
+                  </div>
 
-            <h2>• Entrega de Resultados com Valor Agregado</h2>
-            <input class="input_radio" type="radio" name="entrega" value="1" required><a class="number"> 1</a>
-            <input class="input_radio" type="radio" name="entrega" value="2" required><a class="number"> 2</a>
-            <input class="input_radio" type="radio" name="entrega" value="3" required><a class="number"> 3</a>
-            <input class="input_radio" type="radio" name="entrega" value="4" required><a class="number"> 4</a>
-            <input class="input_radio" type="radio" name="entrega" value="5" required><a class="number"> 5</a>
-            <br>
-            <br>
-            <textarea class="texto_avaliacao" type="text" name="texto_entrega" placeholder="Escreva aqui o seu feedback para o integrante." maxlength="100" pattern="[A-Za-z ]+" title="São permitidas apenas letras!"></textarea>
-        
-            <h2>• Auto-gestão das Atividades</h2>
-            <input class="input_radio" type="radio" name="autogestao" value="1" required><a class="number"> 1</a>
-            <input class="input_radio" type="radio" name="autogestao" value="2" required><a class="number"> 2</a>
-            <input class="input_radio" type="radio" name="autogestao" value="3" required><a class="number"> 3</a>
-            <input class="input_radio" type="radio" name="autogestao" value="4" required><a class="number"> 4</a>
-            <input class="input_radio" type="radio" name="autogestao" value="5" required><a class="number"> 5</a>
-            <br>
-            <br>
-            <textarea class="texto_avaliacao" type="text" name="texto_autogestao" placeholder="Escreva aqui o seu feedback para o integrante." maxlength="100" pattern="[A-Za-z ]+" title="São permitidas apenas letras!"></textarea>
+                  <textarea class="texto_avaliacao" type="text" name="texto_engajamento_{{user['email']}}" placeholder="Escreva aqui o seu feedback para o integrante." maxlength="100" pattern="[A-Za-z ]+" title="São permitidas apenas letras!"></textarea>
+                </td>
+                <td>
+                  <input type="range" name="conhecimento_{{user['email']}}" min="1", max="5", step="1" required>
+                  <div class="input_values">
+                    <a class="number">1</a><a class="number">2</a><a class="number">3</a><a class="number">4</a><a class="number">5</a>
+                  </div>
 
-            <button class="bt_confirmar_trc" type="submit">CONFIRMAR</button>
+                  <textarea class="texto_avaliacao" type="text" name="texto_conhecimento_{{user['email']}}" placeholder="Escreva aqui o seu feedback para o integrante." maxlength="100" pattern="[A-Za-z ]+" title="São permitidas apenas letras!"></textarea>
+                </td>      
+                <td>
+                  <input type="range" name="entrega_{{user['email']}}" min="1", max="5", step="1" required>
+                  <div class="input_values">
+                    <a class="number">1</a><a class="number">2</a><a class="number">3</a><a class="number">4</a><a class="number">5</a>
+                  </div>
+
+                  <textarea class="texto_avaliacao" type="text" name="texto_entrega_{{user['email']}}" placeholder="Escreva aqui o seu feedback para o integrante." maxlength="100" pattern="[A-Za-z ]+" title="São permitidas apenas letras!"></textarea>
+                </td>      
+                <td>
+                  <input type="range" name="autogestao_{{user['email']}}" min="1", max="5", step="1" required>
+                  <div class="input_values">
+                    <a class="number">1</a><a class="number">2</a><a class="number">3</a><a class="number">4</a><a class="number">5</a>
+                  </div>
+
+                  <textarea class="texto_avaliacao" type="text" name="texto_autogestao_{{user['email']}}" placeholder="Escreva aqui o seu feedback para o integrante." maxlength="100" pattern="[A-Za-z ]+" title="São permitidas apenas letras!"></textarea>
+                </td>
+                <input type="hidden" name="user_email_{{user['email']}}" value="{{user['email']}}">
+              </tr>              
+              {% endfor %}
+            </table>
+            
+            <h1 class="bt_autoavaliacao_trc">AUTOAVALIAÇÃO</h1>
+
+            <table class="form_autoavaliacao">
+              <tr>
+                <td>
+                  <h2 class="user_nomes">{{ session['nomeUsuario'] }}</h2>
+                </td>
+                <td>
+                  <input type="range" name="auto_comunicacao" min="1", max="5", step="1" required>
+                  <div class="input_values">
+                    <a class="number">1</a><a class="number">2</a><a class="number">3</a><a class="number">4</a><a class="number">5</a>
+                  </div>
+                </td>
+                <td>
+                  <input type="range" name="auto_engajamento" min="1", max="5", step="1" required>
+                  <div class="input_values">
+                    <a class="number">1</a><a class="number">2</a><a class="number">3</a><a class="number">4</a><a class="number">5</a>
+                  </div>
+                </td>
+                <td>  
+                  <input type="range" name="auto_conhecimento" min="1", max="5", step="1" required>
+                  <div class="input_values">
+                    <a class="number">1</a><a class="number">2</a><a class="number">3</a><a class="number">4</a><a class="number">5</a>
+                  </div>
+                </td>
+                <td>
+                  <input type="range" name="auto_entrega" min="1", max="5", step="1" required>
+                  <div class="input_values">
+                    <a class="number">1</a><a class="number">2</a><a class="number">3</a><a class="number">4</a><a class="number">5</a>
+                  </div>
+                </td>
+                <td>
+                  <input type="range" name="auto_autogestao" min="1", max="5", step="1" required>
+                  <div class="input_values">
+                    <a class="number">1</a><a class="number">2</a><a class="number">3</a><a class="number">4</a><a class="number">5</a>
+                  </div>
+                </td>
+              </tr>
+            </table>
+              <button class="bt_confirmar_trc" type="submit">CONFIRMAR</button>
             </form>
-
-  <img class="legenda_trc" src="{{ url_for('static', filename='img/avaliacao/legenda.png') }}" alt="legenda">
-
-
-  <footer>
-    <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
-  </footer>
-  </div>
-  </div>
-  </label>
-</body>  
+        <footer>
+          <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
+        </footer>
+    </div>
+  </body>  
 </html>
