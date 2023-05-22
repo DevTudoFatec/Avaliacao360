@@ -45,7 +45,7 @@
         {% if primeiro_acesso %}
             <nav class="opções_menu">
                 <h1>Selecione o seu time:</h1>
-                <form method="POST" action="{{ url_for('menu_integrante') }}">
+                <form method="POST" action="{{ url_for('padroes.menu_integrante') }}">
                     <select class="user_info_input" name="user_time" style="border-radius: 3px; font-size: 20px;">                    
                         <option  value="" disabled selected>Nome do time</option>
                         {% for time in times %}

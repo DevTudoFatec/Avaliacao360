@@ -49,7 +49,7 @@
     <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
         <div class="titulos">
         <h3 id="bt_avaliar">Devolutiva de Avaliação</h3>
-            <form class="formulario_avaliacao" method="POST" action="{{ url_for('pre_devolutiva_submit') }}">
+            <form class="formulario_avaliacao" method="POST" action="{{ url_for('devolutivas.pre_devolutiva_submit') }}">
                 <h3>Selecione a Sprint:</h3>      
                 {% for i in range(1,team_sprints+1) %}
                     <input type="radio" name="sprint" value="{{ i }}" required><a class="number"> {{ i }}</a>

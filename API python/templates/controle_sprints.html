@@ -62,7 +62,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <form class="new_projeto" method="POST" action="{{ url_for('criar_projeto') }}">
+                        <form class="new_projeto" method="POST" action="{{ url_for('criacoes.criar_projeto') }}">
                             <td>
                                 <select class="projeto_info_input" name="new_projeto_turma" required style="border-radius: 3px; font-size: 20px;">                                    
                                     <option  value="" disabled selected>Nome da Turma</option>
@@ -100,7 +100,7 @@
                     {% for projeto in projetos %}
                     <tr>
                         <td>
-                            <form class="edit_projeto" method="POST" action="{{ url_for('update_projetos') }}">
+                            <form class="edit_projeto" method="POST" action="{{ url_for('updates.update_projetos') }}">
                             {% for turma in turmas %}
                                 {% if turma['codigo'] == projeto['turma'] %}
                                     <h3>{{ turma['nome']}}</h3>

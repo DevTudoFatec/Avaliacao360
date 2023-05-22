@@ -55,7 +55,7 @@
                     </tr>
                     {% if not editing %}
                     <tr>
-                        <form class="new_time" method="POST" action="{{ url_for('criar_time') }}">
+                        <form class="new_time" method="POST" action="{{ url_for('criacoes.criar_time') }}">
                         <td>
                             <input type="text" class="time_info_input" name="nome_time" placeholder="Nome do Time" required style="border-radius: 3px; font-size: 20px;">
                         </td>
@@ -78,7 +78,7 @@
                 {% for time in times %}
                     <tr>
                         <td>
-                            <form class="edit_turma" method="POST" action="{{ url_for('update_times') }}">
+                            <form class="edit_turma" method="POST" action="{{ url_for('updates.update_times') }}">
                             {% if editing and time['index'] == index %}
                                 <input type="text" name="edited_nome" class="time_info_input" placeholder="{{ time['nome'] }}" required style="border-radius: 3px; font-size: 20px;">
                             {% else %}

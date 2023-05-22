@@ -14,7 +14,7 @@
         </header>
         <img id="logo_api_cadastro" src="{{ url_for('static', filename='img/cadastro/Logo_API cadastro.png') }}" width="400">
         
-        <form id="formulario" method="POST" action="{{ url_for('cadastro_submit') }}">
+        <form id="formulario" method="POST" action="{{ url_for('criacoes.cadastro_submit') }}">
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     {% for message in messages %}

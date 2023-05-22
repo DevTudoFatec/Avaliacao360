@@ -55,7 +55,7 @@
                     </tr>
                     {% if not editing %}
                     <tr>
-                        <form class="new_turma" method="POST" action="{{ url_for('criar_turma') }}">
+                        <form class="new_turma" method="POST" action="{{ url_for('criacoes.criar_turma') }}">
                         <td>
                             <input type="text" class="turma_info_input" name="nome_turma" placeholder="Nome da Turma" required style="border-radius: 3px; font-size: 20px;">
                         </td>
@@ -72,7 +72,7 @@
                 {% for turma in turmas %}
                     <tr>
                         <td>
-                            <form class="edit_turma" method="POST" action="{{ url_for('update_turmas') }}">
+                            <form class="edit_turma" method="POST" action="{{ url_for('updates.update_turmas') }}">
                                 {% if editing and turma['index'] == index %}
                                     <input type="text" name="new_nome" class="turma_info_input" placeholder="{{ turma['nome'] }}" required style="border-radius: 3px; font-size: 20px;">
                                 {% else %}
