@@ -11,9 +11,9 @@ def darkmode_on():
   session['darkmode'] = True
 
   if session['perfil'] == 1:
-    return redirect(url_for('menu_integrante'))
+    return redirect(url_for('padroes.menu_integrante'))
   else:
-    return redirect(url_for('menu_admin'))
+    return redirect(url_for('padroes.menu_admin'))
 
 
 @login_required
@@ -23,6 +23,6 @@ def darkmode_off():
   session['darkmode'] = False
 
   if session['perfil'] == 1:
-    return redirect(url_for('menu_integrante'))
+    return redirect(url_for('padroes.menu_integrante'))
   else:
-    return redirect(url_for('menu_admin'))
+    return redirect(url_for('padroes.menu_admin'))
