@@ -1,0 +1,17 @@
+[
+  {
+    "avaliador": "ciclano@email.com",
+    "integrante": "fulano@email.com",
+    "sprint": 1,
+    "comunicacao": 5,
+    "texto_comunicacao": "",
+    "engajamento": 5,
+    "texto_engajamento": "",
+    "conhecimento": 5,
+    "texto_conhecimento": "",
+    "entrega": 5,
+    "texto_entrega": "",
+    "autogestao": 5,
+    "texto_autogestao": ""
+  }
+]

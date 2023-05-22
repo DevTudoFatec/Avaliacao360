@@ -142,9 +142,31 @@ def update_turmas():
     elif "delete" in request.form:
         editing=False
 
+        try:
+            with open("data/projetos.json", "r") as f:
+                projetos = json.load(f)
+        except:
+            projetos = []
+
+        
+
         for turma in turmas:
           if turma['index'] == index:
             turmas.remove(turma)  
+            
+            for projeto in projetos:
+               if projeto['turma'] == turma['codigo']:
+                  projetos.remove(projeto)
+
+            for user in users:
+               if user['turma'] == turma['codigo']:
+                  user['avaliacoes'] = []
+
+        with open("data/cadastro.json", "w") as file:
+            json.dump(users, file, indent=2)          
+
+        with open("data/projetos.json", "w") as file:
+            json.dump(projetos, file, indent=2)
 
         with open("data/turmas.json", "w") as file:
             json.dump(turmas, file, indent=2)
@@ -313,7 +335,7 @@ def update_projetos():
           if projeto['index'] == index:
             for user in users:
                if user['turma'] == projeto['turma']:
-                  del user['avaliacoes']
+                  user['avaliacoes'] = []
             projetos.remove(projeto)
 
         with open("data/projetos.json", "w") as file:

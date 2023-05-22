@@ -13,12 +13,66 @@
     "index": 1,
     "nome": "Fulano",
     "email": "fulano@email.com",
-    "turma": "db01",
+    "turma": "bd01",
     "time": 1,
     "senha": "$2b$12$LzBZ4MBJx7EV6UXufBM0IOj0rGR4x6ILXHg5JSbrtbkyubn6Vpca6",
     "perfil": 1,
     "acessos": 6,
-    "avaliacoes": [],
+    "avaliacoes": [
+      [
+        1,
+        "2023-05-22",
+        "2023-05-24"
+      ],
+      [
+        2,
+        "2023-05-29",
+        "2023-05-31"
+      ],
+      [
+        3,
+        "2023-06-05",
+        "2023-06-07"
+      ],
+      [
+        4,
+        "2023-06-12",
+        "2023-06-14"
+      ]
+    ],
     "count_avaliacao": 0
+  },
+  {
+    "index": 2,
+    "nome": "Ciclano",
+    "email": "ciclano@email.com",
+    "turma": "bd01",
+    "time": 1,
+    "senha": "$2b$12$FzZbdNSojaFQz07bv6cyJ.v3J5GUPCr5MyXf4a3L7TRHpAHfV0hdq",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "2023-05-22",
+        "2023-05-24"
+      ],
+      [
+        2,
+        "2023-05-29",
+        "2023-05-31"
+      ],
+      [
+        3,
+        "2023-06-05",
+        "2023-06-07"
+      ],
+      [
+        4,
+        "2023-06-12",
+        "2023-06-14"
+      ]
+    ],
+    "count_avaliacao": 1
   }
 ]

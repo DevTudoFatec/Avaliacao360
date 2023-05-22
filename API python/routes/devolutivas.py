@@ -87,11 +87,6 @@ def devolutiva_admin():
 @login_required
 @team_required
 def pre_devolutiva():
-  
-  temp_path = f"data/temp_avaliacao_{session['email']}.json"
-
-  if os.path.exists(temp_path):
-    os.remove(temp_path)
 
   try:
     with open("data/cadastro.json", "r") as f:
