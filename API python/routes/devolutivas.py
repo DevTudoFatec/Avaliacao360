@@ -17,7 +17,7 @@ def pre_devolutiva_admin():
   except:
     users=[]
 
-  return render_template('pre_devolutiva_admin.html', users=users, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+  return render_template('admin/pre_devolutiva_admin.html', users=users, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 @bp.route("/pre_devolutiva_submit_admin", methods=["POST"])
 @login_required
@@ -72,13 +72,13 @@ def pre_devolutiva_submit_admin():
   except:
     autoavaliacoes=[]
 
-  return render_template('devolutiva_admin.html', nomeUsuario=session['nomeUsuario'], sprint=sprint, int_infos = int_infos, integrante=integrante, avgs=avgs, avaliacoes=avaliacoes, autoavaliacoes=autoavaliacoes, email=session['email'], darkmode=session['darkmode'])
+  return render_template('admin/devolutiva_admin.html', nomeUsuario=session['nomeUsuario'], sprint=sprint, int_infos = int_infos, integrante=integrante, avgs=avgs, avaliacoes=avaliacoes, autoavaliacoes=autoavaliacoes, email=session['email'], darkmode=session['darkmode'])
 
 @bp.route("/devolutiva_admin")
 @login_required
 @admin_required
 def devolutiva_admin():
-  return render_template('devolutiva_admin.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+  return render_template('admin/devolutiva_admin.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 
 ##### INTEGRANTE #######
@@ -108,7 +108,7 @@ def pre_devolutiva():
   except:
      pass
 
-  return render_template('pre_devolutiva_avaliacao.html', count=session['count_avaliacao'], sprint_index=session['sprint'], team_sprints=team_sprints, avaliacao_check=session['avaliacao'], nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+  return render_template('integrante/pre_devolutiva_avaliacao.html', count=session['count_avaliacao'], sprint_index=session['sprint'], team_sprints=team_sprints, avaliacao_check=session['avaliacao'], nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 @bp.route("/pre_devolutiva_submit", methods=["POST"])
 @login_required
@@ -151,4 +151,4 @@ def pre_devolutiva_submit():
   except:
     autoavaliacoes=[]
 
-  return render_template('devolutiva_avaliacao.html', count=session['count_avaliacao'], sprint_index=session['sprint'], avaliacao_check=session['avaliacao'], nomeUsuario=session['nomeUsuario'], sprint=sprint, avgs=avgs, avaliacoes=avaliacoes, autoavaliacoes=autoavaliacoes, email=session['email'], darkmode=session['darkmode'])
+  return render_template('integrante/devolutiva_avaliacao.html', count=session['count_avaliacao'], sprint_index=session['sprint'], avaliacao_check=session['avaliacao'], nomeUsuario=session['nomeUsuario'], sprint=sprint, avgs=avgs, avaliacoes=avaliacoes, autoavaliacoes=autoavaliacoes, email=session['email'], darkmode=session['darkmode'])

@@ -18,11 +18,11 @@ def home():
   except:
     pass
 
-  return render_template('login.html')
+  return render_template('geral/login.html')
 
 @bp.route("/cadastro")
 def cadastro():
-  return render_template('cadastro.html')
+  return render_template('geral/cadastro.html')
 
 
 @bp.route("/login", methods=['POST'])
@@ -78,7 +78,7 @@ def login():
 @login_required
 @admin_required
 def menu_admin():
-  return render_template('menu_admin.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+  return render_template('admin/menu_admin.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 @bp.route("/controle_geral")
 @login_required
@@ -104,7 +104,7 @@ def controle_geral():
 
     
 
-  return render_template('controle_geral.html', times=times, turmas=turmas, users=users, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+  return render_template('admin/controle_geral.html', times=times, turmas=turmas, users=users, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 @bp.route("/controle_turmas", methods=["GET", "POST"])
 @login_required
@@ -128,7 +128,7 @@ def controle_turmas():
   except:
     times=[]
 
-  return render_template('controle_turmas.html', users=users, turmas=turmas, times=times, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+  return render_template('admin/controle_turmas.html', users=users, turmas=turmas, times=times, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 @bp.route("/controle_times", methods=["GET", "POST"])
 @login_required
@@ -152,7 +152,7 @@ def controle_times():
   except:
     times=[]
 
-  return render_template('controle_times.html', users=users, turmas=turmas, times=times, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+  return render_template('admin/controle_times.html', users=users, turmas=turmas, times=times, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 
 @bp.route("/controle_sprints")
@@ -184,7 +184,7 @@ def controle_sprints():
   turmas_with_projeto = [projeto["turma"] for projeto in projetos]
   turmas_select = [turma for turma in turmas if turma["codigo"] not in turmas_with_projeto]
 
-  return render_template('controle_sprints.html', turmas_select=turmas_select, users=users, turmas=turmas, times=times, projetos=projetos, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'], sprint_index=session['sprint'])
+  return render_template('admin/controle_sprints.html', turmas_select=turmas_select, users=users, turmas=turmas, times=times, projetos=projetos, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'], sprint_index=session['sprint'])
 
 
 ###### INTEGRANTE  #############
@@ -229,8 +229,8 @@ def menu_integrante():
             times_turma.append(time)
       except:
         times_turma = []     
-      return render_template('menu_integrante.html', primeiro_acesso=primeiro_acesso, times=times_turma, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+      return render_template('integrante/menu_integrante.html', primeiro_acesso=primeiro_acesso, times=times_turma, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
     
     else:
-      return render_template('menu_integrante.html', nomeUsuario=session['nomeUsuario'], sprint_index=session['sprint'], count=session['count_avaliacao'], avaliacao_check=session['avaliacao'], darkmode=session['darkmode'])
+      return render_template('integrante/menu_integrante.html', nomeUsuario=session['nomeUsuario'], sprint_index=session['sprint'], count=session['count_avaliacao'], avaliacao_check=session['avaliacao'], darkmode=session['darkmode'])
 

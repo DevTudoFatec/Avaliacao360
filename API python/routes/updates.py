@@ -76,7 +76,7 @@ def update_geral():
 
         return redirect(url_for('padroes.controle_geral'))        
 
-    return render_template('controle_geral.html', users=users, turmas=turmas, times=times, editing=editing, editing_time=editing_time, editing_perfil=editing_perfil, index=index, darkmode=session['darkmode'])
+    return render_template('admin/controle_geral.html', users=users, turmas=turmas, times=times, editing=editing, editing_time=editing_time, editing_perfil=editing_perfil, index=index, darkmode=session['darkmode'])
 
 
 @bp.route("/update_turmas", methods=["POST"])
@@ -151,7 +151,7 @@ def update_turmas():
           
         return redirect(url_for('padroes.controle_turmas'))
 
-    return render_template('controle_turmas.html', page=page, users=users, turmas=turmas, times=times, editing=editing, index=index, darkmode=session['darkmode'])
+    return render_template('admin/controle_turmas.html', page=page, users=users, turmas=turmas, times=times, editing=editing, index=index, darkmode=session['darkmode'])
 
 @bp.route("/update_times", methods=["POST"])
 @login_required
@@ -219,7 +219,7 @@ def update_times():
           
         return redirect(url_for('padroes.controle_times'))
 
-    return render_template('controle_times.html', page=page, users=users, turmas=turmas, times=times, editing=editing, index=index, darkmode=session['darkmode'])
+    return render_template('admin/controle_times.html', page=page, users=users, turmas=turmas, times=times, editing=editing, index=index, darkmode=session['darkmode'])
 
 
 
@@ -324,4 +324,4 @@ def update_projetos():
 
         return redirect(url_for('padroes.controle_sprints'))
 
-    return render_template('controle_sprints.html', index=index, editing=editing, users=users, turmas=turmas, projetos=projetos, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+    return render_template('admin/controle_sprints.html', index=index, editing=editing, users=users, turmas=turmas, projetos=projetos, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])

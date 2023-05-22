@@ -33,7 +33,7 @@ def avaliacao():
 
     if request.method == 'GET':
 
-      return render_template('avaliacao.html', time=user_time, users=filtered_users, avaliacao_check=session['avaliacao'],nomeUsuario=session['nomeUsuario'],emailUsuario=session['email'], darkmode=session['darkmode'],sprint_index=session['sprint'])
+      return render_template('integrante/avaliacao.html', time=user_time, users=filtered_users, avaliacao_check=session['avaliacao'],nomeUsuario=session['nomeUsuario'],emailUsuario=session['email'], darkmode=session['darkmode'],sprint_index=session['sprint'])
 
     elif request.method == 'POST':
 
