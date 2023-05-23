@@ -11,7 +11,35 @@ bp = bp('devolutivas', __name__)
 @login_required
 @admin_required
 def devolutiva_admin():
-  return render_template('admin/devolutiva_admin.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+
+  pre_devolutiva = False
+
+  if request.method == 'GET':
+    pre_devolutiva = True
+
+    turmas_projetos = []
+
+    try:
+      with open("data/projetos.json", "r") as f:
+        projetos = json.load(f)
+    except:
+      projetos=[]
+
+    try:
+      with open("data/turmas.json", "r") as f:
+        turmas = json.load(f)
+    except:
+      turmas=[]
+
+    for turma in turmas:
+      for projeto in projetos:
+        if projeto['turma'] == turma['codigo']:
+          turmas_projetos.append(turma)
+      
+  
+
+    return render_template('admin/devolutiva_admin.html', pre_devolutiva=pre_devolutiva, turmas=turmas_projetos,
+                              nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 
 ##### INTEGRANTE #######

@@ -62,7 +62,7 @@ def update_geral():
         with open("data/cadastro.json", "w") as file:
             json.dump(users, file, indent=2)
 
-        return redirect(url_for('padroes.controle_geral'))        
+        return redirect(url_for('controles.controle_integrantes'))        
     
     elif "delete" in request.form:
         editing=False
@@ -74,9 +74,9 @@ def update_geral():
         with open("data/cadastro.json", "w") as file:
             json.dump(users, file, indent=2)
 
-        return redirect(url_for('padroes.controle_geral'))        
+        return redirect(url_for('controles.controle_integrantes'))        
 
-    return render_template('admin/controle_geral.html', users=users, turmas=turmas, times=times, editing=editing, editing_time=editing_time, editing_perfil=editing_perfil, index=index, darkmode=session['darkmode'])
+    return render_template('admin/controle_integrantes.html', users=users, turmas=turmas, times=times, editing=editing, editing_time=editing_time, editing_perfil=editing_perfil, index=index, darkmode=session['darkmode'])
 
 
 @bp.route("/update_turmas", methods=["POST"])
@@ -137,7 +137,7 @@ def update_turmas():
         with open("data/times.json", "w") as file:
             json.dump(times, file, indent=2)
 
-        return redirect(url_for('padroes.controle_turmas'))
+        return redirect(url_for('controles.controle_turmas'))
     
     elif "delete" in request.form:
         editing=False
@@ -171,7 +171,7 @@ def update_turmas():
         with open("data/turmas.json", "w") as file:
             json.dump(turmas, file, indent=2)
           
-        return redirect(url_for('padroes.controle_turmas'))
+        return redirect(url_for('controles.controle_turmas'))
 
     return render_template('admin/controle_turmas.html', page=page, users=users, turmas=turmas, times=times, editing=editing, index=index, darkmode=session['darkmode'])
 
@@ -221,7 +221,7 @@ def update_times():
         with open("data/times.json", "w") as file:
             json.dump(times, file, indent=2)
 
-        return redirect(url_for('padroes.controle_times'))
+        return redirect(url_for('controles.controle_times'))
     
     elif "delete" in request.form:
         editing=False
@@ -239,7 +239,7 @@ def update_times():
         with open("data/cadastro.json", "w") as file:
             json.dump(users, file, indent=2)
           
-        return redirect(url_for('padroes.controle_times'))
+        return redirect(url_for('controles.controle_times'))
 
     return render_template('admin/controle_times.html', page=page, users=users, turmas=turmas, times=times, editing=editing, index=index, darkmode=session['darkmode'])
 
@@ -326,7 +326,7 @@ def update_projetos():
         with open('data/cadastro.json', 'w') as u:
           json.dump(users, u, indent=2)
 
-        return redirect(url_for('padroes.controle_sprints'))
+        return redirect(url_for('controles.controle_sprints'))
     
     elif "delete" in request.form:
         editing=False
@@ -344,6 +344,6 @@ def update_projetos():
         with open("data/cadastro.json", "w") as file:
             json.dump(users, file, indent=2)
 
-        return redirect(url_for('padroes.controle_sprints'))
+        return redirect(url_for('controles.controle_sprints'))
 
     return render_template('admin/controle_sprints.html', index=index, editing=editing, users=users, turmas=turmas, projetos=projetos, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])

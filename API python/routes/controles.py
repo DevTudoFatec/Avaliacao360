@@ -4,10 +4,10 @@ from utils.decorators import login_required, admin_required
 
 bp = bp('controles', __name__)
 
-@bp.route("/controle_geral")
+@bp.route("/controle_integrantes")
 @login_required
 @admin_required
-def controle_geral():
+def controle_integrantes():
   try:
     with open("data/cadastro.json", "r") as f:
       users = json.load(f)
@@ -28,7 +28,7 @@ def controle_geral():
 
     
 
-  return render_template('admin/controle_geral.html', times=times, turmas=turmas, users=users, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+  return render_template('admin/controle_integrantes.html', times=times, turmas=turmas, users=users, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 @bp.route("/controle_turmas", methods=["GET", "POST"])
 @login_required
