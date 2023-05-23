@@ -4,7 +4,7 @@
 <head>
   <meta charset="UFT-8"/> <!--extensão para caracteres especiais-->
   <title> Devolutiva Avaliação </title> 
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/devolutiva_avaliacao.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/devolutiva_admin.css') }}">
   {% if darkmode%}
   <style>
     h2, h3, .sprint_sign, .number{
@@ -40,36 +40,42 @@
     {% if pre_devolutiva %}
         <div class="titulos_form">
             <h1 class="bt_pre_devolutiva">DEVOLUTIVA AVALIAÇÃO</h1>
-            <h3 class="sprint_pre_sign">Selecione a Turma:</h3>
-            <form class="form_devolutiva" method="POST" action="{{ url_for('devolutivas.devolutiva_integrante') }}">
+            <h3 class="sprint_pre_sign">Selecione a Turma e o Time:</h3>
             {% if select_turma %}
-                <select name="turma_escolha" required style="border-radius: 3px; font-size: 20px;">                                    
-                    <option  value="" disabled selected>Nome da Turma</option>
-                    {% for turma in turmas %}
-                            <option value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
-                    {% endfor %}
-                </select>
-                <select disabled name="time_escolha" tyle="border-radius: 3px; font-size: 20px;">                                    
-                    <option  value="" disabled selected>Nome do Time</option>
-                </select>
-                <br>
-                <br>
-                <button class="bt_confirmar_trc" name="confirm_devolutiva" type="submit">CONFIRMAR</button>
+                <form class="form_devolutiva" method="POST" action="{{ url_for('devolutivas.devolutiva_admin') }}">
+                    <select class="input_turma_time" name="turma_escolha" required>                                    
+                        <option  value="" disabled selected>Nome da Turma</option>
+                        {% for turma in turmas %}
+                                <option value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
+                        {% endfor %}
+                    </select>
+                    <br>
+                    <br>
+                    <select class="input_turma_time" disabled>                                    
+                        <option  value="" disabled selected>Nome do Time</option>
+                    </select>
+                    <br>
+                    <br>
+                    <button class="bt_confirmar_trc" name="confirm_turma" type="submit" style="margin-left: 1%">CONFIRMAR</button>
+                <form>
             {% else %}
-                <select disabled name="turma_escolha" required style="border-radius: 3px; font-size: 20px;">                                    
-                    <option  value="" disabled selected>Nome da Turma</option>
-                    {% for turma in turmas %}
-                            <option value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
-                    {% endfor %}
-                </select>
-                <select name="time_escolha" tyle="border-radius: 3px; font-size: 20px;">                                    
-                    <option  value="" disabled selected>Nome do Time</option>
-                </select>
-                <br>
-                <br>
-                <button class="bt_confirmar_trc" name="confirm_devolutiva" type="submit">CONFIRMAR</button>
+                <form class="form_devolutiva" method="POST" action="{{ url_for('devolutivas.devolutiva_admin') }}">
+                    <select class="input_turma_time" disabled>
+                        <option value="">{{ turma_tela }}</option>
+                    </select>
+                    <br>
+                    <br>                    
+                    <select class="input_turma_time" name="time_escolha" required>                                    
+                        <option  value="" disabled selected>Nome do Time</option>
+                        {% for time in times %}
+                                <option value="{{ time['codigo'] }}">{{ time['nome'] }}</option>
+                        {% endfor %}
+                    </select>
+                    <br>
+                    <br>
+                    <button class="bt_confirmar_trc" name="confirm_devolutiva" type="submit" style="margin-left: 1%">CONFIRMAR</button>
+                <form>
             {% endif %}
-            <form>
         </div>
     {% else %}
 

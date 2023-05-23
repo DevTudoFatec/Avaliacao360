@@ -209,59 +209,6 @@ body {
   margin-top: -35%;
 }
 
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  background: transparent;
-  cursor: pointer;
-  width: 80%;
-  margin-left: 10%;
-}
-
-input[type="range"]::-webkit-slider-runnable-track {
-  background: #1e6597;
-  height: 0.5rem;
-}
-
-input[type="range"]::-moz-range-track {
-  background: #1e6597;
-  height: 0.5rem;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  margin-top: -5px;
-  background-color: #000000;
-  height: 1rem;
-  width: 1rem;
-}
-
-input[type="range"]:focus {
-  outline: none;
-}
-
-input[type="range"]:focus::-webkit-slider-thumb {
-  border: 1px solid #053a5f;
-  outline: 3px solid #053a5f;
-  outline-offset: 0.125rem;
-  border-radius: 5px;
-}
-
-input[type="range"]::-webkit-slider-runnable-track {
-  background-color: #053a5f;
-  border-radius: 0.5rem;
-  height: 0.5rem;  
-}
-
-.input_values {
-  width: 105%;
-  display: flex;
-  flex-direction: row;
-  gap: 15%;
-  margin-left: 12%;
-}
-
 footer{
   position: absolute;
   width: 50%;
@@ -272,23 +219,6 @@ footer{
 .rodape-img {   
   height: 100%;
   width: auto;
-}
-
-.user_nomes{
-  font-size: 160%;
-}
-
-.input_integrante {
-  left: 1%; 
-  top: -25%;
-  position: absolute;
-}
-
-.Sprint_select {
-  position: absolute;
-  left: 70%; 
-  top: -25%;
-  width: 43%;
 }
 
 h2 {
@@ -332,6 +262,14 @@ th, td {
 h3 {
   text-align: center;
   font-weight: lighter;
+}
+
+.input_turma_time {
+  max-width: 18%; 
+  min-width: 18%;
+  margin-left: -2%; 
+  border-radius: 3px; 
+  font-size: 20px;
 }
 /* RESPONSIVIDADE PARA TELAS MENORES QUE 1920X 1080 */
 /*xr*/

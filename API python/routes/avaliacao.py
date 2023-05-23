@@ -77,6 +77,7 @@ def avaliacao():
         avaliador = session['email']
         integrante = request.form.get(f"user_email_{user['email']}")
         sprint = session['sprint']
+        time = session['time']
         comunicacao = request.form.get(f"comunicacao_{user['email']}")
         texto_comunicacao = request.form.get(f"texto_comunicacao_{user['email']}")
         engajamento = request.form.get(f"engajamento_{user['email']}")
@@ -92,6 +93,7 @@ def avaliacao():
           "avaliador": avaliador,
           "integrante": integrante,
           "sprint": sprint,
+          "time": time,
           "comunicacao": int(comunicacao),
           "texto_comunicacao": texto_comunicacao,
           "engajamento": int(engajamento),

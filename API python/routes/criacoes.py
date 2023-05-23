@@ -8,6 +8,9 @@ from utils.decorators import login_required, admin_required
 
 bp = bp('criacoes', __name__)
 
+#########      ACESSO GERAL          ############
+
+
 @bp.route("/cadastro_submit", methods=["POST"])
 def cadastro_submit():
 
@@ -104,7 +107,7 @@ def criar_turma():
     data = json.load(f)
   if any(turma.get("codigo_turma") == codigo_turma for turma in data):
     flash('Turma já cadastrada')
-    return redirect(url_for('padroes.controle_turmas'))
+    return redirect(url_for('controles.controle_turmas'))
 
   turma_dict = {
     "index": len(data),
@@ -116,7 +119,7 @@ def criar_turma():
   with open('data/turmas.json', 'w') as f:
     json.dump(data, f, indent=2)
 
-  return redirect(url_for('padroes.controle_turmas'))
+  return redirect(url_for('controles.controle_turmas'))
 
 @bp.route("/criar_time", methods=["POST"])
 @login_required
@@ -148,7 +151,7 @@ def criar_time():
   with open('data/times.json', 'w') as f:
     json.dump(data, f, indent=2)
 
-  return redirect(url_for('padroes.controle_times'))
+  return redirect(url_for('controles.controle_times'))
 
 
 @bp.route("/criar_projeto", methods=["POST"])
@@ -222,4 +225,4 @@ def criar_projeto():
   with open('data/cadastro.json', 'w') as u:
     json.dump(users, u, indent=2)
 
-  return redirect(url_for('padroes.controle_sprints'))
+  return redirect(url_for('controles.controle_sprints'))

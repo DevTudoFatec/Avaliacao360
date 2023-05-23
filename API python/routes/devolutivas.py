@@ -11,35 +11,63 @@ bp = bp('devolutivas', __name__)
 @login_required
 @admin_required
 def devolutiva_admin():
+  try:
+    with open("data/projetos.json", "r") as f:
+      projetos = json.load(f)
+  except:
+    projetos=[]
+
+  try:
+    with open("data/turmas.json", "r") as f:
+      turmas = json.load(f)
+  except:
+    turmas=[]
+
+  try:
+    with open("data/times.json", "r") as f:
+      times = json.load(f)
+  except:
+    times=[]
 
   pre_devolutiva = False
+  select_turma = False
 
   if request.method == 'GET':
     pre_devolutiva = True
+    select_turma = True
 
     turmas_projetos = []
-
-    try:
-      with open("data/projetos.json", "r") as f:
-        projetos = json.load(f)
-    except:
-      projetos=[]
-
-    try:
-      with open("data/turmas.json", "r") as f:
-        turmas = json.load(f)
-    except:
-      turmas=[]
 
     for turma in turmas:
       for projeto in projetos:
         if projeto['turma'] == turma['codigo']:
           turmas_projetos.append(turma)
+
+    return render_template('admin/devolutiva_admin.html', select_turma=select_turma, pre_devolutiva=pre_devolutiva, 
+                           turmas=turmas_projetos, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+          
+  
+  elif "confirm_turma" in request.form:
+    pre_devolutiva = True
+
+    turma_escolhida = request.form.get('turma_escolha')
+    times_turma = []
+
+    for time in times:
+      if time['turma'] == turma_escolhida:
+        times_turma.append(time)
+
+    turma_tela = ''
+
+    for turma in turmas:
+      if turma['codigo'] == turma_escolhida:
+        turma_tela = turma['nome']
+        
+    return render_template('admin/devolutiva_admin.html', turma_tela=turma_tela, times=times_turma, select_turma=select_turma, 
+                           pre_devolutiva=pre_devolutiva,  nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
       
   
 
-    return render_template('admin/devolutiva_admin.html', pre_devolutiva=pre_devolutiva, turmas=turmas_projetos,
-                              nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 
 ##### INTEGRANTE #######
