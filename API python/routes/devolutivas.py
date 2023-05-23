@@ -7,74 +7,7 @@ bp = bp('devolutivas', __name__)
 
 #### ADMINISTRADOR ######
 
-@bp.route("/pre_devolutiva_admin")
-@login_required
-@admin_required
-def pre_devolutiva_admin():
-  try:
-    with open("data/cadastro.json", "r") as f:
-      users = json.load(f)
-  except:
-    users=[]
-
-  return render_template('admin/pre_devolutiva_admin.html', users=users, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
-
-@bp.route("/pre_devolutiva_submit_admin", methods=["POST"])
-@login_required
-@admin_required
-def pre_devolutiva_submit_admin():
-  sprint = request.form.get('sprint')
-  integrante = request.form.get('integrante')
-
-  try:
-    with open("data/avaliacao.json", "r") as f:
-      avaliacoes = json.load(f)
-  except:
-    avaliacoes=[]
-
-  int_infos=''
-
-  try:
-    with open("data/cadastro.json", "r") as f:
-      users = json.load(f)
-      for user in users:
-        if user['email'] == integrante:
-          int_infos = user['turma'] + '   -    ' + user['time'] + '   -    ' + user['nome']                   
-  except:
-    users=[]
-
-  try:      
-    rows=0
-    comunicacao = engajamento = conhecimento = entrega = autogestao = 0
-
-    for avaliacao in avaliacoes:
-      if avaliacao['integrante'] == integrante and avaliacao['sprint'] == sprint:
-        rows+=1
-        comunicacao += avaliacao['comunicacao']
-        engajamento += avaliacao['engajamento']
-        conhecimento += avaliacao['conhecimento']
-        entrega += avaliacao['entrega']
-        autogestao += avaliacao['autogestao']
-
-    comunicacao = comunicacao/rows
-    engajamento = engajamento/rows
-    conhecimento = conhecimento/rows
-    entrega = entrega/rows
-    autogestao = autogestao/rows
-
-    avgs = [int(comunicacao), int(engajamento), int(conhecimento), int(entrega), int(autogestao)] 
-  except:
-    avgs = []
-
-  try:
-    with open("data/autoavaliacao.json", "r") as g:
-      autoavaliacoes = json.load(g)
-  except:
-    autoavaliacoes=[]
-
-  return render_template('admin/devolutiva_admin.html', nomeUsuario=session['nomeUsuario'], sprint=sprint, int_infos = int_infos, integrante=integrante, avgs=avgs, avaliacoes=avaliacoes, autoavaliacoes=autoavaliacoes, email=session['email'], darkmode=session['darkmode'])
-
-@bp.route("/devolutiva_admin")
+@bp.route("/devolutiva_admin", methods=["GET", "POST"])
 @login_required
 @admin_required
 def devolutiva_admin():
@@ -83,67 +16,92 @@ def devolutiva_admin():
 
 ##### INTEGRANTE #######
 
-@bp.route("/pre_devolutiva")
+@bp.route("/devolutiva_integrante", methods=["GET", "POST"])
 @login_required
 @team_required
-def pre_devolutiva():
+def devolutiva_integrante():
 
-  try:
-    with open("data/cadastro.json", "r") as f:
-      users = json.load(f)
-  except:
-    users=[]
+  pre_devolutiva = False
 
-  team_sprints=0
+  if request.method == 'GET':
+    pre_devolutiva = True
+    team_sprints = len(session['avaliacoes'])
+  
 
-  try:
-    for user in users:
-      if user['email'] == session['email']:
-          team_sprints=len(user['avaliacoes'])
-  except:
-     pass
+    return render_template('integrante/devolutiva_avaliacao.html', pre_devolutiva=pre_devolutiva, team_sprints=team_sprints,
+                              nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
-  return render_template('integrante/pre_devolutiva_avaliacao.html', count=session['count_avaliacao'], sprint_index=session['sprint'], team_sprints=team_sprints, avaliacao_check=session['avaliacao'], nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+  elif "confirm_devolutiva" in request.form:
 
-@bp.route("/pre_devolutiva_submit", methods=["POST"])
-@login_required
-@team_required
-def pre_devolutiva_submit():
-  sprint = request.form.get('sprint')
+    sprint_escolha = int(request.form.get("sprint_escolha"))
 
-  try:
-    with open("data/avaliacao.json", "r") as f:
-      avaliacoes = json.load(f)
-  except:
-    avaliacoes=[]
+    try:
+      with open("data/avaliacao.json", "r") as f:
+        avaliacoes = json.load(f)
+    except:
+      avaliacoes=[]
 
-  try:      
-    rows=0
-    comunicacao = engajamento = conhecimento = entrega = autogestao = 0
+    try:      
+      rows=0
+      comunicacao = engajamento = conhecimento = entrega = autogestao = 0
 
-    for avaliacao in avaliacoes:
-      if avaliacao['integrante'] == session['email'] and avaliacao['sprint'] == sprint:
-        rows+=1
-        comunicacao += avaliacao['comunicacao']
-        engajamento += avaliacao['engajamento']
-        conhecimento += avaliacao['conhecimento']
-        entrega += avaliacao['entrega']
-        autogestao += avaliacao['autogestao']
+      textos_comunicacao = []
+      textos_engajamento = []
+      textos_conhecimento = []
+      textos_entrega = []
+      textos_autogestao = []
 
-    comunicacao = comunicacao/rows
-    engajamento = engajamento/rows
-    conhecimento = conhecimento/rows
-    entrega = entrega/rows
-    autogestao = autogestao/rows
+      for avaliacao in avaliacoes:
+        if avaliacao['integrante'] == session['email'] and avaliacao['sprint'] == sprint_escolha:
+          rows+=1
+          comunicacao += avaliacao['comunicacao']
+          engajamento += avaliacao['engajamento']
+          conhecimento += avaliacao['conhecimento']
+          entrega += avaliacao['entrega']
+          autogestao += avaliacao['autogestao']
 
-    avgs = [int(comunicacao), int(engajamento), int(conhecimento), int(entrega), int(autogestao)] 
-  except:
-    avgs = []
+          textos_comunicacao.append(avaliacao['texto_comunicacao'])
+          textos_engajamento.append(avaliacao['texto_engajamento'])
+          textos_conhecimento.append(avaliacao['texto_conhecimento'])
+          textos_entrega.append(avaliacao['texto_entrega'])
+          textos_autogestao.append(avaliacao['texto_autogestao'])
 
-  try:
-    with open("data/autoavaliacao.json", "r") as g:
-      autoavaliacoes = json.load(g)
-  except:
-    autoavaliacoes=[]
+      textos = {
+        "comunicacao": textos_comunicacao,
+        "engajamento": textos_engajamento,
+        "conhecimento": textos_conhecimento,
+        "entrega": textos_entrega,
+        "autogestao": textos_autogestao
+      }
 
-  return render_template('integrante/devolutiva_avaliacao.html', count=session['count_avaliacao'], sprint_index=session['sprint'], avaliacao_check=session['avaliacao'], nomeUsuario=session['nomeUsuario'], sprint=sprint, avgs=avgs, avaliacoes=avaliacoes, autoavaliacoes=autoavaliacoes, email=session['email'], darkmode=session['darkmode'])
+      comunicacao = comunicacao/rows
+      engajamento = engajamento/rows
+      conhecimento = conhecimento/rows
+      entrega = entrega/rows
+      autogestao = autogestao/rows
+
+      avgs = {
+        "comunicacao": int(comunicacao), 
+        "engajamento": int(engajamento), 
+        "conhecimento": int(conhecimento), 
+        "entrega": int(entrega), 
+        "autogestao": int(autogestao)
+      }
+    except:
+      avgs = {}
+
+    try:
+      with open("data/autoavaliacao.json", "r") as g:
+        autoavaliacoes = json.load(g)
+    except:
+      autoavaliacoes=[]
+
+    user_autoavaliacao = {}
+
+    for autoavaliacao in autoavaliacoes:
+      if autoavaliacao['email'] == session['email'] and autoavaliacao['sprint'] == sprint_escolha:
+        user_autoavaliacao = autoavaliacao
+
+    return render_template('integrante/devolutiva_avaliacao.html', pre_devolutiva=pre_devolutiva,
+                           avgs=avgs, user_autoavaliacao=user_autoavaliacao, textos=textos, sprint=sprint_escolha, 
+                           nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])

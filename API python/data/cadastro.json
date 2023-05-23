@@ -12,7 +12,7 @@
   {
     "index": 1,
     "nome": "Fulano",
-    "email": "fulano@email.com",
+    "email": "fulano",
     "turma": "bd01",
     "time": 1,
     "senha": "$2b$12$LzBZ4MBJx7EV6UXufBM0IOj0rGR4x6ILXHg5JSbrtbkyubn6Vpca6",
@@ -40,7 +40,7 @@
         "2023-06-14"
       ]
     ],
-    "count_avaliacao": 0
+    "count_avaliacao": 1
   },
   {
     "index": 2,

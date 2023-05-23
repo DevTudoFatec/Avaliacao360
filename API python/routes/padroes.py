@@ -20,6 +20,8 @@ def home():
 
   return render_template('geral/login.html')
 
+
+
 @bp.route("/cadastro")
 def cadastro():
   return render_template('geral/cadastro.html')
@@ -61,15 +63,19 @@ def login():
             if inicio <= current_date <= fim:
               session['avaliacao'] = True
               session['sprint'] = avaliacao[0]
+          
+          session['avaliacoes'] = avaliacoes
         except:
            pass
            
         if item['perfil'] == 2:
           return redirect(url_for('padroes.menu_admin'))
+        
         else:
           return redirect(url_for('padroes.menu_integrante'))
   if not check:
     flash('Usuário ou Senha inválidos')
+
     return redirect('/')
 
 ###### ADMINISTRADOR  #############
@@ -79,113 +85,6 @@ def login():
 @admin_required
 def menu_admin():
   return render_template('admin/menu_admin.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
-
-@bp.route("/controle_geral")
-@login_required
-@admin_required
-def controle_geral():
-  try:
-    with open("data/cadastro.json", "r") as f:
-      users = json.load(f)
-  except:
-    users=[]
-
-  try:
-        with open("data/times.json", "r") as f:
-            times = json.load(f)
-  except:
-      times = []
-  
-  try:
-      with open("data/turmas.json", "r") as f:
-          turmas = json.load(f)
-  except:
-      turmas = []
-
-    
-
-  return render_template('admin/controle_geral.html', times=times, turmas=turmas, users=users, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
-
-@bp.route("/controle_turmas", methods=["GET", "POST"])
-@login_required
-@admin_required
-def controle_turmas():
-  try:
-      with open("data/cadastro.json", "r") as f:
-        users = json.load(f)
-  except:
-    users=[]
-
-  try:
-    with open("data/turmas.json", "r") as f:
-      turmas = json.load(f)
-  except:
-    turmas=[]
-
-  try:
-    with open("data/times.json", "r") as f:
-      times = json.load(f)
-  except:
-    times=[]
-
-  return render_template('admin/controle_turmas.html', users=users, turmas=turmas, times=times, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
-
-@bp.route("/controle_times", methods=["GET", "POST"])
-@login_required
-@admin_required
-def controle_times():
-  try:
-      with open("data/cadastro.json", "r") as f:
-        users = json.load(f)
-  except:
-    users=[]
-
-  try:
-    with open("data/turmas.json", "r") as f:
-      turmas = json.load(f)
-  except:
-    turmas=[]
-
-  try:
-    with open("data/times.json", "r") as f:
-      times = json.load(f)
-  except:
-    times=[]
-
-  return render_template('admin/controle_times.html', users=users, turmas=turmas, times=times, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
-
-
-@bp.route("/controle_sprints")
-def controle_sprints():
-  try:
-      with open("data/cadastro.json", "r") as f:
-        users = json.load(f)
-  except:
-    users=[]
-
-  try:
-    with open("data/turmas.json", "r") as f:
-      turmas = json.load(f)
-  except:
-    turmas=[]
-
-  try:
-    with open("data/times.json", "r") as f:
-      times = json.load(f)
-  except:
-    times=[]
-
-  try:
-    with open("data/projetos.json", "r") as f:
-      projetos = json.load(f)
-  except:
-    projetos=[]
-
-  turmas_with_projeto = [projeto["turma"] for projeto in projetos]
-  turmas_select = [turma for turma in turmas if turma["codigo"] not in turmas_with_projeto]
-
-  return render_template('admin/controle_sprints.html', turmas_select=turmas_select, users=users, turmas=turmas, times=times, projetos=projetos, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'], sprint_index=session['sprint'])
-
 
 ###### INTEGRANTE  #############
 
