@@ -127,11 +127,16 @@ def devolutiva_admin():
           entrega += avaliacao['entrega']
           autogestao += avaliacao['autogestao']
 
-          textos_comunicacao.append(avaliacao['texto_comunicacao'])
-          textos_engajamento.append(avaliacao['texto_engajamento'])
-          textos_conhecimento.append(avaliacao['texto_conhecimento'])
-          textos_entrega.append(avaliacao['texto_entrega'])
-          textos_autogestao.append(avaliacao['texto_autogestao'])
+          if len(avaliacao['texto_comunicacao']) > 0:
+            textos_comunicacao.append(avaliacao['texto_comunicacao'])
+          if len(avaliacao['texto_engajamento']) > 0:
+            textos_engajamento.append(avaliacao['texto_engajamento'])
+          if len(avaliacao['texto_conhecimento']) > 0:
+            textos_conhecimento.append(avaliacao['texto_conhecimento'])
+          if len(avaliacao['texto_entrega']) > 0:
+            textos_entrega.append(avaliacao['texto_entrega'])
+          if len(avaliacao['texto_autogestao']) > 0:
+            textos_autogestao.append(avaliacao['texto_autogestao'])
 
           textos["comunicacao"] = textos_comunicacao
           textos["engajamento"] = textos_engajamento
@@ -219,11 +224,16 @@ def devolutiva_integrante():
           entrega += avaliacao['entrega']
           autogestao += avaliacao['autogestao']
 
-          textos_comunicacao.append(avaliacao['texto_comunicacao'])
-          textos_engajamento.append(avaliacao['texto_engajamento'])
-          textos_conhecimento.append(avaliacao['texto_conhecimento'])
-          textos_entrega.append(avaliacao['texto_entrega'])
-          textos_autogestao.append(avaliacao['texto_autogestao'])
+          if len(avaliacao['texto_comunicacao']) > 0:
+            textos_comunicacao.append(avaliacao['texto_comunicacao'])
+          if len(avaliacao['texto_engajamento']) > 0:
+            textos_engajamento.append(avaliacao['texto_engajamento'])
+          if len(avaliacao['texto_conhecimento']) > 0:
+            textos_conhecimento.append(avaliacao['texto_conhecimento'])
+          if len(avaliacao['texto_entrega']) > 0:
+            textos_entrega.append(avaliacao['texto_entrega'])
+          if len(avaliacao['texto_autogestao']) > 0:
+            textos_autogestao.append(avaliacao['texto_autogestao'])
 
       textos = {
         "comunicacao": textos_comunicacao,
