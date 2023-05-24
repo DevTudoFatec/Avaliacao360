@@ -160,7 +160,7 @@ def update_turmas():
 
             for user in users:
                if user['turma'] == turma['codigo']:
-                  user['avaliacoes'] = []
+                  users.remove(user)
 
         with open("data/cadastro.json", "w") as file:
             json.dump(users, file, indent=2)          

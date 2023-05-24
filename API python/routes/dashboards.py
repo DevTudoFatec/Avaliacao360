@@ -9,10 +9,10 @@ bp = bp('dashboards', __name__)
 @admin_required
 @bp.route("/dashboards_operacionais")
 def dashboards_operacionais():
-  return render_template('admin/dashboards_operacionais.html')
+  return render_template('admin/dashboards_operacionais.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 @login_required
 @admin_required
 @bp.route("/dashboards_gerenciais")
 def dashboards_gerenciais():
-  return render_template('admin/dashboards_gerenciais.html')
+  return render_template('admin/dashboards_gerenciais.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
