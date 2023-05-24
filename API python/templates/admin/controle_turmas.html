@@ -53,7 +53,7 @@
                             <h1 class="turma_info_default_controle">CONTROLE</h1>
                         </td>
                     </tr>
-                    {% if not editing %}
+                    {% if not editing and not confirm_del %}
                     <tr>
                         <form class="new_turma" method="POST" action="{{ url_for('criacoes.criar_turma') }}">
                         <td>
@@ -97,6 +97,13 @@
                             {% if editing and turma['index'] == index %}
                                 <input type="hidden" name="index" value="{{ turma['index'] }}"> 
                                 <input type="hidden" name="old_codigo" value="{{ turma['codigo'] }}">
+                                <button type="submit" class="save_button" name="save">
+                                    {% if darkmode %}
+                                        <img src="{{ url_for('static', filename='img/icones/confirmar_edicao_branco.png') }}" class="save_icon" alt="save_icon">
+                                    {% else %}
+                                        <img src="{{ url_for('static', filename='img/icones/confirmar_edicao.png') }}" class="save_icon" alt="save_icon">
+                                    {% endif %}
+                                </button>   
                                 <a href="/controle_turmas">
                                     <button type="button" class="save_button" name="cancel">
                                         {% if darkmode %}
@@ -105,15 +112,26 @@
                                             <img src="{{ url_for('static', filename='img/icones/cancela_edicao.png') }}" class="save_icon" alt="cancel_icon">
                                         {% endif %}
                                     </button>
-                                </a>    
-                                <button type="submit" class="save_button" name="save">
-                                    {% if darkmode %}
-                                        <img src="{{ url_for('static', filename='img/icones/confirmar_edicao_branco.png') }}" class="save_icon" alt="save_icon">
-                                    {% else %}
-                                        <img src="{{ url_for('static', filename='img/icones/confirmar_edicao.png') }}" class="save_icon" alt="save_icon">
-                                    {% endif %}
-                                </button>
-                            {% else %} 
+                                </a>     
+                            {% elif confirm_delete and turma['index'] == index %} 
+                                    <input type="hidden" name="index" value="{{ turma['index'] }}">
+                                    <button type="submit" class="delete_button" name="confirm_del">
+                                        {% if darkmode %}
+                                            <img src="{{ url_for('static', filename='img/icones/confirm_delete_branco.png') }}" class="edit_icon" alt="edit_icon">
+                                        {% else %}
+                                            <img src="{{ url_for('static', filename='img/icones/confirm_delete.png') }}" class="edit_icon" alt="edit_icon">
+                                        {% endif %}
+                                    </button>
+                                <a href="/controle_sprints">
+                                    <button type="submit" class="delete_button" name="cancel_del">
+                                        {% if darkmode %}
+                                            <img src="{{ url_for('static', filename='img/icones/cancel_delete_branco.png') }}" class="save_icon" alt="save_icon">
+                                        {% else %}
+                                            <img src="{{ url_for('static', filename='img/icones/cancel_delete.png') }}" class="save_icon" alt="save_icon">
+                                        {% endif %}
+                                    </button>
+                                </a>
+                            {% elif not editing and not confirm_delete %} 
                                     <input type="hidden" name="index" value="{{ turma['index'] }}">
                                     <button type="submit" class="edit_button" name="edit">
                                         {% if darkmode %}

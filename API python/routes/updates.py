@@ -103,7 +103,8 @@ def update_turmas():
     except:
         turmas = []
     
-    editing=False
+    editing = False
+    confirm_delete = False
 
     index = int(request.form.get("index"))
 
@@ -140,7 +141,9 @@ def update_turmas():
         return redirect(url_for('controles.controle_turmas'))
     
     elif "delete" in request.form:
-        editing=False
+        confirm_delete = True
+
+    elif "confirm_del" in request.form:
 
         try:
             with open("data/projetos.json", "r") as f:
@@ -173,14 +176,12 @@ def update_turmas():
           
         return redirect(url_for('controles.controle_turmas'))
 
-    return render_template('admin/controle_turmas.html', page=page, users=users, turmas=turmas, times=times, editing=editing, index=index, darkmode=session['darkmode'])
+    return render_template('admin/controle_turmas.html', confirm_delete=confirm_delete, page=page, users=users, turmas=turmas, times=times, editing=editing, index=index, darkmode=session['darkmode'])
 
 @bp.route("/update_times", methods=["POST"])
 @login_required
 @admin_required
 def update_times():
-    page='times'
-
     try:
         with open("data/cadastro.json", "r") as f:
             users = json.load(f)
@@ -199,6 +200,7 @@ def update_times():
     except:
         turmas = []
     
+    confirm_delete = False
     editing=False
 
     index = int(request.form.get("index"))
@@ -224,7 +226,9 @@ def update_times():
         return redirect(url_for('controles.controle_times'))
     
     elif "delete" in request.form:
-        editing=False
+        confirm_delete = True
+
+    elif "confirm_del" in request.form:
 
         for time in times:
           if time['index'] == index:
@@ -241,7 +245,7 @@ def update_times():
           
         return redirect(url_for('controles.controle_times'))
 
-    return render_template('admin/controle_times.html', page=page, users=users, turmas=turmas, times=times, editing=editing, index=index, darkmode=session['darkmode'])
+    return render_template('admin/controle_times.html', confirm_delete=confirm_delete, users=users, turmas=turmas, times=times, editing=editing, index=index, darkmode=session['darkmode'])
 
 
 
@@ -269,6 +273,7 @@ def update_projetos():
         projetos = []
     
     editing=False
+    confirm_delete = False
 
     index = int(request.form.get("index"))
 
@@ -329,15 +334,17 @@ def update_projetos():
         return redirect(url_for('controles.controle_sprints'))
     
     elif "delete" in request.form:
-        editing=False
+        confirm_delete = True
+
+    elif "confirm_del" in request.form:
 
         for projeto in projetos:
-          if projeto['index'] == index:
-            for user in users:
-               if user['turma'] == projeto['turma']:
-                  user['avaliacoes'] = []
-                  user['count_avaliacao'] = 0
-            projetos.remove(projeto)
+            if projeto['index'] == index:
+                for user in users:
+                    if user['turma'] == projeto['turma']:
+                        user['avaliacoes'] = []
+                        user['count_avaliacao'] = 0
+                projetos.remove(projeto)
 
         with open("data/projetos.json", "w") as file:
             json.dump(projetos, file, indent=2)
@@ -347,4 +354,4 @@ def update_projetos():
 
         return redirect(url_for('controles.controle_sprints'))
 
-    return render_template('admin/controle_sprints.html', index=index, editing=editing, users=users, turmas=turmas, projetos=projetos, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+    return render_template('admin/controle_sprints.html', confirm_delete=confirm_delete, index=index, editing=editing, users=users, turmas=turmas, projetos=projetos, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
