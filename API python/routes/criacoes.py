@@ -184,7 +184,7 @@ def criar_projeto():
   while i<new_projeto_sprints:
     sprint = i+1
     inicio =  delta + timedelta(days=new_projeto_duracao_sprint)
-    fim =  inicio + timedelta(days=2)
+    fim =  inicio + timedelta(days=4)
 
     periodos_avaliacao.append([sprint,inicio.strftime('%d-%m-%Y'),fim.strftime('%d-%m-%Y')])
 
