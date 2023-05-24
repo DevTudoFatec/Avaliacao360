@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <style>
+      /* CSS styles */
+      body {
+        background-color: #f0f0f0;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+      }
+    </style>
+  </head>
+    <body>
+      <img  src="https://i.ibb.co/bHSgKsC/Logo-API-3.png" width="300"><br>
+      <br>
+      <h3>Olá, {{ nome }}!</h3><br>
+      Seja bem-vinde a plataforma <b>Avaliação 360º!</b><br><br>
+      <br>
+      Em nossa plataforma você poderá realizar as <b>avaliacões</b> referentes aos projetos da sua turma <b>{% for turma in turmas %}{% if turma['codigo'] == turma_user %}{{turma['nome']}}!{% endif %}{% endfor %}</b><br>
+      <br>
+      <br>
+      Seguem abaixo suas informações de <b>entrada</b> para você não perder:<br>
+      <br>
+      <b>Login: </b>{{ email }}<br>
+      <b>Senha: </b>{{ senha }}<br>
+      <br>
+      <br>
+      Não compartilhe sua senha com <b>ninguém!</b><br>
+      <br>
+      <img  src="https://i.ibb.co/TTRrqMv/Logo-API-PBLTe-X.png" width="200">
+    </body>
+</html>

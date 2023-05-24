@@ -1,12 +1,22 @@
-from flask import request, flash, redirect, url_for, Blueprint as bp
+from flask import request, flash, redirect, url_for, render_template, Blueprint as bp
 import json
 import os
 from datetime import datetime, timedelta
 import bcrypt
 from utils.decorators import login_required, admin_required
+from utils.email_sender import send_email
 
+import asyncio
+import threading
 
 bp = bp('criacoes', __name__)
+
+async def send_email_async(destinatario, assunto, mensagem):
+    await send_email(destinatario, assunto, mensagem)
+
+def run_async_loop(loop):
+    asyncio.set_event_loop(loop)
+    loop.run_forever()
 
 #########      ACESSO GERAL          ############
 
@@ -79,6 +89,16 @@ def cadastro_submit():
   data.append(cadastro_dict)
   with open('data/cadastro.json', 'w') as f:
     json.dump(data, f, indent=2)
+  
+  loop = asyncio.new_event_loop()
+  thread = threading.Thread(target=run_async_loop, args=(loop,))
+  thread.start()
+
+  asyncio.run_coroutine_threadsafe(send_email_async(
+            destinatario = email, 
+            assunto = f"Boas Vindas - Avaliação 360º", 
+            mensagem = render_template('utils/new_user_body.html', email=email, nome=nome.title(), turma_user=codigo_turma, senha=senha, turmas=turmas)
+            ), loop)
 
   flash('Cadastrado com sucesso!')
 
@@ -167,6 +187,12 @@ def criar_projeto():
       with open('data/projetos.json', 'w') as f:
         f.write('[]')
 
+  try:
+        with open("data/turmas.json", "r") as f:
+            turmas = json.load(f)
+  except:
+      turmas = []
+
   new_projeto_turma = request.form.get("new_projeto_turma")
   new_projeto_nome = request.form.get("new_projeto_nome")
   new_projeto_sprints = int(request.form.get("new_projeto_sprints"))
@@ -194,10 +220,10 @@ def criar_projeto():
 
 
   with open('data/projetos.json', 'r') as f:
-    data = json.load(f)
+    projetos = json.load(f)
 
   projeto_dict = {
-    "index": len(data),
+    "index": len(projetos),
     "turma": new_projeto_turma,
     "nome": new_projeto_nome,
     "sprints": new_projeto_sprints,
@@ -207,9 +233,7 @@ def criar_projeto():
     "avaliacoes": periodos_avaliacao
   }
 
-  data.append(projeto_dict)
-  with open('data/projetos.json', 'w') as f:
-    json.dump(data, f, indent=2)
+  projetos.append(projeto_dict)
 
   try:
       with open("data/cadastro.json", "r") as f:
@@ -222,7 +246,19 @@ def criar_projeto():
         user['avaliacoes'] = periodos_avaliacao
         user['count_avaliacao'] = 0
 
+        loop = asyncio.new_event_loop()
+        thread = threading.Thread(target=run_async_loop, args=(loop,))
+        thread.start()
+
+        asyncio.run_coroutine_threadsafe(send_email_async(
+                  destinatario = user['email'], 
+                  assunto = f"Avaliação 360º - Projeto {new_projeto_nome}", 
+                  mensagem = render_template('utils/new_project_body.html', turmas=turmas, user=user, new_projeto_nome=new_projeto_nome, new_projeto_sprints=new_projeto_sprints, new_projeto_duracao_sprint=new_projeto_duracao_sprint, new_projeto_inicio=new_projeto_inicio, new_projeto_fim=new_projeto_fim, periodos_avaliacao=periodos_avaliacao)
+                  ), loop)
+        
   with open('data/cadastro.json', 'w') as u:
     json.dump(users, u, indent=2)
+  with open('data/projetos.json', 'w') as f:
+    json.dump(projetos, f, indent=2)
 
   return redirect(url_for('controles.controle_sprints'))

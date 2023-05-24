@@ -11,14 +11,35 @@
   },
   {
     "index": 1,
-    "nome": "Fulano",
-    "email": "fulano@email.com",
+    "nome": "Joao",
+    "email": "joaoaosaldanha@gmail.com",
     "turma": "bd01",
     "time": 1,
-    "senha": "$2b$12$W9b58UwFztX7MDvrebQ6leGTcKMLNjBbgIztPXd96Pc3055fCf.N.",
+    "senha": "$2b$12$VSqtYbPpQFTs0106m6GvW.20WpMVwprGUqifJfjtAHmXGfqte6z6W",
     "perfil": 1,
     "acessos": 1,
-    "avaliacoes": [],
+    "avaliacoes": [
+      [
+        1,
+        "31-05-2023",
+        "04-06-2023"
+      ],
+      [
+        2,
+        "07-06-2023",
+        "11-06-2023"
+      ],
+      [
+        3,
+        "14-06-2023",
+        "18-06-2023"
+      ],
+      [
+        4,
+        "21-06-2023",
+        "25-06-2023"
+      ]
+    ],
     "count_avaliacao": 0
   }
 ]

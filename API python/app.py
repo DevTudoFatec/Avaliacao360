@@ -1,4 +1,5 @@
 from flask import Flask
+
 from routes.avaliacao import bp as avaliacao
 from routes.controles import bp as controles
 from routes.criacoes import bp as criacoes
@@ -6,7 +7,8 @@ from routes.devolutivas import bp as devolutivas
 from routes.dashboards import bp as dashboards
 from routes.padroes import bp as padroes
 from routes.updates import bp as updates
-from utils.darkmode import bp as darkmode
+
+from utils.darkmode import bp as darkmode 
 
 app = Flask(__name__)
 
