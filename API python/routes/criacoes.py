@@ -186,7 +186,7 @@ def criar_projeto():
     inicio =  delta + timedelta(days=new_projeto_duracao_sprint)
     fim =  inicio + timedelta(days=2)
 
-    periodos_avaliacao.append([sprint,str(inicio),str(fim)])
+    periodos_avaliacao.append([sprint,inicio.strftime('%d-%m-%Y'),fim.strftime('%d-%m-%Y')])
 
     delta += timedelta(days=new_projeto_duracao_sprint)
 
@@ -202,8 +202,8 @@ def criar_projeto():
     "nome": new_projeto_nome,
     "sprints": new_projeto_sprints,
     "duracao": new_projeto_duracao_sprint,
-    "inicio": str(new_projeto_inicio),
-    "fim": str(new_projeto_fim),
+    "inicio": new_projeto_inicio.strftime('%d-%m-%Y'),
+    "fim": new_projeto_fim.strftime('%d-%m-%Y'),
     "avaliacoes": periodos_avaliacao
   }
 

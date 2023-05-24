@@ -4,10 +4,10 @@
 <head>
   <meta charset="UFT-8"/> <!--extensão para caracteres especiais-->
   <title> Devolutiva Avaliação </title> 
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/devolutiva_avaliacao.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/integrante/devolutiva_avaliacao.css') }}">
   {% if darkmode%}
   <style>
-    h2, h3, .sprint_sign, .number{
+    h2, h3, .sprint_sign, .sprint_pre_sign, .number{
       color: white;
     }
     
@@ -47,7 +47,11 @@
                 {% endfor %} 
                 <br>
                 <br>
+                {% if team_sprints > 0 %}
                 <button class="bt_confirmar_trc" name="confirm_devolutiva" type="submit">CONFIRMAR</button>
+                {% else %}
+                <button disabled class="bt_confirmar_trc" name="confirm_devolutiva" type="submit">CONFIRMAR</button>
+                {% endif %}
             <form>
         </div>
     {% else %}

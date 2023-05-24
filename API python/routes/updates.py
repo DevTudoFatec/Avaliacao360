@@ -336,6 +336,7 @@ def update_projetos():
             for user in users:
                if user['turma'] == projeto['turma']:
                   user['avaliacoes'] = []
+                  user['count_avaliacao'] = 0
             projetos.remove(projeto)
 
         with open("data/projetos.json", "w") as file:

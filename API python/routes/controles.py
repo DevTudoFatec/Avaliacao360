@@ -80,6 +80,8 @@ def controle_times():
 
 
 @bp.route("/controle_sprints")
+@login_required
+@admin_required
 def controle_sprints():
   try:
       with open("data/cadastro.json", "r") as f:

@@ -3,7 +3,7 @@
     <head>
         <meta charset="UFT-8"/>
         <title>Controle de Integrantes</title> 
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/controle_geral.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin/controle_integrantes.css') }}">
         {% if darkmode%}
             <style>
             .user_info {
@@ -33,6 +33,9 @@
         <img id="logo_avaliação" src="{{ url_for('static', filename='img/menu_admin/Logo API (3).png') }}" width="300">
         <p><b>Usuário: {{ nomeUsuario }}</b></p>
         </header>
+
+
+        
         <div class="controle_container">
             <h1 class="bt_controle">CONTROLE DE INTEGRANTES</h1>
         </div>

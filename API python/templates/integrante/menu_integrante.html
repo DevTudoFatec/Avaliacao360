@@ -2,8 +2,8 @@
 <html>
     <head>
         <meta charset="UFT-8"/>
-        <title>Opções Usuário - Avaliação 360º PBLTeX</title>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/menu_integrante.css') }}">
+        <title> Menu Integrante</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/integrante/menu_integrante.css') }}">
         {% if darkmode %}
             <style>
             h2 {
@@ -33,7 +33,7 @@
         <p><b>Usuário: {{ nomeUsuario }}</b></p>
         </header>
 
-        <img id="details_integrante" src="{{ url_for('static', filename='img/menu_integrante/Logo_API_Menu_integrante.png') }}" width="300">
+        <img id="details_integrante" src="{{ url_for('static', filename='img/menu_integrante/detalhes.png') }}" width="300">
 
 
         {% if darkmode %}

@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for, session, Blueprint as bp
 import json
-from utils.decorators import login_required, team_required, sprint_required
+from utils.decorators import login_required, team_required, sprint_required, integrante_required
 
 
 bp = bp('avaliacao', __name__)
@@ -9,6 +9,7 @@ bp = bp('avaliacao', __name__)
 @login_required
 @team_required
 @sprint_required
+@integrante_required
 def avaliacao():
     try:
       with open("data/times.json", "r") as f:

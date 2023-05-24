@@ -3,7 +3,7 @@ import json
 import os
 from datetime import datetime
 import bcrypt
-from utils.decorators import login_required, admin_required
+from utils.decorators import login_required, admin_required, integrante_required
 
 
 bp = bp('padroes', __name__)
@@ -57,8 +57,8 @@ def login():
           
           current_date = datetime.now().date()        
           for avaliacao in avaliacoes:
-            inicio = datetime.strptime(avaliacao[1], '%Y-%m-%d').date()
-            fim = datetime.strptime(avaliacao[2], '%Y-%m-%d').date()
+            inicio = datetime.strptime(avaliacao[1], '%d-%m-%Y').date()
+            fim = datetime.strptime(avaliacao[2], '%d-%m-%Y').date()
 
             if inicio <= current_date <= fim:
               session['avaliacao'] = True
@@ -90,6 +90,7 @@ def menu_admin():
 
 @bp.route("/menu_integrante", methods=["GET", "POST"])
 @login_required
+@integrante_required
 def menu_integrante():
 
   with open("data/cadastro.json", "r") as f:
@@ -109,13 +110,13 @@ def menu_integrante():
     return redirect(url_for('padroes.menu_integrante'))
 
   elif request.method == 'GET':
+    
+    primeiro_acesso = False
 
     for user in users:
       if user['email'] == session['email']:
         if user['acessos'] == 0 or session['time'] == 0:
           primeiro_acesso = True
-        else:
-          primeiro_acesso = False
 
     if primeiro_acesso:
       try:

@@ -1,12 +1,7 @@
 [
   {
     "index": 0,
-    "nome": "Dados do Banco",
+    "nome": "Banco De Dados",
     "codigo": "bd01"
-  },
-  {
-    "index": 2,
-    "nome": "Analise E Desenvolvimento",
-    "codigo": "ads01"
   }
 ]
