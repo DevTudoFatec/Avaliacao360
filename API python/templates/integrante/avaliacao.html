@@ -7,19 +7,14 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/integrante/avaliacao.css') }}">
   {% if darkmode%}
   <style>
-    h2 {
-      color: white;
-    }
-
-    .sprint_sign {
-      color: white;
-    }
-
-    .number {
-      color: white;
+    h2, .sprint_sign, .number {
+      color: snow;
     }
     .texto_avaliacao {
       background-color: rgb(202, 202, 202);
+    }            
+    table {
+      background-color: #383838;
     }
     
   </style>
@@ -40,7 +35,7 @@
         {% else %}
             <div class="link_disable">REALIZAR AVALIAÇÃO </div>
         {% endif %}
-        <a href="/pre_devolutiva"> <div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
+        <a href="/devolutiva_integrante"> <div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
         <a href="/"> <div class="link">SAIR ➔ </div></a>
     </nav>
   </div>

@@ -6,9 +6,12 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin/devolutiva_admin.css') }}">
         {% if darkmode%}
           <style>
-              h2, h3, .sprint_sign, .number, .sprint_form, .sprint_pre_sign, .user_nome{
-                  color: white;
-              }
+            h2, h3, .sprint_sign, .number, .sprint_form, .sprint_pre_sign, .user_nome{
+                  color: snow;
+              }            
+            table {
+                background-color: #383838;
+            }
           </style>
         {% endif %}
     </head>
@@ -37,7 +40,7 @@
     {% if pre_devolutiva %}
         <div class="titulos_form">
             <h1 class="bt_pre_devolutiva">DEVOLUTIVA AVALIAÇÃO</h1>
-            <h3 class="sprint_pre_sign">Selecione Turma, Time e a Sprint:</h3>
+            <h3 class="sprint_pre_sign">Selecione a Turma, <br>o Time e a Sprint:</h3>
             {% if select_turma %}
                 <form class="form_devolutiva" method="POST" action="{{ url_for('devolutivas.devolutiva_admin') }}">
                     <select class="input_turma_time" name="turma_escolha" required>                                    

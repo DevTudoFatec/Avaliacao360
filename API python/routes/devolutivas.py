@@ -193,7 +193,7 @@ def devolutiva_integrante():
   
 
     return render_template('integrante/devolutiva_avaliacao.html', pre_devolutiva=pre_devolutiva, team_sprints=team_sprints,
-                              nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+                              nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'], avaliacao_check=session['avaliacao'])
 
   elif "confirm_devolutiva" in request.form:
 
@@ -274,4 +274,4 @@ def devolutiva_integrante():
 
     return render_template('integrante/devolutiva_avaliacao.html', pre_devolutiva=pre_devolutiva,
                            avgs=avgs, user_autoavaliacao=user_autoavaliacao, textos=textos, sprint=sprint_escolha, 
-                           nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+                           nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'], avaliacao_check=session['avaliacao'])

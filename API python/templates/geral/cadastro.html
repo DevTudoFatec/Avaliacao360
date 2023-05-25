@@ -22,7 +22,7 @@
                     {% endfor %}
                 {% endif %}
             {% endwith %}
-            <input id="user" type="text" placeholder="NOME COMPLETO" name="nome" required pattern="[A-Za-z ]+" title="São permitidas apenas letras!">
+            <input id="user" type="text" placeholder="NOME COMPLETO" name="nome" required pattern="\p{L}+" title="São permitidas apenas letras!">
             <br><br>
             <input id="email" type="text" placeholder="E-MAIL" name="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2})?" >
             <br><br>

@@ -1,4 +1,4 @@
-from flask import redirect, url_for, session, Blueprint as bp
+from flask import redirect, url_for, session, Blueprint as bp, request
 from utils.decorators import login_required
 
 bp = bp('darkmode', __name__)
