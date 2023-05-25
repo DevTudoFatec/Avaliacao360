@@ -274,9 +274,17 @@ footer{
   transform: translate(0%, 150%);
   left: 40%;
 }
+
 .rodape-img {   
   height: 100%;
   width: auto;
+}
+
+.rodape-img-table {   
+  height: 100%;
+  width: auto;
+  margin-top: 8%;
+  margin-left: -10%;
 }
 
 .user_nomes{
@@ -386,6 +394,10 @@ h3 {
 
   h2, h3 {
     font-size: 7px;
+  }
+
+  h3 {
+    margin-left: -8%;
   }
 
   .form_autoavaliacao {

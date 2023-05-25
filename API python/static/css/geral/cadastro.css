@@ -13,8 +13,9 @@ header{
     width: 20%;
 }
 
-#logo_api_cadastro{
-    margin: 2%;}
+.logo_api_cadastro{
+    margin-left: 1%;
+}
 
 body{
     text-align: center;
@@ -147,5 +148,13 @@ nav a{
     .logo_api_pbletex {
         margin-top: 30%;
         width: 80%;
+    }
+    
+    .logo_api_cadastro {
+        width: 90%;
+    }
+
+    #formulario {
+        margin-top: 15%;
     }
 }
