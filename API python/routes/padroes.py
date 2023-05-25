@@ -12,12 +12,7 @@ bp = bp('padroes', __name__)
 
 @bp.route("/")
 def home():
-  try:  
-    for key in list(session.keys()):
-      del session[key]
-  except:
-    pass
-
+  
   return render_template('geral/login.html')
 
 
@@ -76,7 +71,7 @@ def login():
   if not check:
     flash('Usuário ou Senha inválidos')
 
-    return redirect('/')
+    return redirect(url_for('padroes.home'))
 
 ###### ADMINISTRADOR  #############
 

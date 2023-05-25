@@ -8,8 +8,10 @@ header{
     font-size: small;
     padding: 2%;}
 
-#logo_avaliação{
-    margin-left: 40%;}
+.logo_avaliação{
+    margin-left: 40%;
+    width: 20%;
+}
 
 #logo_api_cadastro{
     margin: 2%;}
@@ -118,10 +120,32 @@ nav a{
     transition-delay: .2s;}
 
 .flash {
+    color: black;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bolder;
     font-size: 20px;
     font-weight: bold;
     margin-top: -2%;
     text-align: center;
+}
+
+@media screen and (max-width:768px) { 
+    .logo_avaliação {
+        width: 50%;
+        margin-left: 28%;
+    }
+
+    input {
+        width: 70%;
+    }
+
+    .botao__voltar, .botao_cadastrar_voltar {
+        margin-top: 2%;
+        width: 40%;
+    }
+
+    .logo_api_pbletex {
+        margin-top: 30%;
+        width: 80%;
+    }
 }

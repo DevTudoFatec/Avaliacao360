@@ -2,12 +2,13 @@
 <html>
     <head>
         <meta charset="UFT-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> Menu Integrante</title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/integrante/menu_integrante.css') }}">
         {% if darkmode %}
             <style>
-            h2 {
-                color: white;
+            h2, h1 {
+                color: snow;
             }
             </style>
         {% endif %}
@@ -29,17 +30,16 @@
                 <a href="/"> <div class="link">SAIR ➔ </div></a>
             </nav>
         </div>
-        <img id="logo_avaliação" src="{{ url_for('static', filename='img/menu_admin/Logo API (3).png') }}" width="300">
+        <img id="logo_avaliação" src="{{ url_for('static', filename='img/menu_admin/Logo API (3).png') }}">
         <p><b>Usuário: {{ nomeUsuario }}</b></p>
         </header>
 
-        <img class="details_integrante" src="{{ url_for('static', filename='img/menu_integrante/detalhes.png') }}" width="300">
-
+        <img class="details_integrante" src="{{ url_for('static', filename='img/menu_integrante/detalhes.png') }}">
 
         {% if darkmode %}
-            <a href="/darkmode_off"><img class="darkmode_switch" src="{{ url_for('static', filename='img/icones/darkmode.png') }}" width="100"></a>
+            <a href="/darkmode_off"><img class="darkmode_switch" src="{{ url_for('static', filename='img/icones/darkmode.png') }}"></a>
         {% else %}           
-            <a href="/darkmode_on"><img class="darkmode_switch" src="{{ url_for('static', filename='img/icones/lightmode.png') }}" width="100"></a>
+            <a href="/darkmode_on"><img class="darkmode_switch" src="{{ url_for('static', filename='img/icones/lightmode.png') }}"></a>
         {% endif %}
 
         {% if primeiro_acesso %}
@@ -81,7 +81,7 @@
         </nav>
         {% endif %}
         <footer>      
-            <img id="logo_api_pbletex" src="{{ url_for('static', filename='img/menu_admin/Logo_API_PBLTeX.png') }}" width="250">
+            <img class="logo_api_pbletex" src="{{ url_for('static', filename='img/menu_admin/Logo_API_PBLTeX.png') }}">
         </footer>
     </body>
 </html>    

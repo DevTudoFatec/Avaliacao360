@@ -62,15 +62,36 @@ button{
     color: #fed196;
     font-size: 15px;
     font-weight: bold;
-    
-}
-
-.flash {
-    position: absolute;
-    left: 67%;
-    top: 41%;
 }
 
 .botao_cadastro {
     margin-top: 1%;
+}
+
+.flash {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Gran  de', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+@media screen and (max-width:768px) {
+   .texto_instrucao {
+    width: 120%;
+    margin-top: 75%;
+    font-size: 30px;
+    margin-left: -10%;
+   }
+   
+   input {
+    width: 90%;
+   }
+
+   .inputs {
+    margin-left: 20%;
+   }
+
+   .img {
+    position: absolute;
+    margin-top: -120%;
+   }
 }

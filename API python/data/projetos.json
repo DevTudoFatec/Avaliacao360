@@ -1,8 +1,8 @@
 [
   {
     "index": 0,
-    "turma": "bd",
-    "nome": "api",
+    "turma": "bd01",
+    "nome": "API",
     "sprints": 4,
     "duracao": 7,
     "inicio": "18-05-2023",

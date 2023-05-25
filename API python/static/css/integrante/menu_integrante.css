@@ -140,9 +140,45 @@ nav a{
     margin-top: 5%;
 }
 
-
 .darkmode_switch {
     position: absolute;
     right: 5%;
-    top: 30%;
+    top: 40%;
+    width: 7%;
+}
+
+@media screen and (max-width:767px) {
+    .opções_menu{
+        margin-top: 30%;
+    }
+
+    #logo_avaliação{
+        width: 30%;
+        margin-left: 35%;
+    }
+    
+    .details_integrante {
+        width: 80%;
+    }
+    
+    .darkmode_switch {
+        width: 20%;
+        top: 20%;
+        right: 40%;
+    }
+
+    .botao_azul_claro{
+        margin-left: -28%;
+        width: 150%;
+    }
+    
+    .botao_cinza{
+        margin-left: -28%;
+        width: 150%;
+    }
+
+    .logo_api_pbletex {
+        width: 80%;
+        margin-top: 60%;
+    }
 }

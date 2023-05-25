@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UFT-8"/> <!--extensão para caracteres especiais-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> Devolutiva Avaliação </title> 
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/integrante/devolutiva_avaliacao.css') }}">
   {% if darkmode%}
@@ -57,6 +58,9 @@
                 {% endif %}
             <form>
         </div>
+        <footer>
+          <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
+        </footer>
     {% else %}
 
     <div class="content">
@@ -156,11 +160,11 @@
                     <h3>{{ user_autoavaliacao['autogestao'] }}</h3>
                 </td>
             </tr>
-        </table>        
-    {% endif %}
+        </table>
         <footer>
-          <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
-        </footer>
+          <img class="rodape-img-table" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
+        </footer>        
+    {% endif %}
     </div>
   </body>  
 </html>

@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UFT-8"/> <!--extensão para caracteres especiais-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> Cadastro de Integrante</title> 
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/geral/cadastro.css') }}">
     </head>
@@ -10,7 +11,7 @@
             
             <div class="barra">
             </div>
-            <img id="logo_avaliação" src="{{ url_for('static', filename='img/cadastro/Logo.png') }}" alt="Logo da plataforma" width="300">
+            <img class="logo_avaliação" src="{{ url_for('static', filename='img/cadastro/Logo.png') }}" alt="Logo da plataforma">
         </header>
         <img id="logo_api_cadastro" src="{{ url_for('static', filename='img/cadastro/Logo_API cadastro.png') }}" width="400">
         
@@ -18,7 +19,7 @@
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     {% for message in messages %}
-                        <li class="flash">{{ message }}</li>
+                        <h3 class="flash">{{ message }}</h3>
                     {% endfor %}
                 {% endif %}
             {% endwith %}
@@ -36,7 +37,7 @@
         <br>
         <br>
         <footer>
-            <img id="logo_api_pbletex" src="{{ url_for('static', filename='img/cadastro/Logo_API_PBLTeX.png') }}" width="250">
+            <img class="logo_api_pbletex" src="{{ url_for('static', filename='img/cadastro/Logo_API_PBLTeX.png') }}">
         </footer>
     </body>
 </html>

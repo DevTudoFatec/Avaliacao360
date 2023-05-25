@@ -8,5 +8,38 @@
     "senha": "$2b$12$pEfj8M4KBWE/L1HVwmnuJ.TjaNkfx3KjXhRcroWA0.wOIfzJ6sOma",
     "perfil": 2,
     "acessos": 0
+  },
+  {
+    "index": 1,
+    "nome": "Joao",
+    "email": "joaoaos99@gmail.com",
+    "turma": "bd01",
+    "time": 1,
+    "senha": "$2b$12$g6ivrI/ZsynEZ7ndxp2tWOxzk/L2aWbL7XjMsAQMs.IGrbksDcZr6",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "25-05-2023",
+        "29-05-2023"
+      ],
+      [
+        2,
+        "01-06-2023",
+        "05-06-2023"
+      ],
+      [
+        3,
+        "08-06-2023",
+        "12-06-2023"
+      ],
+      [
+        4,
+        "15-06-2023",
+        "19-06-2023"
+      ]
+    ],
+    "count_avaliacao": 0
   }
 ]

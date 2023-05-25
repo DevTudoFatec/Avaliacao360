@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UFT-8"/> <!--extensão para caracteres especiais-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> Avaliação </title> 
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/integrante/avaliacao.css') }}">
   {% if darkmode%}
@@ -42,7 +43,7 @@
   <!--- Fim do botão de menu -->
 
   <!-- Início do conteúdo do cabeçalho -->
-    <img id="logo_avaliação" src="{{ url_for('static', filename='img/avaliacao/Logo copy.png') }}" alt="Logo da plataforma" width="300">
+    <img class="logo_avaliação" src="{{ url_for('static', filename='img/avaliacao/Logo copy.png') }}" alt="Logo da plataforma">
     <p><b>Usuário: {{ nomeUsuario }}</b></p>
   <!-- fim do conteúdo do cabeçalho -->
   </header>

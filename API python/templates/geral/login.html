@@ -2,32 +2,29 @@
 
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Avaliação 360°</title>
   <link rel="stylesheet" type="text/css" href="/static/css/geral/login.css">
 </head>
 <!--CAMINHO PARA A IMAGEM "{{ url_for('static', filename='img/login/Layout API-2.png') }}"-->
 
 <body>
-
 	<nav class="divisao_texto_tela">
 		<nav class="img">
 			<img src="/static/img/login/Layout API-2.png" alt="Imagem principal">
 		</nav>
-
 		<nav class="inputs">
-		<h4 class="texto_instrucao">Faça seu login aqui!</h4>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="flash">
-            {% for message in messages %}
-                {{ message }}
-            {% endfor %}
-			</div>
-        {% endif %}
-        {% endwith %}
-		<form action="{{ url_for('padroes.login') }}" method="post">	
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+				{% for message in messages %}
+					<h4 class="texto_instrucao" style="color: rgba(179, 7, 7, 0.822);">{{ message }}</h4>
+				{% endfor %}
+			{% else %}
+			<h4 class="texto_instrucao">Faça seu login aqui!</h4>
+			{% endif %}
+		{% endwith %}	
+		<form action="{{ url_for('padroes.login') }}" method="post">
 			<input type="text" name="email" placeholder="DIGITE SEU E-MAIL" required>
-
 			<input type="password" name="senha" placeholder="DIGITE SUA SENHA" required>			
 			<br>
 

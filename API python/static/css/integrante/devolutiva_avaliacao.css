@@ -7,7 +7,8 @@ header{
   justify-content: space-between;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: small;
-  padding: 2%;}
+  padding: 2%;
+}
 
 #logo_avaliação{
 margin-left: 42%;
@@ -35,7 +36,8 @@ left: 0;
 cursor: pointer;
 padding: 20px;
 position: absolute;
-z-index: 1;}
+z-index: 9999;
+}
 
 .barra{
 top: 0;
@@ -45,13 +47,15 @@ width: 300px;
 position: absolute;
 transition: all .2s linear;
 left: -300px;
+z-index: 1;
 }
 
 .menu_lateral{
 width: 100%;
 position: absolute;
 top: 60px;
-color:#fed196;}
+color:#fed196;
+}
 
 nav a{
 text-decoration: none;
@@ -62,7 +66,8 @@ background-color: #494949;
 padding: 20px;
 font-size: 12pt;
 transition: all .2s linear;
-border-bottom: 2px solid #222;}
+border-bottom: 2px solid #222;
+}
 
 .link_disable{
   background-color: #bbbbbb;
@@ -265,9 +270,9 @@ input[type="range"]::-webkit-slider-runnable-track {
 footer{
   position: absolute;
   width: 50%;
-  bottom: -40%;
+  bottom: 20%;
   transform: translate(0%, 150%);
-  left: 35%;
+  left: 40%;
 }
 .rodape-img {   
   height: 100%;
@@ -336,17 +341,69 @@ h3 {
 /* RESPONSIVIDADE PARA TELAS MENORES QUE 1920X 1080 */
 /*xr*/
 
-@media screen and (min-width:1100px) {
-}
+@media screen and (max-width:768px) {
+  #logo_avaliação{
+    width: 50%;
+    margin-left: 25%;
+  }
+  
+  .bt_pre_devolutiva{
+    width: 70%;
+    padding: 2%;
+    margin-left: 15%;
+  }
 
-@media screen and (min-width:1200px) {
+  .sprint_pre_sign {
+    margin-top: 40%;
+  }
 
-}
+  .form_devolutiva {
+    margin-left: 32%;
+  }
 
-@media screen and (min-width:1300px) {
+  .bt_confirmar_trc {
+    width: 50%;
+    padding: 3%;
+  }
 
-}
+  .rodape-img {
+    width: 120%;
+    margin-left: -40%;
+  }
 
-@media screen and (min-width:1700px) {
+  /* ////// */
 
+  .bt_devolutiva {
+    width: 400%;
+    padding: 10%;
+    margin-left: -160%;
+  }
+
+  .sprint_sign {
+    width: 150%;
+    margin-left: -40%
+  }
+
+  h2, h3 {
+    font-size: 7px;
+  }
+
+  .form_autoavaliacao {
+    margin-top: 50%;
+    width: 110%;
+    margin-left: -10.5%;
+  }
+
+  .rodape-img-table {
+    width: 120%;
+    margin-left: -50%;
+    margin-top: 80%;
+  }
+
+  .legenda_trc {
+    position: absolute;
+    width: 200%;
+    margin-left: -180%;
+    margin-top: -10%;
+  }
 }
