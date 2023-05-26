@@ -16,5 +16,14 @@
     "conhecimento": 3,
     "entrega": 3,
     "autogestao": 3
+  },
+  {
+    "email": "teste@email.com",
+    "sprint": 1,
+    "comunicacao": 3,
+    "engajamento": 3,
+    "conhecimento": 3,
+    "entrega": 3,
+    "autogestao": 3
   }
 ]
