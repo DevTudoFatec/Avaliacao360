@@ -6,9 +6,11 @@
 	<title>Avaliação 360°</title>
   <link rel="stylesheet" type="text/css" href="/static/css/geral/login.css">
 </head>
-<!--CAMINHO PARA A IMAGEM "{{ url_for('static', filename='img/login/Layout API-2.png') }}"-->
 
 <body>
+	<div class="logo-container">
+		<img class="logo_api_pbletex" src="{{ url_for('static', filename='img/login/PBLTEX.png') }}">
+	</div>
 	<nav class="divisao_texto_tela">
 		<nav class="img">
 			<img src="/static/img/login/Layout API-2.png" alt="Imagem principal">
@@ -17,7 +19,11 @@
 		{% with messages = get_flashed_messages() %}
 			{% if messages %}
 				{% for message in messages %}
-					<h4 class="texto_instrucao" style="color: rgba(179, 7, 7, 0.822);">{{ message }}</h4>
+					{% if message == "Cadastrado com sucesso!" %}
+						<h4 class="texto_instrucao" style="color: rgba(84, 179, 7, 0.822);">{{ message }}</h4>
+					{% else %}
+						<h4 class="texto_instrucao" style="color: rgba(179, 7, 7, 0.822);">{{ message }}</h4>
+					{% endif %}
 				{% endfor %}
 			{% else %}
 			<h4 class="texto_instrucao">Faça seu login aqui!</h4>

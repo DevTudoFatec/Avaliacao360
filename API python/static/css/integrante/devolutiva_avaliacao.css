@@ -346,6 +346,20 @@ h3 {
   text-align: center;
   font-weight: lighter;
 }
+
+h4 {
+  text-align: center;
+  font-weight: lighter;
+  font-size: 200%;
+  margin: 0;
+}
+
+h5 {
+  text-align: center;
+  font-weight: lighter;
+  font-size: 150%;
+  margin: 0;
+}
 /* RESPONSIVIDADE PARA TELAS MENORES QUE 1920X 1080 */
 /*xr*/
 
@@ -398,6 +412,10 @@ h3 {
 
   h3 {
     margin-left: -8%;
+  }
+
+  h5 {
+    font-size: 80%;
   }
 
   .form_autoavaliacao {

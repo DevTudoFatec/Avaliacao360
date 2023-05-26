@@ -209,7 +209,7 @@ def devolutiva_integrante():
     try:      
       rows=0
       comunicacao = engajamento = conhecimento = entrega = autogestao = 0
-
+      
       textos_comunicacao = []
       textos_engajamento = []
       textos_conhecimento = []
@@ -258,7 +258,13 @@ def devolutiva_integrante():
         "autogestao": int(autogestao)
       }
     except:
-      avgs = {}
+      avgs = {
+        "comunicacao": 0, 
+        "engajamento": 0, 
+        "conhecimento": 0, 
+        "entrega": 0, 
+        "autogestao": 0
+      }
       textos = {}
 
     try:
@@ -268,12 +274,20 @@ def devolutiva_integrante():
       autoavaliacoes=[]
 
     user_autoavaliacao = {}
-
     for autoavaliacao in autoavaliacoes:
       if autoavaliacao['email'] == session['email'] and autoavaliacao['sprint'] == sprint_escolha:
         user_autoavaliacao = autoavaliacao
+      
+    if len(user_autoavaliacao) == 0:
+      user_autoavaliacao = {
+        "comunicacao": 0, 
+        "engajamento": 0, 
+        "conhecimento": 0, 
+        "entrega": 0, 
+        "autogestao": 0
+      }
 
-    return render_template('integrante/devolutiva_avaliacao.html', pre_devolutiva=pre_devolutiva,
+    return render_template('integrante/devolutiva_avaliacao.html', pre_devolutiva=pre_devolutiva, 
                            avgs=avgs, user_autoavaliacao=user_autoavaliacao, textos=textos, sprint=sprint_escolha,
                            nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'], avaliacao_check=session['avaliacao'], 
                            sprint_index=session['sprint'], count=session['count_avaliacao'])

@@ -1,0 +1,20 @@
+[
+  {
+    "email": "joaoaosaldanha@gmail.com",
+    "sprint": 1,
+    "comunicacao": 3,
+    "engajamento": 3,
+    "conhecimento": 3,
+    "entrega": 3,
+    "autogestao": 3
+  },
+  {
+    "email": "joaoaos99@gmail.com",
+    "sprint": 1,
+    "comunicacao": 1,
+    "engajamento": 1,
+    "conhecimento": 1,
+    "entrega": 1,
+    "autogestao": 1
+  }
+]
