@@ -79,10 +79,10 @@ def controle_times():
   return render_template('admin/controle_times.html', users=users, turmas=turmas, times=times, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 
-@bp.route("/controle_sprints")
+@bp.route("/controle_projetos")
 @login_required
 @admin_required
-def controle_sprints():
+def controle_projetos():
   try:
       with open("data/cadastro.json", "r") as f:
         users = json.load(f)
@@ -110,4 +110,4 @@ def controle_sprints():
   turmas_with_projeto = [projeto["turma"] for projeto in projetos]
   turmas_select = [turma for turma in turmas if turma["codigo"] not in turmas_with_projeto]
 
-  return render_template('admin/controle_sprints.html', turmas_select=turmas_select, users=users, turmas=turmas, times=times, projetos=projetos, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'], sprint_index=session['sprint'])
+  return render_template('admin/controle_projetos.html', turmas_select=turmas_select, users=users, turmas=turmas, times=times, projetos=projetos, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'], sprint_index=session['sprint'])

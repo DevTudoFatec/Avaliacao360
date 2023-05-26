@@ -263,4 +263,4 @@ def criar_projeto():
   with open('data/projetos.json', 'w') as f:
     json.dump(projetos, f, indent=2)
 
-  return redirect(url_for('controles.controle_sprints'))
+  return redirect(url_for('controles.controle_projetos'))

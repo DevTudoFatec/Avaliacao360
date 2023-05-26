@@ -331,7 +331,7 @@ def update_projetos():
         with open('data/cadastro.json', 'w') as u:
           json.dump(users, u, indent=2)
 
-        return redirect(url_for('controles.controle_sprints'))
+        return redirect(url_for('controles.controle_projetos'))
     
     elif "delete" in request.form:
         confirm_delete = True
@@ -352,6 +352,6 @@ def update_projetos():
         with open("data/cadastro.json", "w") as file:
             json.dump(users, file, indent=2)
 
-        return redirect(url_for('controles.controle_sprints'))
+        return redirect(url_for('controles.controle_projetos'))
 
-    return render_template('admin/controle_sprints.html', confirm_delete=confirm_delete, index=index, editing=editing, users=users, turmas=turmas, projetos=projetos, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+    return render_template('admin/controle_projetos.html', confirm_delete=confirm_delete, index=index, editing=editing, users=users, turmas=turmas, projetos=projetos, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
