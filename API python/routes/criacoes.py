@@ -18,7 +18,7 @@ def run_async_loop(loop):
     asyncio.set_event_loop(loop)
     loop.run_forever()
 
-connection = email_connect()
+#connection = email_connect()
 #########      ACESSO GERAL          ############
 
 @bp.route("/cadastro_submit", methods=["POST"])
@@ -94,12 +94,12 @@ def cadastro_submit():
   thread = threading.Thread(target=run_async_loop, args=(loop,))
   thread.start()
 
-  asyncio.run_coroutine_threadsafe(send_email_async(
-            smtp_connection=connection,
-            destinatario = email, 
-            assunto = f"Boas Vindas - Avaliação 360º", 
-            mensagem = render_template('utils/new_user_body.html', email=email, nome=nome.title(), turma_user=codigo_turma, senha=senha, turmas=turmas)
-            ), loop)
+  # asyncio.run_coroutine_threadsafe(send_email_async(
+  #           smtp_connection=connection,
+  #           destinatario = email, 
+  #           assunto = f"Boas Vindas - Avaliação 360º", 
+  #           mensagem = render_template('utils/new_user_body.html', email=email, nome=nome.title(), turma_user=codigo_turma, senha=senha, turmas=turmas)
+  #           ), loop)
 
   flash('Cadastrado com sucesso!')
 
@@ -251,12 +251,12 @@ def criar_projeto():
         thread = threading.Thread(target=run_async_loop, args=(loop,))
         thread.start()
 
-        asyncio.run_coroutine_threadsafe(send_email_async(
-                  smtp_connection=connection,
-                  destinatario = user['email'], 
-                  assunto = f"Avaliação 360º - Projeto {new_projeto_nome}", 
-                  mensagem = render_template('utils/new_project_body.html', turmas=turmas, user=user, new_projeto_nome=new_projeto_nome, new_projeto_sprints=new_projeto_sprints, new_projeto_duracao_sprint=new_projeto_duracao_sprint, new_projeto_inicio=new_projeto_inicio, new_projeto_fim=new_projeto_fim, periodos_avaliacao=periodos_avaliacao)
-                  ), loop)
+        # asyncio.run_coroutine_threadsafe(send_email_async(
+        #           smtp_connection=connection,
+        #           destinatario = user['email'], 
+        #           assunto = f"Avaliação 360º - Projeto {new_projeto_nome}", 
+        #           mensagem = render_template('utils/new_project_body.html', turmas=turmas, user=user, new_projeto_nome=new_projeto_nome, new_projeto_sprints=new_projeto_sprints, new_projeto_duracao_sprint=new_projeto_duracao_sprint, new_projeto_inicio=new_projeto_inicio, new_projeto_fim=new_projeto_fim, periodos_avaliacao=periodos_avaliacao)
+        #           ), loop)
         
   with open('data/cadastro.json', 'w') as u:
     json.dump(users, u, indent=2)

@@ -156,11 +156,11 @@ def devolutiva_admin():
       entrega = entrega/rows
       autogestao = autogestao/rows
 
-      avgs["comunicacao"] = int(comunicacao)
-      avgs["engajamento"] = int(engajamento)
-      avgs["conhecimento"] = int(conhecimento) 
-      avgs["entrega"] = int(entrega)
-      avgs["autogestao"] = int(autogestao)
+      avgs["comunicacao"] = comunicacao
+      avgs["engajamento"] = engajamento
+      avgs["conhecimento"] = conhecimento
+      avgs["entrega"] = entrega
+      avgs["autogestao"] = autogestao
 
       auto_notas = {
         "comunicacao": 0, 
@@ -192,12 +192,53 @@ def devolutiva_admin():
       users_data[user['email']]['textos'] = textos
       users_data[user['email']]['autoavaliacao'] = auto_notas
       users_data[user['email']]['desvio_medio'] = desvio_medio
+    
 
+    total_comunicacao = total_engajamento = total_conhecimento = total_entrega = total_autogestao = 0
+    total_auto_comunicacao = total_auto_engajamento = total_auto_conhecimento = total_auto_entrega = total_auto_autogestao = 0
 
+    for user in users_data:
+        total_comunicacao += users_data[user]['avgs']['comunicacao']
+        total_engajamento += users_data[user]['avgs']['engajamento']
+        total_conhecimento += users_data[user]['avgs']['conhecimento']
+        total_entrega += users_data[user]['avgs']['entrega']
+        total_autogestao += users_data[user]['avgs']['autogestao']
+
+        total_auto_comunicacao += users_data[user]['autoavaliacao']['comunicacao']
+        total_auto_engajamento += users_data[user]['autoavaliacao']['engajamento']
+        total_auto_conhecimento += users_data[user]['autoavaliacao']['conhecimento']
+        total_auto_entrega += users_data[user]['autoavaliacao']['entrega']
+        total_auto_autogestao += users_data[user]['autoavaliacao']['autogestao']
+
+    medias_time = {
+        "comunicacao": 0,
+        "engajamento": 0,
+        "conhecimento": 0,
+        "entrega": 0,
+        "autogestao": 0,
+        "auto_comunicacao": 0,
+        "auto_engajamento": 0,
+        "auto_conhecimento": 0,
+        "auto_entrega": 0,
+        "auto_autogestao": 0
+    }
+
+    medias_time['comunicacao'] = total_comunicacao/len(users_data)
+    medias_time['engajamento'] = total_engajamento/len(users_data)
+    medias_time['conhecimento'] = total_conhecimento/len(users_data)
+    medias_time['entrega'] = total_entrega/len(users_data)
+    medias_time['autogestao'] = total_autogestao/len(users_data)
+
+    medias_time['auto_comunicacao'] = total_auto_comunicacao/len(users_data)
+    medias_time['auto_engajamento'] = total_auto_engajamento/len(users_data)
+    medias_time['auto_conhecimento'] = total_auto_conhecimento/len(users_data)
+    medias_time['auto_entrega'] = total_auto_entrega/len(users_data)
+    medias_time['auto_autogestao'] = total_auto_autogestao/len(users_data)
+    
       
     return render_template('admin/devolutiva_admin.html', time_nome=time_nome, time_escolha=time_escolha, sprint=sprint_escolha, 
                            users_data=users_data, users=users_time, pre_devolutiva=pre_devolutiva, desvio_medio=desvio_medio,
-                           nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+                           medias_time = medias_time, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
   
 
 
@@ -276,11 +317,11 @@ def devolutiva_integrante():
       autogestao = autogestao/rows
 
       avgs = {
-        "comunicacao": int(comunicacao), 
-        "engajamento": int(engajamento), 
-        "conhecimento": int(conhecimento), 
-        "entrega": int(entrega), 
-        "autogestao": int(autogestao)
+        "comunicacao": comunicacao, 
+        "engajamento": engajamento, 
+        "conhecimento": conhecimento, 
+        "entrega": entrega, 
+        "autogestao": autogestao
       }
     except:
       avgs = {

@@ -95,51 +95,51 @@
                     <h3>MÉDIA AVALIADORES</h3>
                 </td>
                 <td>
-                    {% if avgs['comunicacao'] < 3 and avgs['comunicacao'] > 0 %}
+                    {% if 0 < avgs['comunicacao'] < 3 %}
                         <h4 style="color: rgba(211, 32, 32, 0.911)">{{ avgs['comunicacao'] }}</h4>
-                    {% elif avgs['comunicacao'] == 3 %}
+                    {% elif 3 <= avgs['comunicacao'] < 4 %}
                         <h4 style="color: rgba(53, 111, 236, 0.932)">{{ avgs['comunicacao'] }}</h4>
-                    {% elif avgs['comunicacao'] > 3 %}
+                    {% elif avgs['comunicacao'] >= 4 %}
                         <h4 style="color: rgb(3, 160, 3)">{{ avgs['comunicacao'] }}</h4>
                     {% else %}
                     {% endif %}
                 </td>
                 <td>
-                    {% if avgs['engajamento'] < 3 and avgs['engajamento'] > 0 %}
+                    {% if 0 < avgs['engajamento'] < 3 %}
                         <h4 style="color: rgba(211, 32, 32, 0.911)">{{ avgs['engajamento'] }}</h4>
-                    {% elif avgs['engajamento'] == 3 %}
+                    {% elif 3 <= avgs['engajamento'] < 4 %}
                         <h4 style="color: rgba(53, 111, 236, 0.932)">{{ avgs['engajamento'] }}</h4>
-                    {% elif avgs['engajamento'] > 3 %}
+                    {% elif avgs['engajamento'] >= 4 %}
                         <h4 style="color: rgb(3, 160, 3)">{{ avgs['engajamento'] }}</h4>
                     {% else %}
                     {% endif %}
                 </td>
                 <td>
-                    {% if avgs['conhecimento'] < 3 and avgs['conhecimento'] > 0 %}
+                    {% if 0 < avgs['conhecimento'] < 3 %}
                         <h4 style="color: rgba(211, 32, 32, 0.911)">{{ avgs['conhecimento'] }}</h4>
-                    {% elif avgs['conhecimento'] == 3 %}
+                    {% elif 3 <= avgs['conhecimento'] < 4 %}
                         <h4 style="color: rgba(53, 111, 236, 0.932)">{{ avgs['conhecimento'] }}</h4>
-                    {% elif avgs['conhecimento'] > 3 %}
+                    {% elif avgs['conhecimento'] >= 4 %}
                         <h4 style="color: rgb(3, 160, 3)">{{ avgs['conhecimento'] }}</h4>
                     {% else %}
                     {% endif %}
                 </td>
                 <td>
-                    {% if avgs['entrega'] < 3 and avgs['entrega'] > 0 %}
+                    {% if 0 < avgs['entrega'] < 3 %}
                         <h4 style="color: rgba(211, 32, 32, 0.911)">{{ avgs['entrega'] }}</h4>
-                    {% elif avgs['entrega'] == 3 %}
+                    {% elif 3 <= avgs['entrega'] < 4 %}
                         <h4 style="color: rgba(53, 111, 236, 0.932)">{{ avgs['entrega'] }}</h4>
-                    {% elif avgs['entrega'] > 3 %}
+                    {% elif avgs['entrega'] >= 4 %}
                         <h4 style="color: rgb(3, 160, 3)">{{ avgs['entrega'] }}</h4>
                     {% else %}
                     {% endif %}
                 </td>
                 <td>
-                    {% if avgs['autogestao'] < 3 and avgs['autogestao'] > 0 %}
+                    {% if 0 < avgs['autogestao'] < 3  %}
                         <h4 style="color: rgba(211, 32, 32, 0.911)">{{ avgs['autogestao'] }}</h4>
-                    {% elif avgs['autogestao'] == 3 %}
+                    {% elif 3 <= avgs['autogestao'] < 4 %}
                         <h4 style="color: rgba(53, 111, 236, 0.932)">{{ avgs['autogestao'] }}</h4>
-                    {% elif avgs['autogestao'] > 3 %}
+                    {% elif avgs['autogestao'] >= 4 %}
                         <h4 style="color: rgb(3, 160, 3)">{{ avgs['autogestao'] }}</h4>
                     {% else %}
                     {% endif %}
@@ -180,47 +180,47 @@
                     <h3>AUTOAVALIAÇÃO</h3>
                 </td>
                 <td>
-                    {% if user_autoavaliacao['comunicacao'] < 3 and user_autoavaliacao['comunicacao'] > 0 %}
+                    {% if 0 < user_autoavaliacao['comunicacao'] < 3 %}
                         <h4 style="color: rgba(211, 32, 32, 0.911)">{{ user_autoavaliacao['comunicacao'] }}</h4>
                     {% elif user_autoavaliacao['comunicacao'] == 3 %}
                         <h4 style="color: rgba(53, 111, 236, 0.932)">{{ user_autoavaliacao['comunicacao'] }}</h4>
-                    {% elif user_autoavaliacao['comunicacao'] > 3 %}
+                    {% elif user_autoavaliacao['comunicacao'] >= 4 %}
                         <h4 style="color: rgb(3, 160, 3)">{{ user_autoavaliacao['comunicacao'] }}</h4>
                     {% endif %}
                 </td>
                 <td>
-                    {% if user_autoavaliacao['engajamento'] < 3 and user_autoavaliacao['engajamento'] > 0 %}
+                    {% if 0 < user_autoavaliacao['engajamento'] < 3 %}
                         <h4 style="color: rgba(211, 32, 32, 0.911)">{{ user_autoavaliacao['engajamento'] }}</h4>
                     {% elif user_autoavaliacao['engajamento'] == 3 %}
                         <h4 style="color: rgba(53, 111, 236, 0.932)">{{ user_autoavaliacao['engajamento'] }}</h4>
-                    {% elif user_autoavaliacao['engajamento'] > 3 %}
+                    {% elif user_autoavaliacao['engajamento'] >= 4 %}
                         <h4 style="color: rgb(3, 160, 3)">{{ user_autoavaliacao['engajamento'] }}</h4>
                     {% endif %}
                 </td>
                 <td>
-                    {% if user_autoavaliacao['conhecimento'] < 3 and user_autoavaliacao['conhecimento'] > 0 %}
+                    {% if 0 < user_autoavaliacao['conhecimento'] < 3  %}
                         <h4 style="color: rgba(211, 32, 32, 0.911)">{{ user_autoavaliacao['conhecimento'] }}</h4>
                     {% elif user_autoavaliacao['conhecimento'] == 3 %}
                         <h4 style="color: rgba(53, 111, 236, 0.932)">{{ user_autoavaliacao['conhecimento'] }}</h4>
-                    {% elif user_autoavaliacao['conhecimento'] > 3 %}
+                    {% elif user_autoavaliacao['conhecimento'] >= 4 %}
                         <h4 style="color: rgb(3, 160, 3)">{{ user_autoavaliacao['conhecimento'] }}</h4>
                     {% endif %}
                 </td>
                 <td>
-                    {% if user_autoavaliacao['entrega'] < 3 and user_autoavaliacao['entrega'] > 0 %}
+                    {% if 0 < user_autoavaliacao['entrega'] < 3  %}
                         <h4 style="color: rgba(211, 32, 32, 0.911)">{{ user_autoavaliacao['entrega'] }}</h4>
                     {% elif user_autoavaliacao['comunicacao'] == 3 %}
                         <h4 style="color: rgba(53, 111, 236, 0.932)">{{ user_autoavaliacao['entrega'] }}</h4>
-                    {% elif user_autoavaliacao['comunicacao'] > 3 %}
+                    {% elif user_autoavaliacao['comunicacao'] >= 4 %}
                         <h4 style="color: rgb(3, 160, 3)">{{ user_autoavaliacao['entrega'] }}</h4>
                     {% endif %}
                 </td>
                 <td>
-                    {% if user_autoavaliacao['autogestao'] < 3 and user_autoavaliacao['autogestao'] > 0 %}
+                    {% if 0 < user_autoavaliacao['autogestao'] < 3 %}
                         <h4 style="color: rgba(211, 32, 32, 0.911)">{{ user_autoavaliacao['autogestao'] }}</h4>
                     {% elif user_autoavaliacao['autogestao'] == 3 %}
                         <h4 style="color: rgba(53, 111, 236, 0.932)">{{ user_autoavaliacao['autogestao'] }}</h4>
-                    {% elif user_autoavaliacao['autogestao'] > 3 %}
+                    {% elif user_autoavaliacao['autogestao'] >= 4 %}
                         <h4 style="color: rgb(3, 160, 3)">{{ user_autoavaliacao['autogestao'] }}</h4>
                     {% endif %}
                 </td>
