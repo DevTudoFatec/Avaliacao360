@@ -8,5 +8,29 @@
     "senha": "$2b$12$pEfj8M4KBWE/L1HVwmnuJ.TjaNkfx3KjXhRcroWA0.wOIfzJ6sOma",
     "perfil": 2,
     "acessos": 0
+  },
+  {
+    "index": 1,
+    "nome": "Joao",
+    "email": "joaoaos99@gmail.com",
+    "turma": "bd01",
+    "time": 0,
+    "senha": "$2b$12$wxblT5scOT9IuDpSN1Qz/uez.MKABBME189HpbQVhYFk2UhkqTvIK",
+    "perfil": 1,
+    "acessos": 0,
+    "avaliacoes": [],
+    "count_avaliacao": 0
+  },
+  {
+    "index": 2,
+    "nome": "Joao",
+    "email": "joaoaosaldanha@gmail.com",
+    "turma": "bd01",
+    "time": 0,
+    "senha": "$2b$12$g//yAAKINxCekMd.JlXYZ.6eeZaSn7jmq5OkCedaxxPsCfKII2SCu",
+    "perfil": 1,
+    "acessos": 0,
+    "avaliacoes": [],
+    "count_avaliacao": 0
   }
 ]

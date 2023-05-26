@@ -8,8 +8,7 @@ from routes.dashboards import bp as dashboards
 from routes.padroes import bp as padroes
 from routes.updates import bp as updates
 
-from utils.darkmode import bp as darkmode 
-
+from utils.darkmode import bp as darkmode
 app = Flask(__name__)
 
 app.register_blueprint(avaliacao)

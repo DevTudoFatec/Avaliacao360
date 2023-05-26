@@ -4,22 +4,22 @@ import os
 from datetime import datetime, timedelta
 import bcrypt
 from utils.decorators import login_required, admin_required
-from utils.email_sender import send_email
+from utils.email_sender import send_email, email_connect
 
 import asyncio
 import threading
 
 bp = bp('criacoes', __name__)
 
-async def send_email_async(destinatario, assunto, mensagem):
-    await send_email(destinatario, assunto, mensagem)
+async def send_email_async(smtp_connection, destinatario, assunto, mensagem):
+    await send_email(smtp_connection, destinatario, assunto, mensagem)
 
 def run_async_loop(loop):
     asyncio.set_event_loop(loop)
     loop.run_forever()
 
+connection = email_connect()
 #########      ACESSO GERAL          ############
-
 
 @bp.route("/cadastro_submit", methods=["POST"])
 def cadastro_submit():
@@ -95,6 +95,7 @@ def cadastro_submit():
   thread.start()
 
   asyncio.run_coroutine_threadsafe(send_email_async(
+            smtp_connection=connection,
             destinatario = email, 
             assunto = f"Boas Vindas - Avaliação 360º", 
             mensagem = render_template('utils/new_user_body.html', email=email, nome=nome.title(), turma_user=codigo_turma, senha=senha, turmas=turmas)
@@ -251,6 +252,7 @@ def criar_projeto():
         thread.start()
 
         asyncio.run_coroutine_threadsafe(send_email_async(
+                  smtp_connection=connection,
                   destinatario = user['email'], 
                   assunto = f"Avaliação 360º - Projeto {new_projeto_nome}", 
                   mensagem = render_template('utils/new_project_body.html', turmas=turmas, user=user, new_projeto_nome=new_projeto_nome, new_projeto_sprints=new_projeto_sprints, new_projeto_duracao_sprint=new_projeto_duracao_sprint, new_projeto_inicio=new_projeto_inicio, new_projeto_fim=new_projeto_fim, periodos_avaliacao=periodos_avaliacao)
