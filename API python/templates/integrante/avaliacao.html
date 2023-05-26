@@ -174,5 +174,20 @@
           <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
         </footer>
     </div>
+    <script>
+      var inputRanges = document.querySelectorAll('input[type="range"]');
+  
+      inputRanges.forEach(function(inputRange) {
+        var textArea = inputRange.nextElementSibling.nextElementSibling;
+        
+        inputRange.addEventListener('input', function() {
+          if (parseInt(inputRange.value) < 3) {
+            textArea.required = true;
+          } else {
+            textArea.required = false;
+          }
+        });
+      });
+    </script>
   </body>  
 </html>
