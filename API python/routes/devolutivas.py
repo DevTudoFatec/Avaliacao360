@@ -180,11 +180,11 @@ def devolutiva_admin():
       
       desvio_comunicacao = desvio_engajamento = desvio_conhecimento = desvio_entrega = desvio_autogestao = 0
 
-      desvio_comunicacao += (auto_notas["comunicacao"]-avgs["comunicacao"]) if avgs["comunicacao"] < auto_notas["comunicacao"] else (avgs["comunicacao"] - auto_notas["comunicacao"])
-      desvio_engajamento += (auto_notas["engajamento"]-avgs["engajamento"]) if avgs["engajamento"] < auto_notas["engajamento"] else (avgs["engajamento"] - auto_notas["engajamento"])
-      desvio_conhecimento += (auto_notas["conhecimento"]-avgs["conhecimento"]) if avgs["conhecimento"] < auto_notas["conhecimento"] else (avgs["conhecimento"] - auto_notas["conhecimento"])
-      desvio_entrega += (auto_notas["entrega"]-avgs["entrega"]) if avgs["entrega"] < auto_notas["entrega"] else (avgs["entrega"] - auto_notas["entrega"])
-      desvio_autogestao += (auto_notas["autogestao"]-avgs["autogestao"]) if avgs["autogestao"] < auto_notas["autogestao"] else (avgs["autogestao"] - auto_notas["autogestao"])
+      desvio_comunicacao += (auto_notas["comunicacao"]-avgs["comunicacao"])
+      desvio_engajamento += (auto_notas["engajamento"]-avgs["engajamento"])
+      desvio_conhecimento += (auto_notas["conhecimento"]-avgs["conhecimento"])
+      desvio_entrega += (auto_notas["entrega"]-avgs["entrega"]) 
+      desvio_autogestao += (auto_notas["autogestao"]-avgs["autogestao"])
 
       desvio_medio = (desvio_comunicacao + desvio_engajamento + desvio_conhecimento + desvio_entrega + desvio_autogestao)/5
 
