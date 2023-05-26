@@ -116,7 +116,13 @@ def devolutiva_admin():
       textos_entrega = []
       textos_autogestao = []
       textos = {}
-      avgs = {}
+      avgs = {
+        "comunicacao": 0, 
+        "engajamento": 0, 
+        "conhecimento": 0, 
+        "entrega": 0, 
+        "autogestao": 0
+      }
 
       for avaliacao in avaliacoes:
         if avaliacao['integrante'] == user['email'] and avaliacao['sprint'] == sprint_escolha:
@@ -138,25 +144,31 @@ def devolutiva_admin():
           if len(avaliacao['texto_autogestao']) > 0:
             textos_autogestao.append(avaliacao['texto_autogestao'])
 
-          textos["comunicacao"] = textos_comunicacao
-          textos["engajamento"] = textos_engajamento
-          textos["conhecimento"] = textos_conhecimento
-          textos["entrega"] = textos_entrega
-          textos["autogestao"] = textos_autogestao
+      textos["comunicacao"] = textos_comunicacao
+      textos["engajamento"] = textos_engajamento
+      textos["conhecimento"] = textos_conhecimento
+      textos["entrega"] = textos_entrega
+      textos["autogestao"] = textos_autogestao
 
-          comunicacao = comunicacao/rows
-          engajamento = engajamento/rows
-          conhecimento = conhecimento/rows
-          entrega = entrega/rows
-          autogestao = autogestao/rows
+      comunicacao = comunicacao/rows
+      engajamento = engajamento/rows
+      conhecimento = conhecimento/rows
+      entrega = entrega/rows
+      autogestao = autogestao/rows
 
-          avgs["comunicacao"] = int(comunicacao)
-          avgs["engajamento"] = int(engajamento)
-          avgs["conhecimento"] = int(conhecimento) 
-          avgs["entrega"] = int(entrega)
-          avgs["autogestao"] = int(autogestao)
+      avgs["comunicacao"] = int(comunicacao)
+      avgs["engajamento"] = int(engajamento)
+      avgs["conhecimento"] = int(conhecimento) 
+      avgs["entrega"] = int(entrega)
+      avgs["autogestao"] = int(autogestao)
 
-      auto_notas = {}
+      auto_notas = {
+        "comunicacao": 0, 
+        "engajamento": 0, 
+        "conhecimento": 0, 
+        "entrega": 0, 
+        "autogestao": 0
+      }
 
       for autoavaliacao in autoavaliacoes:
         if autoavaliacao['email'] == user['email'] and autoavaliacao['sprint'] == sprint_escolha:
@@ -166,13 +178,26 @@ def devolutiva_admin():
           auto_notas["entrega"] = int(autoavaliacao["entrega"])
           auto_notas["autogestao"] = int(autoavaliacao["autogestao"])
       
+      desvio_comunicacao = desvio_engajamento = desvio_conhecimento = desvio_entrega = desvio_autogestao = 0
 
+      desvio_comunicacao += (auto_notas["comunicacao"]-avgs["comunicacao"]) if avgs["comunicacao"] < auto_notas["comunicacao"] else (avgs["comunicacao"] - auto_notas["comunicacao"])
+      desvio_engajamento += (auto_notas["engajamento"]-avgs["engajamento"]) if avgs["engajamento"] < auto_notas["engajamento"] else (avgs["engajamento"] - auto_notas["engajamento"])
+      desvio_conhecimento += (auto_notas["conhecimento"]-avgs["conhecimento"]) if avgs["conhecimento"] < auto_notas["conhecimento"] else (avgs["conhecimento"] - auto_notas["conhecimento"])
+      desvio_entrega += (auto_notas["entrega"]-avgs["entrega"]) if avgs["entrega"] < auto_notas["entrega"] else (avgs["entrega"] - auto_notas["entrega"])
+      desvio_autogestao += (auto_notas["autogestao"]-avgs["autogestao"]) if avgs["autogestao"] < auto_notas["autogestao"] else (avgs["autogestao"] - auto_notas["autogestao"])
 
-      users_data[user['email']]['avgs'] = avgs 
+      desvio_medio = (desvio_comunicacao + desvio_engajamento + desvio_conhecimento + desvio_entrega + desvio_autogestao)/5
+
+      users_data[user['email']]['avgs'] = avgs
       users_data[user['email']]['textos'] = textos
       users_data[user['email']]['autoavaliacao'] = auto_notas
+      users_data[user['email']]['desvio_medio'] = desvio_medio
+
+
       
-    return render_template('admin/devolutiva_admin.html', time_nome=time_nome, time_escolha=time_escolha, sprint=sprint_escolha, users_data=users_data, users=users_time, pre_devolutiva=pre_devolutiva, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+    return render_template('admin/devolutiva_admin.html', time_nome=time_nome, time_escolha=time_escolha, sprint=sprint_escolha, 
+                           users_data=users_data, users=users_time, pre_devolutiva=pre_devolutiva, desvio_medio=desvio_medio,
+                           nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
   
 
 

@@ -115,25 +115,64 @@
         </table>   
         {% for user in users %}
             <h1 class="user_nome">{{ user['nome'] }}</h1>
+            <h1 class="user_nome">DM: {% if users_data[user['email']]['desvio_medio'] == 0 %} <span style="color: rgba(53, 111, 236, 0.932)">Neutro</span> 
+                                        {% elif users_data[user['email']]['desvio_medio'] < 0 %} <span style="color: rgba(211, 32, 32, 0.911)">Negativo</span>  
+                                        {% else %} <span style="color: rgb(3, 160, 3)">Positivo</span> 
+                                        {% endif %}</h1>
             <table class="table_devolutiva">
                 <tr>
                     <td>
                         <h2>MÉDIA AVALIADORES</h2>
                     </td>
                     <td>
-                        <h3>{{ users_data[user['email']]['avgs']['comunicacao']}}</h3>
+                        {% if users_data[user['email']]['avgs']['comunicacao'] < 3 and users_data[user['email']]['avgs']['comunicacao'] > 0 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ users_data[user['email']]['avgs']['comunicacao'] }}</h4>
+                        {% elif users_data[user['email']]['avgs']['comunicacao'] == 3 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ users_data[user['email']]['avgs']['comunicacao'] }}</h4>
+                        {% elif users_data[user['email']]['avgs']['comunicacao'] > 3 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ users_data[user['email']]['avgs']['comunicacao'] }}</h4>
+                        {% else %}
+                        {% endif %}
                     </td>
                     <td>
-                        <h3>{{ users_data[user['email']]['avgs']['engajamento']}}</h3>
+                        {% if users_data[user['email']]['avgs']['engajamento'] < 3 and users_data[user['email']]['avgs']['engajamento'] > 0 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ users_data[user['email']]['avgs']['engajamento'] }}</h4>
+                        {% elif users_data[user['email']]['avgs']['engajamento'] == 3 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ users_data[user['email']]['avgs']['engajamento'] }}</h4>
+                        {% elif users_data[user['email']]['avgs']['engajamento'] > 3 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ users_data[user['email']]['avgs']['engajamento'] }}</h4>
+                        {% else %}
+                        {% endif %}
                     </td>
                     <td>
-                        <h3>{{ users_data[user['email']]['avgs']['conhecimento']}}</h3>
+                        {% if users_data[user['email']]['avgs']['conhecimento'] < 3 and users_data[user['email']]['avgs']['conhecimento'] > 0 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ users_data[user['email']]['avgs']['conhecimento'] }}</h4>
+                        {% elif users_data[user['email']]['avgs']['conhecimento'] == 3 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ users_data[user['email']]['avgs']['conhecimento'] }}</h4>
+                        {% elif users_data[user['email']]['avgs']['conhecimento'] > 3 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ users_data[user['email']]['avgs']['conhecimento'] }}</h4>
+                        {% else %}
+                        {% endif %}
                     </td>
                     <td>
-                        <h3>{{ users_data[user['email']]['avgs']['entrega']}}</h3>
+                        {% if users_data[user['email']]['avgs']['entrega'] < 3 and users_data[user['email']]['avgs']['entrega'] > 0 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ users_data[user['email']]['avgs']['entrega'] }}</h4>
+                        {% elif users_data[user['email']]['avgs']['entrega'] == 3 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ users_data[user['email']]['avgs']['entrega'] }}</h4>
+                        {% elif users_data[user['email']]['avgs']['entrega'] > 3 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ users_data[user['email']]['avgs']['entrega'] }}</h4>
+                        {% else %}
+                        {% endif %}
                     </td>
                     <td>
-                        <h3>{{ users_data[user['email']]['avgs']['autogestao']}}</h3>
+                        {% if users_data[user['email']]['avgs']['autogestao'] < 3 and users_data[user['email']]['avgs']['autogestao'] > 0 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ users_data[user['email']]['avgs']['autogestao'] }}</h4>
+                        {% elif users_data[user['email']]['avgs']['autogestao'] == 3 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ users_data[user['email']]['avgs']['autogestao'] }}</h4>
+                        {% elif users_data[user['email']]['avgs']['autogestao'] > 3 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ users_data[user['email']]['avgs']['autogestao'] }}</h4>
+                        {% else %}
+                        {% endif %}
                     </td>
                 </tr>
                 <tr>

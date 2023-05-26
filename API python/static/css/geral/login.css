@@ -32,11 +32,11 @@ body{/*validado*/
 }
 
   
-img {
+.logo_360 {
     width: 80%;
-    
-       
 }
+
+
 
 .texto_instrucao{
     font-size:40px;
@@ -71,7 +71,7 @@ input{
 }
 
 .inputs{
-   
+    margin-top: -10%;
     padding:10px ;
 }
 
@@ -110,6 +110,7 @@ button{
 
    .inputs {
     margin-left: 20%;
+    margin-top: 5%;
    }
 
    .img {
