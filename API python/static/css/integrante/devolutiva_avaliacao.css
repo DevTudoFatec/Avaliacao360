@@ -11,7 +11,8 @@ header{
 }
 
 #logo_avaliação{
-margin-left: 42%;
+margin-left: 40%;
+width: 20%;
 }
 /* FIM CABEÇALHO PADRONIZADO */
 
@@ -365,8 +366,8 @@ h5 {
 
 @media screen and (max-width:768px) {
   #logo_avaliação{
-    width: 50%;
-    margin-left: 25%;
+    width: 30%;
+    margin-left: 32%;
   }
   
   .bt_pre_devolutiva{

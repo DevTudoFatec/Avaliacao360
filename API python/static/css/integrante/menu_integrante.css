@@ -35,10 +35,12 @@ body{
 .opções_menu{
     justify-content: space-around;
     margin-left: 30%;
-    margin-right: 30%;}
+    margin-right: 30%;
+}
 
 footer{
-    margin: 5%}
+    margin: 5%
+}
 
 /*header padrão: início*/
 
@@ -53,7 +55,9 @@ header{
     font-size: small;}
 
 #logo_avaliação{
-    margin-left: 40%;}
+    margin-left: 40%;
+    width: 20%;
+}
 
 .bt{
     padding: 6px, 6px, 6px;
@@ -156,7 +160,7 @@ nav a{
 
     #logo_avaliação{
         width: 30%;
-        margin-left: 35%;
+        margin-left: 32%;
     }
     
     .details_integrante {
