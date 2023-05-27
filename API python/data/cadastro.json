@@ -8,38 +8,5 @@
     "senha": "$2b$12$pEfj8M4KBWE/L1HVwmnuJ.TjaNkfx3KjXhRcroWA0.wOIfzJ6sOma",
     "perfil": 2,
     "acessos": 0
-  },
-  {
-    "index": 1,
-    "nome": "Fulano",
-    "email": "fulano@email.com",
-    "turma": "bd01",
-    "time": 1,
-    "senha": "$2b$12$h0bkvnF3tZ4T0vIuZoScqui024vWMl.JgnTeX.6tSf4rqeWMrw9ki",
-    "perfil": 1,
-    "acessos": 1,
-    "avaliacoes": [
-      [
-        1,
-        "26-05-2023",
-        "30-05-2023"
-      ],
-      [
-        2,
-        "02-06-2023",
-        "06-06-2023"
-      ],
-      [
-        3,
-        "09-06-2023",
-        "13-06-2023"
-      ],
-      [
-        4,
-        "16-06-2023",
-        "20-06-2023"
-      ]
-    ],
-    "count_avaliacao": 0
   }
 ]
