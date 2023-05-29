@@ -223,17 +223,17 @@ def devolutiva_admin():
         "auto_autogestao": 0
     }
 
-    medias_time['comunicacao'] = total_comunicacao/len(users_data)
-    medias_time['engajamento'] = total_engajamento/len(users_data)
-    medias_time['conhecimento'] = total_conhecimento/len(users_data)
-    medias_time['entrega'] = total_entrega/len(users_data)
-    medias_time['autogestao'] = total_autogestao/len(users_data)
+    medias_time['comunicacao'] = float('{:.1f}'.format(total_comunicacao/len(users_data)))
+    medias_time['engajamento'] = float('{:.1f}'.format(total_engajamento/len(users_data)))
+    medias_time['conhecimento'] = float('{:.1f}'.format(total_conhecimento/len(users_data)))
+    medias_time['entrega'] = float('{:.1f}'.format(total_entrega/len(users_data)))
+    medias_time['autogestao'] = float('{:.1f}'.format(total_autogestao/len(users_data)))
 
-    medias_time['auto_comunicacao'] = total_auto_comunicacao/len(users_data)
-    medias_time['auto_engajamento'] = total_auto_engajamento/len(users_data)
-    medias_time['auto_conhecimento'] = total_auto_conhecimento/len(users_data)
-    medias_time['auto_entrega'] = total_auto_entrega/len(users_data)
-    medias_time['auto_autogestao'] = total_auto_autogestao/len(users_data)
+    medias_time['auto_comunicacao'] = float('{:.1f}'.format(total_auto_comunicacao/len(users_data)))
+    medias_time['auto_engajamento'] = float('{:.1f}'.format(total_auto_engajamento/len(users_data)))
+    medias_time['auto_conhecimento'] = float('{:.1f}'.format(total_auto_conhecimento/len(users_data)))
+    medias_time['auto_entrega'] = float('{:.1f}'.format(total_auto_entrega/len(users_data)))
+    medias_time['auto_autogestao'] = float('{:.1f}'.format(total_auto_autogestao/len(users_data)))
     
       
     return render_template('admin/devolutiva_admin.html', time_nome=time_nome, time_escolha=time_escolha, sprint=sprint_escolha, 
