@@ -42,6 +42,3 @@
   <div style="display: inline_block"><br>
   
   + Acesse nosso [Figma](https://www.figma.com/file/86VvL8DaM6IR9RH06jVobp/PBLTeX-Projeto?node-id=0%3A1&t=Av9utODXTrCT0tAK-1) e [Trello](https://trello.com/b/CHEOxSyG/avalia%C3%A7%C3%A3o-360)
-    
-  ## Acessar códigos
-   + Para acessar os códigos realizados na terceira Sprint, entre no link: [Códigos Sprint3](https://github.com/DevTudoFatec/Avaliacao360/tree/Sprint_3)
