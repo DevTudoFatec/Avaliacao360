@@ -29,27 +29,14 @@
         </header>
     
     <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
-
-        <div>
-            <button id="bt_devolutiva_admin"> Devolutiva de Avaliações - ADM </button>
-        </div>
-
-        <nav id="colunas">
-            <div class="coluna1">
-                <button class="bt_titulo_coluna"> Nome </button>
-                
-            </div>
-            <div class="coluna2">
-                <button class="bt_titulo_coluna"> Semestre/turma </button>
-            </div>
-            <div class="coluna3">
-                <button class="bt_titulo_coluna"> Devolutivas </button>
-            </div>
-
-
-        </nav>
-
-        <h1>Minha Dashboard</h1>
+    <main>
+        <button class="bt_devolutiva_admin">Dashboard Gerencial</button> <br>
+        <button class="bt_titulo_media_notas">Evolução da média de notas</button>
         {{ div_grafico|safe }}
+        <footer>
+            <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
+        </footer>
+    </main>
+    </body>
 
         

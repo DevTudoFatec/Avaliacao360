@@ -11,38 +11,43 @@ header{
 #logo_avaliação{
     margin-left: 40%;}
 
-#logo_api_cadastro{
-    margin: 2%;}
-
 body{
-    text-align: center;
     background-color: #eeee;
     margin: 0;
     padding: 0;}
 
-#bt_devolutiva_admin{
-    position: absolute;
+.bt_devolutiva_admin{
     background-color: #5e17eb;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 20px;
+    font-size: 150%;
     border-radius: 50px;
-    padding: 15px;
-    left: 0%;
-    top: -50%;
-    color: white;}
+    padding: 0.8%;
+    color: white;
+    width: 27%;
+    border: none;
+    margin-top: 2%;
+}
 
-#colunas{
-    display: flex;
-    position: absolute;
-    background-color: white;
+.bt_titulo_media_notas{
+    background-color: #FFFFFF;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 20px;
+    font-size: 150%;
     border-radius: 50px;
-    padding: 15px;
-    left: 0%;
-    top: -50%;
-    color: black;}
+    padding: 0.8%;
+    color: #000000;
+    width: 27%;
+    margin-top: 2%;
+    border: none;
+}
 
+main{
+    margin-left: 4%;
+}
+
+footer{
+    text-align: center;
+    margin-top: 5%;
+}
 
 /* Botão de menu */
 .bt{
@@ -111,6 +116,5 @@ body{
 
 
 .dashboard{
-
     margin-top: 40%;
 }
