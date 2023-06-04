@@ -26,20 +26,6 @@ def avaliacao():
     except:
         users = []
 
-    try:
-        with open("data/turmas.json", "r") as f:
-            turmas = json.load(f)
-            turmas_dict = {turma['codigo']: turma['nome'] for turma in turmas}
-    except:
-        turmas = []
-
-    try:
-        with open("data/times.json", "r") as f:
-            times = json.load(f)
-            times_dict = {time['codigo']: time['nome'] for time in times}
-    except:
-        times = []
-
     filtered_users = []
     for user in users:
         if user['time'] == session['time'] and user['email'] != session['email']:
@@ -54,10 +40,6 @@ def avaliacao():
 
       email = session['email']
       sprint = session['sprint']
-      turma_codigo = session['turma']
-      nome_turma = turmas_dict.get(turma_codigo, '')
-      time = session['time']
-      nome_time = times_dict.get(time, '')
       comunicacao = request.form.get('auto_comunicacao')
       engajamento = request.form.get('auto_engajamento')
       conhecimento = request.form.get('auto_conhecimento')
@@ -67,10 +49,6 @@ def avaliacao():
       autovaliacao_dict = {
         "email": email,
         "sprint": sprint,
-        "turma_codigo": turma_codigo,
-        "turma_nome": nome_turma,
-        "time": time,
-        "time_nome": nome_time,
         "comunicacao": int(comunicacao),
         "engajamento": int(engajamento),
         "conhecimento": int(conhecimento),
@@ -100,10 +78,7 @@ def avaliacao():
         avaliador = session['email']
         integrante = request.form.get(f"user_email_{user['email']}")
         sprint = session['sprint']
-        turma_codigo = session['turma']
-        nome_turma = turmas_dict.get(turma_codigo, '')
         time = session['time']
-        nome_time = times_dict.get(time, 'nome')
         comunicacao = request.form.get(f"comunicacao_{user['email']}")
         texto_comunicacao = request.form.get(f"texto_comunicacao_{user['email']}")
         engajamento = request.form.get(f"engajamento_{user['email']}")
@@ -119,10 +94,7 @@ def avaliacao():
           "avaliador": avaliador,
           "integrante": integrante,
           "sprint": sprint,
-          "turma_codigo": turma_codigo,
-          "turma_nome": nome_turma,
           "time": time,
-          "time_nome": nome_time,
           "comunicacao": int(comunicacao),
           "texto_comunicacao": texto_comunicacao,
           "engajamento": int(engajamento),

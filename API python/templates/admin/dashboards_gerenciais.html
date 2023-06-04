@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8"/> <!--extensão para caracteres especiais-->
+        <meta charset="UFT-8"/> <!--extensão para caracteres especiais-->
         <title> Dashboards Gerenciais</title> 
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/icones/apple-touch-icon.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/icones/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/icones/favicon-16x16.png') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin/dashboards_gerenciais.css') }}">
     </head>
         <header> 
@@ -26,22 +29,14 @@
         </header>
     
     <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
-
-        <div>
-            <button id="bt_devolutiva_admin"> Devolutiva de Avaliações - ADM </button>
-        </div>
-
-        <nav id="colunas">
-            <div class="coluna1">
-                <button class="bt_titulo_coluna"> Nome </button>
-                
-            </div>
-            <div class="coluna2">
-                <button class="bt_titulo_coluna"> Semestre/turma </button>
-            </div>
-            <div class="coluna3">
-                <button class="bt_titulo_coluna"> Devolutivas </button>
-            </div>
-        </nav>
+    <main>
+        <button class="bt_devolutiva_admin">Dashboard Gerencial</button> <br>
+        <button class="bt_titulo_media_notas">Evolução da média de notas</button>
+        {{ div_grafico|safe }}
+        <footer>
+            <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
+        </footer>
+    </main>
+    </body>
 
         

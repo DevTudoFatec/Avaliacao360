@@ -3,6 +3,9 @@
     <head>
         <meta charset="UFT-8"/> <!--extensão para caracteres especiais-->
         <title> Dashboards Operacionais</title> 
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/icones/apple-touch-icon.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/icones/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/icones/favicon-16x16.png') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin/dashboards_operacionais.css') }}">
     </head>
     <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
