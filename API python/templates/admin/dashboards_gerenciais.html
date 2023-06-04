@@ -59,7 +59,8 @@
                 </form>
             </div>
             <div class="grafico">
-                {{ div_grafico | safe }}
+                <div id="grafico_geral">{{ div_grafico_sprint | safe }}</div>
+                <div id="grafico_sprint">{{ div_grafico | safe }}</div>
             </div>
 
             <footer>

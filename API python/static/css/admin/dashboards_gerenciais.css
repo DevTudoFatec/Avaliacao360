@@ -113,9 +113,12 @@ footer{
     text-align: center;}
 
 .grafico{
-    width: 30%;
-    height: 25%;
-    margin: 4%;
+    display: flex;
+}
+
+#grafico_geral, #grafico_sprint{
+    width: 40%;
+    margin: 5%;
 }
 
 .select_box{
@@ -127,4 +130,8 @@ footer{
     padding: 0.8%;
     color: #000000;
 }
+
+/* .linha_filtro{
+    display: inline-flex;
+} */
 
