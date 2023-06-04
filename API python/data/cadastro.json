@@ -170,5 +170,23 @@
       ]
     ],
     "count_avaliacao": 1
+  },
+  {
+    "index": 10,
+    "nome": "Beatrizteste",
+    "email": "bia@gmail.com",
+    "turma": "bd01",
+    "time": 0,
+    "senha": "$2b$12$N1Q65Bj9nPw1mljHPbQFz.1lGaVaBZz8By2/e/BPK4oTFA6HaYbK2",
+    "perfil": 1,
+    "acessos": 0,
+    "avaliacoes": [
+      [
+        1,
+        "03-06-2023",
+        "07-06-2023"
+      ]
+    ],
+    "count_avaliacao": 0
   }
 ]

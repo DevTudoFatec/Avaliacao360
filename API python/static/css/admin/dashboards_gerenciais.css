@@ -26,6 +26,8 @@ body{
     width: 27%;
     border: none;
     margin-top: 2%;
+    margin-left: 4%;
+
 }
 
 .bt_titulo_media_notas{
@@ -38,14 +40,10 @@ body{
     width: 27%;
     margin-top: 2%;
     border: none;
-}
-
-main{
     margin-left: 4%;
 }
 
 footer{
-    text-align: center;
     margin-top: 5%;
 }
 
@@ -114,7 +112,19 @@ footer{
     margin-top: -35px;
     text-align: center;}
 
-
-.dashboard{
-    margin-top: 40%;
+.grafico{
+    width: 30%;
+    height: 25%;
+    margin: 4%;
 }
+
+.select_box{
+    background-color: #FFFFFF;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-radius: 50px;
+    width: 20%;
+    margin-left: 4%;
+    padding: 0.8%;
+    color: #000000;
+}
+
