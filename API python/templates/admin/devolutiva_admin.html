@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UFT-8"/>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Devolutiva Admin</title> 
-        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/icones/apple-touch-icon.png') }}">
-        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/icones/favicon-32x32.png') }}">
-        <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/icones/favicon-16x16.png') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin/devolutiva_admin.css') }}">
         {% if darkmode%}
           <style>
@@ -91,16 +89,35 @@
         </div>
     {% else %}
 
-    <div class="header_infos">
+    <div class="content">
+      <div class="header_infos">
         <h1 class="bt_devolutiva">DEVOLUTIVA AVALIAÇÃO</h1>
         <h2 class="sprint_sign">Sprint: {{ sprint }}</h2>
         <h2 class="sprint_sign">Time: {{ time_nome }}</h2>
-    </div>
-    <div>
-        <img id="legenda_trc" src="{{ url_for('static', filename='img/avaliacao/legenda.png') }}" alt="legenda">
-    </div>
-
-    <div class="content">
+        <img class="legenda_trc" src="{{ url_for('static', filename='img/avaliacao/legenda.png') }}" alt="legenda">
+      </div>
+        <table class="table_devolutiva_padrao">
+            <tr>
+                <td>
+                    <h2>TIPO DE AVALIAÇÃO</h2>
+                </td>
+                <td>
+                    <h2>COMUNICAÇÃO E TRABALHO<br>EM EQUIPE</h2>
+                </td>
+                <td>
+                    <h2>ENGAJAMENTO E PRÓ-ATIVIDADE</h2>
+                </td>
+                <td>
+                    <h2>CONHECIMENTO E <br>APLICABILIDADE TÉCNICA</h2>
+                </td>
+                <td>
+                    <h2>ENTREGA DE RESULTADOS COM <br>VALOR AGREGADO</h2>
+                </td>
+                <td>
+                    <h2>AUTO-GESTÃO DAS ATIVIDADES</h2>
+                </td>
+            </tr>
+        </table>   
         {% for user in users %}
             <h1 class="user_nome">{{ user['nome'] }}</h1>
             <h1 class="user_dm">Desvio Medio Autoavaliacao/Avaliacao <br>do Integrante: {% if users_data[user['email']]['desvio_medio'] == 0 %} <span style="color: rgba(53, 111, 236, 0.932)">{{users_data[user['email']]['desvio_medio']}}</span> 
@@ -110,27 +127,7 @@
             <table class="table_devolutiva">
                 <tr>
                     <td>
-                        <h2>TIPO DE AVALIAÇÃO</h2>
-                    </td>
-                    <td>
-                        <h2>COMUNICAÇÃO E TRABALHO<br>EM EQUIPE</h2>
-                    </td>
-                    <td>
-                        <h2>ENGAJAMENTO E PRÓ-ATIVIDADE</h2>
-                    </td>
-                    <td>
-                        <h2>CONHECIMENTO E <br>APLICABILIDADE TÉCNICA</h2>
-                    </td>
-                    <td>
-                        <h2>ENTREGA DE RESULTADOS COM <br>VALOR AGREGADO</h2>
-                    </td>
-                    <td>
-                        <h2>AUTO-GESTÃO DAS ATIVIDADES</h2>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <h2>AVALIAÇÃO DA EQUIPE</h2>
+                        <h2>MÉDIA AVALIADORES</h2>
                     </td>
                     <td>
                         {% if 0 < users_data[user['email']]['avgs']['comunicacao'] < 3 %}
@@ -269,27 +266,7 @@
             <table class="table_devolutiva">
                 <tr>
                     <td>
-                        <h2>TIPO DE AVALIAÇÃO</h2>
-                    </td>
-                    <td>
-                        <h2>COMUNICAÇÃO E TRABALHO<br>EM EQUIPE</h2>
-                    </td>
-                    <td>
-                        <h2>ENGAJAMENTO E PRÓ-ATIVIDADE</h2>
-                    </td>
-                    <td>
-                        <h2>CONHECIMENTO E <br>APLICABILIDADE TÉCNICA</h2>
-                    </td>
-                    <td>
-                        <h2>ENTREGA DE RESULTADOS COM <br>VALOR AGREGADO</h2>
-                    </td>
-                    <td>
-                        <h2>AUTO-GESTÃO DAS ATIVIDADES</h2>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <h2>Avaliação da Equipe</h2>
+                        <h2>Avaliadores</h2>
                     </td>
                     <td>
                         {% if 0 < medias_time['comunicacao'] < 3 %}
@@ -389,10 +366,8 @@
                 </tr>
             </table>
     {% endif %}
-    </div>
-    <div>
         <footer>
-            <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
+          <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
         </footer>
     </div>
   </body>  
