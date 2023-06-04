@@ -2,13 +2,21 @@ from flask import render_template, request, redirect, url_for, session, Blueprin
 import json
 from utils.decorators import login_required, admin_required
 import plotly.express as px
+from dash import Dash, html, dcc
+from dash.dependencies import Input, Output
 import pandas as pd
 
 bp = bp('dashboards', __name__)
 
 @login_required
 @admin_required
-@bp.route("/dashboards_gerenciais", methods=['GET', 'POST'])
+@bp.route("/dashboards_operacionais")
+def dashboards_operacionais():
+    return render_template('admin/dashboards_operacionais.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+
+@login_required
+@admin_required
+@bp.route("/dashboards_gerenciais")
 def dashboards_gerenciais():
  # Gráfico geral
     df = pd.read_json('data/cadastro.json')
