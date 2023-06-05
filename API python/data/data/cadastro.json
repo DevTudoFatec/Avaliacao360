@@ -1,0 +1,192 @@
+[
+  {
+    "index": 0,
+    "nome": "Admin",
+    "email": "admin",
+    "turma": "",
+    "time": 0,
+    "senha": "$2b$12$pEfj8M4KBWE/L1HVwmnuJ.TjaNkfx3KjXhRcroWA0.wOIfzJ6sOma",
+    "perfil": 2,
+    "acessos": 0
+  },
+  {
+    "index": 1,
+    "nome": "Rodrigo",
+    "email": "rodrigo@pereira.com.br",
+    "turma": "bd01",
+    "time": 1,
+    "senha": "$2b$12$Zuv5/88miyXEkno3lsmMMOq9gbH1qP3abDthr1W8.tMWeUhIYmf5C",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "03-06-2023",
+        "07-06-2023"
+      ]
+    ],
+    "count_avaliacao": 1
+  },
+  {
+    "index": 2,
+    "nome": "Beatriz",
+    "email": "beatriz@placido.com.br",
+    "turma": "bd01",
+    "time": 1,
+    "senha": "$2b$12$WivUR4rsbOXEzqv9X3LbrOMaQNqiZSXwXh85UUL74GqHYnQYRu19y",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "03-06-2023",
+        "07-06-2023"
+      ]
+    ],
+    "count_avaliacao": 1
+  },
+  {
+    "index": 3,
+    "nome": "Luis",
+    "email": "luis@eduardo.com.br",
+    "turma": "bd01",
+    "time": 1,
+    "senha": "$2b$12$uQaSf73XSD7YlxAqizZCleMVY0WBw.AdMfpfdCBW2IfzmbSGe3usm",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "03-06-2023",
+        "07-06-2023"
+      ]
+    ],
+    "count_avaliacao": 1
+  },
+  {
+    "index": 4,
+    "nome": "Mariana",
+    "email": "mariana@cassia.com.br",
+    "turma": "bd01",
+    "time": 2,
+    "senha": "$2b$12$f94Z8A8Q2qMt0eEmREV/kuXyw5QwoGi2OyV4LLg5ulok1Hsc3oypC",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "03-06-2023",
+        "07-06-2023"
+      ]
+    ],
+    "count_avaliacao": 1
+  },
+  {
+    "index": 5,
+    "nome": "Renan",
+    "email": "renan@faria.com.br",
+    "turma": "bd01",
+    "time": 2,
+    "senha": "$2b$12$AwMSULbq3Vf4rGUng6E2NeqJyWIxu3iF.nlG7bbyyokQb6pId2qNC",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "03-06-2023",
+        "07-06-2023"
+      ]
+    ],
+    "count_avaliacao": 1
+  },
+  {
+    "index": 6,
+    "nome": "Thomas",
+    "email": "thomas@cavalheiro.com.br",
+    "turma": "bd01",
+    "time": 2,
+    "senha": "$2b$12$FWDZ3bWEx3nSgJ7oEJ0Ere1VsCW1WHCPNC33nva8CkNwc0i965lPe",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "03-06-2023",
+        "07-06-2023"
+      ]
+    ],
+    "count_avaliacao": 1
+  },
+  {
+    "index": 7,
+    "nome": "Renan",
+    "email": "renan@graciano.com.br",
+    "turma": "bd02",
+    "time": 3,
+    "senha": "$2b$12$OZgVZp2WQKhYL7odVNYwzOnr76EV/FV4ORTe83Bg3FEE1YFLplq/O",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "03-06-2023",
+        "07-06-2023"
+      ]
+    ],
+    "count_avaliacao": 1
+  },
+  {
+    "index": 8,
+    "nome": "Isaias",
+    "email": "isaias@maciel.com.br",
+    "turma": "bd02",
+    "time": 3,
+    "senha": "$2b$12$vJTx7nCysceF.6gObftHPuGRz/rMgJtd1WwyzaCiZ1t4/b1THRz26",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "03-06-2023",
+        "07-06-2023"
+      ]
+    ],
+    "count_avaliacao": 1
+  },
+  {
+    "index": 9,
+    "nome": "Joao",
+    "email": "joao@saldanha.com.br",
+    "turma": "bd02",
+    "time": 3,
+    "senha": "$2b$12$WXLsxl3RE2vEJlj37Pt2jOPUOk2O8XwR3uZdldfMkarhr0j2MF9Sm",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "03-06-2023",
+        "07-06-2023"
+      ]
+    ],
+    "count_avaliacao": 1
+  },
+  {
+    "index": 10,
+    "nome": "Beatrizteste",
+    "email": "bia@gmail.com",
+    "turma": "bd01",
+    "time": 0,
+    "senha": "$2b$12$N1Q65Bj9nPw1mljHPbQFz.1lGaVaBZz8By2/e/BPK4oTFA6HaYbK2",
+    "perfil": 1,
+    "acessos": 0,
+    "avaliacoes": [
+      [
+        1,
+        "03-06-2023",
+        "07-06-2023"
+      ]
+    ],
+    "count_avaliacao": 0
+  }
+]
