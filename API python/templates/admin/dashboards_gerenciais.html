@@ -29,42 +29,45 @@
             <p><b>Usuário: {{ nomeUsuario }}</b></p>
         </header>
     
-    <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
+        <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
 
-        <main>
-            <button class="bt_devolutiva_admin">Dashboard Gerencial</button> <br>
-            <div class="linha_filtro">
-                <button class="bt_titulo_media_notas">Evolução da média de notas</button>
-                <!-- Formulário com filtros -->
-                <form method="POST">
-                    <div>time</div>
-                    <!-- Filtro para times -->
-                    <select class="select_box" name="time">
-                    <p>times</p>
-                    {% for time in times %}
-                        <option value="{{ time }}">{{ time }}</option>
-                    {% endfor %}
-                    </select>
-                    <br>
-                    <div>turma</div>
-                    <!-- Filtro para turmas -->
-                    <select class="select_box" name="turma">
-                    {% for turma in turmas %}
-                        <option value="{{ turma }}">{{ turma }}</option>
-                    {% endfor %}
-                    </select>
-                
-                    <!-- Botão de envio do formulário -->
-                    <input type="submit" value="Filtrar">
-                </form>
-            </div>
-            <div class="grafico">
-                <div id="grafico_geral">{{ div_grafico_sprint | safe }}</div>
-                <div id="grafico_sprint">{{ div_grafico | safe }}</div>
-            </div>
-
-            <footer>
-                <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
-            </footer>
-        </main>
+            <main>
+                <button class="bt_devolutiva_admin">Dashboard Gerencial</button> <br>
+                <div class="linha_filtro">
+                    <button class="bt_titulo_media_notas">Evolução da média de notas</button>
+                    <!-- Formulário com filtros -->
+                    <form method="POST" id="formulario">
+                        <!-- <div class='legenda'>time</div> -->
+                        <!-- Filtro para times -->
+                        <select class="select_box" name="time">
+                            <option value="">Time</option>
+                            {% for time in times %}
+                                <option value="{{ time }}">{{ time }}</option>
+                            {% endfor %}
+                        </select>
+                    
+                        <br>
+                        <!-- <div class='legenda'>turma</div> -->
+                        <!-- Filtro para turmas -->
+                        <select class="select_box" name="turma">
+                            <option value="">Turma</option>
+                            {% for turma in turmas %}
+                                <option value="{{ turma }}">{{ turma }}</option>
+                            {% endfor %}
+                        </select>
+        
+                        <!-- Botão de envio do formulário -->
+                        <input type="submit" value="Filtrar" class="bt_filtrar">
+                    </form>
+                </div>
+                <div class="grafico">
+                    <div id="grafico_geral">{{ div_grafico_sprint | safe }}</div>
+                    <div id="grafico_sprint">{{ div_grafico | safe }}</div>
+                </div>
+        
+                <footer>
+                    <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
+                </footer>
+            </main>
         </body>
+        
