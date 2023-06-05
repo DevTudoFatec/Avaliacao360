@@ -1,0 +1,146 @@
+header{
+    display: flex;
+    align-items: center;
+    color: #89cfc9;
+    background-color: #011E36;
+    justify-content: space-between;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: small;
+    padding: 2%;}
+
+#logo_avaliação{
+    margin-left: 40%;}
+
+body{
+    background-color: #eeee;
+    margin: 0;
+    padding: 0;}
+
+.bt_devolutiva_admin{
+    background-color: #5e17eb;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 150%;
+    border-radius: 50px;
+    padding: 0.8%;
+    color: white;
+    width: 27%;
+    border: none;
+    margin: 2%;}
+
+.bt_titulo_media_notas{
+    background-color: #FFFFFF;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 150%;
+    border-radius: 50px;
+    padding: 0.8%;
+    color: #000000;
+    width: 37%;
+    margin-left: 2%;
+    border: none;
+    display: inline;}
+
+footer{
+    margin-top: 2%;}
+
+/* Botão de menu */
+.bt{
+    padding: 6px, 6px, 6px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #89cfc9;
+    transition: 0.3s;
+    z-index: 1;
+    top: 0;
+    background-color: #111;}
+    
+    #check{
+    display: none;}
+    
+    #icone{
+    left: 0;
+    cursor: pointer;
+    padding: 20px;
+    position: absolute;
+    z-index: 1;}
+    
+    .barra{
+    top: 0;
+    background-color: #333;
+    height: 100px;
+    width: 300px;
+    position: absolute;
+    transition: all .2s linear;
+    left: -300px;
+  }
+    
+    .menu_lateral{
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    color:#fed196;}
+    
+    nav a{
+    text-decoration: none;
+    color: #fed196;}
+    
+    .link{
+    background-color: #494949;
+    padding: 20px;
+    font-size: 12pt;
+    transition: all .2s linear;
+    border-bottom: 2px solid #222;}
+    
+    #check:checked ~ .barra{
+    transform: translateX(300px);}
+    
+    #check:checked ~ .barra nav{
+    margin-top: 0;
+    opacity: 1;
+    transition-delay: .2s;}
+    
+    .flashes {
+    position: absolute;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    left: 44%;
+    margin-top: -35px;
+    text-align: center;}
+
+.grafico{
+    display: flex;}
+
+#grafico_geral, #grafico_sprint{
+    width: 46%;
+    margin: 2%;}
+
+.select_box{
+    background-color: #FFFFFF;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-radius: 50px;
+    width: 40%;
+    margin-left: 4%;
+    padding: 1%;
+    color: #000000;}
+
+.bt_filtrar{
+    background-color: #FFFFFF;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-radius: 50px;
+    width: 30%;
+    margin-left: 4%;
+    padding: 1%;
+    color: #000000;
+    margin-right: 2%
+}
+
+.legenda{
+    color: #eeee;}
+
+.linha_filtro{
+    display: flex;
+    width: 100%;}
+
+#formulario{
+    display: flex;
+    width: 100%;}

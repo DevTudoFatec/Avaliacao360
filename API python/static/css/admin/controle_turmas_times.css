@@ -1,0 +1,338 @@
+body{
+  text-align: center;
+  background-color: #eeee;
+  margin: 0;
+  padding: 0;
+}
+
+footer{
+  position: relative;
+  margin-top: 10%;
+}
+
+/*header padrão: início*/
+
+header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: flex-start;
+  color: #89cfc9;
+  background-color: #011E36;
+  padding: 2%;
+  justify-content: space-between;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: small;
+}
+
+#logo_avaliação{
+  margin-left: 40%;}
+
+.bt{
+  padding: 6px, 6px, 6px;
+  text-decoration: none;
+  font-size: 15px;
+  color: #89cfc9;
+  transition: 0.3s;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+}
+
+#check{
+  display: none;
+}
+
+#icone{
+  cursor: pointer;
+  padding: 20px;
+  position: absolute;
+  z-index: 10000;
+}
+
+.barra{
+  top: 0;
+  background-color: #333;
+  height: 100px;
+  width: 300px;
+  position: absolute;
+  transition: all .2s linear;
+  left: -300px;
+  z-index: 9999;
+}
+
+.menu_lateral{
+  width: 100%;
+  position: absolute;
+  top: 60px;
+  color:#fed196;}
+
+nav a{
+  text-decoration: none;
+  color: #fed196;}
+
+.link{
+  background-color: #494949;
+  padding: 20px;
+  font-size: 12pt;
+  transition: all .2s linear;
+  border-bottom: 2px solid #222;}
+
+#check:checked ~ .barra{
+  transform: translateX(300px);}
+
+#check:checked ~ .barra nav{
+  margin-top: 0;
+  opacity: 1;
+  transition-delay: .2s;}
+
+.flashes {
+  position: absolute;
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+  left: 44%;
+  margin-top: -35px;
+  text-align: center;}
+  /*header padrão: fim*/
+
+.controle_container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  margin-top: 8%;
+  left: 20%;  
+  width: 65%;
+}
+
+.bt_turmas{
+  position: absolute;
+  background-color: #5e17eb;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 20px;
+  border-radius: 50px;
+  padding: 15px;
+  width: 32.9%;
+  color: white;
+  left: 15%;
+  margin-top: -8%;
+  cursor: pointer;
+}
+
+.bt_times{
+  position: absolute;
+  background-color: #5e17eb;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 20px;
+  border-radius: 50px;
+  padding: 15px;
+  width: 30%;
+  color: white;
+  left: 55%;
+  margin-top: -8%;
+  cursor: pointer;
+}
+
+.bt_avaliacao_trc{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 15px;
+  border-radius: 50px;
+  padding: 15px;
+  width: 12%;
+  color: black;
+  background-color: white;
+}
+
+.turmas_container {
+  position: absolute;
+  margin-top: 3%;
+}
+
+.turmas_infos {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 78%;
+  margin-left: 17%;
+}
+
+.turma_info_default {
+  display: inline-block;
+  width: 60%; 
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 22px;
+  background-color: white;
+  border-radius: 50px;
+  padding: 15px;
+  font-weight: bold;
+}
+
+.turma_info_default_controle {
+  display: inline-block;
+  width: 60%; 
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 22px;
+  color: #fed196;
+  background-color: #214e65;
+  border-color: #214e65;
+  border-radius: 50px;
+  padding: 15px;
+  font-weight: bold;
+}
+
+.time_info_default_controle {
+  display: inline-block;
+  width: 60%; 
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 22px;
+  color: #fed196;
+  background-color: #214e65;
+  border-color: #214e65;
+  border-radius: 50px;
+  padding: 15px;
+  font-weight: bold;
+}
+
+
+.turma_info {
+  display: inline-block;
+  width: 50%; 
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 20px;
+  font-weight: lighter;
+}
+
+.times_container {
+  position: absolute;
+  margin-top: 3%;
+}
+
+.times_infos {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 78%;
+  margin-left: 16.5%;
+}
+
+.time_info_default {
+  display: inline-block;
+  width: 60%; 
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 22px;
+  background-color: white;
+  border-radius: 50px;
+  padding: 15px;
+  font-weight: bold;
+}
+
+
+.time_info {
+  display: inline-block;
+  width: 60%; 
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 20px;
+  font-weight: lighter;
+}
+
+
+.save_icon {
+  width: 25px;
+}
+
+.edit_icon {
+  width: 25px;
+}
+
+.save_button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+.edit_button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+.turma_info_input {
+  width: 60%;
+  text-align: center;
+}
+
+.time_info_input {
+  width: 60%;
+  text-align: center;
+}
+
+
+.delete_button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+.submit_turma {
+  color: #fed196;
+  background-color: #214e65;
+  border-color: #214e65;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  border-radius: 25px;
+  height: 40px;
+  width: 60%;
+  font-size: 20%;
+  color: #fed196;
+  cursor: pointer;
+  font-size: medium;
+}
+
+.submit_time {
+  color: #fed196;
+  background-color: #214e65;
+  border-color: #214e65;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  border-radius: 25px;
+  height: 40px;
+  width: 70%;
+  font-size: 20%;
+  color: #fed196;
+  cursor: pointer;
+  font-size: medium;
+}
+
+th, td {
+  border: 1px solid rgb(180, 180, 180);
+  padding: 8px;
+}
+
+@media screen and (min-width:1325px) {
+
+  .turmas_infos{
+    width: 73%;
+  }
+
+  .times_infos{
+    width: 73%;
+  }
+}
