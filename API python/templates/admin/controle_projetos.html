@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Controle de Sprints</title> 
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/icones/apple-touch-icon.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/icones/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/icones/favicon-16x16.png') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/integrante/devolutiva_avaliacao.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin/controle_projetos.css') }}">
+        {% if darkmode%}
+            <style>
+            h3 {
+                color: white;
+            }
+
+            table {
+                background-color: #383838;
+            }
+            </style>
+        {% endif %}
+    </head>
+
+    <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
+        <header> 
+            <input type="checkbox" id="check" class="bt">
+            <label id="icone" for="check" class="bt"> ☰ </label>
+        
+        <div class="barra">
+            <nav class="menu_lateral">
+                <a href="/menu_admin"> <div class="link">MENU PRINCIPAL</div></a>
+                <a href="/controle_turmas"> <div class="link">CONTROLE DE TURMAS/TIMES</div></a>
+                <a href="/controle_integrantes"> <div class="link">CONTROLE DE INTEGRANTES</div></a>
+                <a href="/controle_projetos"> <div class="link">CONTROLE DE PROJETOS</div></a>
+                <a href="/devolutiva_admin"> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
+                <a href="/dashboards_operacionais"> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
+                <a href="/dashboards_gerenciais"> <div class="link">DASHBOARDS GERENCIAIS</div></a>
+                <a href="/"> <div class="link">SAIR ➔ </div></a>
+            </nav>
+        </div>
+        <img id="logo_avaliação" src="{{ url_for('static', filename='img/menu_admin/Logo API (3).png') }}" width="300">
+        <p><b>Usuário: {{ nomeUsuario }}</b></p>
+        </header>
+        <div class="controle_container">
+            <h1 class="bt_sprints">CONTROLE DE SPRINTS</h1>
+        </div>
+        <div class="projetos_container">  
+            <table class="projetos_infos">
+                    <tr>
+                        <td>
+                            <h1 class="info_default">TURMA</h1>
+                        </td>
+                        <td>
+                            <h1 class="info_default">NOME DO PROJETO</h1>
+                        </td>
+                        <td>
+                            <h1 class="info_default">SPRINTS</h1>
+                        </td>
+                        <td>          
+                            <h1 class="info_default">DURAÇÃO SPRINT</h1>
+                        </td>
+                        <td>          
+                            <h1 class="info_default">INICIO DO PROJETO</h1>
+                        </td>
+                        <td>          
+                            <h1 class="info_default">FIM DO PROJETO</h1>
+                        </td>
+                        <td>          
+                            <h1 class="default_controle">CONTROLE</h1>
+                        </td>
+                    </tr>
+                    {% if not editing and not confirm_del %}
+                    <tr>
+                        <form class="new_projeto" method="POST" action="{{ url_for('criacoes.criar_projeto') }}">
+                            <td>
+                                <select class="projeto_info_input" name="new_projeto_turma" required style="border-radius: 3px; font-size: 20px;">                                    
+                                    <option  value="" disabled selected>Nome da Turma</option>
+                                    {% for turma in turmas_select %}
+                                            <option value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td>
+                                <input class="projeto_info_input" type="text" name="new_projeto_nome" required>
+                            </td>
+                            <td>
+                                <input type="number" class="projeto_info_input" name="new_projeto_sprints" placeholder="Qtd. de Sprints" min="1" required style="border-radius: 3px; font-size: 20px;"> 
+                            </td>
+                            <td>
+                                <select class="projeto_info_input" name="new_projeto_duracao_sprint" required style="border-radius: 3px; font-size: 20px;">                                    
+                                    <option value="" disabled selected>Dias</option>
+                                    <option value="7">07 Dias</option>
+                                    <option value="15">15 Dias</option>
+                                    <option value="21">21 Dias</option>
+                                    <option value="30">30 Dias</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="date" name="new_projeto_inicio" required>
+                            </td>
+                            <td>
+    
+                            </td>
+                            <td>
+                                <button class="new_projeto_submit" type="submit" >REGISTRAR PROJETO</button>
+                            </td>
+                        </form>
+                    </tr>
+                    {% endif %}
+                    {% for projeto in projetos %}
+                    <tr>
+                        <td>
+                            <form class="edit_projeto" method="POST" action="{{ url_for('updates.update_projetos') }}">
+                            {% for turma in turmas %}
+                                {% if turma['codigo'] == projeto['turma'] %}
+                                    <h3>{{ turma['nome']}}</h3>
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% if editing and projeto['index'] == index %}	
+                                <input class="projeto_info_input" type="text" name="edit_projeto_nome" placeholder="{{ projeto ['nome'] }}" required>
+                            {% else %} 
+                                <h3>{{ projeto['nome']}}</h3>
+                            {% endif %} 
+                        </td>
+                        <td>
+                            {% if editing and projeto['index'] == index %}
+                                <input type="number" class="projeto_info_input" name="edit_projeto_sprints" placeholder="{{ projeto ['sprints'] }}" min="1" required style="border-radius: 3px; font-size: 20px;"> 
+                            {% else %} 
+                                <h3>{{ projeto['sprints']}}</h3>
+                            {% endif %} 
+                        </td>
+                        <td>
+                            {% if editing and projeto['index'] == index %}
+                                <select class="projeto_info_input" name="edit_projeto_duracao_sprint" required style="border-radius: 3px; font-size: 20px;">                                    
+                                    <option value="" disabled selected>{{ projeto['duracao'] }} dias</option>
+                                    <option value="7">7 Dias</option>
+                                    <option value="15">15 Dias</option>
+                                    <option value="21">21 Dias</option>
+                                    <option value="30">30 Dias</option>
+                                </select>	
+                            {% else %} 
+                                <h3>{{ projeto['duracao']}} dias</h3>
+                            {% endif %} 
+                        </td>
+                        <td>
+                            {% if editing and projeto['index'] == index %}	
+                                <input type="date" name="edit_projeto_inicio" placeholder="{{ projeto['inicio'] }}"required>
+                            {% else %} 
+                                <h3>{{ projeto['inicio']}}</h3>
+                            {% endif %} 
+                        </td>
+                        <td>
+                            {% if not editing and projeto['index'] != index %}
+                                <h3>{{ projeto['fim']}}</h3>
+                            {% endif %}	
+                        </td>
+                        <td>
+                            {% if editing and projeto['index'] == index %}
+                                <input type="hidden" name="edit_projeto_turma" value="{{ projeto['turma'] }}">
+                                <input type="hidden" name="index" value="{{ projeto['index'] }}">
+                                <button type="submit" class="save_button" name="save">
+                                    {% if darkmode %}
+                                        <img src="{{ url_for('static', filename='img/icones/confirmar_edicao_branco.png') }}" class="save_icon" alt="save_icon">
+                                    {% else %}
+                                        <img src="{{ url_for('static', filename='img/icones/confirmar_edicao.png') }}" class="save_icon" alt="save_icon">
+                                    {% endif %}
+                                </button>
+                                <a href="/controle_projetos">
+                                    <button type="button" class="save_button" name="cancel">
+                                        {% if darkmode %}
+                                        <img src="{{ url_for('static', filename='img/icones/cancela_edicao_branco.png') }}" class="save_icon" alt="cancel_icon">
+                                        {% else %}
+                                            <img src="{{ url_for('static', filename='img/icones/cancela_edicao.png') }}" class="save_icon" alt="cancel_icon">
+                                        {% endif %}
+                                    </button>
+                                </a>    
+                            {% elif confirm_delete and projeto['index'] == index %} 
+                                    <input type="hidden" name="index" value="{{ projeto['index'] }}">
+                                    <button type="submit" class="delete_button" name="confirm_del">
+                                        {% if darkmode %}
+                                            <img src="{{ url_for('static', filename='img/icones/confirm_delete_branco.png') }}" class="edit_icon" alt="edit_icon">
+                                        {% else %}
+                                            <img src="{{ url_for('static', filename='img/icones/confirm_delete.png') }}" class="edit_icon" alt="edit_icon">
+                                        {% endif %}
+                                    </button>
+                                <a href="/controle_projetos">
+                                    <button type="submit" class="delete_button" name="cancel_del">
+                                        {% if darkmode %}
+                                            <img src="{{ url_for('static', filename='img/icones/cancel_delete_branco.png') }}" class="save_icon" alt="save_icon">
+                                        {% else %}
+                                            <img src="{{ url_for('static', filename='img/icones/cancel_delete.png') }}" class="save_icon" alt="save_icon">
+                                        {% endif %}
+                                    </button>
+                                </a>
+                            {% elif not editing and not confirm_delete %} 
+                                    <input type="hidden" name="index" value="{{ projeto['index'] }}">
+                                    <button type="submit" class="edit_button" name="edit">
+                                        {% if darkmode %}
+                                            <img src="{{ url_for('static', filename='img/icones/editar_branco.png') }}" class="edit_icon" alt="edit_icon">
+                                        {% else %}
+                                            <img src="{{ url_for('static', filename='img/icones/editar.png') }}" class="edit_icon" alt="edit_icon">
+                                        {% endif %}
+                                    </button>
+                                    <button type="submit" class="delete_button" name="delete">
+                                        {% if darkmode %}
+                                            <img src="{{ url_for('static', filename='img/icones/excluir_branco.png') }}" class="save_icon" alt="save_icon">
+                                        {% else %}
+                                            <img src="{{ url_for('static', filename='img/icones/excluir.png') }}" class="save_icon" alt="save_icon">
+                                        {% endif %}
+                                    </button>
+                            {% endif %}
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+            </table>
+            <footer>
+                <img id="logo_api_pbletex" src="{{ url_for('static', filename='img/menu_admin/Logo_API_PBLTeX.png') }}" width="250">
+            </footer>
+        </div>
+    </body>
+</html>  

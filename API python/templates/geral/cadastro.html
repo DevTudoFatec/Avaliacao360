@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/> <!--extensão para caracteres especiais-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Cadastro de Integrante</title> 
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/icones/apple-touch-icon.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/icones/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/icones/favicon-16x16.png') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/geral/cadastro.css') }}">
+    </head>
+    <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
+        <header>
+            
+            <div class="barra">
+            </div>
+            <img class="logo_avaliação" src="{{ url_for('static', filename='img/cadastro/Logo.png') }}" alt="Logo da plataforma">
+        </header>
+        <img class="logo_api_cadastro" src="{{ url_for('static', filename='img/cadastro/Logo_API cadastro.png') }}">
+        
+        <form id="formulario" method="POST" action="{{ url_for('criacoes.cadastro_submit') }}">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <h3 class="flash">{{ message }}</h3>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <input id="user" type="text" placeholder="NOME COMPLETO" name="nome" required pattern="\p{L}+" title="São permitidas apenas letras!">
+            <br><br>
+            <input id="email" type="text" placeholder="E-MAIL" name="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2})?" >
+            <br><br>
+            <input id="turma" type="text" placeholder="CHAVE DA TURMA" name="turma" required>
+            <br><br> 
+            <input id="senha" type="password" placeholder="SENHA" name="senha" required>
+            <br><br>
+            <button class="botao_cadastrar_voltar" type="submit">CADASTRAR</button>
+        </form>
+        <a href="/"><button class="botao__voltar">VOLTAR</button></a>
+        <br>
+        <br>
+        <footer>
+            <img class="logo_api_pbletex" src="{{ url_for('static', filename='img/cadastro/Logo_API_PBLTeX.png') }}">
+        </footer>
+    </body>
+</html>

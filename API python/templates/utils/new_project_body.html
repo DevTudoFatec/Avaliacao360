@@ -1,0 +1,30 @@
+<html>
+    <body>
+      <img  src="https://i.ibb.co/bHSgKsC/Logo-API-3.png" width="300"><br>
+      <br>
+      <h3>Olá, {{user['nome']}}!</h3><br>
+      Vim te avisar que um novo projeto foi criado para a sua turma <b>{% for turma in turmas %}{% if turma['codigo'] == user['turma'] %}{{turma['nome']}}!{% endif %}{% endfor %}</b><br>
+      <br>
+      Seguem as informações do projeto:<br>
+      <br>
+      <b>Nome do projeto: </b>{{new_projeto_nome}}<br>
+      <b>Sprints: </b>{{new_projeto_sprints}}<br>
+      <b>Duração das Sprints: </b>{{new_projeto_duracao_sprint}} dias<br>
+      <b>Inicio do projeto: </b>{{new_projeto_inicio.strftime('%d-%m-%Y')}}<br>
+      <b>Fim do projeto: </b>{{new_projeto_fim.strftime('%d-%m-%Y')}}<br>
+      <br>
+      Datas em que a <b>plataforma</b> estará aberta para realizar a <b>avaliação</b>:<br>
+      <br>
+      {% for periodo in periodos_avaliacao %}
+        <b>Sprint {{ periodo[0] }}</b><br>
+        <b>Inicio:</b> {{ periodo[1] }}<br> 
+        <b>Fim:</b> {{ periodo[2] }}<br>
+        <br>
+      {% endfor %}
+      <br>
+      Fique atento e não perca as datas!<br>
+      <br>
+      <br>
+      <img  src="https://i.ibb.co/TTRrqMv/Logo-API-PBLTe-X.png" width="200">
+    </body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Controle de Integrantes</title> 
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/icones/apple-touch-icon.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/icones/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/icones/favicon-16x16.png') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/integrante/devolutiva_avaliacao.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin/controle_integrantes.css') }}">
+        {% if darkmode%}
+            <style>
+            .user_info {
+                color: snow;
+            }
+            table {
+                background-color: #383838;
+            }
+            </style>
+        {% endif %}
+    </head>
+
+    <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
+        <header> 
+            <input type="checkbox" id="check" class="bt">
+            <label id="icone" for="check" class="bt"> ☰ </label>
+        
+        <div class="barra">
+            <nav class="menu_lateral">
+                <a href="/menu_admin"> <div class="link">MENU PRINCIPAL</div></a>
+                <a href="/controle_turmas"> <div class="link">CONTROLE DE TURMAS/TIMES</div></a>
+                <a href="/controle_integrantes"> <div class="link">CONTROLE DE INTEGRANTES</div></a>
+                <a href="/controle_projetos"> <div class="link">CONTROLE DE PROJETOS</div></a>
+                <a href="/devolutiva_admin"> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
+                <a href="/dashboards_operacionais"> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
+                <a href="/dashboards_gerenciais"> <div class="link">DASHBOARDS GERENCIAIS</div></a>
+                <a href="/"> <div class="link">SAIR ➔ </div></a>
+            </nav>
+        </div>
+        <img id="logo_avaliação" src="{{ url_for('static', filename='img/menu_admin/Logo API (3).png') }}" width="300">
+        <p><b>Usuário: {{ nomeUsuario }}</b></p>
+        </header>
+
+
+        
+        <div class="controle_container">
+            <h1 class="bt_controle">CONTROLE DE INTEGRANTES</h1>
+        </div>
+        <div class="usuarios_container">  
+            <table class="user_infos">
+                    <tr>
+                        <td>
+                            <h1 class="user_info_default">NOME</h1>
+                        </td>
+                        <td>
+                            <h1 class="user_info_default">TURMA</h1>
+                        </td>
+                        <td>          
+                            <h1 class="user_info_default">TIME</h1>
+                        </td>
+                        <td>         
+                            <h1 class="user_info_default">PERFIL</h1>
+                        </td>
+                        <td>          
+                            <h1 class="default_controle">CONTROLE</h1>
+                        </td>
+                    </tr>
+                {% for user in users %} 
+                    <tr>    
+                        <td>
+                            <h1 class="user_info">{{ user['nome'] }}</h1>
+                        </td>
+                        <td>
+                            {% if editing and index == user['index'] %}
+                            <form class="edit_form" method="POST" action="{{ url_for('updates.update_geral') }}">                                    
+                                <input type="hidden" name="index" value="{{ user['index'] }}">
+                                <select class="user_info_input" name="edited_turma" style="border-radius: 3px; font-size: 20px;">
+                                    {% for turma in turmas %} 
+                                        {% if turma['codigo'] == user['turma'] %}
+                                            <option value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
+                                        {% endif %}
+                                    {% endfor %}                                       
+                                    {% for turma in turmas %} 
+                                        {% if turma['codigo'] != user['turma'] %}
+                                            <option  value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                                <button type="submit" class="save_button" name="save_turma">
+                                    <img src="{{ url_for('static', filename='img/icones/proximo.png') }}" class="save_icon" alt="save_icon">
+                                </button>
+                            </form>
+                            {% else %}
+                                {% for turma in turmas %} 
+                                    {% if user['turma'] == turma['codigo'] %}                                        
+                                        <h1 class="user_info">{{ turma['nome'] }}</h1>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if editing_time and index == user['index'] %}            
+                            <form class="edit_form" method="POST" action="{{ url_for('updates.update_geral') }}">                 
+                                <input type="hidden" name="index" value="{{ user['index'] }}">
+                                <select class="user_info_input" name="edited_time" style="border-radius: 3px; font-size: 20px;">   
+                                    {% for time in times %} 
+                                        {% if  time['codigo'] == user['time'] and time['turma'] == user['turma'] %}
+                                            <option  value="{{ time['codigo'] }}">{{ time['nome'] }}</option>
+                                        {% endif %}
+                                    {% endfor %}                                 
+                                    {% for time in times %}
+                                        {% if time['codigo'] != user['time'] and time['turma'] == user['turma'] %} 
+                                            <option value="{{ time['codigo'] }}">{{ time['nome'] }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                                <button type="submit" class="save_button" name="save_time">
+                                    <img src="{{ url_for('static', filename='img/icones/proximo.png') }}" class="save_icon" alt="save_icon">
+                                </button>
+                            </form>
+                            {% else %}
+                                {% for time in times %}
+                                    {% if time['codigo'] == user['time'] %}
+                                        <h1 class="user_info">{{ time['nome'] }}</h1>
+                                    {% endif %}
+                                {% endfor %}                                 
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if editing_perfil and index == user['index']%}
+                                <form class="edit_form" method="POST" action="{{ url_for('updates.update_geral') }}">   
+                                    <input type="hidden" name="index" value="{{ user['index'] }}">
+                                    <select class="user_info_input" name="edited_perfil" style="border-radius: 3px; font-size: 20px;">
+                                    {% if user['perfil']  == 1  %}   
+                                        <option value="1">Usuário</option>   
+                                        <option value="2">Administrador</option>                                   
+                                    {% else %}
+                                        <option value="2">Administrador</option>     
+                                        <option value="1">Usuário</option>   
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    </select>
+                                    <a href="/controle_geral">
+                                        <button type="button" class="save_button" name="cancel">
+                                            {% if darkmode %}
+                                            <img src="{{ url_for('static', filename='img/icones/cancela_edicao_branco.png') }}" class="save_icon" alt="cancel_icon">
+                                            {% else %}
+                                                <img src="{{ url_for('static', filename='img/icones/cancela_edicao.png') }}" class="save_icon" alt="cancel_icon">
+                                            {% endif %}
+                                        </button>
+                                    </a>    
+                                    <button type="submit" class="save_button" name="save_perfil">
+                                        {% if darkmode %}
+                                            <img src="{{ url_for('static', filename='img/icones/confirmar_edicao_branco.png') }}" class="save_icon" alt="save_icon">
+                                        {% else %}
+                                            <img src="{{ url_for('static', filename='img/icones/confirmar_edicao.png') }}" class="save_icon" alt="save_icon">
+                                        {% endif %}
+                                    </button>
+                                </form> 
+                                </td>                                                                      
+                            {% else %}
+                                {% if user['perfil']  == 1  %}     
+                                    <h1 class="user_info">Usuário</h1>                                        
+                                {% else %}
+                                    <h1 class="user_info">Administrador</h1>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                            {% if not editing and not editing_perfil and not editing_time %}
+                            <td>
+                            <form class="edit_form" method="POST" action="{{ url_for('updates.update_geral') }}">   
+                                <input type="hidden" name="index" value="{{ user['index'] }}">  
+                                <button type="submit" class="edit_button" name="edit">
+                                    {% if darkmode %}
+                                        <img src="{{ url_for('static', filename='img/icones/editar_branco.png') }}" class="edit_icon" alt="edit_icon">
+                                    {% else %}
+                                        <img src="{{ url_for('static', filename='img/icones/editar.png') }}" class="edit_icon" alt="edit_icon">
+                                    {% endif %}
+                                </button>
+                                <button type="submit" class="delete_button" name="delete">
+                                    {% if darkmode %}
+                                        <img src="{{ url_for('static', filename='img/icones/excluir_branco.png') }}" class="save_icon" alt="save_icon">
+                                    {% else %}
+                                        <img src="{{ url_for('static', filename='img/icones/excluir.png') }}" class="save_icon" alt="save_icon">
+                                    {% endif %}
+                                </button>
+                            </form>  
+                            </td>
+                            {% elif not editing_perfil%}
+                            <td></td>
+                            {% endif %}
+                    </tr>
+                {% endfor %}            
+            </table>
+            <footer>      
+                <img id="logo_api_pbletex" src="{{ url_for('static', filename='img/menu_admin/Logo_API_PBLTeX.png') }}" width="250">
+            </footer>
+        </div>
+    </body>
+</html>    

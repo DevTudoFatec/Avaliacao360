@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Controle de Times</title> 
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/icones/apple-touch-icon.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/icones/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/icones/favicon-16x16.png') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/integrante/devolutiva_avaliacao.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin/controle_turmas_times.css') }}">
+        {% if darkmode%}
+            <style>
+            .time_info {
+                color: snow;
+            }
+            table {
+                background-color: #383838;
+            }
+            </style>
+        {% endif %}
+    </head>
+
+    <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
+        <header> 
+            <input type="checkbox" id="check" class="bt">
+            <label id="icone" for="check" class="bt"> ☰ </label>
+        
+        <div class="barra">
+            <nav class="menu_lateral">
+                <a href="/menu_admin"> <div class="link">MENU PRINCIPAL</div></a>
+                <a href="/controle_turmas"> <div class="link">CONTROLE DE TURMAS/TIMES</div></a>
+                <a href="/controle_integrantes"> <div class="link">CONTROLE DE INTEGRANTES</div></a>
+                <a href="/controle_projetos"> <div class="link">CONTROLE DE PROJETOS</div></a>
+                <a href="/devolutiva_admin"> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
+                <a href="/dashboards_operacionais"> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
+                <a href="/dashboards_gerenciais"> <div class="link">DASHBOARDS GERENCIAIS</div></a>
+                <a href="/"> <div class="link">SAIR ➔ </div></a>
+            </nav>
+        </div>
+        <img id="logo_avaliação" src="{{ url_for('static', filename='img/menu_admin/Logo API (3).png') }}" width="300">
+        <p><b>Usuário: {{ nomeUsuario }}</b></p>
+        </header>
+        <div class="controle_container">
+                <a href="/controle_turmas"><button class="bt_turmas" type="button" name="turmas">CONTROLE DE TURMAS</button></a>
+                <a href="/controle_times"><button class="bt_times" type="button" name="times">CONTROLE DE TIMES</button></a>
+        </div>
+        <div class="times_container">  
+            <table class="times_infos">
+                    <tr>
+                        <td>
+                            <h1 class="time_info_default">TIME</h1>
+                        </td>
+                        <td>
+                            <h1 class="time_info_default">INTEGRANTES</h1>
+                        </td>
+                        <td>          
+                            <h1 class="time_info_default">TURMA</h1>
+                        </td>
+                        <td>          
+                            <h1 class="turma_info_default_controle">CONTROLE</h1>
+                        </td>
+                    </tr>
+                    {% if not editing and not confirm_del %}
+                    <tr>
+                        <form class="new_time" method="POST" action="{{ url_for('criacoes.criar_time') }}">
+                        <td>
+                            <input type="text" class="time_info_input" name="nome_time" placeholder="Nome do Time" required style="border-radius: 3px; font-size: 20px;">
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                            <select class="user_info_input" name="codigo_time_turma" required style="border-radius: 3px; font-size: 20px;">                                    
+                                <option  value="" disabled selected>Nome da Turma</option>
+                                {% for turma in turmas %}
+                                        <option value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>
+                            <button class="submit_time" type="submit" >ADICIONAR TIME</button>
+                        </td>
+                        </form>
+                    </tr>
+                    {% endif %}
+                {% for time in times %}
+                    <tr>
+                        <td>
+                            <form class="edit_turma" method="POST" action="{{ url_for('updates.update_times') }}">
+                            {% if editing and time['index'] == index %}
+                                <input type="text" name="edited_nome" class="time_info_input" placeholder="{{ time['nome'] }}" required style="border-radius: 3px; font-size: 20px;">
+                            {% else %}
+                                <h1 class="time_info">{{ time['nome'] }}</h1>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% for user in users %}
+                                {% if user['time'] == time['codigo'] %}
+                                    <h1 class="time_info">• {{ user['nome'] }}</h1>
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% if editing and time['index'] == index %}
+                                <select class="user_info_input" name="edited_turma" required style="border-radius: 3px; font-size: 20px;">                                    
+                                    {% for turma in turmas %}
+                                    {% if turma['codigo'] == time['turma'] %}
+                                        <option value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
+                                    {% endif %}
+                                    {% endfor %}                         
+                                    {% for turma in turmas %}
+                                        {% if turma['codigo'] != time['turma'] %}
+                                            <option value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
+                                        {% endif %}
+                                    {% endfor %}  
+                                    </select>
+                            {% else %}
+                                {% for turma in turmas %}
+                                    {% if turma['codigo'] == time['turma'] %}
+                                        <h1 class="time_info">{{ turma['nome'] }}</h1>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if editing and time['index'] == index %}
+                                <input type="hidden" name="index" value="{{ time['index'] }}"> 
+                                <input type="hidden" name="old_codigo" value="{{ time['codigo'] }}">
+                                <button type="submit" class="save_button" name="save">
+                                    {% if darkmode %}
+                                        <img src="{{ url_for('static', filename='img/icones/confirmar_edicao_branco.png') }}" class="save_icon" alt="save_icon">
+                                    {% else %}
+                                        <img src="{{ url_for('static', filename='img/icones/confirmar_edicao.png') }}" class="save_icon" alt="save_icon">
+                                    {% endif %}
+                                </button>  
+                                <a href="/controle_times">
+                                    <button type="button" class="save_button" name="cancel">
+                                        {% if darkmode %}
+                                        <img src="{{ url_for('static', filename='img/icones/cancela_edicao_branco.png') }}" class="save_icon" alt="cancel_icon">
+                                        {% else %}
+                                            <img src="{{ url_for('static', filename='img/icones/cancela_edicao.png') }}" class="save_icon" alt="cancel_icon">
+                                        {% endif %}
+                                    </button>
+                                </a>  
+                            {% elif confirm_delete and time['index'] == index %} 
+                                    <input type="hidden" name="index" value="{{ time['index'] }}">
+                                    <button type="submit" class="delete_button" name="confirm_del">
+                                        {% if darkmode %}
+                                            <img src="{{ url_for('static', filename='img/icones/confirm_delete_branco.png') }}" class="edit_icon" alt="edit_icon">
+                                        {% else %}
+                                            <img src="{{ url_for('static', filename='img/icones/confirm_delete.png') }}" class="edit_icon" alt="edit_icon">
+                                        {% endif %}
+                                    </button>
+                                <a href="/controle_times">
+                                    <button type="submit" class="delete_button" name="cancel_del">
+                                        {% if darkmode %}
+                                            <img src="{{ url_for('static', filename='img/icones/cancel_delete_branco.png') }}" class="save_icon" alt="save_icon">
+                                        {% else %}
+                                            <img src="{{ url_for('static', filename='img/icones/cancel_delete.png') }}" class="save_icon" alt="save_icon">
+                                        {% endif %}
+                                    </button>
+                                </a>
+                            {% elif not editing and not confirm_delete %} 
+                                    <input type="hidden" name="index" value="{{ time['index'] }}">
+                                    <button type="submit" class="edit_button" name="edit">
+                                        {% if darkmode %}
+                                            <img src="{{ url_for('static', filename='img/icones/editar_branco.png') }}" class="edit_icon" alt="edit_icon">
+                                        {% else %}
+                                            <img src="{{ url_for('static', filename='img/icones/editar.png') }}" class="edit_icon" alt="edit_icon">
+                                        {% endif %}
+                                    </button>
+                                    <button type="submit" class="delete_button" name="delete">
+                                        {% if darkmode %}
+                                            <img src="{{ url_for('static', filename='img/icones/excluir_branco.png') }}" class="save_icon" alt="save_icon">
+                                        {% else %}
+                                            <img src="{{ url_for('static', filename='img/icones/excluir.png') }}" class="save_icon" alt="save_icon">
+                                        {% endif %}
+                                    </button>
+                                </form>      
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}            
+            </table>
+            <footer>
+                <img id="logo_api_pbletex" src="{{ url_for('static', filename='img/menu_admin/Logo_API_PBLTeX.png') }}" width="250">
+            </footer>
+        </div>
+    </body>
+</html>    

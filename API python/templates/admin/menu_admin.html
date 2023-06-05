@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title> Menu Admin</title> 
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/icones/apple-touch-icon.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/icones/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/icones/favicon-16x16.png') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/integrante/devolutiva_avaliacao.css') }}">
+        <link rel="stylesheet" href="/static/css/admin/menu_admin.css"/>
+    </head>
+
+    <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
+        <header> 
+            <input type="checkbox" id="check" class="bt">
+            <label id="icone" for="check" class="bt"> ☰ </label>
+        
+        <div class="barra">
+            <nav class="menu_lateral">
+                <a href="/menu_admin"> <div class="link">MENU PRINCIPAL</div></a>
+                <a href="/controle_turmas"> <div class="link">CONTROLE DE TURMAS/TIMES</div></a>
+                <a href="/controle_integrantes"> <div class="link">CONTROLE DE INTEGRANTES</div></a>
+                <a href="/controle_projetos"> <div class="link">CONTROLE DE PROJETOS</div></a>
+                <a href="/devolutiva_admin"> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
+                <a href="/dashboards_operacionais"> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
+                <a href="/dashboards_gerenciais"> <div class="link">DASHBOARDS GERENCIAIS</div></a>
+                <a href="/"> <div class="link">SAIR ➔ </div></a>
+            </nav>
+        </div>
+        <img id="logo_avaliação" src="{{ url_for('static', filename='img/menu_admin/Logo API (3).png') }}" width="300">
+        <p><b>Usuário: {{ nomeUsuario }}</b></p>
+        </header>
+
+        <img id="details_adimn" src="{{ url_for('static', filename='img/menu_admin/Logo_API_Details Admin(1).png') }}" width="400">
+
+        {% if darkmode %}
+            <a href="/darkmode_off"><img class="darkmode_switch" src="{{ url_for('static', filename='img/icones/darkmode.png') }}" width="100"></a>
+        {% else %}           
+            <a href="/darkmode_on"><img class="darkmode_switch" src="{{ url_for('static', filename='img/icones/lightmode.png') }}" width="100"></a>
+        {% endif %}
+
+        <nav class="opções_menu">
+            <nav class="primeira_coluna">
+                <a href="/controle_integrantes">
+                    <button class="botao_azul_claro">
+                        <strong> CONTROLE DE INTEGRANTES  </strong>
+                    </button>
+                </a>
+                <br><br>
+                <a href="/controle_turmas">
+                <button class="botao_azul_claro">
+                    <strong> CONTROLE DE TURMAS/TIMES  </strong>
+                </button>
+                </a>
+                <br><br>
+                <a href="/controle_projetos">
+                    <button class="botao_azul_claro">
+                        <strong> CONTROLE DE PROJETOS </strong>
+                    </button>
+                </a>
+            </nav>
+            <nav class="segunda_coluna">
+                <a href="/devolutiva_admin">
+                <button class="botao_azul_claro">
+                    <strong> DEVOLUTIVA DE AVALIAÇÃO  </strong>
+                </button>
+                </a>
+                <br><br>    
+                <a href="/dashboards_operacionais">
+                    <button class="botao_azul_claro">
+                        <strong> DASHBOARDS OPERACIONAIS  </strong>
+                    </button>
+                </a>
+                <br><br>
+                <a href="/dashboards_gerenciais">
+                    <button class="botao_azul_claro">
+                        <strong> DASHBOARDS GERENCIAIS </strong>
+                    </button>
+                </a>
+            </nav>
+        </nav>
+        <footer>      
+            <img id="logo_api_pbletex" src="{{ url_for('static', filename='img/menu_admin/Logo_API_PBLTeX.png') }}" width="250">
+        </footer>
+    </body>
+</html>    

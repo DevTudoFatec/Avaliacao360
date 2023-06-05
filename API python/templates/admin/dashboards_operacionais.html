@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/> <!--extensão para caracteres especiais-->
+    <title> Dashboards Operacionais</title> 
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/icones/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/icones/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/icones/favicon-16x16.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/integrante/devolutiva_avaliacao.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin/dashboards_operacionais.css') }}">
+</head>
+<body {% if darkmode%} style="background-color: #494949;" {% endif %}>
+    <header> 
+            <input type="checkbox" id="check" class="bt">
+            <label id="icone" for="check" class="bt"> ☰ </label>
+        
+        <div class="barra">
+            <nav class="menu_lateral">
+                <a href="/menu_admin"> <div class="link">MENU PRINCIPAL</div></a>
+                <a href="/controle_turmas"> <div class="link">CONTROLE DE TURMAS/TIMES</div></a>
+                <a href="/controle_integrantes"> <div class="link">CONTROLE DE INTEGRANTES</div></a>
+                <a href="/controle_projetos"> <div class="link">CONTROLE DE PROJETOS</div></a>
+                <a href="/devolutiva_admin"> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
+                <a href="/dashboards_operacionais"> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
+                <a href="/dashboards_gerenciais"> <div class="link">DASHBOARDS GERENCIAIS</div></a>
+                <a href="/"> <div class="link">SAIR ➔ </div></a>
+            </nav>
+        </div>
+        <img id="logo_avaliação" src="{{ url_for('static', filename='img/cadastro/Logo.png') }}" alt="Logo da plataforma" width="300">
+        <p><b>Usuário: {{ nomeUsuario }}</b></p>
+    </header>
+
+    <div>
+        <button id="bt_devolutiva_admin"> Devolutiva de Avaliações - ADM </button>
+    </div>
+
+    <nav id="colunas">
+        <div class="coluna1">
+            <button class="bt_titulo_coluna"> Nome </button>
+            
+        </div>
+        <div class="coluna2">
+            <button class="bt_titulo_coluna"> Semestre/turma </button>
+        </div>
+        <div class="coluna3">
+            <button class="bt_titulo_coluna"> Devolutivas </button>
+        </div>
+    </nav>
+
+    <h1>Dashboard Operacional</h1>
+    <div class="charts-container">
+        <div id="turma-figures">
+            {% for graph in turma_figures %}
+                {{ graph | safe }}
+            {% endfor %}
+        </div>
+        <div id="time-figures">
+            {% for graph in time_figures %}
+                {{ graph | safe }}
+            {% endfor %}
+        </div>
+        <div id="integrante-figures">
+            {% for graph in integrante_figures %}
+                {{ graph | safe }}
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- scripts JavaScript e links de estilo adicionais aqui -->
+</body>
+</html>

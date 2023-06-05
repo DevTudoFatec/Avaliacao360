@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Avaliação 360°</title>
+	<link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/icones/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/icones/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/icones/favicon-16x16.png') }}">
+  <link rel="stylesheet" type="text/css" href="/static/css/geral/login.css">
+</head>
+
+<body>
+	<div class="logo-container">
+		<img class="logo_api_pbletex" src="{{ url_for('static', filename='img/login/PBLTEX.png') }}">
+	</div>
+	<nav class="divisao_texto_tela">
+		<nav class="img">
+			<img class="logo_360" src="/static/img/login/Layout API-2.png" alt="Imagem principal">
+		</nav>
+		<nav class="inputs">
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+				{% for message in messages %}
+					{% if message == "Cadastrado com sucesso!" %}
+						<h4 class="texto_instrucao" style="color: rgba(84, 179, 7, 0.822);">{{ message }}</h4>
+					{% else %}
+						<h4 class="texto_instrucao" style="color: rgba(179, 7, 7, 0.822);">{{ message }}</h4>
+					{% endif %}
+				{% endfor %}
+			{% else %}
+			<h4 class="texto_instrucao">Faça seu login aqui!</h4>
+			{% endif %}
+		{% endwith %}	
+		<form action="{{ url_for('padroes.login') }}" method="post">
+			<input type="text" name="email" placeholder="DIGITE SEU E-MAIL" required>
+			<input type="password" name="senha" placeholder="DIGITE SUA SENHA" required>			
+			<br>
+
+			<button class="botao_acessar" type="submit" value="acessar">ACESSAR</button>
+		</form>
+		<a href="/cadastro"><button class="botao_cadastro" >CADASTRO</button></a>
+		</nav>
+	</nav>
+</body>
