@@ -4,4 +4,4 @@ pandas >= 2.0.2
 plotly >= 5.14.1
 dash >= 2.10.2
 
-(pip install all these librabys versions)
+(pip install all these librarys versions)
