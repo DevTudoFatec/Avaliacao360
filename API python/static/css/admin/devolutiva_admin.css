@@ -266,6 +266,14 @@ th, td {
   padding: 8px;
 }
 
+.link_disable{
+  background-color: #bbbbbb;
+  padding: 20px;
+  font-size: 12pt;
+  transition: all .2s linear;
+  border-bottom: 2px solid #222;
+}
+
 h3 {
   text-align: center;
   font-weight: lighter;

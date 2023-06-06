@@ -17,6 +17,14 @@ header {
     margin: 2%;
 }
 
+.link_disable{
+    background-color: #bbbbbb;
+    padding: 20px;
+    font-size: 12pt;
+    transition: all .2s linear;
+    border-bottom: 2px solid #222;
+}
+
 body {
     text-align: center;
     background-color: #eeee;

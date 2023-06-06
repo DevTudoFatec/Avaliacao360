@@ -11,6 +11,9 @@ def controle_integrantes():
   try:
     with open("data/cadastro.json", "r") as f:
       users = json.load(f)
+      for user in users:
+        if user['email'] == "admin":
+          users.remove(user)
   except:
     users=[]
 

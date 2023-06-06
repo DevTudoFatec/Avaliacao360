@@ -26,6 +26,18 @@ body{
     margin-left: 30%;
     margin-right: 30%;}
 
+.botao_cinza{
+    color: #214e65;
+    background-color: #afafaf;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-color: #afafaf;
+    border-radius: 25px;
+    height: 50px;
+    width: 350px;
+    font-size: medium;
+    text-align: center;
+}
+
 footer{
     margin: 5%}
 
@@ -115,4 +127,13 @@ nav a{
     position: absolute;
     right: 5%;
     top: 30%;
+}
+
+
+.link_disable{
+    background-color: #bbbbbb;
+    padding: 20px;
+    font-size: 12pt;
+    transition: all .2s linear;
+    border-bottom: 2px solid #222;
 }

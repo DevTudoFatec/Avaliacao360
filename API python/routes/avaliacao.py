@@ -151,14 +151,14 @@ def avaliacao():
            with open('data/avaliacao.json', 'w') as f:
               json.dump(avaliacoes, f, indent=2)
 
-      session['count_avaliacao'] += 1
+      session['count_avaliacao'] = session['sprint']         
 
       with open("data/cadastro.json", "r") as f:
         users = json.load(f)
 
       for user in users:
         if user['email'] == session['email']:
-            user['count_avaliacao'] += 1
+            user['count_avaliacao'] = session['sprint']
 
       with open('data/cadastro.json', 'w') as u:
         json.dump(users, u, indent=2)

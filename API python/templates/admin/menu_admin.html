@@ -21,9 +21,15 @@
                 <a href="/controle_turmas"> <div class="link">CONTROLE DE TURMAS/TIMES</div></a>
                 <a href="/controle_integrantes"> <div class="link">CONTROLE DE INTEGRANTES</div></a>
                 <a href="/controle_projetos"> <div class="link">CONTROLE DE PROJETOS</div></a>
-                <a href="/devolutiva_admin"> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
-                <a href="/dashboards_operacionais"> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
-                <a href="/dashboards_gerenciais"> <div class="link">DASHBOARDS GERENCIAIS</div></a>
+                {% if dashboard_check %}
+                    <a href="/devolutiva_admin"> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
+                    <a href="/dashboards_operacionais"> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
+                    <a href="/dashboards_gerenciais"> <div class="link">DASHBOARDS GERENCIAIS</div></a>
+                {% else %}
+                    <div class="link_disable">DEVOLUTIVA DE AVALIAÇÃO</div>
+                    <div class="link_disable">DASHBOARDS OPERACIONAIS</div>
+                    <div class="link_disable">DASHBOARDS GERENCIAIS</div>
+                {% endif %}
                 <a href="/"> <div class="link">SAIR ➔ </div></a>
             </nav>
         </div>
@@ -60,12 +66,13 @@
                 </a>
             </nav>
             <nav class="segunda_coluna">
+                {% if dashboard_check %}
                 <a href="/devolutiva_admin">
-                <button class="botao_azul_claro">
-                    <strong> DEVOLUTIVA DE AVALIAÇÃO  </strong>
-                </button>
+                    <button class="botao_azul_claro">
+                        <strong> DEVOLUTIVA DE AVALIAÇÃO  </strong>
+                    </button>
                 </a>
-                <br><br>    
+                <br><br>
                 <a href="/dashboards_operacionais">
                     <button class="botao_azul_claro">
                         <strong> DASHBOARDS OPERACIONAIS  </strong>
@@ -77,6 +84,19 @@
                         <strong> DASHBOARDS GERENCIAIS </strong>
                     </button>
                 </a>
+                {% else %}
+                    <button disabled class="botao_cinza">
+                        <strong> DEVOLUTIVA DE AVALIAÇÃO  </strong>
+                    </button>
+                    <br><br>
+                    <button disabled class="botao_cinza">
+                        <strong> DASHBOARDS OPERACIONAIS  </strong>
+                    </button>
+                    <br><br>
+                    <button disabled class="botao_cinza">
+                        <strong> DASHBOARDS GERENCIAIS </strong>
+                    </button>
+                {% endif %}
             </nav>
         </nav>
         <footer>      

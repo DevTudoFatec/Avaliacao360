@@ -437,8 +437,8 @@ h5 {
 
   .legenda_trc {
     position: absolute;
-    width: 200%;
-    margin-left: -180%;
-    margin-top: -10%;
+    width: 35%;
+    left: 28%;
+    top: 20%;
   }
 }
