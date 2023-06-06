@@ -62,7 +62,8 @@ header{
     cursor: pointer;
     padding: 20px;
     position: absolute;
-    z-index: 1;}
+    z-index: 2;
+}
 
 .barra{
     top: 0;
@@ -71,7 +72,9 @@ header{
     width: 300px;
     position: absolute;
     transition: all .2s linear;
-    left: -300px;}
+    left: -300px;
+    z-index: 1;
+}
 
 .menu_lateral{
     width: 100%;
