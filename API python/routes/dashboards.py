@@ -45,6 +45,8 @@ def dashboards_operacionais():
         select_time = True
 
     if "filtrar" in request.form:
+        show_dashboards = True
+
         turma_escolha = request.form.get("turma_escolha")
         time_escolha = int(request.form.get("time_escolha"))
         sprint_escolha = int(request.form.get("sprint_escolha"))

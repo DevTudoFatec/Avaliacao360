@@ -125,7 +125,7 @@ def controle_turmas():
   except:
     times=[]
 
-  return render_template('admin/controle_turmas.html', users=users, turmas=turmas, times=times, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+  return render_template('admin/controle_turmas.html', dashboard_check=session['dashboard_check'], users=users, turmas=turmas, times=times, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
 
 @bp.route("/controle_times", methods=["GET", "POST"])
 @login_required
