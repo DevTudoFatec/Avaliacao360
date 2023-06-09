@@ -6,7 +6,6 @@
         <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/icones/apple-touch-icon.png') }}">
         <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/icones/favicon-32x32.png') }}">
         <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/icones/favicon-16x16.png') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/integrante/devolutiva_avaliacao.css') }}">
         <link rel="stylesheet" href="/static/css/admin/menu_admin.css"/>
     </head>
 
@@ -49,19 +48,7 @@
             <nav class="primeira_coluna">
                 <a href="/controle_integrantes">
                     <button class="botao_azul_claro">
-                        <strong> CONTROLE DE INTEGRANTES  </strong>
-                    </button>
-                </a>
-                <br><br>
-                <a href="/controle_turmas">
-                <button class="botao_azul_claro">
-                    <strong> CONTROLE DE TURMAS/TIMES  </strong>
-                </button>
-                </a>
-                <br><br>
-                <a href="/controle_projetos">
-                    <button class="botao_azul_claro">
-                        <strong> CONTROLE DE PROJETOS </strong>
+                        <strong> CONTROLES </strong>
                     </button>
                 </a>
             </nav>
@@ -69,32 +56,12 @@
                 {% if dashboard_check %}
                 <a href="/devolutiva_admin">
                     <button class="botao_azul_claro">
-                        <strong> DEVOLUTIVA DE AVALIAÇÃO  </strong>
-                    </button>
-                </a>
-                <br><br>
-                <a href="/dashboards_operacionais">
-                    <button class="botao_azul_claro">
-                        <strong> DASHBOARDS OPERACIONAIS  </strong>
-                    </button>
-                </a>
-                <br><br>
-                <a href="/dashboards_gerenciais">
-                    <button class="botao_azul_claro">
-                        <strong> DASHBOARDS GERENCIAIS </strong>
+                        <strong> DEVOLUTIVA E DASHBOARDS  </strong>
                     </button>
                 </a>
                 {% else %}
                     <button disabled class="botao_cinza">
-                        <strong> DEVOLUTIVA DE AVALIAÇÃO  </strong>
-                    </button>
-                    <br><br>
-                    <button disabled class="botao_cinza">
-                        <strong> DASHBOARDS OPERACIONAIS  </strong>
-                    </button>
-                    <br><br>
-                    <button disabled class="botao_cinza">
-                        <strong> DASHBOARDS GERENCIAIS </strong>
+                        <strong> DEVOLUTIVA E DASHBOARDS  </strong>
                     </button>
                 {% endif %}
             </nav>

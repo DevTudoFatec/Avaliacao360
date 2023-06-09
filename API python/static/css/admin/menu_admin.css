@@ -18,6 +18,13 @@ body{
     font-size: medium;
     text-align: center;
     cursor: pointer;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.25); 
+}
+
+.botao_azul_claro:hover {
+  background-color: #a6e2b3e8;
+  transform: scale(1.1); 
+  transition: 0.5s; 
 }
 
 .opções_menu{
@@ -127,6 +134,11 @@ nav a{
     position: absolute;
     right: 5%;
     top: 30%;
+}
+
+.darkmode_switch:hover {
+    transform: scale(1.2); 
+    transition: 0.5s; 
 }
 
 

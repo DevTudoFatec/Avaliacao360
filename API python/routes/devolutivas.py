@@ -1,6 +1,6 @@
 from flask import render_template, request, session, Blueprint as bp
 import json
-import os
+import pandas as pd
 from utils.decorators import login_required, admin_required, team_required, integrante_required
 
 bp = bp('devolutivas', __name__)
@@ -11,234 +11,138 @@ bp = bp('devolutivas', __name__)
 @login_required
 @admin_required
 def devolutiva_admin():
-  try:
-    with open("data/projetos.json", "r") as f:
-      projetos = json.load(f)
-  except:
-    projetos=[]
 
-  try:
-    with open("data/turmas.json", "r") as f:
-      turmas = json.load(f)
-  except:
-    turmas=[]
+  with open("data/projetos.json", "r") as f:
+    projetos = json.load(f)
 
-  try:
-    with open("data/times.json", "r") as f:
-      times = json.load(f)
-  except:
-    times=[]
+  with open("data/turmas.json", "r") as f:
+    turmas = json.load(f)
 
-  try:
-    with open("data/cadastro.json", "r") as f:
-      users = json.load(f)
-  except:
-    users=[]
+  with open("data/times.json", "r") as f:
+    times = json.load(f)
 
-  try:
-      with open("data/avaliacao.json", "r") as f:
-        avaliacoes = json.load(f)
-  except:
-    avaliacoes=[]
+  with open("data/cadastro.json", "r") as f:
+    users = json.load(f)
 
+  with open("data/avaliacao.json", "r") as f:
+    avaliacoes = json.load(f)
+
+  with open("data/autoavaliacao.json", "r") as g:
+    autoavaliacoes = json.load(g)
+
+  select_time = False
+  show_table = False          
   
-  try:
-    with open("data/autoavaliacao.json", "r") as g:
-      autoavaliacoes = json.load(g)
-  except:
-    autoavaliacoes=[]
-
-  pre_devolutiva = False
-  select_turma = False
-
-  if request.method == 'GET':
-    pre_devolutiva = True
-    select_turma = True
-
-    turmas_projetos = []
-
-    for turma in turmas:
-      for projeto in projetos:
-        if projeto['turma'] == turma['codigo']:
-          turmas_projetos.append(turma)
-
-    return render_template('admin/devolutiva_admin.html', select_turma=select_turma, pre_devolutiva=pre_devolutiva, 
-                           turmas=turmas_projetos, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
-          
-  
-  elif "confirm_turma" in request.form:
-    pre_devolutiva = True
-
+  if "save_turma" in request.form:
+    select_time = True
     turma_escolha = request.form.get('turma_escolha')
-    times_turma = []
+    nome_turma = [turma['nome'] for turma in turmas if turma['codigo'] == turma_escolha][0]
+    times = [time for time in times if time['turma'] == turma_escolha]
+    qtia_sprints = len([projeto['avaliacoes'] for projeto in projetos if projeto['turma'] == turma_escolha][0])
 
-    for time in times:
-      if time['turma'] == turma_escolha:
-        times_turma.append(time)
-
-    turma_tela = ''
-
-    for turma in turmas:
-      if turma['codigo'] == turma_escolha:
-        turma_tela = turma['nome']
-
-    turma_sprints = ''
-    
-    for projeto in projetos:
-      if projeto["turma"] == turma_escolha:
-        turma_sprints = len(projeto['avaliacoes'])
-    
-      
-    return render_template('admin/devolutiva_admin.html', turma_sprints=turma_sprints, turma_tela=turma_tela, times=times_turma, select_turma=select_turma, 
-                           pre_devolutiva=pre_devolutiva,  nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+    return render_template('admin/devolutiva_admin.html', nome_turma=nome_turma, qtia_sprints=qtia_sprints, 
+                           select_time=select_time, show_table=show_table, nomeUsuario=session['nomeUsuario'], 
+                           darkmode=session['darkmode'], times=times,turma_escolha=turma_escolha)
   
-  elif "confirm_devolutiva" in request.form:
+  elif "filtrar" in request.form:
+    show_table = True
+    turma_escolha = request.form.get("turma_escolha")
+    nome_turma = [turma['nome'] for turma in turmas if turma['codigo'] == turma_escolha][0]
     time_escolha = int(request.form.get('time_escolha'))
+    nome_time = [time['nome'] for time in times if time['codigo'] == time_escolha][0]
     sprint_escolha = int(request.form.get("sprint_escolha"))
-    users_time = []
 
-    time_nome = next(time['nome'] for time in times if time['codigo'] == time_escolha)
+    notas_medias_turma = {}
+    notas_medias_time = {}
+    notas_medias_integrante = {}
 
-    for user in users:
-      if user['time'] == time_escolha:
-        users_time.append(user)
+    for item in avaliacoes:
+      if item['turma_codigo'] == turma_escolha and item['sprint'] == sprint_escolha:
+        integrante = item['integrante']
+        comunicacao = item['comunicacao']
+        engajamento = item['engajamento']
+        conhecimento = item['conhecimento']
+        entrega = item['entrega']
+        autogestao = item['autogestao']
 
-    users_data = {}
+        notas_medias_turma.setdefault('comunicacao', []).append(comunicacao)
+        notas_medias_turma.setdefault('engajamento', []).append(engajamento)
+        notas_medias_turma.setdefault('conhecimento', []).append(conhecimento)
+        notas_medias_turma.setdefault('entrega', []).append(entrega)
+        notas_medias_turma.setdefault('autogestao', []).append(autogestao)
 
-    for user in users_time:
-      users_data[user['email']] = {}
-      rows=0
-      comunicacao = engajamento = conhecimento = entrega = autogestao = 0
+        if item['time'] == time_escolha:
+          notas_medias_time.setdefault('comunicacao', []).append(comunicacao)
+          notas_medias_time.setdefault('engajamento', []).append(engajamento)
+          notas_medias_time.setdefault('conhecimento', []).append(conhecimento)
+          notas_medias_time.setdefault('entrega', []).append(entrega)
+          notas_medias_time.setdefault('autogestao', []).append(autogestao)
 
-      textos_comunicacao = []
-      textos_engajamento = []
-      textos_conhecimento = []
-      textos_entrega = []
-      textos_autogestao = []
-      textos = {}
-      avgs = {
-        "comunicacao": 0, 
-        "engajamento": 0, 
-        "conhecimento": 0, 
-        "entrega": 0, 
-        "autogestao": 0
-      }
+          notas_medias_integrante.setdefault(integrante, {}).setdefault('comunicacao', []).append(comunicacao)
+          notas_medias_integrante.setdefault(integrante, {}).setdefault('engajamento', []).append(engajamento)
+          notas_medias_integrante.setdefault(integrante, {}).setdefault('conhecimento', []).append(conhecimento)
+          notas_medias_integrante.setdefault(integrante, {}).setdefault('entrega', []).append(entrega)
+          notas_medias_integrante.setdefault(integrante, {}).setdefault('autogestao', []).append(autogestao)
 
-      for avaliacao in avaliacoes:
-        if avaliacao['integrante'] == user['email'] and avaliacao['sprint'] == sprint_escolha:
-          rows+=1
-          comunicacao += avaliacao['comunicacao']
-          engajamento += avaliacao['engajamento']
-          conhecimento += avaliacao['conhecimento']
-          entrega += avaliacao['entrega']
-          autogestao += avaliacao['autogestao']
+    df = pd.DataFrame(notas_medias_turma)
+    df = df.mean()
+    notas_medias_turma = {key: float(f"{value:,.2f}") for key, value in df.to_dict().items()}
 
-          if len(avaliacao['texto_comunicacao']) > 0:
-            textos_comunicacao.append(avaliacao['texto_comunicacao'])
-          if len(avaliacao['texto_engajamento']) > 0:
-            textos_engajamento.append(avaliacao['texto_engajamento'])
-          if len(avaliacao['texto_conhecimento']) > 0:
-            textos_conhecimento.append(avaliacao['texto_conhecimento'])
-          if len(avaliacao['texto_entrega']) > 0:
-            textos_entrega.append(avaliacao['texto_entrega'])
-          if len(avaliacao['texto_autogestao']) > 0:
-            textos_autogestao.append(avaliacao['texto_autogestao'])
+    df = pd.DataFrame(notas_medias_time)
+    df = df.mean()
+    notas_medias_time = {key: float(f"{value:,.2f}") for key, value in df.to_dict().items()}
 
-      textos["comunicacao"] = textos_comunicacao
-      textos["engajamento"] = textos_engajamento
-      textos["conhecimento"] = textos_conhecimento
-      textos["entrega"] = textos_entrega
-      textos["autogestao"] = textos_autogestao
+    auto_notas_medias_time = {}
+    auto_notas_medias_turma = {}
+    auto_notas_medias_integrante = {}
 
-      comunicacao = comunicacao/rows
-      engajamento = engajamento/rows
-      conhecimento = conhecimento/rows
-      entrega = entrega/rows
-      autogestao = autogestao/rows
+    for item in autoavaliacoes:
+      if item['turma_codigo'] == turma_escolha and item['sprint'] == sprint_escolha:
+        integrante = item['email']
+        comunicacao = item['comunicacao']
+        engajamento = item['engajamento']
+        conhecimento = item['conhecimento']
+        entrega = item['entrega']
+        autogestao = item['autogestao']
 
-      avgs["comunicacao"] = comunicacao
-      avgs["engajamento"] = engajamento
-      avgs["conhecimento"] = conhecimento
-      avgs["entrega"] = entrega
-      avgs["autogestao"] = autogestao
+        auto_notas_medias_turma.setdefault('auto_comunicacao', []).append(comunicacao)
+        auto_notas_medias_turma.setdefault('auto_engajamento', []).append(engajamento)
+        auto_notas_medias_turma.setdefault('auto_conhecimento', []).append(conhecimento)
+        auto_notas_medias_turma.setdefault('auto_entrega', []).append(entrega)
+        auto_notas_medias_turma.setdefault('auto_autogestao', []).append(autogestao)
 
-      auto_notas = {
-        "comunicacao": 0, 
-        "engajamento": 0, 
-        "conhecimento": 0, 
-        "entrega": 0, 
-        "autogestao": 0
-      }
+        if item['time'] == time_escolha:
+          auto_notas_medias_time.setdefault('auto_comunicacao', []).append(comunicacao)
+          auto_notas_medias_time.setdefault('auto_engajamento', []).append(engajamento)
+          auto_notas_medias_time.setdefault('auto_conhecimento', []).append(conhecimento)
+          auto_notas_medias_time.setdefault('auto_entrega', []).append(entrega)
+          auto_notas_medias_time.setdefault('auto_autogestao', []).append(autogestao)
 
-      for autoavaliacao in autoavaliacoes:
-        if autoavaliacao['email'] == user['email'] and autoavaliacao['sprint'] == sprint_escolha:
-          auto_notas["comunicacao"] = int(autoavaliacao["comunicacao"])
-          auto_notas["engajamento"] = int(autoavaliacao["engajamento"])
-          auto_notas["conhecimento"] = int(autoavaliacao["conhecimento"]) 
-          auto_notas["entrega"] = int(autoavaliacao["entrega"])
-          auto_notas["autogestao"] = int(autoavaliacao["autogestao"])
+          auto_notas_medias_integrante.setdefault(integrante, {}).setdefault('auto_comunicacao', []).append(comunicacao)
+          auto_notas_medias_integrante.setdefault(integrante, {}).setdefault('auto_engajamento', []).append(engajamento)
+          auto_notas_medias_integrante.setdefault(integrante, {}).setdefault('auto_conhecimento', []).append(conhecimento)
+          auto_notas_medias_integrante.setdefault(integrante, {}).setdefault('auto_entrega', []).append(entrega)
+          auto_notas_medias_integrante.setdefault(integrante, {}).setdefault('auto_autogestao', []).append(autogestao)
+
       
-      desvio_comunicacao = desvio_engajamento = desvio_conhecimento = desvio_entrega = desvio_autogestao = 0
+    df = pd.DataFrame(auto_notas_medias_turma)
+    df = df.mean()
+    auto_notas_medias_turma = {key: float(f"{value:,.2f}") for key, value in df.to_dict().items()}
 
-      desvio_comunicacao += (auto_notas["comunicacao"]-avgs["comunicacao"])
-      desvio_engajamento += (auto_notas["engajamento"]-avgs["engajamento"])
-      desvio_conhecimento += (auto_notas["conhecimento"]-avgs["conhecimento"])
-      desvio_entrega += (auto_notas["entrega"]-avgs["entrega"]) 
-      desvio_autogestao += (auto_notas["autogestao"]-avgs["autogestao"])
-
-      desvio_medio = (desvio_comunicacao + desvio_engajamento + desvio_conhecimento + desvio_entrega + desvio_autogestao)/5
-
-      users_data[user['email']]['avgs'] = avgs
-      users_data[user['email']]['textos'] = textos
-      users_data[user['email']]['autoavaliacao'] = auto_notas
-      users_data[user['email']]['desvio_medio'] = desvio_medio
-    
-
-    total_comunicacao = total_engajamento = total_conhecimento = total_entrega = total_autogestao = 0
-    total_auto_comunicacao = total_auto_engajamento = total_auto_conhecimento = total_auto_entrega = total_auto_autogestao = 0
-
-    for user in users_data:
-        total_comunicacao += users_data[user]['avgs']['comunicacao']
-        total_engajamento += users_data[user]['avgs']['engajamento']
-        total_conhecimento += users_data[user]['avgs']['conhecimento']
-        total_entrega += users_data[user]['avgs']['entrega']
-        total_autogestao += users_data[user]['avgs']['autogestao']
-
-        total_auto_comunicacao += users_data[user]['autoavaliacao']['comunicacao']
-        total_auto_engajamento += users_data[user]['autoavaliacao']['engajamento']
-        total_auto_conhecimento += users_data[user]['autoavaliacao']['conhecimento']
-        total_auto_entrega += users_data[user]['autoavaliacao']['entrega']
-        total_auto_autogestao += users_data[user]['autoavaliacao']['autogestao']
-
-    medias_time = {
-        "comunicacao": 0,
-        "engajamento": 0,
-        "conhecimento": 0,
-        "entrega": 0,
-        "autogestao": 0,
-        "auto_comunicacao": 0,
-        "auto_engajamento": 0,
-        "auto_conhecimento": 0,
-        "auto_entrega": 0,
-        "auto_autogestao": 0
-    }
-
-    medias_time['comunicacao'] = float('{:.1f}'.format(total_comunicacao/len(users_data)))
-    medias_time['engajamento'] = float('{:.1f}'.format(total_engajamento/len(users_data)))
-    medias_time['conhecimento'] = float('{:.1f}'.format(total_conhecimento/len(users_data)))
-    medias_time['entrega'] = float('{:.1f}'.format(total_entrega/len(users_data)))
-    medias_time['autogestao'] = float('{:.1f}'.format(total_autogestao/len(users_data)))
-
-    medias_time['auto_comunicacao'] = float('{:.1f}'.format(total_auto_comunicacao/len(users_data)))
-    medias_time['auto_engajamento'] = float('{:.1f}'.format(total_auto_engajamento/len(users_data)))
-    medias_time['auto_conhecimento'] = float('{:.1f}'.format(total_auto_conhecimento/len(users_data)))
-    medias_time['auto_entrega'] = float('{:.1f}'.format(total_auto_entrega/len(users_data)))
-    medias_time['auto_autogestao'] = float('{:.1f}'.format(total_auto_autogestao/len(users_data)))
-    
-      
-    return render_template('admin/devolutiva_admin.html', time_nome=time_nome, time_escolha=time_escolha, sprint=sprint_escolha, 
-                           users_data=users_data, users=users_time, pre_devolutiva=pre_devolutiva, desvio_medio=desvio_medio,
-                           medias_time = medias_time, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+    df = pd.DataFrame(auto_notas_medias_time)
+    df = df.mean()
+    auto_notas_medias_time = {key: float(f"{value:,.2f}") for key, value in df.to_dict().items()}  
+        
+    return render_template('admin/devolutiva_admin.html', turmas=turmas, select_time=select_time,
+                          notas_medias_turma=notas_medias_turma, notas_medias_time=notas_medias_time, 
+                          notas_medias_integrante=notas_medias_integrante, auto_notas_medias_turma=auto_notas_medias_turma, 
+                          auto_notas_medias_time=auto_notas_medias_time, auto_notas_medias_integrante=auto_notas_medias_integrante,
+                          nome_turma=nome_turma, nome_time=nome_time, sprint_escolha=sprint_escolha,
+                         show_table=show_table, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+  
+  
+  return render_template('admin/devolutiva_admin.html', turmas=turmas, select_time=select_time, 
+                         show_table=show_table, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
   
 
 

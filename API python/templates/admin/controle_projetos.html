@@ -6,7 +6,6 @@
         <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/icones/apple-touch-icon.png') }}">
         <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/icones/favicon-32x32.png') }}">
         <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/icones/favicon-16x16.png') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/integrante/devolutiva_avaliacao.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin/controle_projetos.css') }}">
         {% if darkmode%}
             <style>
@@ -48,7 +47,10 @@
         <p><b>Usuário: {{ nomeUsuario }}</b></p>
         </header>
         <div class="controle_container">
-            <h1 class="bt_sprints">CONTROLE DE SPRINTS</h1>
+            <a href="/controle_integrantes"><button class="bt_nav" type="button" name="turmas">INTEGRANTES</button></a>
+            <a href="/controle_turmas"><button class="bt_nav" type="button" name="turmas">TURMAS</button></a>
+            <a href="/controle_times"><button class="bt_nav" type="button" name="times">TIMES</button></a>
+            <a><button class="bt_nav_current" type="button" name="times">PROJETOS</button></a>
         </div>
         <div class="projetos_container">  
             <table class="projetos_infos">

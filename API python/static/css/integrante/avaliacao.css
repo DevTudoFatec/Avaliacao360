@@ -109,7 +109,7 @@ body {
 }
 
 .bt_avaliacao_trc{
-  background-color: #5e17eb;
+  background-color: #89CFC9;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 150%;
   border-radius: 50px;
@@ -121,15 +121,15 @@ body {
 }
 
 .bt_autoavaliacao_trc{
-  background-color: #5e17eb;
+  background-color: #89CFC9;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 150%;
   border-radius: 50px;
   padding: 0.8%;
   color: white;
-  width: 22%;
+  width: 15%;
   text-align: center;
-  margin-left: 33%;
+  margin-left: 36.5%;
   margin-top: 2%;
 }
 
@@ -157,6 +157,13 @@ body {
   color: #fed196;
   margin-left: 38%;
   margin-top: 5%;
+}
+
+.bt_confirmar_trc:hover {
+  color: black;
+  background-color: #a6e2b3e8;
+  transform: scale(1.2); 
+  transition: 0.5s; 
 }
 
 .formulario {

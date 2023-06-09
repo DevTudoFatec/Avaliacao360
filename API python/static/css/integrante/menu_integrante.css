@@ -21,6 +21,12 @@ body{
     cursor: pointer;
 }
 
+.botao_azul_claro:hover{
+    background-color: #a6e2b3e8;
+    transform: scale(1.1); 
+    transition: 0.5s; 
+  }
+
 .botao_cinza{
     color: #214e65;
     background-color: #afafaf;
@@ -152,6 +158,11 @@ nav a{
     right: 5%;
     top: 40%;
     width: 7%;
+}
+
+.darkmode_switch:hover {
+    transform: scale(1.2); 
+    transition: 0.5s; 
 }
 
 @media screen and (max-width:767px) {
