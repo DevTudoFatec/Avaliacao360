@@ -25,6 +25,15 @@ header{
   font-size: small;
 }
 
+
+.link_disable{
+  background-color: #bbbbbb;
+  padding: 20px;
+  font-size: 12pt;
+  transition: all .2s linear;
+  border-bottom: 2px solid #222;
+}
+
 #logo_avaliação{
   margin-left: 40%;}
 
@@ -136,7 +145,7 @@ nav a{
 
 .user_infos {
   table-layout: fixed;
-  width: 78%;
+  width: 85%;
   margin-left: 17%;
 }
 
@@ -156,9 +165,16 @@ nav a{
 .user_info {
   display: inline-block;
   width: 60%; 
-  text-align: center;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 20px;
+  font-weight: lighter;
+}
+
+.user_email {
+  width: 80%; 
+  text-align: left;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 80%;
   font-weight: lighter;
 }
 

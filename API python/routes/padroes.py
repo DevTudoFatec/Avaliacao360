@@ -79,7 +79,19 @@ def login():
 @login_required
 @admin_required
 def menu_admin():
-  return render_template('admin/menu_admin.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+
+  session['dashboard_check'] = False
+  
+  try:
+    with open("data/avaliacao.json", "r") as f:
+        avaliacoes = json.load(f)
+  except:
+    avaliacoes = []
+  
+  if len(avaliacoes) > 0:
+    session['dashboard_check'] = True
+
+  return render_template('admin/menu_admin.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'], dashboard_check=session['dashboard_check'])
 
 ###### INTEGRANTE  #############
 

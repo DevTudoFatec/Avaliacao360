@@ -163,7 +163,7 @@ def criar_time():
 
   time_dict = {
     "index": len(data),
-    "nome": nome_time.title(),
+    "nome": nome_time,
     "turma": codigo_time_turma,
     "codigo": len(data)+1
   }

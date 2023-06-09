@@ -12,86 +12,151 @@ bp = bp('dashboards', __name__)
 
 @login_required
 @admin_required
-@bp.route("/dashboards_operacionais")
+@bp.route("/dashboards_operacionais", methods=["GET", "POST"])
 def dashboards_operacionais():
     # Carregar dados do arquivo JSON
     with open('data/avaliacao.json') as file:
-        data = json.load(file)
+        avaliacoes = json.load(file)
 
-    # Dicionários para armazenar as notas médias
-    notas_medias_turma = {}
-    notas_medias_time = {}
-    notas_medias_integrante = {}
+    with open('data/autoavaliacao.json') as file:
+        autoavaliacoes = json.load(file)
 
-    # Iterar sobre os dados e calcular as notas médias
-    for item in data:
-        avaliador = item['avaliador']
-        integrante = item['integrante']
-        sprint = item['sprint']
-        turma_nome = item['turma_nome']
-        time_nome = item['time_nome']
-        comunicacao = item['comunicacao']
-        engajamento = item['engajamento']
-        conhecimento = item['conhecimento']
-        entrega = item['entrega']
-        autogestao = item['autogestao']
+    with open('data/cadastro.json') as file:
+        users = json.load(file)    
+    
+    with open('data/turmas.json') as file:
+        turmas = json.load(file)
 
-        # Adicionar as notas à média da turma
-        notas_medias_turma.setdefault(turma_nome, {}).setdefault(sprint, {}).setdefault('comunicacao', []).append(comunicacao)
-        notas_medias_turma.setdefault(turma_nome, {}).setdefault(sprint, {}).setdefault('engajamento', []).append(engajamento)
-        notas_medias_turma.setdefault(turma_nome, {}).setdefault(sprint, {}).setdefault('conhecimento', []).append(conhecimento)
-        notas_medias_turma.setdefault(turma_nome, {}).setdefault(sprint, {}).setdefault('entrega', []).append(entrega)
-        notas_medias_turma.setdefault(turma_nome, {}).setdefault(sprint, {}).setdefault('autogestao', []).append(autogestao)
+    with open('data/times.json') as file:
+        times = json.load(file)
 
-        # Adicionar as notas à média do time
-        notas_medias_time.setdefault(turma_nome, {}).setdefault(time_nome, {}).setdefault(sprint, {}).setdefault('comunicacao', []).append(comunicacao)
-        notas_medias_time.setdefault(turma_nome, {}).setdefault(time_nome, {}).setdefault(sprint, {}).setdefault('engajamento', []).append(engajamento)
-        notas_medias_time.setdefault(turma_nome, {}).setdefault(time_nome, {}).setdefault(sprint, {}).setdefault('conhecimento', []).append(conhecimento)
-        notas_medias_time.setdefault(turma_nome, {}).setdefault(time_nome, {}).setdefault(sprint, {}).setdefault('entrega', []).append(entrega)
-        notas_medias_time.setdefault(turma_nome, {}).setdefault(time_nome, {}).setdefault(sprint, {}).setdefault('autogestao', []).append(autogestao)
+    with open('data/projetos.json') as file:
+        projetos = json.load(file)
 
-        # Adicionar as notas à média do integrante
-        notas_medias_integrante.setdefault(turma_nome, {}).setdefault(time_nome, {}).setdefault(integrante, {}).setdefault(sprint, {}).setdefault('comunicacao', []).append(comunicacao)
-        notas_medias_integrante.setdefault(turma_nome, {}).setdefault(time_nome, {}).setdefault(integrante, {}).setdefault(sprint, {}).setdefault('engajamento', []).append(engajamento)
-        notas_medias_integrante.setdefault(turma_nome, {}).setdefault(time_nome, {}).setdefault(integrante, {}).setdefault(sprint, {}).setdefault('conhecimento', []).append(conhecimento)
-        notas_medias_integrante.setdefault(turma_nome, {}).setdefault(time_nome, {}).setdefault(integrante, {}).setdefault(sprint, {}).setdefault('entrega', []).append(entrega)
-        notas_medias_integrante.setdefault(turma_nome, {}).setdefault(time_nome, {}).setdefault(integrante, {}).setdefault(sprint, {}).setdefault('autogestao', []).append(autogestao)
+    select_time = False
+    turma_escolha = None
+    show_dashboards = False
+    qtia_sprints = None
 
-    # Criar gráficos para as médias das turmas
-    turma_figures = []
-    for turma, turma_data in notas_medias_turma.items():
-        for sprint, sprint_data in turma_data.items():
-            df = pd.DataFrame(sprint_data)
-            df = df.mean().reset_index()
-            df.columns = ['critério', 'nota média']
-            fig = px.bar(df, x='critério', y='nota média', title=f'Avaliação Média - Turma {turma} - Sprint {sprint}')
-            turma_figures.append(fig.to_html(full_html=False))
+    if "save_turma" in request.form:
+        turma_escolha = request.form.get("turma_escolha")
+        times = [time for time in times if time['turma'] == turma_escolha]
+        qtia_sprints = len([projeto['avaliacoes'] for projeto in projetos if projeto['turma'] == turma_escolha][0])
+        select_time = True
 
-    # Criar gráficos para as médias dos times
-    time_figures = []
-    for turma, turma_data in notas_medias_time.items():
-        for time, time_data in turma_data.items():
-            for sprint, sprint_data in time_data.items():
-                df = pd.DataFrame(sprint_data)
-                df = df.mean().reset_index()
-                df.columns = ['critério', 'nota média']
-                fig = px.bar(df, x='critério', y='nota média', title=f'Avaliação Média - Turma {turma} - Time {time} - Sprint {sprint}')
-                time_figures.append(fig.to_html(full_html=False))
+    if "filtrar" in request.form:
+        turma_escolha = request.form.get("turma_escolha")
+        time_escolha = int(request.form.get("time_escolha"))
+        sprint_escolha = int(request.form.get("sprint_escolha"))
 
-    # Criar gráficos para as médias dos integrantes
-    integrante_figures = []
-    for turma, turma_data in notas_medias_integrante.items():
-        for time, time_data in turma_data.items():
-            for integrante, integrante_data in time_data.items():
-                for sprint, sprint_data in integrante_data.items():
+        notas_medias_time = {}
+        notas_medias_integrante = {}
+        notas_medias_turma = {}
+
+        for item in avaliacoes:
+            if item['turma_codigo'] == turma_escolha:
+                sprint = item['sprint']
+                integrante = item['integrante']
+                comunicacao = item['comunicacao']
+                engajamento = item['engajamento']
+                conhecimento = item['conhecimento']
+                entrega = item['entrega']
+                autogestao = item['autogestao']
+
+                notas_medias_turma.setdefault(sprint, {}).setdefault('comunicacao', []).append(comunicacao)
+                notas_medias_turma.setdefault(sprint, {}).setdefault('engajamento', []).append(engajamento)
+                notas_medias_turma.setdefault(sprint, {}).setdefault('conhecimento', []).append(conhecimento)
+                notas_medias_turma.setdefault(sprint, {}).setdefault('entrega', []).append(entrega)
+                notas_medias_turma.setdefault(sprint, {}).setdefault('autogestao', []).append(autogestao)
+
+                if item['time'] == time_escolha:
+                    notas_medias_time.setdefault(sprint, {}).setdefault('comunicacao', []).append(comunicacao)
+                    notas_medias_time.setdefault(sprint, {}).setdefault('engajamento', []).append(engajamento)
+                    notas_medias_time.setdefault(sprint, {}).setdefault('conhecimento', []).append(conhecimento)
+                    notas_medias_time.setdefault(sprint, {}).setdefault('entrega', []).append(entrega)
+                    notas_medias_time.setdefault(sprint, {}).setdefault('autogestao', []).append(autogestao)
+
+                    notas_medias_integrante.setdefault(integrante, {}).setdefault(sprint, {}).setdefault('comunicacao', []).append(comunicacao)
+                    notas_medias_integrante.setdefault(integrante, {}).setdefault(sprint, {}).setdefault('engajamento', []).append(engajamento)
+                    notas_medias_integrante.setdefault(integrante, {}).setdefault(sprint, {}).setdefault('conhecimento', []).append(conhecimento)
+                    notas_medias_integrante.setdefault(integrante, {}).setdefault(sprint, {}).setdefault('entrega', []).append(entrega)
+                    notas_medias_integrante.setdefault(integrante, {}).setdefault(sprint, {}).setdefault('autogestao', []).append(autogestao)
+        
+        turma_merged = pd.DataFrame()
+        turma_figures = []
+
+        for sprint, sprint_data in notas_medias_turma.items():
+            if sprint_escolha !=0:
+                if sprint == sprint_escolha:
                     df = pd.DataFrame(sprint_data)
                     df = df.mean().reset_index()
                     df.columns = ['critério', 'nota média']
-                    fig = px.bar(df, x='critério', y='nota média', title=f'Avaliação Média - Turma {turma} - Time {time} - Integrante {integrante} - Sprint {sprint}')
-                    integrante_figures.append(fig.to_html(full_html=False))
+                    fig = px.bar(df, x='critério', y='nota média', color="critério", title=f'Avaliação Média - Sprint {sprint}')
+                    turma_figures.append(fig.to_html(full_html=False))
+            else: 
+                df = pd.DataFrame(sprint_data)
+                df = df.mean().reset_index()
+                df.columns = ['critério', 'nota média']
+                df['sprint'] = sprint
+                turma_merged = pd.concat([turma_merged, df], ignore_index=True)
 
-    # Renderizar o template com os gráficos
-    return render_template('admin/dashboards_operacionais.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'], turma_figures=turma_figures, time_figures=time_figures, integrante_figures=integrante_figures)
+        time_merged = pd.DataFrame()
+        time_figures = []
+        for sprint, sprint_data in notas_medias_time.items():
+            if sprint_escolha !=0:
+                if sprint == sprint_escolha:
+                    df = pd.DataFrame(sprint_data)
+                    df = df.mean().reset_index()
+                    df.columns = ['critério', 'nota média']
+                    fig = px.bar(df, x='critério', y='nota média', color="critério", title=f'Avaliação Média - Sprint {sprint}')
+                    time_figures.append(fig.to_html(full_html=False))
+            else: 
+                df = pd.DataFrame(sprint_data)
+                df = df.mean().reset_index()
+                df.columns = ['critério', 'nota média']
+                df['sprint'] = sprint
+                time_merged = pd.concat([time_merged, df], ignore_index=True)
+
+
+        integrante_merged = pd.DataFrame()
+        integrante_figures = []
+        for integrante, integrante_data in notas_medias_integrante.items():
+            for sprint, sprint_data in integrante_data.items():
+                if sprint_escolha !=0:
+                    if sprint == sprint_escolha:
+                        df = pd.DataFrame(sprint_data)
+                        df = df.mean().reset_index()
+                        df.columns = ['critério', 'nota média']
+                        nome_integrante = [user['nome'] for user in users if user['email'] == integrante][0]
+                        fig = px.bar(df, x='critério', y='nota média', color="critério", title=f'Avaliação Média - Sprint {sprint} -  {nome_integrante} ')
+                        integrante_figures.append(fig.to_html(full_html=False))
+                else: 
+                    df = pd.DataFrame(sprint_data)
+                    df = df.mean().reset_index()
+                    df.columns = ['critério', 'nota média']
+                    df['sprint'] = sprint
+                    df['integrante'] = [user['nome'] for user in users if user['email'] == integrante][0]
+                    integrante_merged = pd.concat([integrante_merged, df], ignore_index=True)
+
+        if sprint_escolha == 0:
+            turma_merged['sprint'] = 'Sprint ' + turma_merged['sprint'].astype(str)
+            fig = px.bar(turma_merged, x='critério', y='nota média',color='sprint',
+                        title='Avaliação Média - Todas Sprints', labels={'sprint': 'Sprint'}, barmode='group')
+            turma_figures.append(fig.to_html(full_html=False))
+    
+            time_merged['sprint'] = 'Sprint ' + time_merged['sprint'].astype(str)
+            fig = px.bar(time_merged, x='critério', y='nota média', color='sprint',
+                        title='Avaliação Média - Todas Sprints', labels={'sprint': 'Sprint'}, barmode='group')
+            time_figures.append(fig.to_html(full_html=False))
+
+            integrante_merged['sprint'] = 'Sprint ' + integrante_merged['sprint'].astype(str)
+            fig = px.bar(integrante_merged, x='critério', y='nota média', color='sprint',
+                                facet_row='integrante', title='Avaliação Média - Todas Sprints', barmode='group')
+            integrante_figures.append(fig.to_html(full_html=False))
+        
+        return render_template('admin/dashboards_operacionais.html', show_dashboards=show_dashboards, turma_escolha=turma_escolha, time_escolha=time_escolha, select_time=select_time, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'], times=times, turmas=turmas, turma_figures=turma_figures, time_figures=time_figures, integrante_figures=integrante_figures)
+
+    return render_template('admin/dashboards_operacionais.html', show_dashboards=show_dashboards, qtia_sprints=qtia_sprints, select_time=select_time, turma_escolha=turma_escolha, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'], times=times, turmas=turmas)
 
 
 @login_required
@@ -102,7 +167,6 @@ def dashboards_gerenciais():
         # Capturar os valores selecionados nos campos de seleção
         turma = request.form.get('turma')
         time = request.form.get('time')
-        
         # Carregar o DataFrame completo
         df = pd.read_json('data/cadastro.json')
         

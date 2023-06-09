@@ -32,9 +32,15 @@
                 <a href="/controle_turmas"> <div class="link">CONTROLE DE TURMAS/TIMES</div></a>
                 <a href="/controle_integrantes"> <div class="link">CONTROLE DE INTEGRANTES</div></a>
                 <a href="/controle_projetos"> <div class="link">CONTROLE DE PROJETOS</div></a>
-                <a href="/devolutiva_admin"> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
-                <a href="/dashboards_operacionais"> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
-                <a href="/dashboards_gerenciais"> <div class="link">DASHBOARDS GERENCIAIS</div></a>
+                {% if dashboard_check %}
+                    <a href="/devolutiva_admin"> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
+                    <a href="/dashboards_operacionais"> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
+                    <a href="/dashboards_gerenciais"> <div class="link">DASHBOARDS GERENCIAIS</div></a>
+                {% else %}
+                    <div class="link_disable">DEVOLUTIVA DE AVALIAÇÃO</div>
+                    <div class="link_disable">DASHBOARDS OPERACIONAIS</div>
+                    <div class="link_disable">DASHBOARDS GERENCIAIS</div>
+                {% endif %}
                 <a href="/"> <div class="link">SAIR ➔ </div></a>
             </nav>
         </div>

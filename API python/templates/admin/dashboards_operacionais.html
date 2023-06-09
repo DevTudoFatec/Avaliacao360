@@ -6,7 +6,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/icones/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/icones/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/icones/favicon-16x16.png') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/integrante/devolutiva_avaliacao.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin/dashboards_operacionais.css') }}">
 </head>
 <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
@@ -30,42 +29,85 @@
         <p><b>Usuário: {{ nomeUsuario }}</b></p>
     </header>
 
-    <div>
-        <button id="bt_devolutiva_admin"> Devolutiva de Avaliações - ADM </button>
+    <h1 id="bt_dashboard_operacionais">Dashboards Operacionais</h1>
+    <div class="form_div">
+        <form class="form_devolutiva" method="POST" action="{{ url_for('dashboards.dashboards_operacionais') }}">
+            {% if not select_time %}
+                <select class="select_box" name="turma_escolha" required>                                    
+                    <option  value="" disabled selected>Turma</option>
+                    {% for turma in turmas %}
+                            <option value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="save_button" name="save_turma">
+                    <img src="{{ url_for('static', filename='img/icones/proximo.png') }}" class="save_icon" alt="save_icon">
+                </button>
+                <select class="select_box" name="time_escolha" disabled>                                    
+                    <option  value="" disabled selected>Time</option>
+                </select>
+                <select class="select_sprint" name="sprint_escolha" disabled>                                    
+                    <option  value="" disabled selected>Sprint</option>
+                </select>
+                <button disabled type="submit" class="filtro_button" name="filtrar">
+                    <img src="{{ url_for('static', filename='img/icones/filtro.png') }}" class="filtro_icon" alt="save_icon">
+                </button>
+            {% else %}
+                <input type="hidden" name="turma_escolha" value="{{ turma_escolha }}">
+                <select class="select_box" name="turma_escolha" disabled> 
+                    {% for turma in turmas %}
+                        {% if turma['codigo'] == turma_escolha %}
+                            <option value="">{{ turma['nome'] }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <select class="select_box" name="time_escolha" required>                                    
+                    <option  value="" disabled selected>Time</option>
+                    {% for time in times %}
+                            <option value="{{ time['codigo'] }}">{{ time['nome'] }}</option>
+                    {% endfor %}
+                </select>
+                <select class="select_sprint" name="sprint_escolha" required>                                    
+                    <option  value="" disabled selected>Sprint</option>
+                    {% for i in range(1, qtia_sprints+1) %}
+                        <option  value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
+                    <option  value="0">Geral</option>
+                </select>
+                <button type="submit" class="filtro_button" name="filtrar" style="cursor: pointer;">
+                    <img src="{{ url_for('static', filename='img/icones/filtro.png') }}" class="filtro_icon" alt="save_icon">
+                </button>
+            {% endif %}
+        </form>
     </div>
-
-    <nav id="colunas">
-        <div class="coluna1">
-            <button class="bt_titulo_coluna"> Nome </button>
-            
-        </div>
-        <div class="coluna2">
-            <button class="bt_titulo_coluna"> Semestre/turma </button>
-        </div>
-        <div class="coluna3">
-            <button class="bt_titulo_coluna"> Devolutivas </button>
-        </div>
-    </nav>
-
-    <h1>Dashboard Operacional</h1>
     <div class="charts-container">
-        <div id="turma-figures">
-            {% for graph in turma_figures %}
-                {{ graph | safe }}
-            {% endfor %}
-        </div>
-        <div id="time-figures">
-            {% for graph in time_figures %}
-                {{ graph | safe }}
-            {% endfor %}
-        </div>
-        <div id="integrante-figures">
-            {% for graph in integrante_figures %}
-                {{ graph | safe }}
-            {% endfor %}
-        </div>
+        {% if show_dashboards %}
+            <div id="turma-figures">
+                {% for turma in turmas %}
+                    {% if turma['codigo'] == turma_escolha %}
+                        <H1>{{ turma['nome'] }}</H1>
+                    {% endif %}
+                {% endfor %}
+                {% for graph in turma_figures %}
+                    {{ graph | safe }}
+                {% endfor %}
+            </div>
+            <div id="time-figures">
+                {% for time in times %}
+                    {% if time['codigo'] == time_escolha %}
+                        <H1>{{ time['nome'] }}</H1>
+                    {% endif %}
+                {% endfor %}
+                {% for graph in time_figures %}
+                    {{ graph | safe }}
+                {% endfor %}
+            </div>
+            <div id="integrante-figures">
+                <H1>INTEGRANTES</H1>
+                {% for graph in integrante_figures %}
+                    {{ graph | safe }}
+                {% endfor %}
+            </div>
+        {% endif %}
     </div>
-
-    <!-- scripts JavaScript e links de estilo adicionais aqui -->
 </body>
 </html>

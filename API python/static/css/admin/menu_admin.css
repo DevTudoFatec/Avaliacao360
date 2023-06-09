@@ -26,6 +26,18 @@ body{
     margin-left: 30%;
     margin-right: 30%;}
 
+.botao_cinza{
+    color: #214e65;
+    background-color: #afafaf;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-color: #afafaf;
+    border-radius: 25px;
+    height: 50px;
+    width: 350px;
+    font-size: medium;
+    text-align: center;
+}
+
 footer{
     margin: 5%}
 
@@ -62,7 +74,8 @@ header{
     cursor: pointer;
     padding: 20px;
     position: absolute;
-    z-index: 1;}
+    z-index: 2;
+}
 
 .barra{
     top: 0;
@@ -71,7 +84,9 @@ header{
     width: 300px;
     position: absolute;
     transition: all .2s linear;
-    left: -300px;}
+    left: -300px;
+    z-index: 1;
+}
 
 .menu_lateral{
     width: 100%;
@@ -112,4 +127,13 @@ nav a{
     position: absolute;
     right: 5%;
     top: 30%;
+}
+
+
+.link_disable{
+    background-color: #bbbbbb;
+    padding: 20px;
+    font-size: 12pt;
+    transition: all .2s linear;
+    border-bottom: 2px solid #222;
 }

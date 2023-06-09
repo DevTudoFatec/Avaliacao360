@@ -61,7 +61,7 @@ footer{
     cursor: pointer;
     padding: 20px;
     position: absolute;
-    z-index: 1;}
+    z-index: 2;}
     
     .barra{
     top: 0;
@@ -71,6 +71,7 @@ footer{
     position: absolute;
     transition: all .2s linear;
     left: -300px;
+    z-index: 1;
   }
     
     .menu_lateral{
@@ -121,7 +122,8 @@ footer{
     width: 40%;
     margin-left: 4%;
     padding: 1%;
-    color: #000000;}
+    color: #000000;
+}
 
 .bt_filtrar{
     background-color: #FFFFFF;
@@ -144,3 +146,11 @@ footer{
 #formulario{
     display: flex;
     width: 100%;}
+
+.link_disable{
+    background-color: #bbbbbb;
+    padding: 20px;
+    font-size: 12pt;
+    transition: all .2s linear;
+    border-bottom: 2px solid #222;
+}
