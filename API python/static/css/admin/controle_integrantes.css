@@ -35,7 +35,17 @@ header{
 }
 
 #logo_avaliação{
-  margin-left: 42.25%;
+  margin-left: 40%;
+  border: none;
+  background: none;
+  padding: none;
+}
+
+.menu_redirect {
+  margin-left: 34%;
+  border: none;
+  background: none;
+  padding: none;
 }
 
 .bt{

@@ -32,11 +32,11 @@
                 <a href="/"> <div class="link">SAIR ➔ </div></a>
             </nav>
         </div>
-        <img id="logo_avaliação" src="{{ url_for('static', filename='img/cadastro/Logo.png') }}" alt="Logo da plataforma" width="300">
+        <a class="menu_redirect" href="/menu_integrante"><img id="logo_avaliação" src="{{ url_for('static', filename='img/menu_admin/Logo API (3).png') }}" width="300px"></a>
         <p><b>Usuário: {{ nomeUsuario }}</b></p>
     </header>
     <div class="controle_container">
-        <a href="/devolutiva_admin"><h1 class="bt_nav">Devolutiva Avaliacões</h1></a>
+        <a href="/devolutiva_admin"><h1 class="bt_nav">Devolutiva de Avaliacões</h1></a>
         <a href="/dashboards_gerenciais"><h1 class="bt_nav">Dashboards Gerenciais</h1></a>
         <a><h1 class="bt_nav_current">Dashboards Operacionais</h1></a>
     </div>
@@ -63,11 +63,11 @@
                     <option  value="" disabled selected>Time</option>
                 </select>
                 {% if darkmode %}
-                    <button disabled type="submit" class="filtro_button" name="filtrar">
+                    <button disabled type="submit" class="disabled_filtro_button" name="filtrar">
                         <img src="{{ url_for('static', filename='img/icones/filtro_branco.png') }}" class="filtro_icon" alt="save_icon">
                     </button>
                 {% else %}
-                    <button disabled type="submit" class="filtro_button" name="filtrar">
+                    <button disabled type="submit" class="disabled_filtro_button" name="filtrar">
                         <img src="{{ url_for('static', filename='img/icones/filtro.png') }}" class="filtro_icon" alt="save_icon">
                     </button>
                 {% endif %}

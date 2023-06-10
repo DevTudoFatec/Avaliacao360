@@ -45,7 +45,6 @@ def devolutiva_admin():
                            darkmode=session['darkmode'], times=times,turma_escolha=turma_escolha)
   
   elif "filtrar" in request.form:
-    show_table = True
     turma_escolha = request.form.get("turma_escolha")
     nome_turma = [turma['nome'] for turma in turmas if turma['codigo'] == turma_escolha][0]
     time_escolha = int(request.form.get('time_escolha'))
@@ -92,6 +91,12 @@ def devolutiva_admin():
     df = df.mean()
     notas_medias_time = {key: float(f"{value:,.2f}") for key, value in df.to_dict().items()}
 
+    for integrante in notas_medias_integrante:
+      df = pd.DataFrame(notas_medias_integrante[integrante])
+      df = df.mean()
+      notas_medias_integrante[integrante] = {key: float(f"{value:,.2f}") for key, value in df.to_dict().items()}
+      notas_medias_integrante[integrante]['nome'] = [user['nome'] for user in users if user['email'] == integrante][0]
+
     auto_notas_medias_time = {}
     auto_notas_medias_turma = {}
     auto_notas_medias_integrante = {}
@@ -118,11 +123,11 @@ def devolutiva_admin():
           auto_notas_medias_time.setdefault('auto_entrega', []).append(entrega)
           auto_notas_medias_time.setdefault('auto_autogestao', []).append(autogestao)
 
-          auto_notas_medias_integrante.setdefault(integrante, {}).setdefault('auto_comunicacao', []).append(comunicacao)
-          auto_notas_medias_integrante.setdefault(integrante, {}).setdefault('auto_engajamento', []).append(engajamento)
-          auto_notas_medias_integrante.setdefault(integrante, {}).setdefault('auto_conhecimento', []).append(conhecimento)
-          auto_notas_medias_integrante.setdefault(integrante, {}).setdefault('auto_entrega', []).append(entrega)
-          auto_notas_medias_integrante.setdefault(integrante, {}).setdefault('auto_autogestao', []).append(autogestao)
+          auto_notas_medias_integrante.setdefault(integrante, {}).setdefault('comunicacao', []).append(comunicacao)
+          auto_notas_medias_integrante.setdefault(integrante, {}).setdefault('engajamento', []).append(engajamento)
+          auto_notas_medias_integrante.setdefault(integrante, {}).setdefault('conhecimento', []).append(conhecimento)
+          auto_notas_medias_integrante.setdefault(integrante, {}).setdefault('entrega', []).append(entrega)
+          auto_notas_medias_integrante.setdefault(integrante, {}).setdefault('autogestao', []).append(autogestao)
 
       
     df = pd.DataFrame(auto_notas_medias_turma)
@@ -131,7 +136,16 @@ def devolutiva_admin():
 
     df = pd.DataFrame(auto_notas_medias_time)
     df = df.mean()
-    auto_notas_medias_time = {key: float(f"{value:,.2f}") for key, value in df.to_dict().items()}  
+    auto_notas_medias_time = {key: float(f"{value:,.2f}") for key, value in df.to_dict().items()}
+
+    for integrante in auto_notas_medias_integrante:
+      df = pd.DataFrame(auto_notas_medias_integrante[integrante])
+      df = df.mean()
+      auto_notas_medias_integrante[integrante] = {key: float(f"{value:,.2f}") for key, value in df.to_dict().items()}
+      auto_notas_medias_integrante[integrante]['nome'] = [user['nome'] for user in users if user['email'] == integrante][0]
+
+    if (len(notas_medias_turma)>0 and len(notas_medias_time)>0 and len(notas_medias_integrante)>0 and len(auto_notas_medias_turma)>0 and len(auto_notas_medias_time)>0 and len(auto_notas_medias_integrante)>0):
+      show_table = True
         
     return render_template('admin/devolutiva_admin.html', turmas=turmas, select_time=select_time,
                           notas_medias_turma=notas_medias_turma, notas_medias_time=notas_medias_time, 

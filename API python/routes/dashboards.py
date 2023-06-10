@@ -3,6 +3,8 @@ import json
 from utils.decorators import login_required, admin_required
 import plotly.express as px
 import pandas as pd
+from datetime import datetime
+import plotly.graph_objects as go
 
 bp = bp('dashboards', __name__)
 
@@ -25,9 +27,6 @@ def dashboards_operacionais():
 
     with open('data/times.json') as file:
         times = json.load(file)
-
-    with open('data/projetos.json') as file:
-        projetos = json.load(file)
 
     select_time = False
     turma_escolha = None
@@ -275,6 +274,11 @@ def dashboards_gerenciais():
     turma_nome = None
     time_nome = None
 
+    avaliacoes_check = {}
+    div_grafico = None
+    div_grafico_sprint = None
+
+
     if "save_turma" in request.form:
         turma_escolha = request.form.get("turma_escolha")
         times = [time for time in times if time['turma'] == turma_escolha]
@@ -287,9 +291,90 @@ def dashboards_gerenciais():
         turma_escolha = request.form.get("turma_escolha")
         time_escolha = int(request.form.get("time_escolha"))
 
+        avaliacoes_abertas = [date[0] for date in ([projeto['avaliacoes'] for projeto in projetos if projeto['turma'] == turma_escolha][0]) if datetime.strptime(date[1], '%d-%m-%Y').date() <= datetime.now().date()]
+        
         turma_nome = [turma['nome'] for turma in turmas if turma['codigo'] == turma_escolha][0]
         time_nome = [time['nome'] for time in times if time['codigo'] == time_escolha][0]
+
+        time_users = [user['email'] for user in users if user['time'] == time_escolha]
+
+        [avaliacoes_check.setdefault(avaliacao['avaliador'], []).append(avaliacao['sprint']) for avaliacao in avaliacoes if avaliacao['sprint'] in avaliacoes_abertas and avaliacao['avaliador'] in time_users ]
+
+        for item in avaliacoes_check:
+            avaliacoes_check[item] = list(set(avaliacoes_check[item]))
+
+        max_length = max(len(values) for values in avaliacoes_check.values())
+
+        df_data = {
+            'Identifier': list(avaliacoes_check.keys())
+        }
+
+        for i in range(1, max_length+1):
+            df_data[str(i)] = [i in values for values in avaliacoes_check.values()]
+
+        df = pd.DataFrame(df_data)
+
+        counts_true = df.iloc[:, 1:].sum()
+        counts_false = df.iloc[:, 1:].count() - counts_true
+
+        fig_column = go.Figure()
+        fig_column.add_trace(go.Bar(x=counts_true.index, y=counts_true, name='Ok'))
+        fig_column.add_trace(go.Bar(x=counts_false.index, y=counts_false, name='Pendente'))
+
+        fig_column.update_layout(
+            barmode='group', 
+            xaxis_title='Sprints', 
+            yaxis_title='Quantia',
+            title=f"{time_nome} - Contagem de Status 'Ok' e 'Pendente' por Sprint"
+        )
+
+        traces = []
+
+        for column in df.columns[1:]:
+            counts = df[column].value_counts()
+            percentages = [count / counts.sum() * 100 for count in counts]
+            trace = go.Pie(labels=['Ok', 'Pendente'], values=percentages, name=column)
+            traces.append(trace)
+
+        layout = go.Layout(
+            title=f"{time_nome} - Porcentagem de Status 'Ok' e 'Pendente' por Sprint",
+            updatemenus=[
+                dict(
+                    active=0,
+                    buttons=[
+                        dict(
+                            label=column,
+                            method='update',
+                            args=[{'visible': [column == trace.name for trace in traces]}],
+                        )
+                        for column in df.columns[1:]
+                    ],
+                )
+            ]
+        )
+
+        fig_pie = go.Figure(data=traces, layout=layout)
+
+        
+        if session['darkmode']:
+            fig_column.update_layout(
+                template="plotly_dark",
+                plot_bgcolor='lightgray'
+            )
+
+            fig_pie.update_layout(
+                template="plotly_dark",
+                plot_bgcolor='lightgray'
+            )
+
+        div_grafico = fig_pie.to_html(full_html=False)
+        div_grafico_sprint = fig_column.to_html(full_html=False)
+        
         
 
-    return render_template('admin/dashboards_gerenciais.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'], turma_nome=turma_nome, show_dashboards=show_dashboards, select_time=select_time, turmas=turmas, times=times)
+    return render_template('admin/dashboards_gerenciais.html', nomeUsuario=session['nomeUsuario'], 
+                           darkmode=session['darkmode'], turma_nome=turma_nome, time_nome=time_nome,
+                           show_dashboards=show_dashboards, select_time=select_time, turmas=turmas, 
+                           times=times, turma_escolha=turma_escolha, avaliacoes_check=avaliacoes_check,
+                           div_grafico_sprint=div_grafico_sprint, div_grafico=div_grafico)
 

@@ -33,12 +33,25 @@ header{
   border-bottom: 2px solid #222;
 }
 
-#logo_avaliação_turmas{
-  margin-left: 41.85%;
+#logo_avaliação{
+  margin-left: 40%;
+  border: none;
+  background: none;
+  padding: none;
 }
 
-#logo_avaliação_times{
-  margin-left: 42.25%;
+.menu_redirect_turmas {
+  margin-left: 34%;
+  border: none;
+  background: none;
+  padding: none;
+}
+
+.menu_redirect_times {
+  margin-left: 34%;
+  border: none;
+  background: none;
+  padding: none;
 }
 
 .bt{

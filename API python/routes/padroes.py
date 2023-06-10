@@ -1,6 +1,5 @@
 from flask import render_template, request, flash, redirect, url_for, session, Blueprint as bp
 import json
-import os
 from datetime import datetime
 import bcrypt
 from utils.decorators import login_required, admin_required, integrante_required
@@ -12,7 +11,7 @@ bp = bp('padroes', __name__)
 
 @bp.route("/")
 def home():
-  
+  session.clear()
   return render_template('geral/login.html')
 
 

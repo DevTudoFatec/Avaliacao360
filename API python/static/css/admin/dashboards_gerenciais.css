@@ -8,8 +8,19 @@ header{
     font-size: small;
     padding: 2%;}
 
-#logo_avaliação{
-    margin-left: 40%;}
+    #logo_avaliação{
+        margin-left: 40%;
+        border: none;
+        background: none;
+        padding: none;
+      }
+      
+      .menu_redirect {
+        margin-left: 34%;
+        border: none;
+        background: none;
+        padding: none;
+      }
 
 body{
     background-color: #eeee;
@@ -180,6 +191,17 @@ text-align: center;}
     padding: 0;
     margin-left: 4%;
 }
+
+.disabled_filtro_button{
+    background: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-radius: 20px;
+    width: 10%;
+    padding: 0;
+    margin-left: 4%;
+}
+
+
 
 .filtro_icon {
     width: 40%;
