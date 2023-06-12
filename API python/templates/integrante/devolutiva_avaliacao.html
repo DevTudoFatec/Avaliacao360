@@ -100,52 +100,52 @@
                     <h3>MÉDIA AVALIADORES</h3>
                 </td>
                 <td>
-                    {% if 0 < avgs['comunicacao'] < 3 %}
-                        <h4 style="color: rgba(211, 32, 32, 0.911)">{{ avgs['comunicacao'] }}</h4>
-                    {% elif 3 <= avgs['comunicacao'] < 4 %}
-                        <h4 style="color: rgba(53, 111, 236, 0.932)">{{ avgs['comunicacao'] }}</h4>
-                    {% elif avgs['comunicacao'] >= 4 %}
-                        <h4 style="color: rgb(3, 160, 3)">{{ avgs['comunicacao'] }}</h4>
+                    {% if 0 < notas_medias_integrante['comunicacao'] < 3 %}
+                        <h4 style="color: rgba(211, 32, 32, 0.911)">{{ notas_medias_integrante['comunicacao'] }}</h4>
+                    {% elif 3 <= notas_medias_integrante['comunicacao'] < 4 %}
+                        <h4 style="color: rgba(53, 111, 236, 0.932)">{{ notas_medias_integrante['comunicacao'] }}</h4>
+                    {% elif notas_medias_integrante['comunicacao'] >= 4 %}
+                        <h4 style="color: rgb(3, 160, 3)">{{ notas_medias_integrante['comunicacao'] }}</h4>
                     {% else %}
                     {% endif %}
                 </td>
                 <td>
-                    {% if 0 < avgs['engajamento'] < 3 %}
-                        <h4 style="color: rgba(211, 32, 32, 0.911)">{{ avgs['engajamento'] }}</h4>
-                    {% elif 3 <= avgs['engajamento'] < 4 %}
-                        <h4 style="color: rgba(53, 111, 236, 0.932)">{{ avgs['engajamento'] }}</h4>
-                    {% elif avgs['engajamento'] >= 4 %}
-                        <h4 style="color: rgb(3, 160, 3)">{{ avgs['engajamento'] }}</h4>
+                    {% if 0 < notas_medias_integrante['engajamento'] < 3 %}
+                        <h4 style="color: rgba(211, 32, 32, 0.911)">{{ notas_medias_integrante['engajamento'] }}</h4>
+                    {% elif 3 <= notas_medias_integrante['engajamento'] < 4 %}
+                        <h4 style="color: rgba(53, 111, 236, 0.932)">{{ notas_medias_integrante['engajamento'] }}</h4>
+                    {% elif notas_medias_integrante['engajamento'] >= 4 %}
+                        <h4 style="color: rgb(3, 160, 3)">{{ notas_medias_integrante['engajamento'] }}</h4>
                     {% else %}
                     {% endif %}
                 </td>
                 <td>
-                    {% if 0 < avgs['conhecimento'] < 3 %}
-                        <h4 style="color: rgba(211, 32, 32, 0.911)">{{ avgs['conhecimento'] }}</h4>
-                    {% elif 3 <= avgs['conhecimento'] < 4 %}
-                        <h4 style="color: rgba(53, 111, 236, 0.932)">{{ avgs['conhecimento'] }}</h4>
-                    {% elif avgs['conhecimento'] >= 4 %}
-                        <h4 style="color: rgb(3, 160, 3)">{{ avgs['conhecimento'] }}</h4>
+                    {% if 0 < notas_medias_integrante['conhecimento'] < 3 %}
+                        <h4 style="color: rgba(211, 32, 32, 0.911)">{{ notas_medias_integrante['conhecimento'] }}</h4>
+                    {% elif 3 <= notas_medias_integrante['conhecimento'] < 4 %}
+                        <h4 style="color: rgba(53, 111, 236, 0.932)">{{ notas_medias_integrante['conhecimento'] }}</h4>
+                    {% elif notas_medias_integrante['conhecimento'] >= 4 %}
+                        <h4 style="color: rgb(3, 160, 3)">{{ notas_medias_integrante['conhecimento'] }}</h4>
                     {% else %}
                     {% endif %}
                 </td>
                 <td>
-                    {% if 0 < avgs['entrega'] < 3 %}
-                        <h4 style="color: rgba(211, 32, 32, 0.911)">{{ avgs['entrega'] }}</h4>
-                    {% elif 3 <= avgs['entrega'] < 4 %}
-                        <h4 style="color: rgba(53, 111, 236, 0.932)">{{ avgs['entrega'] }}</h4>
-                    {% elif avgs['entrega'] >= 4 %}
-                        <h4 style="color: rgb(3, 160, 3)">{{ avgs['entrega'] }}</h4>
+                    {% if 0 < notas_medias_integrante['entrega'] < 3 %}
+                        <h4 style="color: rgba(211, 32, 32, 0.911)">{{ notas_medias_integrante['entrega'] }}</h4>
+                    {% elif 3 <= notas_medias_integrante['entrega'] < 4 %}
+                        <h4 style="color: rgba(53, 111, 236, 0.932)">{{ notas_medias_integrante['entrega'] }}</h4>
+                    {% elif notas_medias_integrante['entrega'] >= 4 %}
+                        <h4 style="color: rgb(3, 160, 3)">{{ notas_medias_integrante['entrega'] }}</h4>
                     {% else %}
                     {% endif %}
                 </td>
                 <td>
-                    {% if 0 < avgs['autogestao'] < 3  %}
-                        <h4 style="color: rgba(211, 32, 32, 0.911)">{{ avgs['autogestao'] }}</h4>
-                    {% elif 3 <= avgs['autogestao'] < 4 %}
-                        <h4 style="color: rgba(53, 111, 236, 0.932)">{{ avgs['autogestao'] }}</h4>
-                    {% elif avgs['autogestao'] >= 4 %}
-                        <h4 style="color: rgb(3, 160, 3)">{{ avgs['autogestao'] }}</h4>
+                    {% if 0 < notas_medias_integrante['autogestao'] < 3  %}
+                        <h4 style="color: rgba(211, 32, 32, 0.911)">{{ notas_medias_integrante['autogestao'] }}</h4>
+                    {% elif 3 <= notas_medias_integrante['autogestao'] < 4 %}
+                        <h4 style="color: rgba(53, 111, 236, 0.932)">{{ notas_medias_integrante['autogestao'] }}</h4>
+                    {% elif notas_medias_integrante['autogestao'] >= 4 %}
+                        <h4 style="color: rgb(3, 160, 3)">{{ notas_medias_integrante['autogestao'] }}</h4>
                     {% else %}
                     {% endif %}
                 </td>
@@ -155,27 +155,27 @@
                     <h3>FEEDBACKS AVALIADORES</h3>
                 </td>
                 <td>
-                    {% for texto in textos['comunicacao'] %}
+                    {% for texto in feedbacks_integrante['comunicacao'] %}
                         <h5>• {{ texto }}</h5>
                     {% endfor %}
                 </td>
                 <td>
-                    {% for texto in textos['engajamento'] %}
+                    {% for texto in feedbacks_integrante['engajamento'] %}
                         <h5>• {{ texto }}</h5>
                     {% endfor %}
                 </td>
                 <td>
-                    {% for texto in textos['conhecimento'] %}
+                    {% for texto in feedbacks_integrante['conhecimento'] %}
                         <h5>• {{ texto }}</h5>
                     {% endfor %}
                 </td>
                 <td>
-                    {% for texto in textos['entrega'] %}
+                    {% for texto in feedbacks_integrante['entrega'] %}
                         <h5>• {{ texto }}</h5>
                     {% endfor %}
                 </td>
                 <td>
-                    {% for texto in textos['autogestao'] %}
+                    {% for texto in feedbacks_integrante['autogestao'] %}
                         <h5>• {{ texto }}</h5>
                     {% endfor %}
                 </td>
@@ -185,48 +185,48 @@
                     <h3>AUTO AVALIAÇÃO</h3>
                 </td>
                 <td>
-                    {% if 0 < user_autoavaliacao['comunicacao'] < 3 %}
-                        <h4 style="color: rgba(211, 32, 32, 0.911)">{{ user_autoavaliacao['comunicacao'] }}</h4>
-                    {% elif user_autoavaliacao['comunicacao'] == 3 %}
-                        <h4 style="color: rgba(53, 111, 236, 0.932)">{{ user_autoavaliacao['comunicacao'] }}</h4>
-                    {% elif user_autoavaliacao['comunicacao'] >= 4 %}
-                        <h4 style="color: rgb(3, 160, 3)">{{ user_autoavaliacao['comunicacao'] }}</h4>
+                    {% if 0 < auto_notas_medias_integrante['comunicacao'] < 3 %}
+                        <h4 style="color: rgba(211, 32, 32, 0.911)">{{ auto_notas_medias_integrante['comunicacao'] }}</h4>
+                    {% elif auto_notas_medias_integrante['comunicacao'] == 3 %}
+                        <h4 style="color: rgba(53, 111, 236, 0.932)">{{ auto_notas_medias_integrante['comunicacao'] }}</h4>
+                    {% elif auto_notas_medias_integrante['comunicacao'] >= 4 %}
+                        <h4 style="color: rgb(3, 160, 3)">{{ auto_notas_medias_integrante['comunicacao'] }}</h4>
                     {% endif %}
                 </td>
                 <td>
-                    {% if 0 < user_autoavaliacao['engajamento'] < 3 %}
-                        <h4 style="color: rgba(211, 32, 32, 0.911)">{{ user_autoavaliacao['engajamento'] }}</h4>
-                    {% elif user_autoavaliacao['engajamento'] == 3 %}
-                        <h4 style="color: rgba(53, 111, 236, 0.932)">{{ user_autoavaliacao['engajamento'] }}</h4>
-                    {% elif user_autoavaliacao['engajamento'] >= 4 %}
-                        <h4 style="color: rgb(3, 160, 3)">{{ user_autoavaliacao['engajamento'] }}</h4>
+                    {% if 0 < auto_notas_medias_integrante['engajamento'] < 3 %}
+                        <h4 style="color: rgba(211, 32, 32, 0.911)">{{ auto_notas_medias_integrante['engajamento'] }}</h4>
+                    {% elif auto_notas_medias_integrante['engajamento'] == 3 %}
+                        <h4 style="color: rgba(53, 111, 236, 0.932)">{{ auto_notas_medias_integrante['engajamento'] }}</h4>
+                    {% elif auto_notas_medias_integrante['engajamento'] >= 4 %}
+                        <h4 style="color: rgb(3, 160, 3)">{{ auto_notas_medias_integrante['engajamento'] }}</h4>
                     {% endif %}
                 </td>
                 <td>
-                    {% if 0 < user_autoavaliacao['conhecimento'] < 3  %}
-                        <h4 style="color: rgba(211, 32, 32, 0.911)">{{ user_autoavaliacao['conhecimento'] }}</h4>
-                    {% elif user_autoavaliacao['conhecimento'] == 3 %}
-                        <h4 style="color: rgba(53, 111, 236, 0.932)">{{ user_autoavaliacao['conhecimento'] }}</h4>
-                    {% elif user_autoavaliacao['conhecimento'] >= 4 %}
-                        <h4 style="color: rgb(3, 160, 3)">{{ user_autoavaliacao['conhecimento'] }}</h4>
+                    {% if 0 < auto_notas_medias_integrante['conhecimento'] < 3  %}
+                        <h4 style="color: rgba(211, 32, 32, 0.911)">{{ auto_notas_medias_integrante['conhecimento'] }}</h4>
+                    {% elif auto_notas_medias_integrante['conhecimento'] == 3 %}
+                        <h4 style="color: rgba(53, 111, 236, 0.932)">{{ auto_notas_medias_integrante['conhecimento'] }}</h4>
+                    {% elif auto_notas_medias_integrante['conhecimento'] >= 4 %}
+                        <h4 style="color: rgb(3, 160, 3)">{{ auto_notas_medias_integrante['conhecimento'] }}</h4>
                     {% endif %}
                 </td>
                 <td>
-                    {% if 0 < user_autoavaliacao['entrega'] < 3  %}
-                        <h4 style="color: rgba(211, 32, 32, 0.911)">{{ user_autoavaliacao['entrega'] }}</h4>
-                    {% elif user_autoavaliacao['comunicacao'] == 3 %}
-                        <h4 style="color: rgba(53, 111, 236, 0.932)">{{ user_autoavaliacao['entrega'] }}</h4>
-                    {% elif user_autoavaliacao['comunicacao'] >= 4 %}
-                        <h4 style="color: rgb(3, 160, 3)">{{ user_autoavaliacao['entrega'] }}</h4>
+                    {% if 0 < auto_notas_medias_integrante['entrega'] < 3  %}
+                        <h4 style="color: rgba(211, 32, 32, 0.911)">{{ auto_notas_medias_integrante['entrega'] }}</h4>
+                    {% elif auto_notas_medias_integrante['entrega'] == 3 %}
+                        <h4 style="color: rgba(53, 111, 236, 0.932)">{{ auto_notas_medias_integrante['entrega'] }}</h4>
+                    {% elif auto_notas_medias_integrante['entrega'] >= 4 %}
+                        <h4 style="color: rgb(3, 160, 3)">{{ auto_notas_medias_integrante['entrega'] }}</h4>
                     {% endif %}
                 </td>
                 <td>
-                    {% if 0 < user_autoavaliacao['autogestao'] < 3 %}
-                        <h4 style="color: rgba(211, 32, 32, 0.911)">{{ user_autoavaliacao['autogestao'] }}</h4>
-                    {% elif user_autoavaliacao['autogestao'] == 3 %}
-                        <h4 style="color: rgba(53, 111, 236, 0.932)">{{ user_autoavaliacao['autogestao'] }}</h4>
-                    {% elif user_autoavaliacao['autogestao'] >= 4 %}
-                        <h4 style="color: rgb(3, 160, 3)">{{ user_autoavaliacao['autogestao'] }}</h4>
+                    {% if 0 < auto_notas_medias_integrante['autogestao'] < 3 %}
+                        <h4 style="color: rgba(211, 32, 32, 0.911)">{{ auto_notas_medias_integrante['autogestao'] }}</h4>
+                    {% elif auto_notas_medias_integrante['autogestao'] == 3 %}
+                        <h4 style="color: rgba(53, 111, 236, 0.932)">{{ auto_notas_medias_integrante['autogestao'] }}</h4>
+                    {% elif auto_notas_medias_integrante['autogestao'] >= 4 %}
+                        <h4 style="color: rgb(3, 160, 3)">{{ auto_notas_medias_integrante['autogestao'] }}</h4>
                     {% endif %}
                 </td>
             </tr>

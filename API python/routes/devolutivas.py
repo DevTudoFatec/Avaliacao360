@@ -189,6 +189,15 @@ def devolutiva_admin():
 @data_required
 def devolutiva_integrante():
 
+  with open("data/cadastro.json", "r") as f:
+    users = json.load(f)
+
+  with open("data/avaliacao.json", "r") as f:
+    avaliacoes = json.load(f)
+
+  with open("data/autoavaliacao.json", "r") as g:
+    autoavaliacoes = json.load(g)
+
   pre_devolutiva = False
 
   if request.method == 'GET':
@@ -203,94 +212,60 @@ def devolutiva_integrante():
 
     sprint_escolha = int(request.form.get("sprint_escolha"))
 
-    try:
-      with open("data/avaliacao.json", "r") as f:
-        avaliacoes = json.load(f)
-    except:
-      avaliacoes=[]
+    notas_medias_integrante = {}
+    feedbacks_integrante = {}
+    auto_notas_medias_integrante = {}
 
-    try:      
-      rows=0
-      comunicacao = engajamento = conhecimento = entrega = autogestao = 0
-      
-      textos_comunicacao = []
-      textos_engajamento = []
-      textos_conhecimento = []
-      textos_entrega = []
-      textos_autogestao = []
+    for item in avaliacoes:
+      if item['integrante'] == session['email'] and item['sprint'] == sprint_escolha:
+        comunicacao = item['comunicacao']
+        engajamento = item['engajamento']
+        conhecimento = item['conhecimento']
+        entrega = item['entrega']
+        autogestao = item['autogestao']
+        texto_comunicacao = item['texto_comunicacao']
+        texto_engajamento = item['texto_engajamento']
+        texto_conhecimento = item['texto_conhecimento']
+        texto_entrega = item['texto_entrega']
+        texto_autogestao = item['texto_autogestao']
 
-      for avaliacao in avaliacoes:
-        if avaliacao['integrante'] == session['email'] and avaliacao['sprint'] == sprint_escolha:
-          rows+=1
-          comunicacao += avaliacao['comunicacao']
-          engajamento += avaliacao['engajamento']
-          conhecimento += avaliacao['conhecimento']
-          entrega += avaliacao['entrega']
-          autogestao += avaliacao['autogestao']
+        notas_medias_integrante.setdefault('comunicacao', []).append(comunicacao)
+        notas_medias_integrante.setdefault('engajamento', []).append(engajamento)
+        notas_medias_integrante.setdefault('conhecimento', []).append(conhecimento)
+        notas_medias_integrante.setdefault('entrega', []).append(entrega)
+        notas_medias_integrante.setdefault('autogestao', []).append(autogestao)
 
-          if len(avaliacao['texto_comunicacao']) > 0:
-            textos_comunicacao.append(avaliacao['texto_comunicacao'])
-          if len(avaliacao['texto_engajamento']) > 0:
-            textos_engajamento.append(avaliacao['texto_engajamento'])
-          if len(avaliacao['texto_conhecimento']) > 0:
-            textos_conhecimento.append(avaliacao['texto_conhecimento'])
-          if len(avaliacao['texto_entrega']) > 0:
-            textos_entrega.append(avaliacao['texto_entrega'])
-          if len(avaliacao['texto_autogestao']) > 0:
-            textos_autogestao.append(avaliacao['texto_autogestao'])
+        feedbacks_integrante.setdefault('comunicacao', []).append(texto_comunicacao) if len(texto_comunicacao) > 0 else None
+        feedbacks_integrante.setdefault('engajamento', []).append(texto_engajamento) if len(texto_engajamento) > 0 else None
+        feedbacks_integrante.setdefault('conhecimento', []).append(texto_conhecimento) if len(texto_conhecimento) > 0 else None
+        feedbacks_integrante.setdefault('entrega', []).append(texto_entrega) if len(texto_entrega) > 0 else None
+        feedbacks_integrante.setdefault('autogestao', []).append(texto_autogestao) if len(texto_autogestao) > 0 else None
 
-      textos = {
-        "comunicacao": textos_comunicacao,
-        "engajamento": textos_engajamento,
-        "conhecimento": textos_conhecimento,
-        "entrega": textos_entrega,
-        "autogestao": textos_autogestao
-      }
 
-      comunicacao = comunicacao/rows
-      engajamento = engajamento/rows
-      conhecimento = conhecimento/rows
-      entrega = entrega/rows
-      autogestao = autogestao/rows
+    df = pd.DataFrame(notas_medias_integrante)
+    df = df.mean()
+    notas_medias_integrante = {key: float(f"{value:,.2f}") for key, value in df.to_dict().items()}
 
-      avgs = {
-        "comunicacao": comunicacao, 
-        "engajamento": engajamento, 
-        "conhecimento": conhecimento, 
-        "entrega": entrega, 
-        "autogestao": autogestao
-      }
-    except:
-      avgs = {
-        "comunicacao": 0, 
-        "engajamento": 0, 
-        "conhecimento": 0, 
-        "entrega": 0, 
-        "autogestao": 0
-      }
-      textos = {}
+    for item in autoavaliacoes:
+      if item['email'] == session['email'] and item['sprint'] == sprint_escolha:
+        comunicacao = item['comunicacao']
+        engajamento = item['engajamento']
+        conhecimento = item['conhecimento']
+        entrega = item['entrega']
+        autogestao = item['autogestao']
 
-    try:
-      with open("data/autoavaliacao.json", "r") as g:
-        autoavaliacoes = json.load(g)
-    except:
-      autoavaliacoes=[]
+        auto_notas_medias_integrante.setdefault('comunicacao', []).append(comunicacao)
+        auto_notas_medias_integrante.setdefault('engajamento', []).append(engajamento)
+        auto_notas_medias_integrante.setdefault('conhecimento', []).append(conhecimento)
+        auto_notas_medias_integrante.setdefault('entrega', []).append(entrega)
+        auto_notas_medias_integrante.setdefault('autogestao', []).append(autogestao)
 
-    user_autoavaliacao = {}
-    for autoavaliacao in autoavaliacoes:
-      if autoavaliacao['email'] == session['email'] and autoavaliacao['sprint'] == sprint_escolha:
-        user_autoavaliacao = autoavaliacao
-      
-    if len(user_autoavaliacao) == 0:
-      user_autoavaliacao = {
-        "comunicacao": 0, 
-        "engajamento": 0, 
-        "conhecimento": 0, 
-        "entrega": 0, 
-        "autogestao": 0
-      }
+    df = pd.DataFrame(auto_notas_medias_integrante)
+    df = df.mean()
+    auto_notas_medias_integrante = {key: float(f"{value:,.2f}") for key, value in df.to_dict().items()}
 
     return render_template('integrante/devolutiva_avaliacao.html', pre_devolutiva=pre_devolutiva, 
-                           avgs=avgs, user_autoavaliacao=user_autoavaliacao, textos=textos, sprint=sprint_escolha,
-                           nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'], avaliacao_check=session['avaliacao'], 
-                           sprint_index=session['sprint'], count=session['count_avaliacao'])
+                           sprint=sprint_escolha, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'], 
+                           avaliacao_check=session['avaliacao'], sprint_index=session['sprint'], count=session['count_avaliacao'],
+                           notas_medias_integrante=notas_medias_integrante, auto_notas_medias_integrante=auto_notas_medias_integrante, feedbacks_integrante=feedbacks_integrante
+                          )
