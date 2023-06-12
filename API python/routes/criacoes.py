@@ -1,4 +1,4 @@
-from flask import request, flash, redirect, url_for, render_template, Blueprint as bp
+from flask import request, flash, redirect, url_for, Blueprint as bp
 import json
 import os
 from datetime import datetime, timedelta
