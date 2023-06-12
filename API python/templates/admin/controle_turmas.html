@@ -27,7 +27,8 @@
         <div class="barra">
             <nav class="menu_lateral">
                 <a href="/menu_admin"> <div class="link">MENU PRINCIPAL</div></a>
-                <a href="/controle_turmas"> <div class="link">CONTROLE DE TURMAS/TIMES</div></a>
+                <div class="actual_page">CONTROLE DE TURMAS</div>
+                <a href="/controle_times"> <div class="link">CONTROLE DE TIMES</div></a>
                 <a href="/controle_integrantes"> <div class="link">CONTROLE DE INTEGRANTES</div></a>
                 <a href="/controle_projetos"> <div class="link">CONTROLE DE PROJETOS</div></a>
                 {% if dashboard_check %}
@@ -39,7 +40,7 @@
                     <div class="link_disable">DASHBOARDS OPERACIONAIS</div>
                     <div class="link_disable">DASHBOARDS GERENCIAIS</div>
                 {% endif %}
-                <a href="/"> <div class="link">SAIR ➔ </div></a>
+                <a href="/logout"> <div class="link">SAIR ➔ </div></a>
             </nav>
         </div>
         <a class="menu_redirect_turmas" href="/menu_integrante"><img id="logo_avaliação" src="{{ url_for('static', filename='img/menu_admin/Logo API (3).png') }}" width="300px"></a>

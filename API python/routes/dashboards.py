@@ -1,6 +1,6 @@
 from flask import render_template, request, session, Blueprint as bp
 import json
-from utils.decorators import login_required, admin_required
+from utils.decorators import login_required, admin_required, data_required
 import plotly.express as px
 import pandas as pd
 from datetime import datetime
@@ -10,6 +10,7 @@ bp = bp('dashboards', __name__)
 
 @login_required
 @admin_required
+@data_required
 @bp.route("/dashboards_operacionais", methods=["GET", "POST"])
 def dashboards_operacionais():
     # Carregar dados do arquivo JSON
@@ -28,13 +29,15 @@ def dashboards_operacionais():
     with open('data/times.json') as file:
         times = json.load(file)
 
+    turmas = [turma for turma in turmas if turma['codigo'] in [avaliacao['turma_codigo'] for avaliacao in avaliacoes]]  
+
     select_time = False
     turma_escolha = None
     show_dashboards = False
 
     if "save_turma" in request.form:
         turma_escolha = request.form.get("turma_escolha")
-        times = [time for time in times if time['turma'] == turma_escolha]
+        times = [time for time in times if time['turma'] == turma_escolha and time['codigo'] in [avaliacao['time'] for avaliacao in avaliacoes]]
         select_time = True
 
     if "filtrar" in request.form:
@@ -293,6 +296,7 @@ def dashboards_operacionais():
 
 @login_required
 @admin_required
+@data_required
 @bp.route("/dashboards_gerenciais", methods=['GET', 'POST'])
 def dashboards_gerenciais():
     with open('data/avaliacao.json') as file:
@@ -309,6 +313,8 @@ def dashboards_gerenciais():
 
     with open('data/projetos.json') as file:
         projetos = json.load(file)
+
+    turmas = [turma for turma in turmas if turma['codigo'] in [avaliacao['turma_codigo'] for avaliacao in avaliacoes]]
     
     select_time = False
     turma_escolha = None
@@ -324,7 +330,7 @@ def dashboards_gerenciais():
 
     if "save_turma" in request.form:
         turma_escolha = request.form.get("turma_escolha")
-        times = [time for time in times if time['turma'] == turma_escolha]
+        times = [time for time in times if time['turma'] == turma_escolha and time['codigo'] in [avaliacao['time'] for avaliacao in avaliacoes]]
         select_time = True
         turma_nome = [turma['nome'] for turma in turmas if turma['codigo'] == turma_escolha][0]
 
@@ -346,13 +352,12 @@ def dashboards_gerenciais():
         for item in avaliacoes_check:
             avaliacoes_check[item] = list(set(avaliacoes_check[item]))
 
-        max_length = max(len(values) for values in avaliacoes_check.values())
-
+        max_sprint = max(max(max(avaliacoes_check.values(), key=lambda x: max(x))), 1)
         df_data = {
             'Identifier': list(avaliacoes_check.keys())
         }
 
-        for i in range(1, max_length+1):
+        for i in range(1, max_sprint + 1):
             df_data[str(i)] = [i in values for values in avaliacoes_check.values()]
 
         df = pd.DataFrame(df_data)

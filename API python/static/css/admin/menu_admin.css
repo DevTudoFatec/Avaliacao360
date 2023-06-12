@@ -63,6 +63,15 @@ header{
 #logo_avaliação{
     margin-left: 40%;}
 
+.actual_page{
+    background-color: #494949;
+    color: #fdc77f;
+    padding: 20px;
+    font-size: 13pt;
+    transition: all .2s linear;
+    border-bottom: 2px solid #222;
+}
+
 .bt{
     padding: 6px, 6px, 6px;
     text-decoration: none;
@@ -144,6 +153,7 @@ nav a{
 
 .link_disable{
     background-color: #bbbbbb;
+    color: black;
     padding: 20px;
     font-size: 12pt;
     transition: all .2s linear;

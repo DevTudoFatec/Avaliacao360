@@ -22,6 +22,15 @@ header {
     background: none;
     padding: none;
   }
+
+.actual_page{
+    background-color: #494949;
+    color: #fdc77f;
+    padding: 20px;
+    font-size: 13pt;
+    transition: all .2s linear;
+    border-bottom: 2px solid #222;
+}
   
 #logo_api_cadastro {
     margin: 2%;

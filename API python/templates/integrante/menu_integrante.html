@@ -23,14 +23,18 @@
             <label id="icone" for="check" class="bt"> ☰ </label>
         <div class="barra">
             <nav class="menu_lateral">
-                <a href="/menu_integrante"> <div class="link">MENU PRINCIPAL</div></a>
+                <div class="actual_page">MENU PRINCIPAL</div>
                 {% if avaliacao_check and sprint_index > count %}
                     <a href="/avaliacao"><div class="link">REALIZAR AVALIAÇÃO </div></a>
                 {% else %}
                     <div class="link_disable">REALIZAR AVALIAÇÃO </div>
                 {% endif %}
-                <a href="/devolutiva_integrante"><div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
-                <a href="/"> <div class="link">SAIR ➔ </div></a>
+                {% if devolutiva_check %}
+                    <a href="/devolutiva_integrante"><div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
+                {% else %}
+                    <div class="link_disable">DEVOLUTIVA DA AVALIAÇÃO </div>
+                {% endif %}
+                <a href="/logout"> <div class="link">SAIR ➔ </div></a>
             </nav>
         </div>
         <img id="logo_avaliação" src="{{ url_for('static', filename='img/menu_admin/Logo API (3).png') }}">
@@ -76,11 +80,18 @@
                 </button>
             {% endif %}
             <br><br>
+            {% if devolutiva_check %}
             <a href="/devolutiva_integrante">
                 <button class="botao_azul_claro">
                     <strong> DEVOLUTIVA DA AVALIAÇÃO </strong>
                 </button>
             </a>
+            </a>
+            {% else %}
+                <button disabled class="botao_cinza">
+                    <strong> DEVOLUTIVA DA AVALIAÇÃO </strong>
+                </button>
+            {% endif %}
         </nav>
         {% endif %}
         <footer>      

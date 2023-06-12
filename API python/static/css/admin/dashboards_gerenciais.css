@@ -43,6 +43,15 @@ a {
     gap: 6%;
 }
 
+.actual_page{
+    background-color: #494949;
+    color: #fdc77f;
+    padding: 20px;
+    font-size: 13pt;
+    transition: all .2s linear;
+    border-bottom: 2px solid #222;
+  }
+
 .bt_nav{
     flex: 1;
     background-color: #89CFC9;
@@ -153,11 +162,12 @@ text-decoration: none;
 color: #fed196;}
 
 .link{
-background-color: #494949;
-padding: 20px;
-font-size: 12pt;
-transition: all .2s linear;
-border-bottom: 2px solid #222;}
+    background-color: #494949;
+    padding: 20px;
+    font-size: 12pt;
+    transition: all .2s linear;
+    border-bottom: 2px solid #222;
+}
 
 #check:checked ~ .barra{
 transform: translateX(300px);}

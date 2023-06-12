@@ -11,13 +11,12 @@
           <style>
             h2, h3, .sprint_sign, .number, .sprint_form, .sprint_pre_sign, .user_nome, .time_medias{
                   color: snow;
-              }            
-
-            .user_dm {
-                color: rgb(209, 209, 209);
-            }
+              }
             .table_devolutiva {
                 background-color: #383838;
+            }
+            #legenda_trc {
+                background-color: gray;
             }
           </style>
         {% endif %}
@@ -31,13 +30,14 @@
         <div class="barra">
             <nav class="menu_lateral">
                 <a href="/menu_admin"> <div class="link">MENU PRINCIPAL</div></a>
-                <a href="/controle_turmas"> <div class="link">CONTROLE DE TURMAS/TIMES</div></a>
+                <a href="/controle_turmas"> <div class="link">CONTROLE DE TURMAS</div></a>
+                <a href="/controle_times"> <div class="link">CONTROLE DE TIMES</div></a>
                 <a href="/controle_integrantes"> <div class="link">CONTROLE DE INTEGRANTES</div></a>
                 <a href="/controle_projetos"> <div class="link">CONTROLE DE PROJETOS</div></a>
-                <a href="/devolutiva_admin"> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
+                <div class="actual_page">DEVOLUTIVA DE AVALIAÇÃO</div>
                 <a href="/dashboards_operacionais"> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
                 <a href="/dashboards_gerenciais"> <div class="link">DASHBOARDS GERENCIAIS</div></a>
-                <a href="/"> <div class="link">SAIR ➔ </div></a>
+                <a href="/logout"> <div class="link">SAIR ➔ </div></a>
             </nav>
         </div>
         <a class="menu_redirect" href="/menu_integrante"><img id="logo_avaliação" src="{{ url_for('static', filename='img/menu_admin/Logo API (3).png') }}" width="300px"></a>
@@ -126,24 +126,24 @@
     <div class="content">
         <h1 class="time_medias">MÉDIAS DA TURMA</h1>
         <table class="table_devolutiva">
-            <tr>
+            <tr class="table_header">
                 <td>
-                    <h2>TIPO DE AVALIAÇÃO</h2>
+                    <h6>TIPO DE AVALIAÇÃO</h6>
                 </td>
                 <td>
-                    <h2>COMUNICAÇÃO E TRABALHO<br>EM EQUIPE</h2>
+                    <h6>COMUNICAÇÃO E TRABALHO<br>EM EQUIPE</h6>
                 </td>
                 <td>
-                    <h2>ENGAJAMENTO E PRÓ-ATIVIDADE</h2>
+                    <h6>ENGAJAMENTO E PRÓ-ATIVIDADE</h6>
                 </td>
                 <td>
-                    <h2>CONHECIMENTO E <br>APLICABILIDADE TÉCNICA</h2>
+                    <h6>CONHECIMENTO E <br>APLICABILIDADE TÉCNICA</h6>
                 </td>
                 <td>
-                    <h2>ENTREGA DE RESULTADOS COM <br>VALOR AGREGADO</h2>
+                    <h6>ENTREGA DE RESULTADOS COM <br>VALOR AGREGADO</h6>
                 </td>
                 <td>
-                    <h2>AUTO-GESTÃO DAS ATIVIDADES</h2>
+                    <h6>AUTO-GESTÃO DAS ATIVIDADES</h6>
                 </td>
             </tr>
             <tr>
@@ -251,22 +251,22 @@
         <table class="table_devolutiva">
             <tr>
                 <td>
-                    <h2>TIPO DE AVALIAÇÃO</h2>
+                    <h6>TIPO DE AVALIAÇÃO</h6>
                 </td>
                 <td>
-                    <h2>COMUNICAÇÃO E TRABALHO<br>EM EQUIPE</h2>
+                    <h6>COMUNICAÇÃO E TRABALHO<br>EM EQUIPE</h6>
                 </td>
                 <td>
-                    <h2>ENGAJAMENTO E PRÓ-ATIVIDADE</h2>
+                    <h6>ENGAJAMENTO E PRÓ-ATIVIDADE</h6>
                 </td>
                 <td>
-                    <h2>CONHECIMENTO E <br>APLICABILIDADE TÉCNICA</h2>
+                    <h6>CONHECIMENTO E <br>APLICABILIDADE TÉCNICA</h6>
                 </td>
                 <td>
-                    <h2>ENTREGA DE RESULTADOS COM <br>VALOR AGREGADO</h2>
+                    <h6>ENTREGA DE RESULTADOS COM <br>VALOR AGREGADO</h6>
                 </td>
                 <td>
-                    <h2>AUTO-GESTÃO DAS ATIVIDADES</h2>
+                    <h6>AUTO-GESTÃO DAS ATIVIDADES</h6>
                 </td>
             </tr>
             <tr>
@@ -374,22 +374,22 @@
         <table class="table_devolutiva">
             <tr>
                 <td>
-                    <h2>INTEGRANTE</h2>
+                    <h6>INTEGRANTE</h6>
                 </td>
                 <td>
-                    <h2>COMUNICAÇÃO E TRABALHO<br>EM EQUIPE</h2>
+                    <h6>COMUNICAÇÃO E TRABALHO<br>EM EQUIPE</h6>
                 </td>
                 <td>
-                    <h2>ENGAJAMENTO E PRÓ-ATIVIDADE</h2>
+                    <h6>ENGAJAMENTO E PRÓ-ATIVIDADE</h6>
                 </td>
                 <td>
-                    <h2>CONHECIMENTO E <br>APLICABILIDADE TÉCNICA</h2>
+                    <h6>CONHECIMENTO E <br>APLICABILIDADE TÉCNICA</h6>
                 </td>
                 <td>
-                    <h2>ENTREGA DE RESULTADOS COM <br>VALOR AGREGADO</h2>
+                    <h6>ENTREGA DE RESULTADOS COM <br>VALOR AGREGADO</h6>
                 </td>
                 <td>
-                    <h2>AUTO-GESTÃO DAS ATIVIDADES</h2>
+                    <h6>AUTO-GESTÃO DAS ATIVIDADES</h6>
                 </td>
             </tr>
             {% for integrante in notas_medias_integrante %}
@@ -449,22 +449,22 @@
         <table class="table_devolutiva">
             <tr>
                 <td>
-                    <h2>INTEGRANTE</h2>
+                    <h6>INTEGRANTE</h6>
                 </td>
                 <td>
-                    <h2>COMUNICAÇÃO E TRABALHO<br>EM EQUIPE</h2>
+                    <h6>COMUNICAÇÃO E TRABALHO<br>EM EQUIPE</h6>
                 </td>
                 <td>
-                    <h2>ENGAJAMENTO E PRÓ-ATIVIDADE</h2>
+                    <h6>ENGAJAMENTO E PRÓ-ATIVIDADE</h6>
                 </td>
                 <td>
-                    <h2>CONHECIMENTO E <br>APLICABILIDADE TÉCNICA</h2>
+                    <h6>CONHECIMENTO E <br>APLICABILIDADE TÉCNICA</h6>
                 </td>
                 <td>
-                    <h2>ENTREGA DE RESULTADOS COM <br>VALOR AGREGADO</h2>
+                    <h6>ENTREGA DE RESULTADOS COM <br>VALOR AGREGADO</h6>
                 </td>
                 <td>
-                    <h2>AUTO-GESTÃO DAS ATIVIDADES</h2>
+                    <h6>AUTO-GESTÃO DAS ATIVIDADES</h6>
                 </td>
             </tr>
             {% for integrante in feedbacks_integrante %}
@@ -504,22 +504,22 @@
         <table class="table_devolutiva">
             <tr>
                 <td>
-                    <h2>INTEGRANTE</h2>
+                    <h6>INTEGRANTE</h6>
                 </td>
                 <td>
-                    <h2>COMUNICAÇÃO E TRABALHO<br>EM EQUIPE</h2>
+                    <h6>COMUNICAÇÃO E TRABALHO<br>EM EQUIPE</h6>
                 </td>
                 <td>
-                    <h2>ENGAJAMENTO E PRÓ-ATIVIDADE</h2>
+                    <h6>ENGAJAMENTO E PRÓ-ATIVIDADE</h6>
                 </td>
                 <td>
-                    <h2>CONHECIMENTO E <br>APLICABILIDADE TÉCNICA</h2>
+                    <h6>CONHECIMENTO E <br>APLICABILIDADE TÉCNICA</h6>
                 </td>
                 <td>
-                    <h2>ENTREGA DE RESULTADOS COM <br>VALOR AGREGADO</h2>
+                    <h6>ENTREGA DE RESULTADOS COM <br>VALOR AGREGADO</h6>
                 </td>
                 <td>
-                    <h2>AUTO-GESTÃO DAS ATIVIDADES</h2>
+                    <h6>AUTO-GESTÃO DAS ATIVIDADES</h6>
                 </td>
             </tr>
             {% for integrante in auto_notas_medias_integrante %}

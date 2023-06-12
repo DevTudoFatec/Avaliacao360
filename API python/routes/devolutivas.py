@@ -1,7 +1,7 @@
 from flask import render_template, request, session, Blueprint as bp
 import json
 import pandas as pd
-from utils.decorators import login_required, admin_required, team_required, integrante_required
+from utils.decorators import login_required, admin_required, team_required, integrante_required, data_required
 
 bp = bp('devolutivas', __name__)
 
@@ -10,6 +10,7 @@ bp = bp('devolutivas', __name__)
 @bp.route("/devolutiva_admin", methods=["GET", "POST"])
 @login_required
 @admin_required
+@data_required
 def devolutiva_admin():
 
   with open("data/projetos.json", "r") as f:
@@ -30,6 +31,8 @@ def devolutiva_admin():
   with open("data/autoavaliacao.json", "r") as g:
     autoavaliacoes = json.load(g)
 
+  turmas = [turma for turma in turmas if turma['codigo'] in [avaliacao['turma_codigo'] for avaliacao in avaliacoes]]  
+
   select_time = False
   show_table = False          
   
@@ -37,7 +40,7 @@ def devolutiva_admin():
     select_time = True
     turma_escolha = request.form.get('turma_escolha')
     nome_turma = [turma['nome'] for turma in turmas if turma['codigo'] == turma_escolha][0]
-    times = [time for time in times if time['turma'] == turma_escolha]
+    times = [time for time in times if time['turma'] == turma_escolha and time['codigo'] in [avaliacao['time'] for avaliacao in avaliacoes]]
     qtia_sprints = len([projeto['avaliacoes'] for projeto in projetos if projeto['turma'] == turma_escolha][0])
 
     return render_template('admin/devolutiva_admin.html', nome_turma=nome_turma, qtia_sprints=qtia_sprints, 
@@ -183,14 +186,14 @@ def devolutiva_admin():
 @login_required
 @team_required
 @integrante_required
+@data_required
 def devolutiva_integrante():
 
   pre_devolutiva = False
 
   if request.method == 'GET':
     pre_devolutiva = True
-    team_sprints = len(session['avaliacoes'])
-  
+    team_sprints = len(session['avaliacoes'])  
 
     return render_template('integrante/devolutiva_avaliacao.html', pre_devolutiva=pre_devolutiva, team_sprints=team_sprints,
                               nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'], avaliacao_check=session['avaliacao'],

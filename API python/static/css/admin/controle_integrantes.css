@@ -28,8 +28,19 @@ header{
 
 .link_disable{
   background-color: #bbbbbb;
+  color: black;
   padding: 20px;
   font-size: 12pt;
+  transition: all .2s linear;
+  border-bottom: 2px solid #222;
+}
+
+.actual_page{
+  background-color: #494949;
+  color: #fdc77f;
+  font-weight: bolder;
+  padding: 20px;
+  font-size: 13pt;
   transition: all .2s linear;
   border-bottom: 2px solid #222;
 }
@@ -90,14 +101,16 @@ header{
 
 nav a{
   text-decoration: none;
-  color: #fed196;}
+  color: #fed196;
+}
 
 .link{
   background-color: #494949;
   padding: 20px;
   font-size: 12pt;
   transition: all .2s linear;
-  border-bottom: 2px solid #222;}
+  border-bottom: 2px solid #222;
+}
 
 #check:checked ~ .barra{
   transform: translateX(300px);}

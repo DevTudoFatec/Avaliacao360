@@ -15,13 +15,14 @@
             <div class="barra">
                 <nav class="menu_lateral">
                     <a href="/menu_admin"> <div class="link">MENU PRINCIPAL</div></a>
-                    <a href="/controle_turmas"> <div class="link">CONTROLE DE TURMAS/TIMES</div></a>
+                    <a href="/controle_turmas"> <div class="link">CONTROLE DE TURMAS</div></a>
+                    <a href="/controle_times"> <div class="link">CONTROLE DE TIMES</div></a>
                     <a href="/controle_integrantes"> <div class="link">CONTROLE DE INTEGRANTES</div></a>
                     <a href="/controle_projetos"> <div class="link">CONTROLE DE PROJETOS</div></a>
                     <a href="/devolutiva_admin"> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
                     <a href="/dashboards_operacionais"> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
-                    <a href="/dashboards_gerenciais"> <div class="link">DASHBOARDS GERENCIAIS</div></a>
-                    <a href="/"> <div class="link">SAIR ➔ </div></a>
+                    <div class="actual_page">DASHBOARDS GERENCIAIS</div>
+                    <a href="/logout"> <div class="link">SAIR ➔ </div></a>
                 </nav>
             </div>
             <a class="menu_redirect" href="/menu_integrante"><img id="logo_avaliação" src="{{ url_for('static', filename='img/menu_admin/Logo API (3).png') }}" width="300px"></a>
