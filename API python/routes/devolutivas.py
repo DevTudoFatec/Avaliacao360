@@ -49,20 +49,27 @@ def devolutiva_admin():
     nome_turma = [turma['nome'] for turma in turmas if turma['codigo'] == turma_escolha][0]
     time_escolha = int(request.form.get('time_escolha'))
     nome_time = [time['nome'] for time in times if time['codigo'] == time_escolha][0]
-    sprint_escolha = int(request.form.get("sprint_escolha"))
+    sprint_escolha = [int(request.form.get("sprint_escolha"))] if int(request.form.get("sprint_escolha")) != 0 else [i for i in range(1,len([projeto['avaliacoes'] for projeto in projetos if projeto['turma'] == turma_escolha][0])+1)]
+    sprint_string = ', '.join(str(x) for x in sprint_escolha) if len(sprint_escolha) > 1 else str(sprint_escolha[0])
 
     notas_medias_turma = {}
     notas_medias_time = {}
     notas_medias_integrante = {}
+    feedbacks_integrante = {}
 
     for item in avaliacoes:
-      if item['turma_codigo'] == turma_escolha and item['sprint'] == sprint_escolha:
+      if item['turma_codigo'] == turma_escolha and item['sprint'] in sprint_escolha:
         integrante = item['integrante']
         comunicacao = item['comunicacao']
         engajamento = item['engajamento']
         conhecimento = item['conhecimento']
         entrega = item['entrega']
         autogestao = item['autogestao']
+        texto_comunicacao = item['texto_comunicacao']
+        texto_engajamento = item['texto_engajamento']
+        texto_conhecimento = item['texto_conhecimento']
+        texto_entrega = item['texto_entrega']
+        texto_autogestao = item['texto_autogestao']
 
         notas_medias_turma.setdefault('comunicacao', []).append(comunicacao)
         notas_medias_turma.setdefault('engajamento', []).append(engajamento)
@@ -83,6 +90,12 @@ def devolutiva_admin():
           notas_medias_integrante.setdefault(integrante, {}).setdefault('entrega', []).append(entrega)
           notas_medias_integrante.setdefault(integrante, {}).setdefault('autogestao', []).append(autogestao)
 
+          feedbacks_integrante.setdefault(integrante, {}).setdefault('comunicacao', []).append(texto_comunicacao) if len(texto_comunicacao) > 0 else None
+          feedbacks_integrante.setdefault(integrante, {}).setdefault('engajamento', []).append(texto_engajamento) if len(texto_engajamento) > 0 else None
+          feedbacks_integrante.setdefault(integrante, {}).setdefault('conhecimento', []).append(texto_conhecimento) if len(texto_conhecimento) > 0 else None
+          feedbacks_integrante.setdefault(integrante, {}).setdefault('entrega', []).append(texto_entrega) if len(texto_entrega) > 0 else None
+          feedbacks_integrante.setdefault(integrante, {}).setdefault('autogestao', []).append(texto_autogestao) if len(texto_autogestao) > 0 else None
+
     df = pd.DataFrame(notas_medias_turma)
     df = df.mean()
     notas_medias_turma = {key: float(f"{value:,.2f}") for key, value in df.to_dict().items()}
@@ -97,12 +110,15 @@ def devolutiva_admin():
       notas_medias_integrante[integrante] = {key: float(f"{value:,.2f}") for key, value in df.to_dict().items()}
       notas_medias_integrante[integrante]['nome'] = [user['nome'] for user in users if user['email'] == integrante][0]
 
+    for integrante in feedbacks_integrante:
+      feedbacks_integrante[integrante]['nome'] = [user['nome'] for user in users if user['email'] == integrante][0]
+
     auto_notas_medias_time = {}
     auto_notas_medias_turma = {}
     auto_notas_medias_integrante = {}
 
     for item in autoavaliacoes:
-      if item['turma_codigo'] == turma_escolha and item['sprint'] == sprint_escolha:
+      if item['turma_codigo'] == turma_escolha and item['sprint'] in sprint_escolha:
         integrante = item['email']
         comunicacao = item['comunicacao']
         engajamento = item['engajamento']
@@ -144,14 +160,14 @@ def devolutiva_admin():
       auto_notas_medias_integrante[integrante] = {key: float(f"{value:,.2f}") for key, value in df.to_dict().items()}
       auto_notas_medias_integrante[integrante]['nome'] = [user['nome'] for user in users if user['email'] == integrante][0]
 
-    if (len(notas_medias_turma)>0 and len(notas_medias_time)>0 and len(notas_medias_integrante)>0 and len(auto_notas_medias_turma)>0 and len(auto_notas_medias_time)>0 and len(auto_notas_medias_integrante)>0):
-      show_table = True
+
+    show_table = True
         
     return render_template('admin/devolutiva_admin.html', turmas=turmas, select_time=select_time,
-                          notas_medias_turma=notas_medias_turma, notas_medias_time=notas_medias_time, 
+                          notas_medias_turma=notas_medias_turma, notas_medias_time=notas_medias_time, sprint_string=sprint_string,
                           notas_medias_integrante=notas_medias_integrante, auto_notas_medias_turma=auto_notas_medias_turma, 
                           auto_notas_medias_time=auto_notas_medias_time, auto_notas_medias_integrante=auto_notas_medias_integrante,
-                          nome_turma=nome_turma, nome_time=nome_time, sprint_escolha=sprint_escolha,
+                          nome_turma=nome_turma, nome_time=nome_time, sprint_escolha=sprint_escolha, feedbacks_integrante=feedbacks_integrante,
                          show_table=show_table, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
   
   

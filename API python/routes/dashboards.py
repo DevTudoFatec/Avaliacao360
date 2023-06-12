@@ -69,6 +69,11 @@ def dashboards_operacionais():
                 notas_medias_turma.setdefault(sprint, {}).setdefault('conhecimento', []).append(conhecimento)
                 notas_medias_turma.setdefault(sprint, {}).setdefault('entrega', []).append(entrega)
                 notas_medias_turma.setdefault(sprint, {}).setdefault('autogestao', []).append(autogestao)
+                notas_medias_turma.setdefault('geral', {}).setdefault('comunicacao', []).append(comunicacao)
+                notas_medias_turma.setdefault('geral', {}).setdefault('engajamento', []).append(engajamento)
+                notas_medias_turma.setdefault('geral', {}).setdefault('conhecimento', []).append(conhecimento)
+                notas_medias_turma.setdefault('geral', {}).setdefault('entrega', []).append(entrega)
+                notas_medias_turma.setdefault('geral', {}).setdefault('autogestao', []).append(autogestao)
 
                 if item['time'] == time_escolha:
                     notas_medias_time.setdefault(sprint, {}).setdefault('comunicacao', []).append(comunicacao)
@@ -76,12 +81,22 @@ def dashboards_operacionais():
                     notas_medias_time.setdefault(sprint, {}).setdefault('conhecimento', []).append(conhecimento)
                     notas_medias_time.setdefault(sprint, {}).setdefault('entrega', []).append(entrega)
                     notas_medias_time.setdefault(sprint, {}).setdefault('autogestao', []).append(autogestao)
+                    notas_medias_time.setdefault('geral', {}).setdefault('comunicacao', []).append(comunicacao)
+                    notas_medias_time.setdefault('geral', {}).setdefault('engajamento', []).append(engajamento)
+                    notas_medias_time.setdefault('geral', {}).setdefault('conhecimento', []).append(conhecimento)
+                    notas_medias_time.setdefault('geral', {}).setdefault('entrega', []).append(entrega)
+                    notas_medias_time.setdefault('geral', {}).setdefault('autogestao', []).append(autogestao)
 
                     notas_medias_integrante.setdefault(integrante, {}).setdefault(sprint, {}).setdefault('comunicacao', []).append(comunicacao)
                     notas_medias_integrante.setdefault(integrante, {}).setdefault(sprint, {}).setdefault('engajamento', []).append(engajamento)
                     notas_medias_integrante.setdefault(integrante, {}).setdefault(sprint, {}).setdefault('conhecimento', []).append(conhecimento)
                     notas_medias_integrante.setdefault(integrante, {}).setdefault(sprint, {}).setdefault('entrega', []).append(entrega)
                     notas_medias_integrante.setdefault(integrante, {}).setdefault(sprint, {}).setdefault('autogestao', []).append(autogestao)
+                    notas_medias_integrante.setdefault(integrante, {}).setdefault('geral', {}).setdefault('comunicacao', []).append(comunicacao)
+                    notas_medias_integrante.setdefault(integrante, {}).setdefault('geral', {}).setdefault('engajamento', []).append(engajamento)
+                    notas_medias_integrante.setdefault(integrante, {}).setdefault('geral', {}).setdefault('conhecimento', []).append(conhecimento)
+                    notas_medias_integrante.setdefault(integrante, {}).setdefault('geral', {}).setdefault('entrega', []).append(entrega)
+                    notas_medias_integrante.setdefault(integrante, {}).setdefault('geral', {}).setdefault('autogestao', []).append(autogestao)
         
         turma_merged = pd.DataFrame()
 
@@ -114,7 +129,9 @@ def dashboards_operacionais():
                 df['nome_integrante'] = [user['nome'] for user in users if user['email'] == integrante][0]
                 integrante_merged = pd.concat([integrante_merged, df], ignore_index=True)
 
-        turma_merged['sprint'] = 'Sprint ' + turma_merged['sprint'].astype(str)
+        turma_merged['sprint'] = turma_merged['sprint'].apply(lambda x: 'Sprint ' + str(x) if x != 'geral' else 'Geral')
+        turma_merged = turma_merged.sort_values(by='sprint', ascending=False)
+
         fig = px.bar(turma_merged, x='critério', y='nota média',color='sprint',
                     title=f'{turma_nome} - Avaliação Média', labels={'sprint': 'Sprint'}, barmode='group'
                     )
@@ -125,7 +142,9 @@ def dashboards_operacionais():
             )
         turma_figures.append(fig.to_html(full_html=False))
 
-        time_merged['sprint'] = 'Sprint ' + time_merged['sprint'].astype(str)
+        time_merged['sprint'] = time_merged['sprint'].apply(lambda x: 'Sprint ' + str(x) if x != 'geral' else 'Geral')
+        time_merged = time_merged.sort_values(by='sprint', ascending=False)
+
         fig = px.bar(time_merged, x='critério', y='nota média', color='sprint',
                     title=f'{time_nome} - Avaliação Média', labels={'sprint': 'Sprint'}, barmode='group')
         if session['darkmode']:
@@ -134,8 +153,10 @@ def dashboards_operacionais():
                 plot_bgcolor='lightgray'
             )
         time_figures.append(fig.to_html(full_html=False))
+        
+        integrante_merged['sprint'] = integrante_merged['sprint'].apply(lambda x: 'Sprint ' + str(x) if x != 'geral' else 'Geral')
+        integrante_merged = integrante_merged.sort_values(by='sprint', ascending=False)
 
-        integrante_merged['sprint'] = 'Sprint ' + integrante_merged['sprint'].astype(str)
         fig = px.bar(integrante_merged, x='critério', y='nota média', color='sprint', facet_col_wrap=2,
                             facet_col='nome_integrante', title='Integrantes - Avaliação Média', 
                             labels={'sprint': 'Sprint', 'nome_integrante': 'Integrante'}, barmode='group')
@@ -165,6 +186,11 @@ def dashboards_operacionais():
                 notas_medias_turma.setdefault(sprint, {}).setdefault('conhecimento', []).append(conhecimento)
                 notas_medias_turma.setdefault(sprint, {}).setdefault('entrega', []).append(entrega)
                 notas_medias_turma.setdefault(sprint, {}).setdefault('autogestao', []).append(autogestao)
+                notas_medias_turma.setdefault('geral', {}).setdefault('comunicacao', []).append(comunicacao)
+                notas_medias_turma.setdefault('geral', {}).setdefault('engajamento', []).append(engajamento)
+                notas_medias_turma.setdefault('geral', {}).setdefault('conhecimento', []).append(conhecimento)
+                notas_medias_turma.setdefault('geral', {}).setdefault('entrega', []).append(entrega)
+                notas_medias_turma.setdefault('geral', {}).setdefault('autogestao', []).append(autogestao)
 
                 if item['time'] == time_escolha:
                     notas_medias_time.setdefault(sprint, {}).setdefault('comunicacao', []).append(comunicacao)
@@ -172,12 +198,22 @@ def dashboards_operacionais():
                     notas_medias_time.setdefault(sprint, {}).setdefault('conhecimento', []).append(conhecimento)
                     notas_medias_time.setdefault(sprint, {}).setdefault('entrega', []).append(entrega)
                     notas_medias_time.setdefault(sprint, {}).setdefault('autogestao', []).append(autogestao)
+                    notas_medias_time.setdefault('geral', {}).setdefault('comunicacao', []).append(comunicacao)
+                    notas_medias_time.setdefault('geral', {}).setdefault('engajamento', []).append(engajamento)
+                    notas_medias_time.setdefault('geral', {}).setdefault('conhecimento', []).append(conhecimento)
+                    notas_medias_time.setdefault('geral', {}).setdefault('entrega', []).append(entrega)
+                    notas_medias_time.setdefault('geral', {}).setdefault('autogestao', []).append(autogestao)
 
                     notas_medias_integrante.setdefault(integrante, {}).setdefault(sprint, {}).setdefault('comunicacao', []).append(comunicacao)
                     notas_medias_integrante.setdefault(integrante, {}).setdefault(sprint, {}).setdefault('engajamento', []).append(engajamento)
                     notas_medias_integrante.setdefault(integrante, {}).setdefault(sprint, {}).setdefault('conhecimento', []).append(conhecimento)
                     notas_medias_integrante.setdefault(integrante, {}).setdefault(sprint, {}).setdefault('entrega', []).append(entrega)
                     notas_medias_integrante.setdefault(integrante, {}).setdefault(sprint, {}).setdefault('autogestao', []).append(autogestao)
+                    notas_medias_integrante.setdefault(integrante, {}).setdefault('geral', {}).setdefault('comunicacao', []).append(comunicacao)
+                    notas_medias_integrante.setdefault(integrante, {}).setdefault('geral', {}).setdefault('engajamento', []).append(engajamento)
+                    notas_medias_integrante.setdefault(integrante, {}).setdefault('geral', {}).setdefault('conhecimento', []).append(conhecimento)
+                    notas_medias_integrante.setdefault(integrante, {}).setdefault('geral', {}).setdefault('entrega', []).append(entrega)
+                    notas_medias_integrante.setdefault(integrante, {}).setdefault('geral', {}).setdefault('autogestao', []).append(autogestao)
         
         turma_merged = pd.DataFrame()
 
@@ -210,7 +246,9 @@ def dashboards_operacionais():
                 df['nome_integrante'] = [user['nome'] for user in users if user['email'] == integrante][0]
                 integrante_merged = pd.concat([integrante_merged, df], ignore_index=True)
 
-        turma_merged['sprint'] = 'Sprint ' + turma_merged['sprint'].astype(str)
+        turma_merged['sprint'] = turma_merged['sprint'].apply(lambda x: 'Sprint ' + str(x) if x != 'geral' else 'Geral')
+        turma_merged = turma_merged.sort_values(by='sprint', ascending=False)
+
         fig = px.bar(turma_merged, x='critério', y='nota média',color='sprint',
                     title=f'{turma_nome} - AutoAvaliação Média', labels={'sprint': 'Sprint'}, barmode='group'
                     )
@@ -221,7 +259,9 @@ def dashboards_operacionais():
             )
         turma_figures.append(fig.to_html(full_html=False))
 
-        time_merged['sprint'] = 'Sprint ' + time_merged['sprint'].astype(str)
+        time_merged['sprint'] = time_merged['sprint'].apply(lambda x: 'Sprint ' + str(x) if x != 'geral' else 'Geral')
+        time_merged = time_merged.sort_values(by='sprint', ascending=False)
+
         fig = px.bar(time_merged, x='critério', y='nota média', color='sprint',
                     title=f'{time_nome} - AutoAvaliação Média', labels={'sprint': 'Sprint'}, barmode='group')
         if session['darkmode']:
@@ -231,7 +271,10 @@ def dashboards_operacionais():
             )
         time_figures.append(fig.to_html(full_html=False))
 
-        integrante_merged['sprint'] = 'Sprint ' + integrante_merged['sprint'].astype(str)
+        integrante_merged['sprint'] = integrante_merged['sprint'].apply(lambda x: 'Sprint ' + str(x) if x != 'geral' else 'Geral')
+        integrante_merged = integrante_merged.sort_values(by='sprint', ascending=False)
+
+
         fig = px.bar(integrante_merged, x='critério', y='nota média', color='sprint', facet_col_wrap=2,
                             facet_col='nome_integrante', title='Integrantes - AutoAvaliação Média', 
                             labels={'sprint': 'Sprint', 'nome_integrante': 'Integrante'}, barmode='group')

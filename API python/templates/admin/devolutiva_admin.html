@@ -99,6 +99,7 @@
                     {% for i in range (1,qtia_sprints+1) %}
                             <option value="{{ i }}">{{ i }}</option>
                     {% endfor %}
+                            <option value="0">GERAL</option>
                 </select>
                 {% if darkmode %}
                     <button type="submit" class="filtro_button" name="filtrar" style="cursor: pointer">
@@ -114,7 +115,7 @@
     </div>
     {% if show_table %}
     <div class="header_infos">
-        <h2 class="sprint_sign">Sprint: {{ sprint_escolha }}</h2>
+        <h2 class="sprint_sign">Sprint: {{ sprint_string }}</h2>
         <h2 class="sprint_sign">Turma: {{ nome_turma }}</h2>
         <h2 class="sprint_sign">Time: {{ nome_time }}</h2>
     </div>
@@ -440,6 +441,61 @@
                     {% elif notas_medias_integrante[integrante]['autogestao'] >= 4 %}
                         <h4 style="color: rgb(3, 160, 3)">{{ notas_medias_integrante[integrante]['autogestao'] }}</h4>
                     {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <h1 class="time_medias">FEEDBACKS RECEBIDOS</h1>
+        <table class="table_devolutiva">
+            <tr>
+                <td>
+                    <h2>INTEGRANTE</h2>
+                </td>
+                <td>
+                    <h2>COMUNICAÇÃO E TRABALHO<br>EM EQUIPE</h2>
+                </td>
+                <td>
+                    <h2>ENGAJAMENTO E PRÓ-ATIVIDADE</h2>
+                </td>
+                <td>
+                    <h2>CONHECIMENTO E <br>APLICABILIDADE TÉCNICA</h2>
+                </td>
+                <td>
+                    <h2>ENTREGA DE RESULTADOS COM <br>VALOR AGREGADO</h2>
+                </td>
+                <td>
+                    <h2>AUTO-GESTÃO DAS ATIVIDADES</h2>
+                </td>
+            </tr>
+            {% for integrante in feedbacks_integrante %}
+            <tr>
+                <td>
+                    <h3>{{ feedbacks_integrante[integrante]['nome'] }}</h3>
+                </td>
+                <td>
+                    {% for feedback in feedbacks_integrante[integrante]['comunicacao'] %}
+                        <h3>• {{ feedback }}</h3>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for feedback in feedbacks_integrante[integrante]['engajamento'] %}
+                        <h3>• {{ feedback }}</h3>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for feedback in feedbacks_integrante[integrante]['conhecimento'] %}
+                        <h3>• {{ feedback }}</h3>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for feedback in feedbacks_integrante[integrante]['entrega'] %}
+                        <h3>• {{ feedback }}</h3>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for feedback in feedbacks_integrante[integrante]['autogestao'] %}
+                        <h3>• {{ feedback }}</h3>
+                    {% endfor %}
                 </td>
             </tr>
             {% endfor %}

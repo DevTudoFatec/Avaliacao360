@@ -144,7 +144,7 @@
                             {% endif %}
                         </td>
                         <td>
-                            {% if editing_perfil and index == user['index']%}
+                            {% if editing_perfil and index == user['index'] %}
                                 <form class="edit_form" method="POST" action="{{ url_for('controles.controle_integrantes') }}">   
                                     <input type="hidden" name="index" value="{{ user['index'] }}">
                                     <select class="user_info_input" name="edited_perfil" style="border-radius: 3px; font-size: 20px;">
@@ -225,7 +225,7 @@
                                     </button>
                                 </a>
                             </td>
-                            </form>  
+                            </form>   
                             {% elif not editing_perfil%}
                             <td></td>
                             {% endif %}
