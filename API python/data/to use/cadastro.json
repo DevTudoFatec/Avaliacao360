@@ -1,0 +1,408 @@
+[
+  {
+    "index": 0,
+    "nome": "Admin",
+    "email": "admin",
+    "turma": "",
+    "time": 0,
+    "senha": "$2b$12$pEfj8M4KBWE/L1HVwmnuJ.TjaNkfx3KjXhRcroWA0.wOIfzJ6sOma",
+    "perfil": 2,
+    "acessos": 0
+  },
+  {
+    "index": 1,
+    "nome": "Joao",
+    "email": "joao@email.com",
+    "turma": "bd01",
+    "time": 1,
+    "senha": "$2b$12$3MkG990FzHKi8Wu22P6vu.jkzIyxlYxPowqM3Po2C5diKdfel9pYG",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "12-06-2023",
+        "16-06-2023"
+      ],
+      [
+        2,
+        "19-06-2023",
+        "23-06-2023"
+      ],
+      [
+        3,
+        "26-06-2023",
+        "30-06-2023"
+      ],
+      [
+        4,
+        "03-07-2023",
+        "07-07-2023"
+      ]
+    ],
+    "count_avaliacao": 1
+  },
+  {
+    "index": 2,
+    "nome": "Ingrid",
+    "email": "ingrid@email.com",
+    "turma": "bd01",
+    "time": 1,
+    "senha": "$2b$12$3MkG990FzHKi8Wu22P6vu.jkzIyxlYxPowqM3Po2C5diKdfel9pYG",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "12-06-2023",
+        "16-06-2023"
+      ],
+      [
+        2,
+        "19-06-2023",
+        "23-06-2023"
+      ],
+      [
+        3,
+        "26-06-2023",
+        "30-06-2023"
+      ],
+      [
+        4,
+        "03-07-2023",
+        "07-07-2023"
+      ]
+    ],
+    "count_avaliacao": 0
+  },
+  {
+    "index": 3,
+    "nome": "Claudio",
+    "email": "claudio@email.com",
+    "turma": "bd01",
+    "time": 1,
+    "senha": "$2b$12$3MkG990FzHKi8Wu22P6vu.jkzIyxlYxPowqM3Po2C5diKdfel9pYG",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "12-06-2023",
+        "16-06-2023"
+      ],
+      [
+        2,
+        "19-06-2023",
+        "23-06-2023"
+      ],
+      [
+        3,
+        "26-06-2023",
+        "30-06-2023"
+      ],
+      [
+        4,
+        "03-07-2023",
+        "07-07-2023"
+      ]
+    ],
+    "count_avaliacao": 0
+  },
+  {
+    "index": 4,
+    "nome": "Beatriz",
+    "email": "beatriz@email.com",
+    "turma": "ads01",
+    "time": 2,
+    "senha": "$2b$12$3MkG990FzHKi8Wu22P6vu.jkzIyxlYxPowqM3Po2C5diKdfel9pYG",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "12-06-2023",
+        "16-06-2023"
+      ],
+      [
+        2,
+        "19-06-2023",
+        "23-06-2023"
+      ],
+      [
+        3,
+        "26-06-2023",
+        "30-06-2023"
+      ],
+      [
+        4,
+        "03-07-2023",
+        "07-07-2023"
+      ]
+    ],
+    "count_avaliacao": 0
+  },
+  {
+    "index": 5,
+    "nome": "Luis",
+    "email": "luis@email.com",
+    "turma": "ads01",
+    "time": 2,
+    "senha": "$2b$12$3MkG990FzHKi8Wu22P6vu.jkzIyxlYxPowqM3Po2C5diKdfel9pYG",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "12-06-2023",
+        "16-06-2023"
+      ],
+      [
+        2,
+        "19-06-2023",
+        "23-06-2023"
+      ],
+      [
+        3,
+        "26-06-2023",
+        "30-06-2023"
+      ],
+      [
+        4,
+        "03-07-2023",
+        "07-07-2023"
+      ]
+    ],
+    "count_avaliacao": 0
+  },
+  {
+    "index": 6,
+    "nome": "Yuri",
+    "email": "yuri@email.com",
+    "turma": "ads01",
+    "time": 2,
+    "senha": "$2b$12$3MkG990FzHKi8Wu22P6vu.jkzIyxlYxPowqM3Po2C5diKdfel9pYG",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "12-06-2023",
+        "16-06-2023"
+      ],
+      [
+        2,
+        "19-06-2023",
+        "23-06-2023"
+      ],
+      [
+        3,
+        "26-06-2023",
+        "30-06-2023"
+      ],
+      [
+        4,
+        "03-07-2023",
+        "07-07-2023"
+      ]
+    ],
+    "count_avaliacao": 0
+  },
+  {
+    "index": 7,
+    "nome": "Renan",
+    "email": "renan@email.com",
+    "turma": "bd01",
+    "time": 3,
+    "senha": "$2b$12$3MkG990FzHKi8Wu22P6vu.jkzIyxlYxPowqM3Po2C5diKdfel9pYG",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "12-06-2023",
+        "16-06-2023"
+      ],
+      [
+        2,
+        "19-06-2023",
+        "23-06-2023"
+      ],
+      [
+        3,
+        "26-06-2023",
+        "30-06-2023"
+      ],
+      [
+        4,
+        "03-07-2023",
+        "07-07-2023"
+      ]
+    ],
+    "count_avaliacao": 0
+  },
+  {
+    "index": 8,
+    "nome": "Thomas",
+    "email": "thomas@email.com",
+    "turma": "bd01",
+    "time": 3,
+    "senha": "$2b$12$3MkG990FzHKi8Wu22P6vu.jkzIyxlYxPowqM3Po2C5diKdfel9pYG",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "12-06-2023",
+        "16-06-2023"
+      ],
+      [
+        2,
+        "19-06-2023",
+        "23-06-2023"
+      ],
+      [
+        3,
+        "26-06-2023",
+        "30-06-2023"
+      ],
+      [
+        4,
+        "03-07-2023",
+        "07-07-2023"
+      ]
+    ],
+    "count_avaliacao": 0
+  },
+  {
+    "index": 9,
+    "nome": "Isaias",
+    "email": "isaias@email.com",
+    "turma": "bd01",
+    "time": 3,
+    "senha": "$2b$12$3MkG990FzHKi8Wu22P6vu.jkzIyxlYxPowqM3Po2C5diKdfel9pYG",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "12-06-2023",
+        "16-06-2023"
+      ],
+      [
+        2,
+        "19-06-2023",
+        "23-06-2023"
+      ],
+      [
+        3,
+        "26-06-2023",
+        "30-06-2023"
+      ],
+      [
+        4,
+        "03-07-2023",
+        "07-07-2023"
+      ]
+    ],
+    "count_avaliacao": 0
+  },
+  {
+    "index": 10,
+    "nome": "Mariana",
+    "email": "mariana@email.com",
+    "turma": "ads01",
+    "time": 4,
+    "senha": "$2b$12$3MkG990FzHKi8Wu22P6vu.jkzIyxlYxPowqM3Po2C5diKdfel9pYG",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "12-06-2023",
+        "16-06-2023"
+      ],
+      [
+        2,
+        "19-06-2023",
+        "23-06-2023"
+      ],
+      [
+        3,
+        "26-06-2023",
+        "30-06-2023"
+      ],
+      [
+        4,
+        "03-07-2023",
+        "07-07-2023"
+      ]
+    ],
+    "count_avaliacao": 0
+  },
+  {
+    "index": 11,
+    "nome": "Ricardo",
+    "email": "ricardo@email.com",
+    "turma": "ads01",
+    "time": 4,
+    "senha": "$2b$12$3MkG990FzHKi8Wu22P6vu.jkzIyxlYxPowqM3Po2C5diKdfel9pYG",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "12-06-2023",
+        "16-06-2023"
+      ],
+      [
+        2,
+        "19-06-2023",
+        "23-06-2023"
+      ],
+      [
+        3,
+        "26-06-2023",
+        "30-06-2023"
+      ],
+      [
+        4,
+        "03-07-2023",
+        "07-07-2023"
+      ]
+    ],
+    "count_avaliacao": 0
+  },
+  {
+    "index": 12,
+    "nome": "Fulano",
+    "email": "fulano@email.com",
+    "turma": "ads01",
+    "time": 4,
+    "senha": "$2b$12$3MkG990FzHKi8Wu22P6vu.jkzIyxlYxPowqM3Po2C5diKdfel9pYG",
+    "perfil": 1,
+    "acessos": 1,
+    "avaliacoes": [
+      [
+        1,
+        "12-06-2023",
+        "16-06-2023"
+      ],
+      [
+        2,
+        "19-06-2023",
+        "23-06-2023"
+      ],
+      [
+        3,
+        "26-06-2023",
+        "30-06-2023"
+      ],
+      [
+        4,
+        "03-07-2023",
+        "07-07-2023"
+      ]
+    ],
+    "count_avaliacao": 0
+  }
+]

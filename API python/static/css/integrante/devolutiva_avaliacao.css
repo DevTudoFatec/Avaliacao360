@@ -189,6 +189,19 @@ body {
   color: #fed196;
 }
 
+
+.disabled_bt_confirmar_trc {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 100%;
+  border-radius: 50px;
+  padding: 1%;
+  width: 15%;
+  text-align: center;
+  background-color: #214E65;
+  border-bottom: 2% solid #222;
+  color: #fed196;
+}
+
 .bt_confirmar_trc:hover {
   color: black;
   background-color: #a6e2b3e8;
@@ -301,13 +314,14 @@ footer{
 .rodape-img {   
   height: 100%;
   width: auto;
+  margin-left: 10%;
+  margin-top: 10%;
 }
 
 .rodape-img-table {   
   height: 100%;
   width: auto;
   margin-top: 8%;
-  margin-left: -10%;
 }
 
 .user_nomes{

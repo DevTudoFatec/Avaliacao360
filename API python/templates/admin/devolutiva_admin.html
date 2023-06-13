@@ -52,7 +52,7 @@
     <div class="form_div">
         <button class="bt_titulo_media_notas">Avaliações e Autovaliações</button>
         <form class="form_devolutiva" method="POST" action="{{ url_for('devolutivas.devolutiva_admin') }}">
-            {% if not select_time %}
+            {% if not select_time and not select_sprint %}
                 <select class="select_box" name="turma_escolha" required>                                    
                     <option  value="" disabled selected>Turma</option>
                     {% for turma in turmas %}
@@ -83,7 +83,7 @@
                         <img src="{{ url_for('static', filename='img/icones/filtro.png') }}" class="filtro_icon" alt="save_icon">
                     </button>
                 {% endif %}
-            {% else %}
+            {% elif not select_sprint %}
                 <input type="hidden" name="turma_escolha" value="{{ turma_escolha }}">
                 <select class="select_box" name="turma_escolha" disabled>
                         <option value="">{{ nome_turma }}</option>
@@ -94,12 +94,42 @@
                             <option value="{{ time['codigo'] }}">{{ time['nome'] }}</option>
                     {% endfor %}
                 </select>
+                {% if darkmode %}
+                    <button type="submit" class="save_button" name="save_time">
+                        <img src="{{ url_for('static', filename='img/icones/proximo_branco.png') }}" class="save_icon" alt="save_icon">
+                    </button>
+                {% else %}
+                    <button type="submit" class="save_button" name="save_time">
+                        <img src="{{ url_for('static', filename='img/icones/proximo.png') }}" class="save_icon" alt="save_icon">
+                    </button>
+                {% endif %}
+                <select disabled class="select_box" name="sprint_escolha" required>                                    
+                    <option  value="" disabled selected>Sprint</option>
+                </select>
+                {% if darkmode %}
+                    <button disabled type="submit" class="disabled_filtro_button" name="filtrar">
+                        <img src="{{ url_for('static', filename='img/icones/filtro_branco.png') }}" class="filtro_icon" alt="save_icon">
+                    </button>
+                {% else %}
+                    <button disabled type="submit" class="disabled_filtro_button" name="filtrar">
+                        <img src="{{ url_for('static', filename='img/icones/filtro.png') }}" class="filtro_icon" alt="save_icon">
+                    </button>
+                {% endif %}
+            {% else %}
+                <input type="hidden" name="turma_escolha" value="{{ turma_escolha }}">
+                <input type="hidden" name="time_escolha" value="{{ time_escolha }}">
+                <select class="select_box" name="turma_escolha" disabled>
+                        <option value="">{{ nome_turma }}</option>
+                </select>
+                <select class="select_box" name="time_escolha" disabled>                                    
+                    <option  value="" disabled selected>{{ nome_time }}</option>
+                </select>
                 <select class="select_box" name="sprint_escolha" required>                                    
                     <option  value="" disabled selected>Sprint</option>
-                    {% for i in range (1,qtia_sprints+1) %}
-                            <option value="{{ i }}">{{ i }}</option>
-                    {% endfor %}
-                            <option value="0">GERAL</option>
+                    {% for sprint in team_sprints %}                                   
+                        <option  value="{{ sprint }}">{{ sprint }}</option>
+                    {% endfor %}            
+                        <option  value="0">GERAL</option>
                 </select>
                 {% if darkmode %}
                     <button type="submit" class="filtro_button" name="filtrar" style="cursor: pointer">

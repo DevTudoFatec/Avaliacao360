@@ -1,4 +1,4 @@
-from flask import request, flash, redirect, url_for, Blueprint as bp
+from flask import request, flash, redirect, url_for, render_template, Blueprint as bp
 import json
 import os
 from datetime import datetime, timedelta
@@ -18,7 +18,7 @@ def run_async_loop(loop):
     asyncio.set_event_loop(loop)
     loop.run_forever()
 
-#connection = email_connect()
+# connection = email_connect()
 #########      ACESSO GERAL          ############
 
 @bp.route("/cadastro_submit", methods=["POST"])
@@ -247,9 +247,9 @@ def criar_projeto():
         user['avaliacoes'] = periodos_avaliacao
         user['count_avaliacao'] = 0
 
-        loop = asyncio.new_event_loop()
-        thread = threading.Thread(target=run_async_loop, args=(loop,))
-        thread.start()
+        # loop = asyncio.new_event_loop()
+        # thread = threading.Thread(target=run_async_loop, args=(loop,))
+        # thread.start()
 
         # asyncio.run_coroutine_threadsafe(send_email_async(
         #           smtp_connection=connection,

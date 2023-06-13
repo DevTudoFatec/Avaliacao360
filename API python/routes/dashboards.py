@@ -137,7 +137,8 @@ def dashboards_operacionais():
         turma_merged['sprint'] = turma_merged['sprint'].apply(lambda x: 'Geral' if x == 'ZZZ Geral' else x.replace('Sprint ', ''))
 
         fig = px.bar(turma_merged, x='critério', y='nota média',color='sprint',
-                    title=f'{turma_nome} - Avaliação Média', labels={'sprint': 'Sprint'}, barmode='group'
+                    title=f'{turma_nome} - Avaliação Média', labels={'sprint': 'Sprint'}, barmode='group', 
+                    color_discrete_sequence=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']
                     )
         if session['darkmode']:
             fig.update_layout(
@@ -151,7 +152,8 @@ def dashboards_operacionais():
         time_merged['sprint'] = time_merged['sprint'].apply(lambda x: 'Geral' if x == 'ZZZ Geral' else x.replace('Sprint ', ''))
 
         fig = px.bar(time_merged, x='critério', y='nota média', color='sprint',
-                    title=f'{time_nome} - Avaliação Média', labels={'sprint': 'Sprint'}, barmode='group')
+                    title=f'{time_nome} - Avaliação Média', labels={'sprint': 'Sprint'}, barmode='group', 
+                    color_discrete_sequence=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd'])
         if session['darkmode']:
             fig.update_layout(
                 template="plotly_dark",
@@ -165,7 +167,8 @@ def dashboards_operacionais():
 
         fig = px.bar(integrante_merged, x='critério', y='nota média', color='sprint', facet_col_wrap=2,
                             facet_col='nome_integrante', title='Integrantes - Avaliação Média', 
-                            labels={'sprint': 'Sprint', 'nome_integrante': 'Integrante'}, barmode='group')
+                            labels={'sprint': 'Sprint', 'nome_integrante': 'Integrante'}, barmode='group', 
+                    color_discrete_sequence=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd'])
         if session['darkmode']:
             fig.update_layout(
                 template="plotly_dark",
@@ -257,7 +260,8 @@ def dashboards_operacionais():
         turma_merged['sprint'] = turma_merged['sprint'].apply(lambda x: 'Geral' if x == 'ZZZ Geral' else x.replace('Sprint ', ''))
 
         fig = px.bar(turma_merged, x='critério', y='nota média',color='sprint',
-                    title=f'{turma_nome} - AutoAvaliação Média', labels={'sprint': 'Sprint'}, barmode='group'
+                    title=f'{turma_nome} - AutoAvaliação Média', labels={'sprint': 'Sprint'}, barmode='group', 
+                    color_discrete_sequence=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']
                     )
         if session['darkmode']:
             fig.update_layout(
@@ -271,7 +275,8 @@ def dashboards_operacionais():
         time_merged['sprint'] = time_merged['sprint'].apply(lambda x: 'Geral' if x == 'ZZZ Geral' else x.replace('Sprint ', ''))
 
         fig = px.bar(time_merged, x='critério', y='nota média', color='sprint',
-                    title=f'{time_nome} - AutoAvaliação Média', labels={'sprint': 'Sprint'}, barmode='group')
+                    title=f'{time_nome} - AutoAvaliação Média', labels={'sprint': 'Sprint'}, barmode='group', 
+                    color_discrete_sequence=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd'])
         if session['darkmode']:
             fig.update_layout(
                 template="plotly_dark",
@@ -286,7 +291,8 @@ def dashboards_operacionais():
 
         fig = px.bar(integrante_merged, x='critério', y='nota média', color='sprint', facet_col_wrap=2,
                             facet_col='nome_integrante', title='Integrantes - AutoAvaliação Média', 
-                            labels={'sprint': 'Sprint', 'nome_integrante': 'Integrante'}, barmode='group')
+                            labels={'sprint': 'Sprint', 'nome_integrante': 'Integrante'}, barmode='group', 
+                    color_discrete_sequence=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd'])
         if session['darkmode']:
             fig.update_layout(
                 template="plotly_dark",

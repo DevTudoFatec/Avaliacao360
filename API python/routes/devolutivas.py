@@ -34,25 +34,40 @@ def devolutiva_admin():
   turmas = [turma for turma in turmas if turma['codigo'] in [avaliacao['turma_codigo'] for avaliacao in avaliacoes]]  
 
   select_time = False
-  show_table = False          
+  select_sprint = False
+  show_table = False   
   
   if "save_turma" in request.form:
     select_time = True
     turma_escolha = request.form.get('turma_escolha')
     nome_turma = [turma['nome'] for turma in turmas if turma['codigo'] == turma_escolha][0]
     times = [time for time in times if time['turma'] == turma_escolha and time['codigo'] in [avaliacao['time'] for avaliacao in avaliacoes]]
-    qtia_sprints = len([projeto['avaliacoes'] for projeto in projetos if projeto['turma'] == turma_escolha][0])
 
-    return render_template('admin/devolutiva_admin.html', nome_turma=nome_turma, qtia_sprints=qtia_sprints, 
-                           select_time=select_time, show_table=show_table, nomeUsuario=session['nomeUsuario'], 
+    return render_template('admin/devolutiva_admin.html', nome_turma=nome_turma, nomeUsuario=session['nomeUsuario'],
+                           select_time=select_time, select_sprint=select_sprint, show_table=show_table, 
                            darkmode=session['darkmode'], times=times,turma_escolha=turma_escolha)
+  
+
+  elif "save_time" in request.form:
+    select_sprint = True
+    time_escolha = int(request.form.get('time_escolha'))
+    turma_escolha = request.form.get('turma_escolha')
+    nome_turma = [turma['nome'] for turma in turmas if turma['codigo'] == turma_escolha][0]
+    nome_time = [time['nome'] for time in times if time['codigo'] == time_escolha][0]
+    team_sprints = list(set([avaliacao['sprint'] for avaliacao in avaliacoes if avaliacao['time'] == time_escolha and avaliacao['sprint'] in [autoavaliacao['sprint'] for autoavaliacao in autoavaliacoes if autoavaliacao['time'] == time_escolha]])) 
+
+    return render_template('admin/devolutiva_admin.html', team_sprints=team_sprints, nomeUsuario=session['nomeUsuario'], 
+                           select_time=select_time, select_sprint=select_sprint, show_table=show_table, time_escolha=time_escolha, 
+                           darkmode=session['darkmode'], turma_escolha=turma_escolha, nome_turma=nome_turma, nome_time=nome_time)
   
   elif "filtrar" in request.form:
     turma_escolha = request.form.get("turma_escolha")
     nome_turma = [turma['nome'] for turma in turmas if turma['codigo'] == turma_escolha][0]
+
     time_escolha = int(request.form.get('time_escolha'))
     nome_time = [time['nome'] for time in times if time['codigo'] == time_escolha][0]
-    sprint_escolha = [int(request.form.get("sprint_escolha"))] if int(request.form.get("sprint_escolha")) != 0 else [i for i in range(1,len([projeto['avaliacoes'] for projeto in projetos if projeto['turma'] == turma_escolha][0])+1)]
+
+    sprint_escolha = [int(request.form.get("sprint_escolha"))] if int(request.form.get("sprint_escolha")) != 0 else list(set([avaliacao['sprint'] for avaliacao in avaliacoes if avaliacao['time'] == time_escolha and avaliacao['sprint'] in [autoavaliacao['sprint'] for autoavaliacao in autoavaliacoes if autoavaliacao['time'] == time_escolha]]))
     sprint_string = ', '.join(str(x) for x in sprint_escolha) if len(sprint_escolha) > 1 else str(sprint_escolha[0])
 
     notas_medias_turma = {}
