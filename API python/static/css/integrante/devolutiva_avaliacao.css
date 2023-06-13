@@ -227,15 +227,15 @@ table tr:first-child{
   table-layout: fixed;
   width: 105%;
   margin-left: -7.5%;
-  margin-top: 3%;
+  margin-top: 13%;
 }
 
 .legenda_trc{
   position: relative;
   float: right;
   width: 15%;
-  margin-top: -12%;
-  margin-right: 2%;
+  margin-top: -7%;
+  margin-right: 10%;
 }
 
 

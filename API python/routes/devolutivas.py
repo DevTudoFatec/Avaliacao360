@@ -202,11 +202,11 @@ def devolutiva_integrante():
 
   if request.method == 'GET':
     pre_devolutiva = True
-    team_sprints = len(session['avaliacoes'])  
+    team_sprints = list(set([avaliacao['sprint'] for avaliacao in avaliacoes if avaliacao['integrante'] == session['email'] and avaliacao['sprint'] in [autoavaliacao['sprint'] for autoavaliacao in autoavaliacoes if autoavaliacao['email'] == session['email']]])) 
 
     return render_template('integrante/devolutiva_avaliacao.html', pre_devolutiva=pre_devolutiva, team_sprints=team_sprints,
                               nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'], avaliacao_check=session['avaliacao'],
-                              sprint_index=session['sprint'], count=session['count_avaliacao'])
+                              sprint_index=session['sprint'], count=session['count_avaliacao'], team__sprints = len(team_sprints))
 
   elif "confirm_devolutiva" in request.form:
 

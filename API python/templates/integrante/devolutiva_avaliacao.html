@@ -11,11 +11,14 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/integrante/devolutiva_avaliacao.css') }}">
   {% if darkmode%}
   <style>
-    h2, h3, .sprint_sign, .sprint_pre_sign, .number{
-      color: white;
+    h3, h5, .sprint_sign, .sprint_pre_sign, .number{
+      color: snow;
     }
     table {
         background-color: #383838;
+    }
+    .legenda_trc {
+        background-color: aliceblue;
     }
     
   </style>
@@ -49,15 +52,15 @@
             <h1 class="bt_pre_devolutiva">DEVOLUTIVA AVALIAÇÃO</h1>
             <h3 class="sprint_pre_sign">Selecione a Sprint:</h3>
             <form class="form_devolutiva" method="POST" action="{{ url_for('devolutivas.devolutiva_integrante') }}">
-                {% for i in range(1,team_sprints+1) %}
+                {% for i in team_sprints %}
                     <input type="radio" name="sprint_escolha" value="{{i}}" required><a class="number"> {{ i }}</a>
                 {% endfor %} 
                 <br>
                 <br>
-                {% if team_sprints > 0 %}
-                <button class="bt_confirmar_trc" name="confirm_devolutiva" type="submit">CONFIRMAR</button>
+                {% if team__sprints > 0 %}
+                    <button class="bt_confirmar_trc" name="confirm_devolutiva" type="submit">CONFIRMAR</button>
                 {% else %}
-                <button disabled class="bt_confirmar_trc" name="confirm_devolutiva" type="submit">CONFIRMAR</button>
+                    <button disabled class="bt_confirmar_trc" name="confirm_devolutiva" type="submit">CONFIRMAR</button>
                 {% endif %}
             <form>
         </div>

@@ -79,19 +79,6 @@
   },
   {
     "email":"claudio@email.com",
-    "sprint":3,
-    "turma_codigo":"bd01",
-    "turma_nome":"Banco De Dados",
-    "time":1,
-    "time_nome":"DevTudo",
-    "comunicacao":2,
-    "engajamento":1,
-    "conhecimento":5,
-    "entrega":2,
-    "autogestao":4
-  },
-  {
-    "email":"claudio@email.com",
     "sprint":4,
     "turma_codigo":"bd01",
     "turma_nome":"Banco De Dados",

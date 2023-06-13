@@ -132,8 +132,9 @@ def dashboards_operacionais():
                 df['nome_integrante'] = [user['nome'] for user in users if user['email'] == integrante][0]
                 integrante_merged = pd.concat([integrante_merged, df], ignore_index=True)
 
-        turma_merged['sprint'] = turma_merged['sprint'].apply(lambda x: 'Sprint ' + str(x) if x != 'geral' else 'Geral')
-        turma_merged = turma_merged.sort_values(by='sprint', ascending=False)
+        turma_merged['sprint'] = turma_merged['sprint'].apply(lambda x: 'Sprint ' + str(x) if x != 'geral' else 'ZZZ Geral')
+        turma_merged = turma_merged.sort_values(by='sprint')
+        turma_merged['sprint'] = turma_merged['sprint'].apply(lambda x: 'Geral' if x == 'ZZZ Geral' else x.replace('Sprint ', ''))
 
         fig = px.bar(turma_merged, x='critério', y='nota média',color='sprint',
                     title=f'{turma_nome} - Avaliação Média', labels={'sprint': 'Sprint'}, barmode='group'
@@ -145,8 +146,9 @@ def dashboards_operacionais():
             )
         turma_figures.append(fig.to_html(full_html=False))
 
-        time_merged['sprint'] = time_merged['sprint'].apply(lambda x: 'Sprint ' + str(x) if x != 'geral' else 'Geral')
-        time_merged = time_merged.sort_values(by='sprint', ascending=False)
+        time_merged['sprint'] = time_merged['sprint'].apply(lambda x: 'Sprint ' + str(x) if x != 'geral' else 'ZZZ Geral')
+        time_merged = time_merged.sort_values(by='sprint')
+        time_merged['sprint'] = time_merged['sprint'].apply(lambda x: 'Geral' if x == 'ZZZ Geral' else x.replace('Sprint ', ''))
 
         fig = px.bar(time_merged, x='critério', y='nota média', color='sprint',
                     title=f'{time_nome} - Avaliação Média', labels={'sprint': 'Sprint'}, barmode='group')
@@ -157,8 +159,9 @@ def dashboards_operacionais():
             )
         time_figures.append(fig.to_html(full_html=False))
         
-        integrante_merged['sprint'] = integrante_merged['sprint'].apply(lambda x: 'Sprint ' + str(x) if x != 'geral' else 'Geral')
-        integrante_merged = integrante_merged.sort_values(by='sprint', ascending=False)
+        integrante_merged['sprint'] = integrante_merged['sprint'].apply(lambda x: 'Sprint ' + str(x) if x != 'geral' else 'ZZZ Geral')
+        integrante_merged = integrante_merged.sort_values(by='sprint')
+        integrante_merged['sprint'] = integrante_merged['sprint'].apply(lambda x: 'Geral' if x == 'ZZZ Geral' else x.replace('Sprint ', ''))
 
         fig = px.bar(integrante_merged, x='critério', y='nota média', color='sprint', facet_col_wrap=2,
                             facet_col='nome_integrante', title='Integrantes - Avaliação Média', 
@@ -249,8 +252,9 @@ def dashboards_operacionais():
                 df['nome_integrante'] = [user['nome'] for user in users if user['email'] == integrante][0]
                 integrante_merged = pd.concat([integrante_merged, df], ignore_index=True)
 
-        turma_merged['sprint'] = turma_merged['sprint'].apply(lambda x: 'Sprint ' + str(x) if x != 'geral' else 'Geral')
-        turma_merged = turma_merged.sort_values(by='sprint', ascending=False)
+        turma_merged['sprint'] = turma_merged['sprint'].apply(lambda x: 'Sprint ' + str(x) if x != 'geral' else 'ZZZ Geral')
+        turma_merged = turma_merged.sort_values(by='sprint')        
+        turma_merged['sprint'] = turma_merged['sprint'].apply(lambda x: 'Geral' if x == 'ZZZ Geral' else x.replace('Sprint ', ''))
 
         fig = px.bar(turma_merged, x='critério', y='nota média',color='sprint',
                     title=f'{turma_nome} - AutoAvaliação Média', labels={'sprint': 'Sprint'}, barmode='group'
@@ -262,8 +266,9 @@ def dashboards_operacionais():
             )
         turma_figures.append(fig.to_html(full_html=False))
 
-        time_merged['sprint'] = time_merged['sprint'].apply(lambda x: 'Sprint ' + str(x) if x != 'geral' else 'Geral')
-        time_merged = time_merged.sort_values(by='sprint', ascending=False)
+        time_merged['sprint'] = time_merged['sprint'].apply(lambda x: 'Sprint ' + str(x) if x != 'geral' else 'ZZZ Geral')
+        time_merged = time_merged.sort_values(by='sprint')
+        time_merged['sprint'] = time_merged['sprint'].apply(lambda x: 'Geral' if x == 'ZZZ Geral' else x.replace('Sprint ', ''))
 
         fig = px.bar(time_merged, x='critério', y='nota média', color='sprint',
                     title=f'{time_nome} - AutoAvaliação Média', labels={'sprint': 'Sprint'}, barmode='group')
@@ -274,8 +279,9 @@ def dashboards_operacionais():
             )
         time_figures.append(fig.to_html(full_html=False))
 
-        integrante_merged['sprint'] = integrante_merged['sprint'].apply(lambda x: 'Sprint ' + str(x) if x != 'geral' else 'Geral')
-        integrante_merged = integrante_merged.sort_values(by='sprint', ascending=False)
+        integrante_merged['sprint'] = integrante_merged['sprint'].apply(lambda x: 'Sprint ' + str(x) if x != 'geral' else 'ZZZ Geral')
+        integrante_merged = integrante_merged.sort_values(by='sprint')
+        integrante_merged['sprint'] = integrante_merged['sprint'].apply(lambda x: 'Geral' if x == 'ZZZ Geral' else x.replace('Sprint ', ''))
 
 
         fig = px.bar(integrante_merged, x='critério', y='nota média', color='sprint', facet_col_wrap=2,
@@ -366,8 +372,8 @@ def dashboards_gerenciais():
         counts_false = df.iloc[:, 1:].count() - counts_true
 
         fig_column = go.Figure()
-        fig_column.add_trace(go.Bar(x=counts_true.index, y=counts_true, name='Ok'))
-        fig_column.add_trace(go.Bar(x=counts_false.index, y=counts_false, name='Pendente'))
+        fig_column.add_trace(go.Bar(x=counts_true.index, y=counts_true, name='Ok', marker={'color': 'rgb(0, 100, 0)'}))
+        fig_column.add_trace(go.Bar(x=counts_false.index, y=counts_false, name='Pendente', marker={'color': 'rgb(139, 0, 0)'}))
 
         fig_column.update_layout(
             barmode='group', 
@@ -379,9 +385,14 @@ def dashboards_gerenciais():
         traces = []
 
         for column in df.columns[1:]:
-            counts = df[column].value_counts()
+            counts = df[column].value_counts().reindex([True, False], fill_value=0)
+            labels = ['Ok', 'Pendente']
             percentages = [count / counts.sum() * 100 for count in counts]
-            trace = go.Pie(labels=['Ok', 'Pendente'], values=percentages, name=column)
+            trace = go.Pie(
+                labels=labels, 
+                values=percentages, 
+                name=column,
+                marker={'colors': ['rgb(0, 100, 0)', 'rgb(139, 0, 0)']})
             traces.append(trace)
 
         layout = go.Layout(
@@ -391,7 +402,7 @@ def dashboards_gerenciais():
                     active=0,
                     buttons=[
                         dict(
-                            label=column,
+                            label=f"Sprint {column}",
                             method='update',
                             args=[{'visible': [column == trace.name for trace in traces]}],
                         )
@@ -422,7 +433,7 @@ def dashboards_gerenciais():
 
     return render_template('admin/dashboards_gerenciais.html', nomeUsuario=session['nomeUsuario'], 
                            darkmode=session['darkmode'], turma_nome=turma_nome, time_nome=time_nome,
-                           show_dashboards=show_dashboards, select_time=select_time, turmas=turmas, 
-                           times=times, turma_escolha=turma_escolha, avaliacoes_check=avaliacoes_check,
+                           show_dashboards=show_dashboards, select_time=select_time,  
+                           times=times, turma_escolha=turma_escolha, turmas=turmas,
                            div_grafico_sprint=div_grafico_sprint, div_grafico=div_grafico)
 
