@@ -13,13 +13,13 @@
 ## :dart: Objetivo Sprint 4
 > - Implementação das Dashboards gerenciais e operacionais;
 > - Implementação das alterações solicitadas pelo cliente;
-> - Correção dos falhas de operação.
+> - Correção das falhas de operação.
 
 ## Burndown
 <img src="https://github.com/DevTudoFatec/Avaliacao360/assets/111203231/db3a727d-04b6-4ec1-b692-1cdb1e1bc196" alt="Burndown" style="width:600px;height:350px;"></p>
  
 ## Backlog do produto
-![image](https://github.com/DevTudoFatec/Avaliacao360/assets/111203231/07ab7ce8-df4d-411d-a274-b1d928dcf0aa)
+![image](https://github.com/DevTudoFatec/Avaliacao360/assets/111203231/871fe5ec-964b-4ddd-a718-7332923aeb2c)
 
 ## Tecnologias utilizadas
 <div style="display: inline_block"><br>
