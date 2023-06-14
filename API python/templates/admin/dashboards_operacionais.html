@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin/dashboards_operacionais.css') }}">
     {% if darkmode%}
         <style>
-        h1 {
+        label, h1 {
             color: snow;
         }
         </style>
@@ -23,13 +23,13 @@
         <div class="barra">
             <nav class="menu_lateral">
                 <a href="/menu_admin"> <div class="link">MENU PRINCIPAL</div></a>
+                <a href="/controle_integrantes"> <div class="link">CONTROLE DE INTEGRANTES</div></a>
                 <a href="/controle_turmas"> <div class="link">CONTROLE DE TURMAS</div></a>
                 <a href="/controle_times"> <div class="link">CONTROLE DE TIMES</div></a>
-                <a href="/controle_integrantes"> <div class="link">CONTROLE DE INTEGRANTES</div></a>
                 <a href="/controle_projetos"> <div class="link">CONTROLE DE PROJETOS</div></a>
                 <a href="/devolutiva_admin"> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
-                <div class="actual_page">DASHBOARDS OPERACIONAIS</div>
                 <a href="/dashboards_gerenciais"> <div class="link">DASHBOARDS GERENCIAIS</div></a>
+                <div class="actual_page">DASHBOARDS OPERACIONAIS</div>
                 <a href="/logout"> <div class="link">SAIR ➔ </div></a>
             </nav>
         </div>
@@ -99,30 +99,125 @@
             {% endif %}
         </form>
     </div>
-    <div class="charts-container">
-        {% if show_dashboards %}
+    
+    {% if show_dashboards %}
+        <div class="options_container">
+            <div>
+                <input type="checkbox" id="turma_Checkbox" checked>
+                <label for="turma_Checkbox">Turma</label>
+            </div>
+            <div>
+                <input type="checkbox" id="time_Checkbox" checked>
+                <label for="time_Checkbox">Time</label>
+            </div>
+            <div>
+                <input type="checkbox" id="integrantes_Checkbox" checked>
+                <label for="integrantes_Checkbox">Integrantes</label>
+            </div>
+        </div>
+        
+        <div class="options1_container">
+            <div>
+                <input type="checkbox" id="avaliacao_Checkbox" checked>
+                <label for="avaliacao_Checkbox">Avaliação</label>
+            </div>
+            <div>
+                <input type="checkbox" id="autoavaliacao_Checkbox" checked>
+                <label for="autoavaliacao_Checkbox">Auto Avaliação</label>
+            </div>
+        </div>
+
+        <div class="charts-container">
             <div id="turma-figures">
-                <H1>TURMA</H1>
-                {% for graph in turma_figures %}
-                    {{ graph | safe }}
-                {% endfor %}
+                <div class="dash_title">
+                    <H1>TURMA</H1>
+                </div>
+                <div class="avaliacao_figure">
+                    {{ turma_figures[0] | safe }}
+                </div>
+                <div class="autoavaliacao_figure">
+                    {{ turma_figures[1] | safe }}
+                </div>
             </div>
             <div id="time-figures">
-                <H1>TIME</H1>
-                {% for graph in time_figures %}
-                    {{ graph | safe }}
-                {% endfor %}
+                <div class="dash_title">
+                    <H1>TIME</H1>
+                </div>
+                <div class="avaliacao_figure">
+                    {{ time_figures[0] | safe }}
+                </div>
+                <div class="autoavaliacao_figure">
+                    {{ time_figures[1] | safe }}
+                </div>
             </div>
             <div id="integrante-figures">
-                <H1>INTEGRANTES</H1>
-                {% for graph in integrante_figures %}
-                    {{ graph | safe }}
-                {% endfor %}
+                <div class="dash_title">
+                    <H1>INTEGRANTES</H1>
+                </div>
+                <div class="avaliacao_figure">
+                    {{ integrante_figures[0] | safe }}
+                </div>
+                <div class="autoavaliacao_figure">
+                    {{ integrante_figures[1] | safe }}
+                </div>
             </div>
-        {% endif %}
-    </div>
+        </div>
+    {% endif %}
     <footer>
         <img class="rodape_img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var turmaCheckbox = document.getElementById('turma_Checkbox');
+            var timeCheckbox = document.getElementById('time_Checkbox');
+            var integrantesCheckbox = document.getElementById('integrantes_Checkbox');
+            var avaliacaoCheckbox = document.getElementById('avaliacao_Checkbox');
+            var autoavaliacaoCheckbox = document.getElementById('autoavaliacao_Checkbox');
+
+            var turmaDiv = document.querySelector('#turma-figures');
+            var timeDiv = document.querySelector('#time-figures');
+            var integrantesDiv = document.querySelector('#integrante-figures');
+            var avaliacaoDivs = document.querySelectorAll('.avaliacao_figure');
+            var autoavaliacaoDivs = document.querySelectorAll('.autoavaliacao_figure');
+            var dashTitleDivs = document.querySelectorAll('.dash_title');
+
+
+            turmaCheckbox.addEventListener('change', toggleDivVisibility);
+            timeCheckbox.addEventListener('change', toggleDivVisibility);
+            integrantesCheckbox.addEventListener('change', toggleDivVisibility);
+            avaliacaoCheckbox.addEventListener('change', toggleDivVisibility);
+            autoavaliacaoCheckbox.addEventListener('change', toggleDivVisibility);
+
+            function toggleDivVisibility() {
+                turmaDiv.style.display = turmaCheckbox.checked ? 'block' : 'none';
+                timeDiv.style.display = timeCheckbox.checked ? 'block' : 'none';
+                integrantesDiv.style.display = integrantesCheckbox.checked ? 'block' : 'none';
+                
+                avaliacaoDivs.forEach(function (div) {
+                    div.style.display = avaliacaoCheckbox.checked ? 'block' : 'none';
+                });
+
+                autoavaliacaoDivs.forEach(function (div) {
+                    div.style.display = autoavaliacaoCheckbox.checked ? 'block' : 'none';
+                });
+
+                if (!turmaCheckbox.checked && !timeCheckbox.checked && !integrantesCheckbox.checked) {
+                    document.querySelector('.options1_container').style.display = 'none';
+                } else {
+                    document.querySelector('.options1_container').style.display = 'flex';
+                }
+
+                if (!avaliacaoCheckbox.checked && !autoavaliacaoCheckbox.checked) {             
+                    dashTitleDivs.forEach(function (div) {
+                        div.style.display = 'none';
+                    });
+                } else {                
+                    dashTitleDivs.forEach(function (div) {
+                        div.style.display = 'block';
+                    });
+                }
+            }
+        });
+    </script>
 </body>
 </html>

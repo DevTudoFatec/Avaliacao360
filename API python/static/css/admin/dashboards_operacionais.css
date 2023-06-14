@@ -201,6 +201,7 @@ nav a {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: 3%;
 }
 
 .charts-container > * {
@@ -280,4 +281,138 @@ h1 {
     margin-left: 2%;
     border: none;
     display: inline;
+}
+
+
+
+
+
+
+.options_container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+    gap: 4%;
+}
+
+.options1_container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
+    gap: 2%;
+}
+
+#turma_Checkbox,
+#time_Checkbox,
+#integrantes_Checkbox,
+#avaliacao_Checkbox,
+#autoavaliacao_Checkbox {
+  display: none;
+}
+
+#turma_Checkbox + label,
+#time_Checkbox + label,
+#integrantes_Checkbox + label{
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+  font-size: 25px;
+  margin-left: 10px;
+  font-weight: normal;
+  font-family: 'Courier New', Courier, monospace;
+  padding-left: 30px;
+}
+
+
+#avaliacao_Checkbox + label,
+#autoavaliacao_Checkbox + label{
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+  font-size: 20px;
+  margin-left: 10px;
+  font-weight: normal;
+  font-family: 'Courier New', Courier, monospace;
+  padding-left: 30px;
+}
+
+#turma_Checkbox:checked + label,
+#time_Checkbox:checked + label,
+#integrantes_Checkbox:checked + label,
+#avaliacao_Checkbox:checked + label,
+#autoavaliacao_Checkbox:checked + label {
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#turma_Checkbox + label:before,
+#time_Checkbox + label:before,
+#integrantes_Checkbox + label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #999;
+  background-color: #fff;
+}
+
+
+#avaliacao_Checkbox + label:before,
+#autoavaliacao_Checkbox + label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #999;
+  background-color: #fff;
+}
+
+#turma_Checkbox:checked + label:before,
+#time_Checkbox:checked + label:before,
+#integrantes_Checkbox:checked + label:before,
+#avaliacao_Checkbox:checked + label:before,
+#autoavaliacao_Checkbox:checked + label:before {
+  background-color: #39c915;
+  border-color: #39c915;
+}
+
+#turma_Checkbox:checked + label:after,
+#time_Checkbox:checked + label:after,
+#integrantes_Checkbox:checked + label:after {
+  content: "✔";
+  position: absolute;
+  left: 4px;
+  top: 0;
+  font-size: 16px;
+  color: black;
+  visibility: hidden;
+}
+
+#avaliacao_Checkbox:checked + label:after,
+#autoavaliacao_Checkbox:checked + label:after {
+  content: "✔";
+  position: absolute;
+  left: 2px;
+  top: -2px;
+  font-size: 14px;
+  color: black;
+  visibility: hidden;
+}
+
+#turma_Checkbox:checked + label:after,
+#time_Checkbox:checked + label:after,
+#integrantes_Checkbox:checked + label:after,
+#avaliacao_Checkbox:checked + label:after,
+#autoavaliacao_Checkbox:checked + label:after {
+  visibility: visible;
 }

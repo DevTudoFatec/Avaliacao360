@@ -181,7 +181,7 @@ def devolutiva_admin():
 
     show_table = True
         
-    return render_template('admin/devolutiva_admin.html', turmas=turmas, select_time=select_time,
+    return render_template('admin/devolutiva_admin.html', turmas=turmas, select_time=select_time, sprint_check=len(sprint_escolha),
                           notas_medias_turma=notas_medias_turma, notas_medias_time=notas_medias_time, sprint_string=sprint_string,
                           notas_medias_integrante=notas_medias_integrante, auto_notas_medias_turma=auto_notas_medias_turma, 
                           auto_notas_medias_time=auto_notas_medias_time, auto_notas_medias_integrante=auto_notas_medias_integrante,
