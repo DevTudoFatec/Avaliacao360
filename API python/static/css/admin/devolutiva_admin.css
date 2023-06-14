@@ -132,15 +132,6 @@ h7 {
   font-size: 30px;
 }
 
-.options_container {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10%;
-  gap: 5%;
-}
 
 a {
   text-decoration: none;
@@ -442,6 +433,11 @@ h3 {
   margin: 0;
 }
 
+h1 {
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+}
+
 h4 {
   text-align: center;
   font-weight: lighter;
@@ -476,6 +472,37 @@ h4 {
 }
 
 
+.area_filtro {
+  position: relative;
+  background-color: rgb(221, 221, 221);
+  border-radius: 20px;
+  width: 50%;
+  margin-left: 25%;
+  margin-top: 7%;
+}
+
+h5 {
+  margin: 0;
+  font-size: 20px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.titulo_filtros {
+  width: 100%;
+  background-color: rgb(156, 156, 156);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.options_container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3%;
+  gap: 5%;
+}
 
 .options1_container {
   position: relative;
@@ -484,7 +511,7 @@ h4 {
   justify-content: center;
   align-items: center;
   margin-top: 2%;
-  gap: 2%;
+  gap: 4%;
 }
 
 #turma_Checkbox,
@@ -602,5 +629,7 @@ h4 {
 #feedbacks_Checkbox:checked + label:after {
   visibility: visible;
 }
+
+
 
 

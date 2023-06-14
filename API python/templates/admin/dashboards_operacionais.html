@@ -12,6 +12,12 @@
         label, h1 {
             color: snow;
         }
+        .area_filtro {
+            background-color: gray;
+        }
+        .titulo_filtros{
+            background-color: rgba(102, 102, 102, 0.89);
+        }
         </style>
     {% endif %}
 </head>
@@ -101,7 +107,12 @@
     </div>
     
     {% if show_dashboards %}
+    <div class="area_filtro">
+        <div class="titulo_filtros">
+            <h1>FILTROS:</h1>
+        </div>
         <div class="options_container">
+            <h5>CONJUNTOS DE DADOS:</h5>
             <div>
                 <input type="checkbox" id="turma_Checkbox" checked>
                 <label for="turma_Checkbox">Turma</label>
@@ -115,8 +126,9 @@
                 <label for="integrantes_Checkbox">Integrantes</label>
             </div>
         </div>
-        
+
         <div class="options1_container">
+            <h5>FONTES DE DADOS:</h5>
             <div>
                 <input type="checkbox" id="avaliacao_Checkbox" checked>
                 <label for="avaliacao_Checkbox">Avaliação</label>
@@ -126,6 +138,8 @@
                 <label for="autoavaliacao_Checkbox">Auto Avaliação</label>
             </div>
         </div>
+        <br>
+    </div>
 
         <div class="charts-container">
             <div id="turma-figures">
