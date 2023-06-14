@@ -1,6 +1,6 @@
 # <p align = "center"> API - 1° Semestre - Banco de Dados 2023 
 
-![Avaliação 360° (3)](https://user-images.githubusercontent.com/111469327/229332571-b5c83526-7de5-4818-b9b6-a54e23a34cf4.png)
+<p align="center"><img src="https://github.com/DevTudoFatec/Avaliacao360/assets/111203231/f385f59d-838c-4f95-aa12-7819526b20d3" alt="Capa" style="width:600px;height:350px;"></p>
 
 <p align = "center">
 <a href="#apresentação-da-equipe">Apresentação da Equipe</a> •
@@ -47,7 +47,7 @@ Nosso objetivo é automatizar um produto de forma que cada passo seja validado p
 > - [x] 13/06 a 14/06 - Feira de soluções
 
 ## Backlog do Produto
-![image](https://github.com/DevTudoFatec/Avaliacao360/assets/111203231/59c8fa0c-3dca-4289-b090-1b9fe3415b21)
+![image](https://github.com/DevTudoFatec/Avaliacao360/assets/111203231/ef3e917f-7fea-4191-b7a4-cf6d6fa45318)
 
 ## Tecnologias utilizadas
 <div style="display: inline_block"><br>
