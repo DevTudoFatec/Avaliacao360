@@ -1,7 +1,7 @@
 
 # <p align = "center" > API - 1° Semestre - Banco de Dados 2023 - SPRINT 3 </p>
   
- <p align="center"><img src="https://github.com/DevTudoFatec/Avaliacao360/assets/111203231/b7fadfa2-a89a-427a-a92f-a93fd979149a" alt="Sprint_3" style="width:600px;height:350px;"></p>
+ <p align="center"><img src="https://github.com/DevTudoFatec/Avaliacao360/assets/111203231/4b5f5de3-a0ce-4bda-861e-0c960f605d5b" alt="Sprint_3" style="width:600px;height:350px;"></p>
  
 <p align="center">
  <a href ="#dart-objetivo-sprint-3">Objetivo</a>  •
