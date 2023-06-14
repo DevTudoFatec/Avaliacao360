@@ -1,7 +1,7 @@
 
 # <p align = "center" > API - 1° Semestre - Banco de Dados 2023 - SPRINT 2 </p>
   
- <p align="center"><img src="https://user-images.githubusercontent.com/111203231/233869890-6e948b40-788d-42dc-805f-3f27e3011bf4.jpg" alt="Sprint_2" style="width:600px;height:350px;"></p>
+ <p align="center"><img src="https://github.com/DevTudoFatec/Avaliacao360/assets/111203231/e41c3320-bce0-4ea3-b69b-63b1136f175d" alt="Sprint_2" style="width:600px;height:350px;"></p>
  
 <p align="center">
  <a href ="#dart-objetivo-sprint-2">Objetivo</a>  •
@@ -41,6 +41,3 @@
   <div style="display: inline_block"><br>
   
   + Acesse nosso [Figma](https://www.figma.com/file/86VvL8DaM6IR9RH06jVobp/PBLTeX-Projeto?node-id=0%3A1&t=Av9utODXTrCT0tAK-1) e [Trello](https://trello.com/b/CHEOxSyG/avalia%C3%A7%C3%A3o-360)
-    
-  ## Acessar códigos
-   + Para acessar os códigos realizados na segunda Sprint, entre no link: [Códigos Sprint2](https://github.com/DevTudoFatec/Avaliacao360/tree/Sprint_2/API%20python)
