@@ -1,5 +1,6 @@
 from functools import wraps
 from flask import session, redirect, url_for
+import json
 
 def login_required(route_function):
     @wraps(route_function)
@@ -38,5 +39,21 @@ def sprint_required(route_function):
     def decorated_function(*args, **kwargs):
         if session['sprint'] == session['count_avaliacao']:
             return redirect(url_for('padroes.menu_integrante'))
+        return route_function(*args, **kwargs)
+    return decorated_function
+
+def data_required(route_function):
+    @wraps(route_function)
+    def decorated_function(*args, **kwargs):
+        try:
+            with open("data/avaliacao.json", "r") as f:
+                avaliacoes = json.load(f)
+                if len(avaliacoes) < 1:
+                    return redirect(url_for('padroes.menu_admin'))
+        except:
+            if session['perfil'] == 1:
+                return redirect(url_for('padroes.menu_integrante'))
+            elif session['perfil'] == 2:
+                return redirect(url_for('padroes.menu_admin'))
         return route_function(*args, **kwargs)
     return decorated_function

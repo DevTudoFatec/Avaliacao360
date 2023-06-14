@@ -34,13 +34,9 @@
   <div class="barra">
     <nav class="menu_lateral">
         <a href="/menu_integrante"> <div class="link">MENU PRINCIPAL</div></a>
-        {% if avaliacao_check %}
-          <a href="/avaliacao"><div class="link">REALIZAR AVALIAÇÃO </div></a>
-        {% else %}
-            <div class="link_disable">REALIZAR AVALIAÇÃO </div>
-        {% endif %}
+        <div class="actual_page">REALIZAR AVALIAÇÃO </div>
         <a href="/devolutiva_integrante"> <div class="link">DEVOLUTIVA DA AVALIAÇÃO</div></a>
-        <a href="/"> <div class="link">SAIR ➔ </div></a>
+        <a href="/logout"> <div class="link">SAIR ➔ </div></a>
     </nav>
   </div>
   <!--- Fim do botão de menu -->

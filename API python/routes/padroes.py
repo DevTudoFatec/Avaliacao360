@@ -1,6 +1,5 @@
 from flask import render_template, request, flash, redirect, url_for, session, Blueprint as bp
 import json
-import os
 from datetime import datetime
 import bcrypt
 from utils.decorators import login_required, admin_required, integrante_required
@@ -12,10 +11,12 @@ bp = bp('padroes', __name__)
 
 @bp.route("/")
 def home():
-  
   return render_template('geral/login.html')
 
-
+@bp.route("/logout")
+def logout():
+  session.clear()
+  return redirect(url_for('padroes.home'))
 
 @bp.route("/cadastro")
 def cadastro():
@@ -79,7 +80,19 @@ def login():
 @login_required
 @admin_required
 def menu_admin():
-  return render_template('admin/menu_admin.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+
+  session['dashboard_check'] = False
+  
+  try:
+    with open("data/avaliacao.json", "r") as f:
+        avaliacoes = json.load(f)
+  except:
+    avaliacoes = []
+  
+  if len(avaliacoes) > 0:
+    session['dashboard_check'] = True
+
+  return render_template('admin/menu_admin.html', nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'], dashboard_check=session['dashboard_check'])
 
 ###### INTEGRANTE  #############
 
@@ -107,6 +120,7 @@ def menu_integrante():
   elif request.method == 'GET':
     
     primeiro_acesso = False
+    devolutiva_check = False
 
     for user in users:
       if user['email'] == session['email']:
@@ -127,5 +141,14 @@ def menu_integrante():
       return render_template('integrante/menu_integrante.html', primeiro_acesso=primeiro_acesso, times=times_turma, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
     
     else:
-      return render_template('integrante/menu_integrante.html', nomeUsuario=session['nomeUsuario'], sprint_index=session['sprint'], count=session['count_avaliacao'], avaliacao_check=session['avaliacao'], darkmode=session['darkmode'])
+      try:
+        with open("data/avaliacao.json", "r") as f:
+          avaliacoes = json.load(f)
+      except:
+        avaliacoes=[]
+
+      if len(avaliacoes) > 0:
+        devolutiva_check = True
+
+      return render_template('integrante/menu_integrante.html', nomeUsuario=session['nomeUsuario'], sprint_index=session['sprint'], count=session['count_avaliacao'], avaliacao_check=session['avaliacao'], devolutiva_check=devolutiva_check, darkmode=session['darkmode'])
 

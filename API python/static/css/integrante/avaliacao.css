@@ -69,8 +69,19 @@ border-bottom: 2px solid #222;}
 
 .link_disable{
   background-color: #bbbbbb;
+  color: black;
   padding: 20px;
   font-size: 12pt;
+  transition: all .2s linear;
+  border-bottom: 2px solid #222;
+}
+
+.actual_page{
+  background-color: #494949;
+  color: #fdc77f;
+  font-weight: bolder;
+  padding: 20px;
+  font-size: 13pt;
   transition: all .2s linear;
   border-bottom: 2px solid #222;
 }
@@ -109,7 +120,7 @@ body {
 }
 
 .bt_avaliacao_trc{
-  background-color: #5e17eb;
+  background-color: #89CFC9;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 150%;
   border-radius: 50px;
@@ -121,15 +132,15 @@ body {
 }
 
 .bt_autoavaliacao_trc{
-  background-color: #5e17eb;
+  background-color: #89CFC9;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 150%;
   border-radius: 50px;
   padding: 0.8%;
   color: white;
-  width: 22%;
+  width: 15%;
   text-align: center;
-  margin-left: 33%;
+  margin-left: 36.5%;
   margin-top: 2%;
 }
 
@@ -159,6 +170,13 @@ body {
   margin-top: 5%;
 }
 
+.bt_confirmar_trc:hover {
+  color: black;
+  background-color: #a6e2b3e8;
+  transform: scale(1.2); 
+  transition: 0.5s; 
+}
+
 .formulario {
   margin-top: -30%;
 }
@@ -179,6 +197,7 @@ body {
   table-layout: fixed;
   width: 105%;
   margin-left: -7.5%;
+  margin-top: 5%;
 }
 
 .form_autoavaliacao {

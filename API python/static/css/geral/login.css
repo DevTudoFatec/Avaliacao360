@@ -86,9 +86,27 @@ button{
     font-weight: bold;
 }
 
+.botao_acessar {
+    cursor: pointer;
+}
+.botao_acessar:hover {
+    color: black;
+    background-color: #a6e2b3e8;
+    transform: scale(1.2); 
+    transition: 0.5s; 
+}
+
 .botao_cadastro {
     margin-top: 1%;
+    cursor: pointer;
 }
+
+.botao_cadastro:hover {
+    color: black;
+    background-color: #a6e2b3e8;
+    transform: scale(1.2); 
+    transition: 0.5s; 
+  }
 
 .flash {
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Gran  de', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;

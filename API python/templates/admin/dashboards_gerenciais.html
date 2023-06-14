@@ -6,7 +6,6 @@
         <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/icones/apple-touch-icon.png') }}">
         <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/icones/favicon-32x32.png') }}">
         <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/icones/favicon-16x16.png') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/integrante/devolutiva_avaliacao.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin/dashboards_gerenciais.css') }}">
     </head>
         <header> 
@@ -16,58 +15,101 @@
             <div class="barra">
                 <nav class="menu_lateral">
                     <a href="/menu_admin"> <div class="link">MENU PRINCIPAL</div></a>
-                    <a href="/controle_turmas"> <div class="link">CONTROLE DE TURMAS/TIMES</div></a>
                     <a href="/controle_integrantes"> <div class="link">CONTROLE DE INTEGRANTES</div></a>
+                    <a href="/controle_turmas"> <div class="link">CONTROLE DE TURMAS</div></a>
+                    <a href="/controle_times"> <div class="link">CONTROLE DE TIMES</div></a>
                     <a href="/controle_projetos"> <div class="link">CONTROLE DE PROJETOS</div></a>
                     <a href="/devolutiva_admin"> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
+                    <div class="actual_page">DASHBOARDS GERENCIAIS</div>
                     <a href="/dashboards_operacionais"> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
-                    <a href="/dashboards_gerenciais"> <div class="link">DASHBOARDS GERENCIAIS</div></a>
-                    <a href="/"> <div class="link">SAIR ➔ </div></a>
+                    <a href="/logout"> <div class="link">SAIR ➔ </div></a>
                 </nav>
             </div>
-            <img id="logo_avaliação" src="{{ url_for('static', filename='img/cadastro/Logo.png') }}" alt="Logo da plataforma" width="300">
+            <a class="menu_redirect" href="/menu_integrante"><img id="logo_avaliação" src="{{ url_for('static', filename='img/menu_admin/Logo API (3).png') }}" width="300px"></a>
             <p><b>Usuário: {{ nomeUsuario }}</b></p>
         </header>
     
         <body {% if darkmode%} style="background-color: #494949;" {% endif %}>
-
             <main>
-                <button class="bt_devolutiva_admin">Dashboard Gerencial</button> <br>
+                <div class="controle_container">
+                    <a href="/devolutiva_admin"><h1 class="bt_nav">Devolutiva de Avaliacões</h1></a>
+                    <a><h1 class="bt_nav_current">Dashboards Gerenciais</h1></a>
+                    <a href="/dashboards_operacionais"><h1 class="bt_nav">Dashboards Operacionais</h1></a>
+                </div>
+                <div class="dashboard_change">
+                </div>
                 <div class="linha_filtro">
-                    <button class="bt_titulo_media_notas">Evolução da média de notas</button>
-                    <!-- Formulário com filtros -->
+                    <button class="bt_titulo_media_notas">Adesão dos Integrantes às Avaliações</button>
                     <form method="POST" id="formulario">
-                        <!-- <div class='legenda'>time</div> -->
-                        <!-- Filtro para times -->
-                        <select class="select_box" name="time">
-                            <option value="">Time</option>
-                            {% for time in times %}
-                                <option value="{{ time }}">{{ time }}</option>
-                            {% endfor %}
-                        </select>
-                    
-                        <br>
-                        <!-- <div class='legenda'>turma</div> -->
-                        <!-- Filtro para turmas -->
-                        <select class="select_box" name="turma">
-                            <option value="">Turma</option>
-                            {% for turma in turmas %}
-                                <option value="{{ turma }}">{{ turma }}</option>
-                            {% endfor %}
-                        </select>
-        
-                        <!-- Botão de envio do formulário -->
-                        <input type="submit" value="Filtrar" class="bt_filtrar">
+                        {% if not select_time %}
+                            <select class="select_box" name="turma_escolha" required>
+                                <option disabled selected value="">Turma</option>
+                                {% for turma in turmas %}
+                                    <option value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
+                                {% endfor %}
+                            </select>
+                            {% if darkmode %}
+                                <button type="submit" class="save_button" name="save_turma">
+                                    <img src="{{ url_for('static', filename='img/icones/proximo_branco.png') }}" class="save_icon" alt="save_icon">
+                                </button>
+                            {% else %}
+                                <button type="submit" class="save_button" name="save_turma">
+                                    <img src="{{ url_for('static', filename='img/icones/proximo.png') }}" class="save_icon" alt="save_icon">
+                                </button>
+                            {% endif %}
+                            <select disabled class="select_box" name="time_escolha">
+                                <option disabled selected value="">Time</option>
+                            </select>
+                            {% if darkmode %}
+                                <button disabled type="submit" class="disabled_filtro_button" name="filtrar">
+                                    <img src="{{ url_for('static', filename='img/icones/filtro_branco.png') }}" class="filtro_icon" alt="save_icon">
+                                </button>
+                            {% else %}
+                                <button disabled type="submit" class="disabled_filtro_button" name="filtrar">
+                                    <img src="{{ url_for('static', filename='img/icones/filtro.png') }}" class="filtro_icon" alt="save_icon">
+                                </button>
+                            {% endif %}
+                        {% else %}
+                            <input type="hidden" name="turma_escolha" value="{{ turma_escolha }}">
+                            <select disabled class="select_box" name="turma">
+                                <option disabled selected value="">{{ turma_nome }}</option>
+                            </select>
+                            {% if darkmode %}
+                                <button type="submit" class="save_button" name="save_turma">
+                                    <img src="{{ url_for('static', filename='img/icones/proximo_branco.png') }}" class="save_icon" alt="save_icon">
+                                </button>
+                            {% else %}
+                                <button type="submit" class="save_button" name="save_turma">
+                                    <img src="{{ url_for('static', filename='img/icones/proximo.png') }}" class="save_icon" alt="save_icon">
+                                </button>
+                            {% endif %}
+                            <select class="select_box" name="time_escolha" required>
+                                <option disabled selected value="">Time</option>
+                                {% for time in times %}
+                                    <option value="{{ time['codigo'] }}">{{ time['nome'] }}</option>
+                                {% endfor %}
+                            </select>
+                            {% if darkmode %}
+                                <button type="submit" class="filtro_button" name="filtrar" style="cursor: pointer;">
+                                    <img src="{{ url_for('static', filename='img/icones/filtro_branco.png') }}" class="filtro_icon" alt="save_icon">
+                                </button>
+                            {% else %}
+                                <button type="submit" class="filtro_button" name="filtrar" style="cursor: pointer;">
+                                    <img src="{{ url_for('static', filename='img/icones/filtro.png') }}" class="filtro_icon" alt="save_icon">
+                                </button>
+                            {% endif %}
+                        {% endif %}
                     </form>
                 </div>
-                <div class="grafico">
-                    <div id="grafico_geral">{{ div_grafico_sprint | safe }}</div>
-                    <div id="grafico_sprint">{{ div_grafico | safe }}</div>
-                </div>
-        
-                <footer>
-                    <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
-                </footer>
+                {% if show_dashboards %}
+                    <div class="grafico">
+                        <div id="grafico_geral">{{ div_grafico_sprint | safe }}</div>
+                        <div id="grafico_sprint">{{ div_grafico | safe }}</div>
+                    </div>
+                {% endif %}
             </main>
+            <footer>
+                <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
+            </footer>
         </body>
         

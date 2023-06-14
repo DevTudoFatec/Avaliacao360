@@ -8,77 +8,6 @@ bp = bp('updates', __name__)
 
 ###### ADMINISTRADOR  #############
 
-
-@bp.route("/update_geral", methods=["POST"])
-@login_required
-@admin_required
-def update_geral():
-    try:
-        with open("data/cadastro.json", "r") as f:
-            users = json.load(f)
-    except:
-        users = []
-
-    try:
-        with open("data/times.json", "r") as f:
-            times = json.load(f)
-    except:
-        times = []
-    
-    try:
-        with open("data/turmas.json", "r") as f:
-            turmas = json.load(f)
-    except:
-        turmas = []
-    
-    editing=False
-    editing_time=False
-    editing_perfil=False
-
-    index = int(request.form.get("index"))
-
-    if "edit" in request.form:
-        editing=True
-
-    elif "save_turma" in request.form:
-        editing_time=True
-
-        session['edited_turma'] = request.form.get("edited_turma")            
-
-    elif "save_time" in request.form:
-        editing_perfil=True
-
-        session['edited_time'] = request.form.get("edited_time")
-
-    elif "save_perfil" in request.form:        
-        edited_perfil = request.form.get("edited_perfil")
-
-        for user in users:
-          if user['index'] == index:
-            user['turma'] = session['edited_turma']
-            user['time'] = int(session['edited_time'])
-            user['perfil'] = int(edited_perfil)
-
-        with open("data/cadastro.json", "w") as file:
-            json.dump(users, file, indent=2)
-
-        return redirect(url_for('controles.controle_integrantes'))        
-    
-    elif "delete" in request.form:
-        editing=False
-
-        for user in users:
-          if user['index'] == index:
-            users.remove(user)  
-
-        with open("data/cadastro.json", "w") as file:
-            json.dump(users, file, indent=2)
-
-        return redirect(url_for('controles.controle_integrantes'))        
-
-    return render_template('admin/controle_integrantes.html', users=users, turmas=turmas, times=times, editing=editing, editing_time=editing_time, editing_perfil=editing_perfil, index=index, darkmode=session['darkmode'])
-
-
 @bp.route("/update_turmas", methods=["POST"])
 @login_required
 @admin_required
@@ -176,7 +105,7 @@ def update_turmas():
           
         return redirect(url_for('controles.controle_turmas'))
 
-    return render_template('admin/controle_turmas.html', confirm_delete=confirm_delete, page=page, users=users, turmas=turmas, times=times, editing=editing, index=index, darkmode=session['darkmode'])
+    return render_template('admin/controle_turmas.html', dashboard_check=session['dashboard_check'], confirm_delete=confirm_delete, page=page, users=users, turmas=turmas, times=times, editing=editing, index=index, darkmode=session['darkmode'])
 
 @bp.route("/update_times", methods=["POST"])
 @login_required
@@ -245,7 +174,7 @@ def update_times():
           
         return redirect(url_for('controles.controle_times'))
 
-    return render_template('admin/controle_times.html', confirm_delete=confirm_delete, users=users, turmas=turmas, times=times, editing=editing, index=index, darkmode=session['darkmode'])
+    return render_template('admin/controle_times.html', dashboard_check=session['dashboard_check'], confirm_delete=confirm_delete, users=users, turmas=turmas, times=times, editing=editing, index=index, darkmode=session['darkmode'])
 
 
 
@@ -354,4 +283,4 @@ def update_projetos():
 
         return redirect(url_for('controles.controle_projetos'))
 
-    return render_template('admin/controle_projetos.html', confirm_delete=confirm_delete, index=index, editing=editing, users=users, turmas=turmas, projetos=projetos, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])
+    return render_template('admin/controle_projetos.html', dashboard_check=session['dashboard_check'], confirm_delete=confirm_delete, index=index, editing=editing, users=users, turmas=turmas, projetos=projetos, nomeUsuario=session['nomeUsuario'], darkmode=session['darkmode'])

@@ -9,15 +9,14 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin/devolutiva_admin.css') }}">
         {% if darkmode%}
           <style>
-            h2, h3, .sprint_sign, .number, .sprint_form, .sprint_pre_sign, .user_nome{
+            label, h2, h3, .sprint_sign, .number, .sprint_form, .sprint_pre_sign, .user_nome, .time_medias{
                   color: snow;
-              }            
-
-            .user_dm {
-                color: rgb(209, 209, 209);
-            }
+              }
             .table_devolutiva {
                 background-color: #383838;
+            }
+            #legenda_trc {
+                background-color: aliceblue;
             }
           </style>
         {% endif %}
@@ -31,369 +30,695 @@
         <div class="barra">
             <nav class="menu_lateral">
                 <a href="/menu_admin"> <div class="link">MENU PRINCIPAL</div></a>
-                <a href="/controle_turmas"> <div class="link">CONTROLE DE TURMAS/TIMES</div></a>
                 <a href="/controle_integrantes"> <div class="link">CONTROLE DE INTEGRANTES</div></a>
+                <a href="/controle_turmas"> <div class="link">CONTROLE DE TURMAS</div></a>
+                <a href="/controle_times"> <div class="link">CONTROLE DE TIMES</div></a>
                 <a href="/controle_projetos"> <div class="link">CONTROLE DE PROJETOS</div></a>
-                <a href="/devolutiva_admin"> <div class="link">DEVOLUTIVA DE AVALIAÇÃO</div></a>
-                <a href="/dashboards_operacionais"> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
+                <div class="actual_page">DEVOLUTIVA DE AVALIAÇÃO</div>
                 <a href="/dashboards_gerenciais"> <div class="link">DASHBOARDS GERENCIAIS</div></a>
-                <a href="/"> <div class="link">SAIR ➔ </div></a>
+                <a href="/dashboards_operacionais"> <div class="link">DASHBOARDS OPERACIONAIS</div></a>
+                <a href="/logout"> <div class="link">SAIR ➔ </div></a>
             </nav>
         </div>
-        <img id="logo_avaliação" src="{{ url_for('static', filename='img/menu_admin/Logo API (3).png') }}" width="300">
+        <a class="menu_redirect" href="/menu_integrante"><img id="logo_avaliação" src="{{ url_for('static', filename='img/menu_admin/Logo API (3).png') }}" width="300px"></a>
         <p><b>Usuário: {{ nomeUsuario }}</b></p>
         </header>
-
-    {% if pre_devolutiva %}
-        <div class="titulos_form">
-            <h1 class="bt_pre_devolutiva">DEVOLUTIVA AVALIAÇÃO</h1>
-            <h3 class="sprint_pre_sign">Selecione a Turma, <br>o Time e a Sprint:</h3>
-            {% if select_turma %}
-                <form class="form_devolutiva" method="POST" action="{{ url_for('devolutivas.devolutiva_admin') }}">
-                    <select class="input_turma_time" name="turma_escolha" required>                                    
-                        <option  value="" disabled selected>Nome da Turma</option>
-                        {% for turma in turmas %}
-                                <option value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
-                        {% endfor %}
-                    </select>
-                    <br>
-                    <br>
-                    <button class="bt_confirmar_trc" name="confirm_turma" type="submit" style="margin-left: 1%">CONFIRMAR TURMA</button>
-                    <br>
-                    <br>
-                    <select class="input_turma_time" disabled>                                    
-                        <option  value="" disabled selected>Nome do Time</option>
-                    </select>
-                <form>
-            {% else %}
-                <form class="form_devolutiva" method="POST" action="{{ url_for('devolutivas.devolutiva_admin') }}">
-                    <select class="input_turma_time" disabled>
-                        <option value="">{{ turma_tela }}</option>
-                    </select>
-                    <br>
-                    <br>                    
-                    <select class="input_turma_time" name="time_escolha" required>                                    
-                        <option  value="" disabled selected>Nome do Time</option>
-                        {% for time in times %}
-                                <option value="{{ time['codigo'] }}">{{ time['nome'] }}</option>
-                        {% endfor %}
-                    </select>
-                    <br>
-                    <p class="sprint_form">Sprint:</p>
-                    {% for i in range(1,turma_sprints+1) %}
-                        <input type="radio" class="input_sprint" name="sprint_escolha" value="{{i}}" required><a class="number"> {{i}}</a>
-                    {% endfor %}
-                    <br>
-                    <br>
-                    <button class="bt_confirmar_trc" name="confirm_devolutiva" type="submit" style="margin-left: 1%">CONFIRMAR</button>
-                <form>
-            {% endif %}
+        <div class="controle_container">
+            <a><h1 class="bt_nav_current">Devolutiva de Avaliacões</h1></a>
+            <a href="/dashboards_gerenciais"><h1 class="bt_nav">Dashboards Gerenciais</h1></a>
+            <a href="dashboards_operacionais"><h1 class="bt_nav">Dashboards Operacionais</h1></a>
         </div>
-    {% else %}
 
+    <div class="form_div">
+        <button class="bt_titulo_media_notas">Avaliações e Autovaliações</button>
+        <form class="form_devolutiva" method="POST" action="{{ url_for('devolutivas.devolutiva_admin') }}">
+            {% if not select_time and not select_sprint %}
+                <select class="select_box" name="turma_escolha" required>                                    
+                    <option  value="" disabled selected>Turma</option>
+                    {% for turma in turmas %}
+                            <option value="{{ turma['codigo'] }}">{{ turma['nome'] }}</option>
+                    {% endfor %}
+                </select>
+                {% if darkmode %}
+                    <button type="submit" class="save_button" name="save_turma">
+                        <img src="{{ url_for('static', filename='img/icones/proximo_branco.png') }}" class="save_icon" alt="save_icon">
+                    </button>
+                {% else %}
+                    <button type="submit" class="save_button" name="save_turma">
+                        <img src="{{ url_for('static', filename='img/icones/proximo.png') }}" class="save_icon" alt="save_icon">
+                    </button>
+                {% endif %}
+                <select class="select_box" name="time_escolha" disabled>                                    
+                    <option  value="" disabled selected>Time</option>
+                </select>
+                <select class="select_box" name="sprint_escolha" disabled>                                    
+                    <option  value="" disabled selected>Sprint</option>
+                </select>
+                {% if darkmode %}
+                    <button disabled type="submit" class="disabled_filtro_button" name="filtrar">
+                        <img src="{{ url_for('static', filename='img/icones/filtro_branco.png') }}" class="filtro_icon" alt="save_icon">
+                    </button>
+                {% else %}
+                    <button disabled type="submit" class="disabled_filtro_button" name="filtrar">
+                        <img src="{{ url_for('static', filename='img/icones/filtro.png') }}" class="filtro_icon" alt="save_icon">
+                    </button>
+                {% endif %}
+            {% elif not select_sprint %}
+                <input type="hidden" name="turma_escolha" value="{{ turma_escolha }}">
+                <select class="select_box" name="turma_escolha" disabled>
+                        <option value="">{{ nome_turma }}</option>
+                </select>
+                <select class="select_box" name="time_escolha" required>                                    
+                    <option  value="" disabled selected>Time</option>
+                    {% for time in times %}
+                            <option value="{{ time['codigo'] }}">{{ time['nome'] }}</option>
+                    {% endfor %}
+                </select>
+                {% if darkmode %}
+                    <button type="submit" class="save_button" name="save_time">
+                        <img src="{{ url_for('static', filename='img/icones/proximo_branco.png') }}" class="save_icon" alt="save_icon">
+                    </button>
+                {% else %}
+                    <button type="submit" class="save_button" name="save_time">
+                        <img src="{{ url_for('static', filename='img/icones/proximo.png') }}" class="save_icon" alt="save_icon">
+                    </button>
+                {% endif %}
+                <select disabled class="select_box" name="sprint_escolha" required>                                    
+                    <option  value="" disabled selected>Sprint</option>
+                </select>
+                {% if darkmode %}
+                    <button disabled type="submit" class="disabled_filtro_button" name="filtrar">
+                        <img src="{{ url_for('static', filename='img/icones/filtro_branco.png') }}" class="filtro_icon" alt="save_icon">
+                    </button>
+                {% else %}
+                    <button disabled type="submit" class="disabled_filtro_button" name="filtrar">
+                        <img src="{{ url_for('static', filename='img/icones/filtro.png') }}" class="filtro_icon" alt="save_icon">
+                    </button>
+                {% endif %}
+            {% else %}
+                <input type="hidden" name="turma_escolha" value="{{ turma_escolha }}">
+                <input type="hidden" name="time_escolha" value="{{ time_escolha }}">
+                <select class="select_box" name="turma_escolha" disabled>
+                        <option value="">{{ nome_turma }}</option>
+                </select>
+                <select class="select_box" name="time_escolha" disabled>                                    
+                    <option  value="" disabled selected>{{ nome_time }}</option>
+                </select>
+                <select class="select_box" name="sprint_escolha" required>                                    
+                    <option  value="" disabled selected>Sprint</option>
+                    {% for sprint in team_sprints %}                                   
+                        <option  value="{{ sprint }}">{{ sprint }}</option>
+                    {% endfor %}            
+                        <option  value="0">GERAL</option>
+                </select>
+                {% if darkmode %}
+                    <button type="submit" class="filtro_button" name="filtrar" style="cursor: pointer">
+                        <img src="{{ url_for('static', filename='img/icones/filtro_branco.png') }}" class="filtro_icon" alt="save_icon">
+                    </button>
+                {% else %}
+                    <button type="submit" class="filtro_button" name="filtrar" style="cursor: pointer">
+                        <img src="{{ url_for('static', filename='img/icones/filtro.png') }}" class="filtro_icon" alt="save_icon">
+                    </button>
+                {% endif %}
+            {% endif %}
+        </form>
+    </div>
+    {% if show_table %}
     <div class="header_infos">
-        <h1 class="bt_devolutiva">DEVOLUTIVA AVALIAÇÃO</h1>
-        <h2 class="sprint_sign">Sprint: {{ sprint }}</h2>
-        <h2 class="sprint_sign">Time: {{ time_nome }}</h2>
+        <h2 class="sprint_sign">Sprint: {{ sprint_string }}</h2>
+        <h2 class="sprint_sign">Turma: {{ nome_turma }}</h2>
+        <h2 class="sprint_sign">Time: {{ nome_time }}</h2>
     </div>
     <div>
         <img id="legenda_trc" src="{{ url_for('static', filename='img/avaliacao/legenda.png') }}" alt="legenda">
     </div>
 
+    <div class="options_container">
+        <div>
+            <input type="checkbox" id="turma_Checkbox" checked>
+            <label for="turma_Checkbox">Turma</label>
+        </div>
+        <div>
+            <input type="checkbox" id="time_Checkbox" checked>
+            <label for="time_Checkbox">Time</label>
+        </div>
+        <div>
+            <input type="checkbox" id="integrantes_Checkbox" checked>
+            <label for="integrantes_Checkbox">Integrantes</label>
+        </div>
+    </div>
+
+    <div class="options1_container">
+        <div>
+            <input type="checkbox" id="avaliacao_Checkbox" checked>
+            <label for="avaliacao_Checkbox">Avaliação</label>
+        </div>
+        <div>
+            <input type="checkbox" id="autoavaliacao_Checkbox" checked>
+            <label for="autoavaliacao_Checkbox">Auto Avaliação</label>
+        </div>
+        <div>
+            <input type="checkbox" id="feedbacks_Checkbox" checked>
+            <label for="feedbacks_Checkbox">Feedbacks</label>
+        </div>
+    </div>
+
     <div class="content">
-        {% for user in users %}
-            <h1 class="user_nome">{{ user['nome'] }}</h1>
-            <h1 class="user_dm">Desvio Medio Autoavaliacao/Avaliacao <br>do Integrante: {% if users_data[user['email']]['desvio_medio'] == 0 %} <span style="color: rgba(53, 111, 236, 0.932)">{{users_data[user['email']]['desvio_medio']}}</span> 
-                                        {% elif users_data[user['email']]['desvio_medio'] < 0 %} <span style="color: rgba(211, 32, 32, 0.911)">{{users_data[user['email']]['desvio_medio']}}</span>  
-                                        {% else %} <span style="color: rgb(3, 160, 3)">{{users_data[user['email']]['desvio_medio']}}</span> 
-                                        {% endif %}</h1>
+        <div class="table_turma">
+            <div class="dash_title">
+            <h1 class="time_medias">MÉDIAS DA TURMA</h1>
             <table class="table_devolutiva">
-                <tr>
+                <tr class="table_header">
                     <td>
-                        <h2>TIPO DE AVALIAÇÃO</h2>
+                        <h6>TIPO DE AVALIAÇÃO</h6>
                     </td>
                     <td>
-                        <h2>COMUNICAÇÃO E TRABALHO<br>EM EQUIPE</h2>
+                        <h6>COMUNICAÇÃO E TRABALHO<br>EM EQUIPE</h6>
                     </td>
                     <td>
-                        <h2>ENGAJAMENTO E PRÓ-ATIVIDADE</h2>
+                        <h6>ENGAJAMENTO E PRÓ-ATIVIDADE</h6>
                     </td>
                     <td>
-                        <h2>CONHECIMENTO E <br>APLICABILIDADE TÉCNICA</h2>
+                        <h6>CONHECIMENTO E <br>APLICABILIDADE TÉCNICA</h6>
                     </td>
                     <td>
-                        <h2>ENTREGA DE RESULTADOS COM <br>VALOR AGREGADO</h2>
+                        <h6>ENTREGA DE RESULTADOS COM <br>VALOR AGREGADO</h6>
                     </td>
                     <td>
-                        <h2>AUTO-GESTÃO DAS ATIVIDADES</h2>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <h2>AVALIAÇÃO DA EQUIPE</h2>
-                    </td>
-                    <td>
-                        {% if 0 < users_data[user['email']]['avgs']['comunicacao'] < 3 %}
-                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ users_data[user['email']]['avgs']['comunicacao'] }}</h4>
-                        {% elif 3 <= users_data[user['email']]['avgs']['comunicacao'] < 4 %}
-                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ users_data[user['email']]['avgs']['comunicacao'] }}</h4>
-                        {% elif users_data[user['email']]['avgs']['comunicacao'] >= 4 %}
-                            <h4 style="color: rgb(3, 160, 3)">{{ users_data[user['email']]['avgs']['comunicacao'] }}</h4>
-                        {% else %}
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if 0 <  users_data[user['email']]['avgs']['engajamento'] < 3 %}
-                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ users_data[user['email']]['avgs']['engajamento'] }}</h4>
-                        {% elif 3 <= users_data[user['email']]['avgs']['engajamento'] < 4 %}
-                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ users_data[user['email']]['avgs']['engajamento'] }}</h4>
-                        {% elif users_data[user['email']]['avgs']['engajamento'] >= 4 %}
-                            <h4 style="color: rgb(3, 160, 3)">{{ users_data[user['email']]['avgs']['engajamento'] }}</h4>
-                        {% else %}
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if 0 < users_data[user['email']]['avgs']['conhecimento'] < 3 %}
-                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ users_data[user['email']]['avgs']['conhecimento'] }}</h4>
-                        {% elif 3 <= users_data[user['email']]['avgs']['conhecimento'] < 4 %}
-                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ users_data[user['email']]['avgs']['conhecimento'] }}</h4>
-                        {% elif users_data[user['email']]['avgs']['conhecimento'] >= 4 %}
-                            <h4 style="color: rgb(3, 160, 3)">{{ users_data[user['email']]['avgs']['conhecimento'] }}</h4>
-                        {% else %}
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if 0 < users_data[user['email']]['avgs']['entrega'] < 3 %}
-                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ users_data[user['email']]['avgs']['entrega'] }}</h4>
-                        {% elif 3 <= users_data[user['email']]['avgs']['entrega'] < 4 %}
-                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ users_data[user['email']]['avgs']['entrega'] }}</h4>
-                        {% elif users_data[user['email']]['avgs']['entrega'] >= 4 %}
-                            <h4 style="color: rgb(3, 160, 3)">{{ users_data[user['email']]['avgs']['entrega'] }}</h4>
-                        {% else %}
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if 0 < users_data[user['email']]['avgs']['autogestao'] < 3 %}
-                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ users_data[user['email']]['avgs']['autogestao'] }}</h4>
-                        {% elif 3 <= users_data[user['email']]['avgs']['autogestao'] < 4  %}
-                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ users_data[user['email']]['avgs']['autogestao'] }}</h4>
-                        {% elif users_data[user['email']]['avgs']['autogestao'] >= 4 %}
-                            <h4 style="color: rgb(3, 160, 3)">{{ users_data[user['email']]['avgs']['autogestao'] }}</h4>
-                        {% else %}
-                        {% endif %}
+                        <h6>AUTO-GESTÃO DAS ATIVIDADES</h6>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <h2>FEEDBACKS AVALIADORES</h2>
-                    </td>
-                    <td>
-                        {% for texto in users_data[user['email']]['textos']['comunicacao'] %}
-                            <h3>• {{ texto }}</h3>
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {% for texto in users_data[user['email']]['textos']['engajamento'] %}
-                            <h3>• {{ texto }}</h3>
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {% for texto in users_data[user['email']]['textos']['conhecimento'] %}
-                            <h3>• {{ texto }}</h3>
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {% for texto in users_data[user['email']]['textos']['entrega'] %}
-                            <h3>• {{ texto }}</h3>
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {% for texto in users_data[user['email']]['textos']['autogestao'] %}
-                            <h3>• {{ texto }}</h3>
-                        {% endfor %}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <h2>AUTOAVALIAÇÃO</h2>
-                    </td>
-                    <td>
-                        {% if 0 < users_data[user['email']]['autoavaliacao']['comunicacao'] < 3 %}
-                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ users_data[user['email']]['autoavaliacao']['comunicacao'] }}</h4>
-                        {% elif users_data[user['email']]['autoavaliacao']['comunicacao'] == 3 %}
-                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ users_data[user['email']]['autoavaliacao']['comunicacao'] }}</h4>
-                        {% elif users_data[user['email']]['autoavaliacao']['comunicacao'] >= 4 %}
-                            <h4 style="color: rgb(3, 160, 3)">{{ users_data[user['email']]['autoavaliacao']['comunicacao'] }}</h4>
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if 0 < users_data[user['email']]['autoavaliacao']['engajamento'] < 3 %}
-                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ users_data[user['email']]['autoavaliacao']['engajamento'] }}</h4>
-                        {% elif users_data[user['email']]['autoavaliacao']['engajamento'] == 3 %}
-                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ users_data[user['email']]['autoavaliacao']['engajamento'] }}</h4>
-                        {% elif users_data[user['email']]['autoavaliacao']['engajamento'] >= 4 %}
-                            <h4 style="color: rgb(3, 160, 3)">{{ users_data[user['email']]['autoavaliacao']['engajamento'] }}</h4>
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if 0 < users_data[user['email']]['autoavaliacao']['conhecimento'] < 3 %}
-                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ users_data[user['email']]['autoavaliacao']['conhecimento'] }}</h4>
-                        {% elif users_data[user['email']]['autoavaliacao']['conhecimento'] == 3 %}
-                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ users_data[user['email']]['autoavaliacao']['conhecimento'] }}</h4>
-                        {% elif users_data[user['email']]['autoavaliacao']['conhecimento'] >= 4 %}
-                            <h4 style="color: rgb(3, 160, 3)">{{ users_data[user['email']]['autoavaliacao']['conhecimento'] }}</h4>
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if 0 < users_data[user['email']]['autoavaliacao']['entrega'] < 3 %}
-                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ users_data[user['email']]['autoavaliacao']['entrega'] }}</h4>
-                        {% elif users_data[user['email']]['autoavaliacao']['entrega'] == 3 %}
-                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ users_data[user['email']]['autoavaliacao']['entrega'] }}</h4>
-                        {% elif users_data[user['email']]['autoavaliacao']['entrega'] >= 4 %}
-                            <h4 style="color: rgb(3, 160, 3)">{{ users_data[user['email']]['autoavaliacao']['entrega'] }}</h4>
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if 0 < users_data[user['email']]['autoavaliacao']['autogestao'] < 3 %}
-                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ users_data[user['email']]['autoavaliacao']['autogestao'] }}</h4>
-                        {% elif users_data[user['email']]['autoavaliacao']['autogestao'] == 3 %}
-                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ users_data[user['email']]['autoavaliacao']['autogestao'] }}</h4>
-                        {% elif users_data[user['email']]['autoavaliacao']['autogestao'] >= 4 %}
-                            <h4 style="color: rgb(3, 160, 3)">{{ users_data[user['email']]['autoavaliacao']['autogestao'] }}</h4>
-                        {% endif %}
-                    </td>
-                </tr>
-            </table>
-        {% endfor %}
-            <h1 class="time_medias">MÉDIAS DO TIME</h1>
-            <table class="table_devolutiva">
-                <tr>
-                    <td>
-                        <h2>TIPO DE AVALIAÇÃO</h2>
-                    </td>
-                    <td>
-                        <h2>COMUNICAÇÃO E TRABALHO<br>EM EQUIPE</h2>
-                    </td>
-                    <td>
-                        <h2>ENGAJAMENTO E PRÓ-ATIVIDADE</h2>
-                    </td>
-                    <td>
-                        <h2>CONHECIMENTO E <br>APLICABILIDADE TÉCNICA</h2>
-                    </td>
-                    <td>
-                        <h2>ENTREGA DE RESULTADOS COM <br>VALOR AGREGADO</h2>
-                    </td>
-                    <td>
-                        <h2>AUTO-GESTÃO DAS ATIVIDADES</h2>
-                    </td>
-                </tr>
-                <tr>
+            </div>
+                <tr class="avaliacao_figure">
                     <td>
                         <h2>Avaliação da Equipe</h2>
                     </td>
                     <td>
-                        {% if 0 < medias_time['comunicacao'] < 3 %}
-                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ medias_time['comunicacao'] }}</h4>
-                        {% elif 3 <= medias_time['comunicacao'] < 4  %}
-                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ medias_time['comunicacao'] }}</h4>
-                        {% elif medias_time['comunicacao'] >= 4 %}
-                            <h4 style="color: rgb(3, 160, 3)">{{ medias_time['comunicacao'] }}</h4>
+                        {% if 0 < notas_medias_turma['comunicacao'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ notas_medias_turma['comunicacao'] }}</h4>
+                        {% elif 3 <= notas_medias_turma['comunicacao'] < 4  %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ notas_medias_turma['comunicacao'] }}</h4>
+                        {% elif notas_medias_turma['comunicacao'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ notas_medias_turma['comunicacao'] }}</h4>
                         {% endif %}
                     </td>
                     <td>
-                        {% if 0 < medias_time['engajamento'] < 3 %}
-                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ medias_time['engajamento'] }}</h4>
-                        {% elif 3 <= medias_time['engajamento'] < 4 %}
-                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ medias_time['engajamento'] }}</h4>
-                        {% elif medias_time['engajamento'] >= 4 %}
-                            <h4 style="color: rgb(3, 160, 3)">{{ medias_time['engajamento'] }}</h4>
+                        {% if 0 < notas_medias_turma['engajamento'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ notas_medias_turma['engajamento'] }}</h4>
+                        {% elif 3 <= notas_medias_turma['engajamento'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ notas_medias_turma['engajamento'] }}</h4>
+                        {% elif notas_medias_turma['engajamento'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ notas_medias_turma['engajamento'] }}</h4>
                         {% endif %}
                     </td>
                     <td>
-                        {% if 0 < medias_time['conhecimento'] < 3 %}
-                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ medias_time['conhecimento'] }}</h4>
-                        {% elif 3 <= medias_time['conhecimento'] < 4 %}
-                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ medias_time['conhecimento'] }}</h4>
-                        {% elif medias_time['conhecimento'] >= 4 %}
-                            <h4 style="color: rgb(3, 160, 3)">{{ medias_time['conhecimento'] }}</h4>
+                        {% if 0 < notas_medias_turma['conhecimento'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ notas_medias_turma['conhecimento'] }}</h4>
+                        {% elif 3 <= notas_medias_turma['conhecimento'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ notas_medias_turma['conhecimento'] }}</h4>
+                        {% elif notas_medias_turma['conhecimento'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ notas_medias_turma['conhecimento'] }}</h4>
                         {% endif %}
                     </td>
                     <td>
-                        {% if 0 < medias_time['entrega'] < 3 %}
-                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ medias_time['entrega'] }}</h4>
-                        {% elif 3 <= medias_time['entrega'] < 4 %}
-                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ medias_time['entrega'] }}</h4>
-                        {% elif medias_time['entrega'] >= 4 %}
-                            <h4 style="color: rgb(3, 160, 3)">{{ medias_time['entrega'] }}</h4>
+                        {% if 0 < notas_medias_turma['entrega'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ notas_medias_turma['entrega'] }}</h4>
+                        {% elif 3 <= notas_medias_turma['entrega'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ notas_medias_turma['entrega'] }}</h4>
+                        {% elif notas_medias_turma['entrega'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ notas_medias_turma['entrega'] }}</h4>
                         {% endif %}
                     </td>
                     <td>
-                        {% if 0 < medias_time['autogestao'] < 3 %}
-                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ medias_time['autogestao'] }}</h4>
-                        {% elif 3 <= medias_time['autogestao'] < 4 %}
-                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ medias_time['autogestao'] }}</h4>
-                        {% elif medias_time['autogestao'] >= 4 %}
-                            <h4 style="color: rgb(3, 160, 3)">{{ medias_time['autogestao'] }}</h4>
+                        {% if 0 < notas_medias_turma['autogestao'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ notas_medias_turma['autogestao'] }}</h4>
+                        {% elif 3 <= notas_medias_turma['autogestao'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ notas_medias_turma['autogestao'] }}</h4>
+                        {% elif notas_medias_turma['autogestao'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ notas_medias_turma['autogestao'] }}</h4>
                         {% endif %}
                     </td>
                 </tr>
-                <tr>
+                <tr class="autoavaliacao_figure">
                     <td>
                         <h2>Auto Avaliacao</h2>
                     </td>
                     <td>
-                        {% if 0 < medias_time['auto_comunicacao'] < 3 %}
-                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ medias_time['auto_comunicacao'] }}</h4>
-                        {% elif 3 <= medias_time['auto_comunicacao'] < 4 %}
-                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ medias_time['auto_comunicacao'] }}</h4>
-                        {% elif medias_time['auto_comunicacao'] >= 4 %}
-                            <h4 style="color: rgb(3, 160, 3)">{{ medias_time['auto_comunicacao'] }}</h4>
+                        {% if 0 < auto_notas_medias_turma['auto_comunicacao'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ auto_notas_medias_turma['auto_comunicacao'] }}</h4>
+                        {% elif 3 <= auto_notas_medias_turma['auto_comunicacao'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ auto_notas_medias_turma['auto_comunicacao'] }}</h4>
+                        {% elif auto_notas_medias_turma['auto_comunicacao'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ auto_notas_medias_turma['auto_comunicacao'] }}</h4>
                         {% endif %}
                     </td>
                     <td>
-                        {% if 0 < medias_time['auto_engajamento'] < 3 %}
-                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ medias_time['auto_engajamento'] }}</h4>
-                        {% elif 3 <= medias_time['auto_engajamento'] < 4 %}
-                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ medias_time['auto_engajamento'] }}</h4>
-                        {% elif medias_time['auto_engajamento'] >= 4 %}
-                            <h4 style="color: rgb(3, 160, 3)">{{ medias_time['auto_engajamento'] }}</h4>
+                        {% if 0 < auto_notas_medias_turma['auto_engajamento'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ auto_notas_medias_turma['auto_engajamento'] }}</h4>
+                        {% elif 3 <= auto_notas_medias_turma['auto_engajamento'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ auto_notas_medias_turma['auto_engajamento'] }}</h4>
+                        {% elif auto_notas_medias_turma['auto_engajamento'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ auto_notas_medias_turma['auto_engajamento'] }}</h4>
                         {% endif %}
                     </td>
                     <td>
-                        {% if 0 < medias_time['auto_conhecimento'] < 3 %}
-                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ medias_time['auto_conhecimento'] }}</h4>
-                        {% elif 3 <= medias_time['auto_conhecimento'] < 4 %}
-                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ medias_time['auto_conhecimento'] }}</h4>
-                        {% elif medias_time['auto_conhecimento'] >= 4 %}
-                            <h4 style="color: rgb(3, 160, 3)">{{ medias_time['auto_conhecimento'] }}</h4>
+                        {% if 0 < auto_notas_medias_turma['auto_conhecimento'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ auto_notas_medias_turma['auto_conhecimento'] }}</h4>
+                        {% elif 3 <= auto_notas_medias_turma['auto_conhecimento'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ auto_notas_medias_turma['auto_conhecimento'] }}</h4>
+                        {% elif auto_notas_medias_turma['auto_conhecimento'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ auto_notas_medias_turma['auto_conhecimento'] }}</h4>
                         {% endif %}
                     </td>
                     <td>
-                        {% if 0 < medias_time['auto_entrega'] < 3 %}
-                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ medias_time['auto_entrega'] }}</h4>
-                        {% elif 3 <= medias_time['auto_entrega'] < 4 %}
-                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ medias_time['auto_entrega'] }}</h4>
-                        {% elif medias_time['auto_entrega'] >= 4 %}
-                            <h4 style="color: rgb(3, 160, 3)">{{ medias_time['auto_entrega'] }}</h4>
+                        {% if 0 < auto_notas_medias_turma['auto_entrega'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ auto_notas_medias_turma['auto_entrega'] }}</h4>
+                        {% elif 3 <= auto_notas_medias_turma['auto_entrega'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ auto_notas_medias_turma['auto_entrega'] }}</h4>
+                        {% elif auto_notas_medias_turma['auto_entrega'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ auto_notas_medias_turma['auto_entrega'] }}</h4>
                         {% endif %}
                     </td>
                     <td>
-                        {% if 0 < medias_time['auto_autogestao'] < 3 %}
-                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ medias_time['auto_autogestao'] }}</h4>
-                        {% elif 3 <= medias_time['auto_autogestao'] < 4 %}
-                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ medias_time['auto_autogestao'] }}</h4>
-                        {% elif medias_time['auto_autogestao'] >= 4 %}
-                            <h4 style="color: rgb(3, 160, 3)">{{ medias_time['auto_autogestao'] }}</h4>
+                        {% if 0 < auto_notas_medias_turma['auto_autogestao'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ auto_notas_medias_turma['auto_autogestao'] }}</h4>
+                        {% elif 3 <= auto_notas_medias_turma['auto_autogestao'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ auto_notas_medias_turma['auto_autogestao'] }}</h4>
+                        {% elif auto_notas_medias_turma['auto_autogestao'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ auto_notas_medias_turma['auto_autogestao'] }}</h4>
                         {% endif %}
                     </td>
                 </tr>
             </table>
-    {% endif %}
+            </div>
+        </div>
+        <div class="table_time">
+            <div class="dash_title">
+            <h1 class="time_medias">MÉDIAS DO TIME</h1>
+            <table class="table_devolutiva">
+                <tr>
+                    <td>
+                        <h6>TIPO DE AVALIAÇÃO</h6>
+                    </td>
+                    <td>
+                        <h6>COMUNICAÇÃO E TRABALHO<br>EM EQUIPE</h6>
+                    </td>
+                    <td>
+                        <h6>ENGAJAMENTO E PRÓ-ATIVIDADE</h6>
+                    </td>
+                    <td>
+                        <h6>CONHECIMENTO E <br>APLICABILIDADE TÉCNICA</h6>
+                    </td>
+                    <td>
+                        <h6>ENTREGA DE RESULTADOS COM <br>VALOR AGREGADO</h6>
+                    </td>
+                    <td>
+                        <h6>AUTO-GESTÃO DAS ATIVIDADES</h6>
+                    </td>
+                </tr>
+            </div>
+                <tr class="avaliacao_figure">
+                    <td>
+                        <h2>Avaliação da Equipe</h2>
+                    </td>
+                    <td>
+                        {% if 0 < notas_medias_time['comunicacao'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ notas_medias_time['comunicacao'] }}</h4>
+                        {% elif 3 <= notas_medias_time['comunicacao'] < 4  %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ notas_medias_time['comunicacao'] }}</h4>
+                        {% elif notas_medias_time['comunicacao'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ notas_medias_time['comunicacao'] }}</h4>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if 0 < notas_medias_time['engajamento'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ notas_medias_time['engajamento'] }}</h4>
+                        {% elif 3 <= notas_medias_time['engajamento'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ notas_medias_time['engajamento'] }}</h4>
+                        {% elif notas_medias_time['engajamento'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ notas_medias_time['engajamento'] }}</h4>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if 0 < notas_medias_time['conhecimento'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ notas_medias_time['conhecimento'] }}</h4>
+                        {% elif 3 <= notas_medias_time['conhecimento'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ notas_medias_time['conhecimento'] }}</h4>
+                        {% elif notas_medias_time['conhecimento'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ notas_medias_time['conhecimento'] }}</h4>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if 0 < notas_medias_time['entrega'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ notas_medias_time['entrega'] }}</h4>
+                        {% elif 3 <= notas_medias_time['entrega'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ notas_medias_time['entrega'] }}</h4>
+                        {% elif notas_medias_time['entrega'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ notas_medias_time['entrega'] }}</h4>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if 0 < notas_medias_time['autogestao'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ notas_medias_time['autogestao'] }}</h4>
+                        {% elif 3 <= notas_medias_time['autogestao'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ notas_medias_time['autogestao'] }}</h4>
+                        {% elif notas_medias_time['autogestao'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ notas_medias_time['autogestao'] }}</h4>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr class="autoavaliacao_figure">
+                    <td>
+                        <h2>Auto Avaliacao</h2>
+                    </td>
+                    <td>
+                        {% if 0 < auto_notas_medias_time['auto_comunicacao'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ auto_notas_medias_time['auto_comunicacao'] }}</h4>
+                        {% elif 3 <= auto_notas_medias_time['auto_comunicacao'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ auto_notas_medias_time['auto_comunicacao'] }}</h4>
+                        {% elif auto_notas_medias_time['auto_comunicacao'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ auto_notas_medias_time['auto_comunicacao'] }}</h4>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if 0 < auto_notas_medias_time['auto_engajamento'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ auto_notas_medias_time['auto_engajamento'] }}</h4>
+                        {% elif 3 <= auto_notas_medias_time['auto_engajamento'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ auto_notas_medias_time['auto_engajamento'] }}</h4>
+                        {% elif auto_notas_medias_time['auto_engajamento'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ auto_notas_medias_time['auto_engajamento'] }}</h4>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if 0 < auto_notas_medias_time['auto_conhecimento'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ auto_notas_medias_time['auto_conhecimento'] }}</h4>
+                        {% elif 3 <= auto_notas_medias_time['auto_conhecimento'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ auto_notas_medias_time['auto_conhecimento'] }}</h4>
+                        {% elif auto_notas_medias_time['auto_conhecimento'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ auto_notas_medias_time['auto_conhecimento'] }}</h4>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if 0 < auto_notas_medias_time['auto_entrega'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ auto_notas_medias_time['auto_entrega'] }}</h4>
+                        {% elif 3 <= auto_notas_medias_time['auto_entrega'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ auto_notas_medias_time['auto_entrega'] }}</h4>
+                        {% elif auto_notas_medias_time['auto_entrega'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ auto_notas_medias_time['auto_entrega'] }}</h4>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if 0 < auto_notas_medias_time['auto_autogestao'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ auto_notas_medias_time['auto_autogestao'] }}</h4>
+                        {% elif 3 <= auto_notas_medias_time['auto_autogestao'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ auto_notas_medias_time['auto_autogestao'] }}</h4>
+                        {% elif auto_notas_medias_time['auto_autogestao'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ auto_notas_medias_time['auto_autogestao'] }}</h4>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        </div>
+        <div class="table_integrantes">
+            <div class="avaliacao_figure">
+            <h1 class="time_medias">MÉDIAS DOS INTEGRANTES PELOS AVALIADORES</h1>
+            <table class="table_devolutiva">
+                <tr>
+                    <td>
+                        <h6>INTEGRANTE</h6>
+                    </td>
+                    <td>
+                        <h6>COMUNICAÇÃO E TRABALHO<br>EM EQUIPE</h6>
+                    </td>
+                    <td>
+                        <h6>ENGAJAMENTO E PRÓ-ATIVIDADE</h6>
+                    </td>
+                    <td>
+                        <h6>CONHECIMENTO E <br>APLICABILIDADE TÉCNICA</h6>
+                    </td>
+                    <td>
+                        <h6>ENTREGA DE RESULTADOS COM <br>VALOR AGREGADO</h6>
+                    </td>
+                    <td>
+                        <h6>AUTO-GESTÃO DAS ATIVIDADES</h6>
+                    </td>
+                </tr>
+                {% for integrante in notas_medias_integrante %}
+                <tr>
+                    <td>
+                        <h2>{{ notas_medias_integrante[integrante]['nome'] }}</h2>
+                    </td>
+                    <td>
+                        {% if 0 < notas_medias_integrante[integrante]['comunicacao'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ notas_medias_integrante[integrante]['comunicacao'] }}</h4>
+                        {% elif 3 <= notas_medias_integrante[integrante]['comunicacao'] < 4  %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ notas_medias_integrante[integrante]['comunicacao'] }}</h4>
+                        {% elif notas_medias_integrante[integrante]['comunicacao'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ notas_medias_integrante[integrante]['comunicacao'] }}</h4>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if 0 < notas_medias_integrante[integrante]['engajamento'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ notas_medias_integrante[integrante]['engajamento'] }}</h4>
+                        {% elif 3 <= notas_medias_integrante[integrante]['engajamento'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ notas_medias_integrante[integrante]['engajamento'] }}</h4>
+                        {% elif notas_medias_integrante[integrante]['engajamento'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ notas_medias_integrante[integrante]['engajamento'] }}</h4>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if 0 < notas_medias_integrante[integrante]['conhecimento'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ notas_medias_integrante[integrante]['conhecimento'] }}</h4>
+                        {% elif 3 <= notas_medias_integrante[integrante]['conhecimento'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ notas_medias_integrante[integrante]['conhecimento'] }}</h4>
+                        {% elif notas_medias_integrante[integrante]['conhecimento'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ notas_medias_integrante[integrante]['conhecimento'] }}</h4>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if 0 < notas_medias_integrante[integrante]['entrega'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ notas_medias_integrante[integrante]['entrega'] }}</h4>
+                        {% elif 3 <= notas_medias_integrante[integrante]['entrega'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ notas_medias_integrante[integrante]['entrega'] }}</h4>
+                        {% elif notas_medias_integrante[integrante]['entrega'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ notas_medias_integrante[integrante]['entrega'] }}</h4>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if 0 < notas_medias_integrante[integrante]['autogestao'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ notas_medias_integrante[integrante]['autogestao'] }}</h4>
+                        {% elif 3 <= notas_medias_integrante[integrante]['autogestao'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ notas_medias_integrante[integrante]['autogestao'] }}</h4>
+                        {% elif notas_medias_integrante[integrante]['autogestao'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ notas_medias_integrante[integrante]['autogestao'] }}</h4>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            </div>
+            <div class="autoavaliacao_figure">
+            <h1 class="time_medias">{% if sprint_check > 1 %} MÉDIAS AUTOAVALIAÇÕES {% else %} AUTOAVALIAÇÃO {% endif %}</h1>
+            <table class="table_devolutiva">
+                <tr>
+                    <td>
+                        <h6>INTEGRANTE</h6>
+                    </td>
+                    <td>
+                        <h6>COMUNICAÇÃO E TRABALHO<br>EM EQUIPE</h6>
+                    </td>
+                    <td>
+                        <h6>ENGAJAMENTO E PRÓ-ATIVIDADE</h6>
+                    </td>
+                    <td>
+                        <h6>CONHECIMENTO E <br>APLICABILIDADE TÉCNICA</h6>
+                    </td>
+                    <td>
+                        <h6>ENTREGA DE RESULTADOS COM <br>VALOR AGREGADO</h6>
+                    </td>
+                    <td>
+                        <h6>AUTO-GESTÃO DAS ATIVIDADES</h6>
+                    </td>
+                </tr>
+                {% for integrante in auto_notas_medias_integrante %}
+                <tr>
+                    <td>
+                        <h2>{{ auto_notas_medias_integrante[integrante]['nome'] }}</h2>
+                    </td>
+                    <td>
+                        {% if 0 < auto_notas_medias_integrante[integrante]['comunicacao'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ auto_notas_medias_integrante[integrante]['comunicacao'] }}</h4>
+                        {% elif 3 <= auto_notas_medias_integrante[integrante]['comunicacao'] < 4  %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ auto_notas_medias_integrante[integrante]['comunicacao'] }}</h4>
+                        {% elif auto_notas_medias_integrante[integrante]['comunicacao'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ auto_notas_medias_integrante[integrante]['comunicacao'] }}</h4>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if 0 < auto_notas_medias_integrante[integrante]['engajamento'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ auto_notas_medias_integrante[integrante]['engajamento'] }}</h4>
+                        {% elif 3 <= auto_notas_medias_integrante[integrante]['engajamento'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ auto_notas_medias_integrante[integrante]['engajamento'] }}</h4>
+                        {% elif auto_notas_medias_integrante[integrante]['engajamento'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ auto_notas_medias_integrante[integrante]['engajamento'] }}</h4>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if 0 < auto_notas_medias_integrante[integrante]['conhecimento'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ auto_notas_medias_integrante[integrante]['conhecimento'] }}</h4>
+                        {% elif 3 <= auto_notas_medias_integrante[integrante]['conhecimento'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ auto_notas_medias_integrante[integrante]['conhecimento'] }}</h4>
+                        {% elif auto_notas_medias_integrante[integrante]['conhecimento'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ auto_notas_medias_integrante[integrante]['conhecimento'] }}</h4>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if 0 < auto_notas_medias_integrante[integrante]['entrega'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ auto_notas_medias_integrante[integrante]['entrega'] }}</h4>
+                        {% elif 3 <= auto_notas_medias_integrante[integrante]['entrega'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ auto_notas_medias_integrante[integrante]['entrega'] }}</h4>
+                        {% elif auto_notas_medias_integrante[integrante]['entrega'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ auto_notas_medias_integrante[integrante]['entrega'] }}</h4>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if 0 < auto_notas_medias_integrante[integrante]['autogestao'] < 3 %}
+                            <h4 style="color: rgba(211, 32, 32, 0.911)">{{ auto_notas_medias_integrante[integrante]['autogestao'] }}</h4>
+                        {% elif 3 <= auto_notas_medias_integrante[integrante]['autogestao'] < 4 %}
+                            <h4 style="color: rgba(53, 111, 236, 0.932)">{{ auto_notas_medias_integrante[integrante]['autogestao'] }}</h4>
+                        {% elif auto_notas_medias_integrante[integrante]['autogestao'] >= 4 %}
+                            <h4 style="color: rgb(3, 160, 3)">{{ auto_notas_medias_integrante[integrante]['autogestao'] }}</h4>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            </div>
+            <div class="feedbacks_div">
+            <h1 class="time_medias">FEEDBACKS RECEBIDOS</h1>
+            <table class="table_devolutiva">
+                <tr>
+                    <td>
+                        <h6>INTEGRANTE</h6>
+                    </td>
+                    <td>
+                        <h6>COMUNICAÇÃO E TRABALHO<br>EM EQUIPE</h6>
+                    </td>
+                    <td>
+                        <h6>ENGAJAMENTO E PRÓ-ATIVIDADE</h6>
+                    </td>
+                    <td>
+                        <h6>CONHECIMENTO E <br>APLICABILIDADE TÉCNICA</h6>
+                    </td>
+                    <td>
+                        <h6>ENTREGA DE RESULTADOS COM <br>VALOR AGREGADO</h6>
+                    </td>
+                    <td>
+                        <h6>AUTO-GESTÃO DAS ATIVIDADES</h6>
+                    </td>
+                </tr>
+                {% for integrante in feedbacks_integrante %}
+                <tr>
+                    <td>
+                        <h3>{{ feedbacks_integrante[integrante]['nome'] }}</h3>
+                    </td>
+                    <td>
+                        {% for feedback in feedbacks_integrante[integrante]['comunicacao'] %}
+                            <h3>• {{ feedback }}</h3>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for feedback in feedbacks_integrante[integrante]['engajamento'] %}
+                            <h3>• {{ feedback }}</h3>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for feedback in feedbacks_integrante[integrante]['conhecimento'] %}
+                            <h3>• {{ feedback }}</h3>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for feedback in feedbacks_integrante[integrante]['entrega'] %}
+                            <h3>• {{ feedback }}</h3>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for feedback in feedbacks_integrante[integrante]['autogestao'] %}
+                            <h3>• {{ feedback }}</h3>
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            </div>
+        </div>
     </div>
+    {% endif %}
     <div>
         <footer>
-            <img class="rodape-img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
+            <img class="rodape_img" src="{{ url_for('static', filename='img/avaliacao/Logo_API_PBLTeX.png') }}" alt="img rodape">
         </footer>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var turmaCheckbox = document.getElementById('turma_Checkbox');
+            var timeCheckbox = document.getElementById('time_Checkbox');
+            var integrantesCheckbox = document.getElementById('integrantes_Checkbox');
+            var avaliacaoCheckbox = document.getElementById('avaliacao_Checkbox');
+            var autoavaliacaoCheckbox = document.getElementById('autoavaliacao_Checkbox');
+            var feedbacksCheckbox = document.getElementById('feedbacks_Checkbox');
+
+            var turmaDiv = document.querySelector('.table_turma');
+            var timeDiv = document.querySelector('.table_time');
+            var integrantesDiv = document.querySelector('.table_integrantes');
+            var avaliacaoDivs = document.querySelectorAll('.avaliacao_figure');
+            var autoavaliacaoDivs = document.querySelectorAll('.autoavaliacao_figure');
+            var feedbacksDiv = document.querySelector('.feedbacks_div');
+            var dashTitleDivs = document.querySelectorAll('.dash_title');
+
+            turmaCheckbox.addEventListener('change', toggleDivVisibility);
+            timeCheckbox.addEventListener('change', toggleDivVisibility);
+            integrantesCheckbox.addEventListener('change', toggleDivVisibility);
+            avaliacaoCheckbox.addEventListener('change', toggleDivVisibility);
+            autoavaliacaoCheckbox.addEventListener('change', toggleDivVisibility);
+            feedbacksCheckbox.addEventListener('change', toggleDivVisibility);
+
+            function toggleDivVisibility() {
+                turmaDiv.style.display = turmaCheckbox.checked ? 'block' : 'none';
+                timeDiv.style.display = timeCheckbox.checked ? 'block' : 'none';
+                integrantesDiv.style.display = integrantesCheckbox.checked ? 'block' : 'none';
+                feedbacksDiv.style.display = feedbacksCheckbox.checked ? 'block' : 'none';
+
+                avaliacaoDivs.forEach(function (div) {
+                    div.style.display = avaliacaoCheckbox.checked ? '' : 'none';
+                });
+
+                autoavaliacaoDivs.forEach(function (div) {
+                    div.style.display = autoavaliacaoCheckbox.checked ? '' : 'none';
+                });
+
+                if (!turmaCheckbox.checked && !timeCheckbox.checked && !integrantesCheckbox.checked) {
+                    document.querySelector('.options1_container').style.display = 'none';
+                } else {
+                    document.querySelector('.options1_container').style.display = 'flex';
+                }
+
+                if (!avaliacaoCheckbox.checked && !autoavaliacaoCheckbox.checked) {             
+                    dashTitleDivs.forEach(function (div) {
+                        div.style.display = 'none';
+                    });
+                } else {                
+                    dashTitleDivs.forEach(function (div) {
+                        div.style.display = '';
+                    });
+                }
+
+                if (!integrantesCheckbox.checked) {
+                    feedbacksCheckbox.checked = false;
+                }
+            }
+        });
+    </script>
   </body>  
 </html>

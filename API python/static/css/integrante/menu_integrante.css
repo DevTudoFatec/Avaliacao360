@@ -21,6 +21,12 @@ body{
     cursor: pointer;
 }
 
+.botao_azul_claro:hover{
+    background-color: #a6e2b3e8;
+    transform: scale(1.1); 
+    transition: 0.5s; 
+  }
+
 .botao_cinza{
     color: #214e65;
     background-color: #afafaf;
@@ -109,8 +115,20 @@ nav a{
     border-bottom: 2px solid #222;
 }
 
+
+.actual_page{
+    background-color: #494949;
+    color: #fdc77f;
+    font-weight: bolder;
+    padding: 20px;
+    font-size: 13pt;
+    transition: all .2s linear;
+    border-bottom: 2px solid #222;
+  }
+
 .link_disable{
     background-color: #bbbbbb;
+    color: black;
     padding: 20px;
     font-size: 12pt;
     transition: all .2s linear;
@@ -147,11 +165,25 @@ nav a{
     margin-top: 5%;
 }
 
+.button_first_access:hover {
+    color: black;
+    background-color: #a6e2b3e8;
+    transform: scale(1.2); 
+    transition: 0.5s;
+}
+
+
+
 .darkmode_switch {
     position: absolute;
     right: 5%;
     top: 40%;
     width: 7%;
+}
+
+.darkmode_switch:hover {
+    transform: scale(1.2); 
+    transition: 0.5s; 
 }
 
 @media screen and (max-width:767px) {
